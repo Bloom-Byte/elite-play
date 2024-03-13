@@ -1,0 +1,60 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #0B1210;
+    top: 0;
+    width: 100vw;
+    /* height: 80px; */
+    padding: 3rem;
+}
+
+.nav-games {
+    display: flex;
+    gap: 2.5rem;
+}
+
+.nav-games__dice {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-games__dice span {
+    color: #6E6E71;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.nav-auth {
+    display: flex;
+    gap: 16px;
+}
+
+.nav-auth__signin {
+    background: transparent;
+    border: none;
+    color: #6E6E71;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    padding: 10px 20px;
+}
+
+.nav-auth__signup {
+    background-color:#077E551A;
+    padding: 10px 20px;
+    border: 2px #077E551A;
+    border-radius: 6px;
+    color: #88df95;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
