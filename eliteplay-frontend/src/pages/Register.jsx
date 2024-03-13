@@ -54,10 +54,10 @@ const Register = () => {
               <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} onFocus={() => setPasswordFocused(true)} onBlur={() => setPasswordFocused(false)} />
             </div>
             <div className="register-form__check-box">
-              <label class="container">
+              <label className="container">
               I agree to the User Agreement & confirm I am at least 18 years old
                 <input type="checkbox" />
-                <span class="checkmark"></span>
+                <span className="checkmark"></span>
               </label>
             </div>
             <button className="register-form__submit-btn" type="submit"> Sign Up Now </button>

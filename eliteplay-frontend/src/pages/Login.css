@@ -1,0 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.login-form__forgot-password a {
+    text-decoration: none;
+    font-size: 12px;
+    color: white;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+}
