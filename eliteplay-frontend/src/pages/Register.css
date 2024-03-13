@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+    background-color: #0B1210;
+    ;
+}
+
+.register {
+    display: flex;
+}
+
+.register-logo {
+    width: 40%; 
+    height: auto; 
+}
+
+.register-logo img {
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+}
+
+.register-form {
+    width: 60%;
+    padding: 0 4rem;
+}
+
+.register-form__form {
+    display: flex;
+    flex-direction: column;
+    padding: 6rem;
+}
+
+.register-form__heading h4 {
+    font-size: 16px;
+    font-weight: 800;
+    margin-bottom: 2rem;
+    color: white;
+    font-family: "Manrope", sans-serif;
+}
+
+.register-form__form-input {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+
+.input-icon {
+    position: absolute; 
+    left: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+}
+
+.register-form__input-box {
+    position: relative;
+}
+
+.register-form__input-box input {
+    padding-left: 50px;
+    background-color: #070C0A;
+    border: 2px #44537126;
+    border-radius: 4px;
+    width: 320px;
+    height: 48px;
+    color: white;
+}   
+
+.register-form__input-box input:focus {
+    outline: none;
+    border: 2px solid #24E3A1;
+}
+
+.register-form__check-box {
+    display: flex;
+    gap: 1rem;
+}
+
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: 22px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  
+  /* Hide the browser's default checkbox */
+  .container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+  }
+  
+  /* Create a custom checkbox */
+  .checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 16px;
+    width: 16px;
+    background-color: black;
+    border: 2px solid #44537140;
+    border-radius: 4px;
+  }
+  
+  /* When the checkbox is checked, add a green background */
+  .container input:checked ~ .checkmark {
+    background-color: #24E3A1;
+  }
+  
+  /* Create the checkmark/indicator (hidden when not checked) */
+  .checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+  }
+  
+  /* Show the checkmark when checked */
+  .container input:checked ~ .checkmark:after {
+    display: block;
+  }
+  
+  /* Style the checkmark/indicator */
+  .container .checkmark:after {
+    left: 5px;
+    top: 3px;
+    width: 4px;
+    height: 7px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.register-form__check-box label {
+    font-size: 12px;
+    color: white;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    max-width: 320px;
+}
+
+.register-form__submit-btn {
+    background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+    border: 1px transparent;
+    border-radius: 6px;
+    color: #fff; 
+    padding: 10px 20px;
+    width: 372px;
+    height: 48px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.register-form__signin p {
+    font-size: 12px;
+    color: white;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+}
+
+.register-form__signin p a {
+    margin-left: 1rem;
+    color: #24E3A1;
+    text-decoration: none;
+}
+
+.register-form__option-box {
+    width: 372px;
+}
+
+.register-form__option {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 12px;
+    color: #6E6E71;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+}
+
+.register-form__google-signin {
+    display: flex;
+    gap: 20px;
+    padding: 10px 20px;
+    width: 332px;
+    height: 48px;
+    background-color: #070C0A;
+    align-items: center;
+    justify-content: center;
+    border-radius: 6px;
+}
+
+.register-form__google-signin span {
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    color: white;
+}
