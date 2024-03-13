@@ -1,7 +1,27 @@
-import React from 'react'
+import React, { useState } from 'react'
 import './Register.css'
 
 const Register = () => {
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [usernameFocused, setUsernameFocused] = useState(false);
+    const [emailFocused, setEmailFocused] = useState(false);
+    const [passwordFocused, setPasswordFocused] = useState(false);
+
+    const handleUsernameChange = (event) => {
+        setUsername(event.target.value);
+    };
+
+    const handleEmailChange = (event) => {
+        setEmail(event.target.value);
+    };
+
+    const handlePasswordChange = (event) => {
+        setPassword(event.target.value);
+    };
+
+
   return (
     <div className="register">
       <div className="register-logo">
@@ -14,24 +34,24 @@ const Register = () => {
         <div className="register-form__form">
           <form className="register-form__form-input" action="">
             <div className="register-form__input-box">
-              <img className="input-icon" src="./user.svg" alt="user-icon" />
-              <input type="text" placeholder="Username" />
+              <img className="input-icon" src={!usernameFocused && username ? "./user-white.svg" : "./user.svg"} alt="user-icon" />
+              <input type="text" placeholder="Username" value={username} onChange={handleUsernameChange} onFocus={() => setUsernameFocused(true)} onBlur={() => setUsernameFocused(false)}/>
             </div>
             <div className="register-form__input-box">
               <img
                 className="input-icon"
-                src="./mail-02.svg"
+                src={!emailFocused && email ? "./mail-white.svg" : "./mail-02.svg"}
                 alt="email-icon"
               />
-              <input type="email" placeholder="Email Address" />
+              <input type="email" placeholder="Email Address" value={email} onChange={handleEmailChange} onFocus={() => setEmailFocused(true)} onBlur={() => setEmailFocused(false)} />
             </div>
             <div className="register-form__input-box">
               <img
                 className="input-icon"
-                src="./lock-key.svg"
+                src={!passwordFocused && password ? "./lock-key-white.svg" : "./lock-key.svg"}
                 alt="password-icon"
               />
-              <input type="password" placeholder="Password" />
+              <input type="password" placeholder="Password" value={password} onChange={handlePasswordChange} onFocus={() => setPasswordFocused(true)} onBlur={() => setPasswordFocused(false)} />
             </div>
             <div className="register-form__check-box">
               <label class="container">
