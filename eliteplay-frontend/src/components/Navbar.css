@@ -12,7 +12,7 @@ body {
     justify-content: space-between;
     background-color: #0B1210;
     top: 0;
-    width: 97vw;
+    width: 95vw;
     /* height: 80px; */
     padding: 1rem;
 }
@@ -60,6 +60,56 @@ body {
     border: 2px #077E551A;
     border-radius: 6px;
     color: #88df95;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.nav-loggedin {
+    display: flex;
+    gap: 30px;
+    margin-left: -200px;
+}
+
+.nav-profile {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.nav-wallet {
+    display: flex;
+    align-items: center;
+}
+
+.nav-wallet_info {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    background-color: black;
+    border: 1px solid black;
+    border-radius: 6px;
+    padding: 8px;
+}
+
+.nav-wallet_info span {
+    color: #6E6E71;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.nav-wallet_deposit {
+    background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    border-radius: 6px;
+    padding: 8px 12px;
+}
+
+.nav-wallet_deposit span {
+    color: white;
     font-size: 14px;
     font-family: "Manrope", sans-serif;
     font-weight: 600;

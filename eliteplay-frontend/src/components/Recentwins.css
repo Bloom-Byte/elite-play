@@ -9,6 +9,10 @@
     border-radius: 9px;
 }
 
+.recent-wins__extended {
+    margin-left: 18rem;
+}
+
 .recent-wins__title {
     display: flex;
     align-items: center;

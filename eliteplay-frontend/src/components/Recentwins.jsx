@@ -1,9 +1,9 @@
 import React from 'react'
 import './Recentwins.css'
 
-const Recentwins = () => {
+const Recentwins = ({isNavOpen}) => {
   return (
-    <div className="recent-wins">
+    <div className={`recent-wins ${isNavOpen ? 'recent-wins__extended' : ''}`}>
       <div className='recent-wins__title'>
         <div className="active-wins"> </div>
         <h4>Recent Wins</h4>

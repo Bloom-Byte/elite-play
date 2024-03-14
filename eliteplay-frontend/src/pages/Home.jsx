@@ -13,7 +13,7 @@ const Home = () => {
         <Navbar isNavOpen={isNavOpen} />
         <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
         <Hero isNavOpen={isNavOpen} />
-        <Recentwins />
+        <Recentwins isNavOpen={isNavOpen} />
     </div>
   )
 }
