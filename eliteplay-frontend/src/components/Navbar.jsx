@@ -15,8 +15,8 @@ const Navbar = ({isNavOpen}) => {
             </div>
         </div>
         <div className='nav-auth'>
-            <button className='nav-auth__signin'>Sign In</button>
-            <button className='nav-auth__signup'>Sign Up</button>
+            <a href='/login'><button className='nav-auth__signin'>Sign In</button></a>
+            <a href='/register'><button className='nav-auth__signup'>Sign Up</button></a>
         </div>
     </div>
   )

@@ -22,7 +22,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
               src="./menu-01.svg"
               alt="close-icon"
             />
-            <img src="./eliteplay.svg" alt="logo" />
+           <a href='/'> <img src="./eliteplay.svg" alt="logo" /></a>
           </div>
           <div className="sidenav__links">
             <div
