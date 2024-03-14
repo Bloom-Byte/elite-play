@@ -1,0 +1,56 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.home-hero {
+  height: 350px;
+  background-position: center; 
+  background-repeat: no-repeat; 
+  background-size: cover;
+  margin-left: 8rem;
+  margin-right: 5vw;
+  margin-top: 3rem;
+  background-size: cover;
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.home-hero-extended {
+    margin-left: 18rem;
+}
+
+.home-hero__txt-section {
+    display: flex;
+    flex-direction: column;
+    max-width: 225px;
+    align-items: left;
+    text-align: left;
+    margin-left: 50px;
+}
+
+.home-hero__txt-section h4 {
+    font-size: 32px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+}
+
+.home-hero__txt-section p {
+    font-size: 16px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+}
+
+.home-hero__txt-section button {
+    background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+    color: #FFFFFF;
+    font-size: 16px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}

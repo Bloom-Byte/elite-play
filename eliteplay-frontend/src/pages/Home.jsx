@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Sidenav from '../components/Sidenav'
+import Hero from '../components/Hero'
 import './Home.css'
 
 const Home = () => {
@@ -10,6 +11,7 @@ const Home = () => {
     <div>
         <Navbar isNavOpen={isNavOpen} />
         <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+        <Hero isNavOpen={isNavOpen} />
     </div>
   )
 }

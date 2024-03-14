@@ -26,6 +26,7 @@ body {
     background-color: #077E551A;
     padding: 8px;
     border-radius: 6px;
+    cursor: pointer;
 }
 
 .sidenav__links {
@@ -41,6 +42,7 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    cursor: pointer;
 }
 
 .sidenav__link span {
