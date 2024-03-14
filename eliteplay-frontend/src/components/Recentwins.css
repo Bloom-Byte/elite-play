@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.recent-wins {
+    background: #070C0A;
+    margin-left: 8rem;
+    margin-top: 2rem;
+    margin-right: 5vw;
+    padding: 8px, 16px, 8px, 16px;
+    border-radius: 9px;
+}
+
+.recent-wins__title {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.active-wins {
+    border-radius: 50%;
+    background: #34B263;
+    width: 8px;
+    height: 8px;
+    margin-left: 1rem;
+}
+
+.recent-wins__title h4 {
+    font-size: 14px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.recent-wins__container {
+    display: flex;
+    margin-left: 1rem;
+    gap: 1rem;
+}
+
+.recent-wins__coin-info {
+    display: flex;
+    gap: 5px;
+    margin-top: 5px;
+}
+
+.recent-wins__coin-info span {
+    font-size: 12px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.recent-wins__egold {
+    font-size: 12px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    color: #34B263;
+}
