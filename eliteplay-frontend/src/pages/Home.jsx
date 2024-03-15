@@ -3,6 +3,7 @@ import Navbar from '../components/Navbar'
 import Sidenav from '../components/Sidenav'
 import Hero from '../components/Hero'
 import Recentwins from '../components/Recentwins'
+import DepositCTA from '../components/DepositCTA'
 import './Home.css'
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
         <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
         <Hero isNavOpen={isNavOpen} />
         <Recentwins isNavOpen={isNavOpen} />
+        <DepositCTA isNavOpen={isNavOpen} />
     </div>
   )
 }

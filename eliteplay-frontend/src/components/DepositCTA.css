@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.deposit-cta {
+    height: 250px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 8rem;
+    margin-right: 5vw;
+    margin-top: 3rem;
+    background-size: cover;
+    max-width: 100%;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.deposit-cta-extended {
+    margin-left: 18rem;
+}
+
+.deposit-cta__txt {
+    padding: 0 50px;
+    display: flex;
+    /* max-width: 500px; */
+}
+
+.deposit-cta__txt h4 {
+    font-size: 32px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 1rem;
+}
+
+.begin-now {
+    color: #FEAB32;
+}
+
+.deposit-cta button {
+    background: linear-gradient(to right,  #F4900C 50%,  #FFAC33 50%);
+    border: 1px transparent;
+    border-radius: 6px;
+    padding: 10px 40px;
+    margin-right: 50px;
+    font-size: 16px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    color: #ffffff;
+}
