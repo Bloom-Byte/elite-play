@@ -1,0 +1,58 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.vip-cta {
+    height: 350px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-left: 8rem;
+  margin-right: 5vw;
+  margin-top: 3rem;
+  background-size: cover;
+  max-width: 100%;
+  border-radius: 12px;
+}
+
+.vip-cta-extended {
+  margin-left: 18rem;
+}
+
+.vip-cta_text {
+  display: flex;
+  flex-direction: column;
+  max-width: 225px;
+  text-align: left;
+  padding: 10px;
+  padding-left: 50px;
+  justify-content: center;
+}
+
+.vip-cta_text h4 {
+  font-size: 32px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+}
+
+.vip-cta_text p {
+  font-size: 16px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  color: #ffffff;
+  margin: 0;
+}
+
+.vip-cta_text button {
+  background: linear-gradient(to right, #F4900C 50%, #FFAC33 50%);
+  color: #ffffff;
+  font-size: 16px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 2rem;
+}

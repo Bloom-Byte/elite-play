@@ -5,6 +5,7 @@ import Hero from '../components/Hero'
 import Recentwins from '../components/Recentwins'
 import DepositCTA from '../components/DepositCTA'
 import Livebets from '../components/Livebets'
+import VIPCTA from '../components/VIPCTA'
 import './Home.css'
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
         <Recentwins isNavOpen={isNavOpen} />
         <DepositCTA isNavOpen={isNavOpen} />
         <Livebets isNavOpen={isNavOpen} />
+        <VIPCTA isNavOpen={isNavOpen} />
     </div>
   )
 }
