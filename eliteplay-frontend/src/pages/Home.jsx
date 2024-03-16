@@ -7,6 +7,7 @@ import DepositCTA from '../components/DepositCTA'
 import Livebets from '../components/Livebets'
 import VIPCTA from '../components/VIPCTA'
 import Description from '../components/Description'
+import Footer from '../components/Footer'
 import './Home.css'
 
 const Home = () => {
@@ -22,6 +23,7 @@ const Home = () => {
         <Livebets isNavOpen={isNavOpen} />
         <VIPCTA isNavOpen={isNavOpen} />
         <Description isNavOpen={isNavOpen} />
+        <Footer isNavOpen={isNavOpen} />
     </div>
   )
 }
