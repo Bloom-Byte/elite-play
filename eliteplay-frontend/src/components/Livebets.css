@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.livebets {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 8rem;
+  margin-right: 5vw;
+}
+
+.livebets-extended {
+    margin-left: 18rem;
+}
+
+.livebets h5 {
+  font-size: 18px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+
+.livebets .all-bets {
+  background-color: #077e551a;
+  border: 1px solid #077e551a;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.livebets .big-bets {
+    background-color: #070C0A;
+    border: 1px solid #070C0A;
+    border-radius: 6px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-family: 'Manrope', sans-serif;
+    font-weight: 600;
+    color: #6E6E71;
+  }
+
+.livebets-table {
+  background-color: #070c0a;
+  margin-top: 2rem;
+  border-radius: 6px;
+}
+
+.livebets-table_table th,
+.livebets-table_table td {
+  padding: 20px 50px;
+}
+
+.livebets-table_table th {
+  font-size: 12px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.livebets-table_table td {
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.livebets-table_table .game-icon {
+  display: flex;
+  gap: 10px;
+}
+
+.livebets-table_table .dice {
+  color: #ff9d3f;
+}
+
+.livebets-table_table .crash {
+  color: #af33e4;
+}
+
+.livebets-table_table .name {
+  margin-left: 10px;
+}
+
+.livebets-table_table .coin {
+  margin-right: 5px;
+  margin-bottom: -5px;
+}
+
+.livebets-table_table .green {
+  color: #34b263;
+}
+
+.livebets-table_table .red {
+  color: #e14453;
+}

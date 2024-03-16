@@ -4,6 +4,7 @@ import Sidenav from '../components/Sidenav'
 import Hero from '../components/Hero'
 import Recentwins from '../components/Recentwins'
 import DepositCTA from '../components/DepositCTA'
+import Livebets from '../components/Livebets'
 import './Home.css'
 
 const Home = () => {
@@ -16,6 +17,7 @@ const Home = () => {
         <Hero isNavOpen={isNavOpen} />
         <Recentwins isNavOpen={isNavOpen} />
         <DepositCTA isNavOpen={isNavOpen} />
+        <Livebets isNavOpen={isNavOpen} />
     </div>
   )
 }
