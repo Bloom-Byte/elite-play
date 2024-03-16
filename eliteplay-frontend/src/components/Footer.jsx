@@ -29,8 +29,38 @@ const Footer = ({ isNavOpen }) => {
             navigate the ever-increasing multiplier in our crash games.
           </p>
         </div>
-        <div className="footer-cta__right"></div>
+        <div className="footer-cta__right">
+            <div className='footer-cta-items'>
+                <p>Games</p>
+                <a href=''>Dice</a>
+                <a href=''>Crash</a>
+            </div>
+            <div className='footer-cta-items'>
+                <p>Promo</p>
+                <a href=''>VIP Club</a>
+            </div>
+            <div className='footer-cta-items'>
+                <p>Support/Legal</p>
+                <a href=''>Help Center</a>
+                <a href=''>FAQ</a>
+                <a href=''>Privacy Policy</a>
+                <a href=''>Terms of Service</a>
+                <a href=''>Live Support</a>
+            </div>
+            <div>
+                <p>Community</p>
+                <div className='social-icons'>
+                    <img src="./facebook.svg" alt="facebook-icon" />
+                    <img src="./x.svg" alt="x-icon" />
+                    <img src="./linkedin.svg" alt="linkedin-icon" />
+                    <img src="./youtube.svg" alt="youtube-icon" />
+                    <img src="./instagram.svg" alt="instagram-icon" />
+                    <img src="./discord.svg" alt="discord-icon" />
+                </div>
+            </div>
+        </div>
       </div>
+      <p className='copyright'>©2024 ELITEPLAY ALL RIGHTS RESERVED</p>
     </div>
   )
 }
