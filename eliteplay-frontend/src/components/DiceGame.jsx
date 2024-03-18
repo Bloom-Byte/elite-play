@@ -5,9 +5,20 @@ const DiceGame = ({ isNavOpen }) => {
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
       <div className="dicegame-buttons">
-        <button className='dicegame-dice-title'>Dice</button>
-        <button> <img className='dicegame-fairnesslogo' src="./fairness.svg" alt="fairness" /> Fairness Checker</button>
-        <button> <img src="./Exclude.svg" alt="" /> Live Games</button>
+        <button className="dicegame-dice-title">Dice</button>
+        <button>
+          {' '}
+          <img
+            className="dicegame-fairnesslogo"
+            src="./fairness.svg"
+            alt="fairness"
+          />{' '}
+          Fairness Checker
+        </button>
+        <button>
+          {' '}
+          <img src="./Exclude.svg" alt="" /> Live Games
+        </button>
       </div>
       <div className="dicegame-gamesection">
         <div className="dicegame-placebet">
@@ -40,10 +51,56 @@ const DiceGame = ({ isNavOpen }) => {
                 10
               </span>
             </div>
-            <button className='dicegame-rollnow'>Roll Now</button>
+            <button className="dicegame-rollnow">Roll Now</button>
           </div>
         </div>
-        <div></div>
+        <div className='dicegame-diceroll'>
+          <div className='dicegame-diceroll__odds'>
+            <span>88.59</span>
+            <span>74.17</span>
+            <span className='dicegame-diceroll__odds-active'>37.56</span>
+            <span className='dicegame-diceroll__odds-active'>32.95</span>
+            <span>55.34</span>
+            <span>92.81</span>
+            <span>67.89</span>
+            <span>51.73</span>
+          </div>
+          <div className='dicegame-diceroll__die'>
+            <img src="./die.svg" alt="die" />
+          </div>
+          <div className='dicegame-diceroll__range'>
+            <input type="range" min="0" max="100" value="50" />
+          </div>
+          <div className='dicegame-diceroll__range_values'>
+            <span>0</span>
+            <span>25</span>
+            <span>50</span>
+            <span>100</span>
+          </div>
+          <div className='dicegame-diceroll__box'>
+            <div className='dicegame-diceroll__outer-box'>
+                <p>Payout</p>
+                <div className='dicegame-diceroll__box-info'>
+                    <span>1.98</span>
+                    <span>x</span>
+                </div>
+            </div>
+            <div className='dicegame-diceroll__outer-box'>
+                <p>Roll Under</p>
+                <div className='dicegame-diceroll__box-info dicegame-diceroll-rollover'>
+                    <span>50</span>
+                    <img src="./rollover.svg" alt="rollover" />
+                </div>
+            </div>
+            <div className='dicegame-diceroll__outer-box'>
+                <p>Win Chance</p>
+                <div className='dicegame-diceroll__box-info'>
+                    <span>50</span>
+                    <span>%</span>
+                </div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   )
