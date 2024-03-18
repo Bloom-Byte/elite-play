@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.dicetable {
+  margin-left: 8rem;
+  margin-top: 2rem;
+  margin-right: 5vw;
+  margin-bottom: 100px;
+}
+
+.dicetable-extended {
+  margin-left: 18rem;
+}
+
+.dicebets-toggle .dice-bets {
+  background-color: #077e551a;
+  border: 1px solid #077e551a;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.dicebets-toggle .desc-info {
+  background-color: #070c0a;
+  border: 1px solid #070c0a;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: #6e6e71;
+}
+
+.dicetable-section {
+    margin-top: 16px;
+    background-color: #070C0A;
+    padding: 10px;
+}
+
+.dicetable-betstitle {
+    padding-top: 10px;
+    /* margin: 10px; */
+    display: flex;
+    width: 100%;
+    border: 1px solid #0D1513;
+    border-radius: 6px;
+}
+
+.dicetable-betstitle div {
+    width: 50%;
+    text-align: center;
+    padding: 8px;
+    font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+}
+
+.dicetable-betstitle_all-bets {
+  color: white;
+}
+
+.dicetable-betstitle_my-bets {
+    background: #077E551A;
+    color: #6E6E71;
+}
+
+.livebets-table_table th, tr {
+    padding-right: 80px;
+}
