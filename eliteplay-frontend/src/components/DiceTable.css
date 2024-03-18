@@ -34,25 +34,25 @@
 }
 
 .dicetable-section {
-    margin-top: 16px;
-    background-color: #070C0A;
-    padding: 10px;
+  margin-top: 16px;
+  background-color: #070c0a;
+  padding: 10px;
 }
 
 .dicetable-betstitle {
-    padding-top: 10px;
-    /* margin: 10px; */
-    display: flex;
-    width: 100%;
-    border: 1px solid #0D1513;
-    border-radius: 6px;
+  padding-top: 10px;
+  /* margin: 10px; */
+  display: flex;
+  width: 100%;
+  border: 1px solid #0d1513;
+  border-radius: 6px;
 }
 
 .dicetable-betstitle div {
-    width: 50%;
-    text-align: center;
-    padding: 8px;
-    font-size: 14px;
+  width: 50%;
+  text-align: center;
+  padding: 8px;
+  font-size: 14px;
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
 }
@@ -62,10 +62,39 @@
 }
 
 .dicetable-betstitle_my-bets {
-    background: #077E551A;
-    color: #6E6E71;
+  background: #077e551a;
+  color: #6e6e71;
 }
 
-.livebets-table_table th, tr {
-    padding-right: 80px;
+.livebets-table_table th,
+tr {
+  padding-right: 70px;
+}
+
+.dicetable-description-information h3 {
+  font-size: 32px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 800;
+  color: #9e9ea2;
+}
+
+.dicetable-description-information p {
+  font-size: 16px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  color: #9e9ea2;
+}
+
+.dicetable-description-information h5 {
+  font-size: 16px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  color: #9e9ea2;
+}
+
+.dicetable-description-information h6 {
+  font-size: 16px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: #9e9ea2;
 }
