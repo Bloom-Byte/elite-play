@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.dicegame {
+  margin-left: 8rem;
+  margin-top: 2rem;
+  margin-right: 5vw;
+}
+
+.dicegame-extended {
+  margin-left: 18rem;
+}
+
+.dicegame-buttons {
+  display: flex;
+  gap: 10px;
+}
+
+.dicegame-buttons button {
+  background-color: #0b281f;
+  border: 1px transparent;
+  border-radius: 6px;
+  padding: 8px 20px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #9E9EA2;
+}
+
+.dicegame-buttons button img {
+    margin-right: 5px;
+}
+
+.dicegame-fairnesslogo{
+    margin-bottom: -5px;
+}
+
+.dicegame-dice-title {
+  background-color: #070c0a !important;
+  color: #ffffff !important;
+}
+
+.dicegame-gamesection {
+  display: flex;
+}
+
+.dicegame-placebet {
+  background-color: #0b281f;
+  margin-top: 24px;
+  height: 400px;
+}
+
+.dicegame-placebet_type {
+  display: flex;
+}
+
+.dicegame-placebet_type span {
+  padding: 1rem 2rem;
+}
+
+.dicegame-placebet_type .active {
+  border-bottom: 1px solid #1fc88e;
+  font-family: Manrope;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: white;
+}
+
+.dicegame-placebet_type span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 20px;
+  letter-spacing: 0px;
+  text-align: center;
+  color: #6e6e71;
+}
+
+.dicegame-placebet__bet {
+  padding: 1rem;
+}
+
+.dicegame-placebet__bet p {
+  padding: 0;
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #9e9ea2;
+}
+
+.dicegame-placebet__amount {
+  margin-top: 1rem;
+  background: #070c0a;
+  padding: 0.5rem;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.dicegame-placebet__amonut-toggle {
+  display: flex;
+  gap: 5px;
+}
+
+.dicegame-placebet__amount span {
+  color: white;
+  align-self: center;
+}
+
+.dicegame-placebet__amount span img {
+  margin-right: 5px;
+}
+
+.dicegame-placebet__amonut-toggle span {
+  background: #0b1210;
+  border-radius: 6px;
+  padding: 8px 16px;
+  color: white;
+}
+
+.dicegame-placebet__select-amount {
+  margin-top: 5px;
+  display: flex;
+  gap: 5px;
+  margin-bottom: 20px;
+}
+
+.dicegame-placebet__select-amount span {
+  background-color: #070c0a;
+  padding: 8px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.dicegame-rollnow {
+  margin-top: 20px;
+  width: 100%;
+  background: linear-gradient(to right, #158c63 50%, #24e3a1 50%);
+  border: 1px transparent;
+  border-radius: 6px;
+  padding: 12px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
