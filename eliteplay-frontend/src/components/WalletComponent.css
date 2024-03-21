@@ -1,182 +1,326 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 .wallet-comp {
-    margin-left: 8rem;
+  margin-left: 8rem;
   margin-top: 2rem;
   margin-right: 5vw;
   margin-bottom: 10rem;
 }
 
 .wallet-comp-extended {
-    margin-left: 18rem;
+  margin-left: 18rem;
 }
 
 .wallet-header {
-    padding: 8px 20px;
-    background-color: #070C0A;
-    border: 1px solid #070C0A;;
-    border-radius: 6px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 30px;
+  padding: 8px 20px;
+  background-color: #070c0a;
+  border: 1px solid #070c0a;
+  border-radius: 6px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 30px;
 }
 
 .wallet-comp_wallet-options {
-    background-color: #0B1210;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    gap: 40px;
+  background-color: #0b1210;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
 }
 
 .wallet-option {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .wallet-option span {
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #6E6E71;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6e6e71;
 }
 
 .wallet-comps {
-    display: flex;
-    gap: 20px;
+  display: flex;
+  gap: 20px;
 }
 
 .wallet-comp_wallet-info {
-    width: 100%;
+  width: 100%;
 }
 
-.wallet-comp_wallet-balance{
-    background-color: #0B1210;
-    padding: 20px;
-    display: flex;
-    gap: 24px;
-    width: 100%;
+.wallet-comp_wallet-balance {
+  background-color: #0b1210;
+  padding: 20px;
+  display: flex;
+  gap: 24px;
+  width: 100%;
 }
 
 .pot-info {
-    display: flex;
-    gap: 7px;
+  display: flex;
+  gap: 7px;
 }
 
 .pot-balance {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .real-balance {
-    font-family: 'Manrope', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-.real-balance_amount{
-    font-family: 'Manrope', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: #88DF95 !important;
+.real-balance_amount {
+  font-family: 'Manrope', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #88df95 !important;
 }
 
 .pot-balance span:nth-child(1) {
-    font-family: 'Manrope', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: #6E6E71;
-  }
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6e6e71;
+}
 
-  .pot-balance span:nth-child(2) {
-    font-family: 'Manrope', sans-serif;
-    font-size: 18px;
-    font-weight: 600;
-    color: #ffffff;
-  }
+.pot-balance span:nth-child(2) {
+  font-family: 'Manrope', sans-serif;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+}
 
-  .mainBalance-section {
-    width: 100%;
-    margin-top: 20px;
-    background-color: #0B1210;
-    padding: 20px;
-    border-radius: 6px;
-  }
+.mainBalance-section {
+  width: 100%;
+  margin-top: 20px;
+  background-color: #0b1210;
+  padding: 20px;
+  border-radius: 6px;
+}
 
 .mainBalance_hide {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .mainBalance_hide span {
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #6E6E71;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6e6e71;
 }
 
 .mainBalance_hide input {
-    background-color: #0B281F;
-    border: 2px solid #0B281F;
-    padding: 6px;
-    border-radius: 6px;
+  background-color: #0b281f;
+  border: 2px solid #0b281f;
+  padding: 6px;
+  border-radius: 6px;
 }
 
 .mainBalance-section p {
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: #6E6E71;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #6e6e71;
 }
- 
+
 .mainBalance-fiat-currency {
-    background-color: #070C0A;
-    display: flex;
-    justify-content: space-between;
-    padding: 16px;
-    border-radius: 6px;
+  background-color: #070c0a;
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  border-radius: 6px;
 }
 
 .mainBalance-amount {
-    display: flex;
-    gap: 24px;
-    align-items: center;
+  display: flex;
+  gap: 24px;
+  align-items: center;
 }
 
 .mainBalance-amount span:nth-child(1) {
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-.mainBalance-amount span:nth-child(2), .mainBalance-amount span:nth-child(3) {
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: #88DF95;
+.mainBalance-amount span:nth-child(2),
+.mainBalance-amount span:nth-child(3) {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #88df95;
+}
+
+.deposit-wallet_main {
+    padding: 20px;
 }
 
 .crypto-amount-balance {
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .currency-title {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.currency-title span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.wallet-deposit {
+  background-color: #0b1210;
+  padding-top: 20px;
+  width: 100%;
+}
+
+.wallet-deposit_headers {
+  display: flex;
+  align-items: center;
+}
+
+.wallet-deposit_headers span {
+  padding: 10px 20%;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6e6e71;
+  border-bottom: 1px solid #44537126;
+  width: 100%;
+}
+
+.wallet-deposit_active {
+  border-bottom: 1px solid #1fc88e !important;
+  font-family: 'Manrope', sans-serif !important;
+  font-weight: 600 !important;
+  color: #ffffff !important;
+}
+
+.wallet-deposit_cryptocoins {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+}
+
+.wallet-deposit_cryptocoins div {
+  border: 1px solid #6e6e71;
+  border-radius: 6px;
+  padding: 10px;
+  background-color: #070c0a;
+  display: flex;
+  gap: 5px;
+}
+
+.wallet-deposit_cryptocoins div span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.wallet-deposit p {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #c5c5c7;
+}
+
+.cryptoAddress {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #34B263;
+}
+
+.middleAddress {
+    color: white;
+}
+
+.copy-box {
+    background-color: #0B281F;
+    border-radius: 6px;
+    padding: 2px 8px;
     display: flex;
     gap: 5px;
     align-items: center;
 }
 
-.currency-title span {
+.copy-box span {
     font-family: 'Manrope', sans-serif;
-    font-size: 16px;
+    font-size: 12px;
     font-weight: 600;
     color: #ffffff;
+}
+
+.deposit-crypto {
+    margin-top: 1rem;
+    padding: 8px 16px;
+    background-color: #070C0A;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.deposit-crypto span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.crypto-notice {
+    margin-top: 2rem;
+    padding: 8px 16px;
+    background-color: #0B281F;
+}
+
+.crypto-notice_notice-head {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #34B263;
+}
+
+.crypto-notice_notice-info {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #ffffff;
+}
+
+.crypto-deposit-method_type{
+    display: flex;
+    gap: 10px;
+    width: 100%;
+}
+
+.crypto-deposit-method_type div {
+    width: 100%;
+}
+
+.options-list {
+    width: 100%;
+    background-color:  #070C0A;
+    padding: 16px;
+    color: white;
+    border: 1px solid #070C0A;
 }
