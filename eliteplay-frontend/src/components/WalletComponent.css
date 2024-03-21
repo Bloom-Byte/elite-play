@@ -291,6 +291,7 @@
     margin-top: 2rem;
     padding: 8px 16px;
     background-color: #0B281F;
+    border-radius: 6px;
 }
 
 .crypto-notice_notice-head {
@@ -339,4 +340,64 @@
 
 .fial-deposit_range {
     color: #6E6E71 !important;
+}
+
+.fiat-deposit_options {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 10px;
+}
+
+.fiat-deposit_option {
+    padding: 8px;
+    background-color: #070C0A;
+    border: 1px solid #6E6E71;
+    border-radius: 6px;
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.fiat-deposit_option span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.fiat-deposit_option_active {
+    border: 1px solid #1FC88E;
+}
+
+.deposit_fiat-btn {
+    margin-top: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.deposit_fiat-btn button {
+    background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+    border: 1px transparent;
+    border-radius: 6px;
+    color: #fff; 
+    padding: 10px 30px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.fiat-deposit_info {
+    margin-top: 1rem;
+    padding: 8px 16px;
+    background-color: #0B281F;
+    border-radius: 6px;
+}
+
+.fiat-deposit_info span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #88DF95;
 }

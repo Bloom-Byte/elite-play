@@ -208,19 +208,35 @@ const WalletComponent = ({ isNavOpen }) => {
                           </span>
                        <span className='deposit-currency'>USD</span>
                       </div>
-                      <div className="deposit-crypto">
-                        <img src="./alert-01.svg" alt="alert-icon" />
-                        <span>Minimum Deposit: 0.1 USDT</span>
+                      <div className='fiat-deposit_options'>
+                        <div className='fiat-deposit_option fiat-deposit_option_active'>
+                            <span>USD 10</span>
+                        </div>
+                        <div className='fiat-deposit_option'>
+                            <span>USD 50</span>
+                        </div>
+                        <div className='fiat-deposit_option'>
+                            <span>USD 100</span>
+                        </div>
+                        <div className='fiat-deposit_option'>
+                            <span>USD 500</span>
+                        </div>
+                        <div className='fiat-deposit_option'>
+                            <span>USD 1000</span>
+                        </div>
+                      </div>
+                      <div className='deposit_fiat-btn'>
+                        <button>Deposit Fiat</button>
                       </div>
                       <div className="crypto-notice">
-                        <span className="crypto-notice_notice-head">
-                          NOTICE:{' '}
-                        </span>
                         <span className="crypto-notice_notice-info">
-                          Send only USDT to this deposit address. Coins will be
-                          deposited automatically after 20 network
-                          confirmations. 
+                        1.Your transfer amount has to MATCH the submission amount. <br />
+                        2.Each Order ID can ONLY be used once to avoid duplicates. <br />
+                        3.DO NOT save and deposit to previous's bank account. Please follow the deposit guideline to make deposit, otherwise your deposit will be missing.
                         </span>
+                      </div>
+                      <div className='fiat-deposit_info'>
+                        <span>You will be redirected to a third-party site verified by elitepay for a secure and trustworthy browsing experience</span>
                       </div>
                     </div>
                   </div>
