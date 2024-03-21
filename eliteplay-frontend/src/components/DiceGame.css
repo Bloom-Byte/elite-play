@@ -55,10 +55,6 @@
   display: flex;
 }
 
-.dicegame-placebet_type span {
-  padding: 1rem 2rem;
-}
-
 .dicegame-placebet_type .active {
   border-bottom: 1px solid #1fc88e;
   font-family: Manrope;
@@ -68,9 +64,11 @@
   letter-spacing: 0px;
   text-align: center;
   color: white;
+  width: 100%;
 }
 
 .dicegame-placebet_type span {
+  padding: 1rem 2rem;
   font-family: 'Manrope', sans-serif;
   font-size: 14px;
   font-weight: 400;
@@ -78,6 +76,7 @@
   letter-spacing: 0px;
   text-align: center;
   color: #6e6e71;
+  cursor: pointer;
 }
 
 .dicegame-placebet__bet {
@@ -119,7 +118,7 @@
 .dicegame-placebet__amonut-toggle span {
   background: #0b1210;
   border-radius: 6px;
-  padding: 8px 16px;
+  padding: 8px;
   color: white;
 }
 
@@ -229,24 +228,68 @@
 }
 
 .dicegame-diceroll__outer-box {
-    width: 250px;
+  width: 250px;
 }
 
 .dicegame-diceroll__box-info {
-    background-color: #070C0A;
-    padding: 8px;
-    border-radius: 6px;
-    display: flex;
-    justify-content: space-between;
+  background-color: #070c0a;
+  padding: 8px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
 }
 
 .dicegame-diceroll-rollover {
-    background-color: #0D1513;
+  background-color: #0d1513;
 }
 
 .dicegame-diceroll__box-info span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.mrg-b {
+    margin-bottom: 1rem;
+}
+
+.dicegame-onwin {
+    display: flex;
+    gap: 5px;
+    margin-top: 1rem;
+}
+
+.gamedice-reset_btn {
+    background-color: #070c0a;
+    padding: 8px;
+    border-radius: 6px;
+}
+
+.dicegame-pecent-bx {
+    position: relative;
+    display: inline-block;
+}
+
+.dicegame-pecent-bx input {
+    padding-right: 20px;
+    width: 100px;
+}
+
+.dicegame-pecent-bx span {
+    position: absolute;
+    top: 50%;
+    right: 5px;
+    transform: 'translateY(-50%)';
+}
+
+.dicegame-reset-bx {
+    background-color: #0B1210;
+    padding: 4px;
+    margin-right: 10px;
     font-family: 'Manrope', sans-serif;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 600;
     color: #ffffff;
+    border-radius: 6px;
 }

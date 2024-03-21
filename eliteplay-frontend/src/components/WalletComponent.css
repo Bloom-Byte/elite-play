@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.wallet-comp {
+    margin-left: 8rem;
+  margin-top: 2rem;
+  margin-right: 5vw;
+  margin-bottom: 10rem;
+}
+
+.wallet-comp-extended {
+    margin-left: 18rem;
+}
+
+.wallet-header {
+    padding: 8px 20px;
+    background-color: #070C0A;
+    border: 1px solid #070C0A;;
+    border-radius: 6px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    margin-bottom: 30px;
+}
+
+.wallet-comp_wallet-options {
+    background-color: #0B1210;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+.wallet-option {
+    display: flex;
+    gap: 10px;
+}
+
+.wallet-option span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6E6E71;
+}
+
+.wallet-comps {
+    display: flex;
+    gap: 20px;
+}
+
+.wallet-comp_wallet-info {
+    width: 100%;
+}
+
+.wallet-comp_wallet-balance{
+    background-color: #0B1210;
+    padding: 20px;
+    display: flex;
+    gap: 24px;
+    width: 100%;
+}
+
+.pot-info {
+    display: flex;
+    gap: 7px;
+}
+
+.pot-balance {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.real-balance {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.real-balance_amount{
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #88DF95 !important;
+}
+
+.pot-balance span:nth-child(1) {
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    color: #6E6E71;
+  }
+
+  .pot-balance span:nth-child(2) {
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+  }
+
+  .mainBalance-section {
+    width: 100%;
+    margin-top: 20px;
+    background-color: #0B1210;
+    padding: 20px;
+    border-radius: 6px;
+  }
+
+.mainBalance_hide {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mainBalance_hide span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #6E6E71;
+}
+
+.mainBalance_hide input {
+    background-color: #0B281F;
+    border: 2px solid #0B281F;
+    padding: 6px;
+    border-radius: 6px;
+}
+
+.mainBalance-section p {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #6E6E71;
+}
+ 
+.mainBalance-fiat-currency {
+    background-color: #070C0A;
+    display: flex;
+    justify-content: space-between;
+    padding: 16px;
+    border-radius: 6px;
+}
+
+.mainBalance-amount {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+}
+
+.mainBalance-amount span:nth-child(1) {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.mainBalance-amount span:nth-child(2), .mainBalance-amount span:nth-child(3) {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #88DF95;
+}
+
+.crypto-amount-balance {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.currency-title {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+}
+
+.currency-title span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+}

@@ -1,8 +1,7 @@
 import React, { useState } from 'react'
-import './DiceGame.css'
 
-const DiceGame = ({ isNavOpen }) => {
-  const [auto, setAuto] = useState(false)
+const CrashGame = ({ isNavOpen }) => {
+    const [auto, setAuto] = useState(false)
 
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
@@ -186,4 +185,4 @@ const DiceGame = ({ isNavOpen }) => {
   )
 }
 
-export default DiceGame
+export default CrashGame

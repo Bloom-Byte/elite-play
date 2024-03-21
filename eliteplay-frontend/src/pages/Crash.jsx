@@ -1,23 +1,23 @@
 import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 import Sidenav from '../components/Sidenav'
-import DiceGame from '../components/DiceGame'
-import DiceTable from '../components/DiceTable'
+import CrashGame from '../components/CrashGame'
+import CrashTable from '../components/CrashTable'
 import Footer from '../components/Footer'
-import './Dice.css'
+import './Crash.css'
 
-const Dice = () => {
+const Crash = () => {
   const [isNavOpen, setIsNavOpen] = useState(true)
 
   return (
     <div>
       <Navbar isNavOpen={isNavOpen} />
       <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
-      <DiceGame isNavOpen={isNavOpen} />
-      <DiceTable isNavOpen={isNavOpen} />
+      <CrashGame isNavOpen={isNavOpen} />
+      <CrashTable isNavOpen={isNavOpen} />
       <Footer isNavOpen={isNavOpen} />
     </div>
   )
 }
 
-export default Dice
+export default Crash
