@@ -324,3 +324,19 @@
     color: white;
     border: 1px solid #070C0A;
 }
+
+.deposit-currency{
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #6E6E71;
+}
+
+.fiat-deposit_amount {
+    display: flex;
+    justify-content: space-between;
+}
+
+.fial-deposit_range {
+    color: #6E6E71 !important;
+}

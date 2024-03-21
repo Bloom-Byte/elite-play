@@ -12,6 +12,7 @@ const options = [
 
 const WalletComponent = ({ isNavOpen }) => {
   const [currentSection, setCurrentSection] = useState('Balance');
+  const [depositmethod, setDepositMethod] = useState('crypto');
 
   return (
     <div className={`wallet-comp ${isNavOpen ? 'wallet-comp-extended' : ''}`}>
@@ -97,64 +98,134 @@ const WalletComponent = ({ isNavOpen }) => {
           {currentSection === 'Deposit' && (
             <div className="wallet-deposit">
               <div className="wallet-deposit_headers">
-                <span className="wallet-deposit_active">Crypto</span>
-                <span>Fiat</span>
+                <span
+                  onClick={() => {
+                    setDepositMethod('crypto');
+                  }}
+                  className={`${
+                    depositmethod === 'crypto' ? 'wallet-deposit_active' : ''
+                  }`}
+                >
+                  Crypto
+                </span>
+                <span
+                  onClick={() => {
+                    setDepositMethod('fiat');
+                  }}
+                  className={`${
+                    depositmethod === 'fiat' ? 'wallet-deposit_active' : ''
+                  }`}
+                >
+                  Fiat
+                </span>
               </div>
-              <div className="deposit-wallet_main">
-                <div className="wallet-deposit_cryptocoins">
-                  <div>
-                    <img src="./usdt.svg" alt="usdt" />
-                    <span>USDT</span>
-                  </div>
-                  <div>
-                    <img src="./solana.svg" alt="solana" />
-                    <span>SOL</span>
-                  </div>
-                </div>
-                <div>
-                  <div className='crypto-deposit-method_type'>
+              {depositmethod === 'crypto' ? (
+                <div className="deposit-wallet_main">
+                  <div className="wallet-deposit_cryptocoins">
                     <div>
-                      <p>Deposit Currency</p>
-                      <select className="options-list">
-                        <option value="usdt">USDT</option>
-                        <option value="solana">SOL</option>
-                      </select>
+                      <img src="./usdt.svg" alt="usdt" />
+                      <span>USDT</span>
                     </div>
                     <div>
-                      <p>Choose Network</p>
-                      <select className="options-list">
-                        <option value="erc20">ERC 20</option>
-                        <option value="erc21">ERC 21</option>
-                      </select>
+                      <img src="./solana.svg" alt="solana" />
+                      <span>SOL</span>
                     </div>
                   </div>
-                  <p>Deposit Address</p>
-                  <div className="mainBalance-fiat-currency">
-                    <span className="cryptoAddress">
-                      0x67
-                      <span className="middleAddress">
-                        8bD9B31a318af10bb0897905E425dBb
+                  <div>
+                    <div className="crypto-deposit-method_type">
+                      <div>
+                        <p>Deposit Currency</p>
+                        <select className="options-list">
+                          <option value="usdt">USDT</option>
+                          <option value="solana">SOL</option>
+                        </select>
+                      </div>
+                      <div>
+                        <p>Choose Network</p>
+                        <select className="options-list">
+                          <option value="erc20">ERC 20</option>
+                          <option value="erc21">ERC 21</option>
+                        </select>
+                      </div>
+                    </div>
+                    <p>Deposit Address</p>
+                    <div className="mainBalance-fiat-currency">
+                      <span className="cryptoAddress">
+                        0x67
+                        <span className="middleAddress">
+                          8bD9B31a318af10bb0897905E425dBb
+                        </span>
+                        Ce5A794
                       </span>
-                      Ce5A794
-                    </span>
-                    <div className="copy-box">
-                      <img src="./copy-01.svg" alt="copy-icon" />
-                      <span>Copy</span>
+                      <div className="copy-box">
+                        <img src="./copy-01.svg" alt="copy-icon" />
+                        <span>Copy</span>
+                      </div>
+                    </div>
+                    <div className="deposit-crypto">
+                      <img src="./alert-01.svg" alt="alert-icon" />
+                      <span>Minimum Deposit: 0.1 USDT</span>
+                    </div>
+                    <div className="crypto-notice">
+                      <span className="crypto-notice_notice-head">
+                        NOTICE:{' '}
+                      </span>
+                      <span className="crypto-notice_notice-info">
+                        Send only USDT to this deposit address. Coins will be
+                        deposited automatically after 20 network confirmations. 
+                      </span>
                     </div>
                   </div>
-                  <div className="deposit-crypto">
-                    <img src="./alert-01.svg" alt="alert-icon" />
-                    <span>Minimum Deposit: 0.1 USDT</span>
-                  </div>
-                  <div className="crypto-notice">
-                    <span className="crypto-notice_notice-head">NOTICE: </span>
-                    <span className="crypto-notice_notice-info">
-                      Send only USDT to this deposit address. Coins will be
-                      deposited automatically after 20 network confirmations. 
-                    </span>
-                  </div>
                 </div>
-              </div>
+              ) : (
+                <>
+                  <div className="deposit-wallet_main">
+                    <div>
+                      <div className="crypto-deposit-method_type">
+                        <div>
+                          <p>Deposit Currency</p>
+                          <select className="options-list">
+                            <option value="usd">USD</option>
+                            <option value="ngn">NGN</option>
+                          </select>
+                        </div>
+                        <div>
+                          <p>Choose Network</p>
+                          <select className="options-list">
+                            <option value="paystack">PayStack</option>
+                            <option value="interswitch">Interswitch1</option>
+                          </select>
+                        </div>
+                      </div>
+                      <div className='fiat-deposit_amount'>
+                      <p>Deposit Amount</p>
+                      <p className='fial-deposit_range'>10 - 100000 USD</p>
+                      </div>
+                      
+                      <div className="mainBalance-fiat-currency">
+                          <span className="middleAddress">
+                           10
+                          </span>
+                       <span className='deposit-currency'>USD</span>
+                      </div>
+                      <div className="deposit-crypto">
+                        <img src="./alert-01.svg" alt="alert-icon" />
+                        <span>Minimum Deposit: 0.1 USDT</span>
+                      </div>
+                      <div className="crypto-notice">
+                        <span className="crypto-notice_notice-head">
+                          NOTICE:{' '}
+                        </span>
+                        <span className="crypto-notice_notice-info">
+                          Send only USDT to this deposit address. Coins will be
+                          deposited automatically after 20 network
+                          confirmations. 
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </>
+              )}
             </div>
           )}
         </div>

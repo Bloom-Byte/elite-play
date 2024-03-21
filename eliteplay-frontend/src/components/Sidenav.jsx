@@ -50,7 +50,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
             >
               <div className="sidenav__link">
                 <img src="./dice.svg" alt="dice-icon" />
-                <span>Dice</span>
+                <span><a href="/dice">Dice</a></span>
               </div>
             </div>
             <div
@@ -64,7 +64,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
             >
               <div className="sidenav__link">
                 <img src="./chart-increase.svg" alt="crash-icon" />
-                <span>Crash</span>
+                <span><a href="/crash">Crash</a></span>
               </div>
             </div>
             <div

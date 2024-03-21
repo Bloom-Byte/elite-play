@@ -44,11 +44,19 @@ body {
     cursor: pointer;
 }
 
-.sidenav__link span {
+.sidenav__link span  {
     color: #6E6E71;
     font-size: 14px;
     font-family: "Manrope", sans-serif;
     font-weight: 600;
+}
+
+.sidenav__link span a {
+    color: #6E6E71;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    text-decoration: none;
 }
 
 .sidenav-vip {

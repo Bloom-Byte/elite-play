@@ -32,11 +32,12 @@ body {
     gap: 10px;
 }
 
-.nav-games__dice span {
+.nav-games__dice span a {
     color: #6E6E71;
     font-size: 14px;
     font-family: "Manrope", sans-serif;
     font-weight: 600;
+    text-decoration: none;
 }
 
 .nav-auth {
@@ -113,4 +114,8 @@ body {
     font-size: 14px;
     font-family: "Manrope", sans-serif;
     font-weight: 600;
+}
+
+.wallet-nav {
+    text-decoration: none;
 }
