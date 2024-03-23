@@ -206,6 +206,7 @@
   color: #6e6e71;
   border-bottom: 1px solid #44537126;
   width: 100%;
+  cursor: pointer;
 }
 
 .wallet-deposit_active {
@@ -400,4 +401,71 @@
     font-size: 14px;
     font-weight: 600;
     color: #88DF95;
+}
+
+.withdraw-address_input {
+    width: 99%;
+    padding: 16px 0px;
+    padding-left: 10px;
+    background-color: #070C0A;
+    border: 1px solid #070C0A;
+    border-radius: 6px;
+    color: white;
+}
+
+.withdraw-address_input:focus {
+    outline: none;
+    border: 2px solid #24E3A1;
+}
+
+.withdraw-amount_title {
+    display: flex;
+    justify-content: space-between;
+}
+
+.withdraw-amount_title p:nth-child(2) {
+    color: #6E6E71;
+}
+
+.withdraw_amounts {
+    margin-top: 1rem;
+    background-color: #0D1513;
+    padding: 8px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.withdraw_amounts div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.withdraw_amount-details span:nth-child(1){
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    color: #9E9EA2;
+}
+
+.withdraw_amount-details span:nth-child(2){
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.more-info_icon{
+    margin-bottom: -4px;
+    margin-left: 4px;
+}
+
+.accountnumber-input {
+    width: 99%;
+    padding: 16px 0px;
+    padding-left: 10px;
+    background-color: #070C0A;
+    border: 1px solid #070C0A;
+    border-radius: 6px;
+    color: white;
 }

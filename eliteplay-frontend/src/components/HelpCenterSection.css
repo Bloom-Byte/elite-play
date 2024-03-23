@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.help-center {
+  margin-left: 8rem;
+  margin-top: 2rem;
+  margin-right: 5vw;
+  margin-bottom: 10rem;
+}
+
+.help-center-extended {
+  margin-left: 18rem;
+}
+
+.help-center p {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #9E9EA2;
+}
+
+.help-center__action-items{
+    display: flex;
+    gap: 25px;
+}
+
+.help-center_navs {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: #0B1210;
+    padding: 20px;
+    border-radius: 6px;
+    height: 636px;
+}
+
+.help-center_nav {
+    padding: 8px;
+    width: 132px;
+    cursor: pointer;
+}
+
+.help-center_nav span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #6E6E71;
+}
+
+.help-center_nav-active {
+    background-color: #0B281F;
+    border-radius: 6px;
+}
+
+.help-center_nav-active span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+
+.help-center-header {
+    background-color: #070C0A;
+    width: 100px;
+    padding: 8px 20px;
+    margin-bottom: 24px;
+    border-radius: 6px;
+}
+
+.help-center-header span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+}
+
+.help-center_game-desc{
+    padding: 20px;
+    background-color: #0B1210;
+    border-radius: 6px;
+}
+
+.help-center_game-desc select {
+    background-color: #070C0A;
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #070C0A;
+    color: white;
+}
+
+.help-center_game-desc select:focus {
+    outline: none;
+    border: 2px solid #24E3A1;
+}
+
+.help-center_game-desc h4 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #9E9EA2;
+}
+
+.help-center_game-desc li {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #9E9EA2;
+}
+
+.help-center_game-desc-btn {
+    background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+    border: 1px transparent;
+    border-radius: 6px;
+    color: #fff; 
+    padding: 10px 20px;
+    width: 100%;
+    height: 48px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.github-verify {
+    color: #24E3A1;
+}
+
+.privacy-policy_header {
+    font-size: 16px !important;
+    font-weight: 600 !important;
+    color: #ffffff !important;
+    margin-bottom: 2rem;
+}
+
+.privacy-policy_list {
+    margin-bottom: 1rem;
+}
+
+.grey-circle {
+    display: block;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: #9E9EA2;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
+
+.header-circle {
+    display: block;
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    background-color: white;
+    margin-top: 2px;
+    flex-shrink: 0;
+}
