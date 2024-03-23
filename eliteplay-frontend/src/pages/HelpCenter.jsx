@@ -12,7 +12,7 @@ const HelpCenter = () => {
       <Navbar isNavOpen={isNavOpen} />
       <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
       <HelpCenterSection isNavOpen={isNavOpen} />
-      {/* <Footer isNavOpen={isNavOpen} /> */}
+      <Footer isNavOpen={isNavOpen} />
     </div>
   );
 };

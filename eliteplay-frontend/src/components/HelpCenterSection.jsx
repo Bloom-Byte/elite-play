@@ -45,26 +45,36 @@ const HelpCenterSection = ({ isNavOpen }) => {
             <span>Terms of Service</span>
           </div>
           <div
-            onClick={() => setCurrentSection('provably fair')}
-            className="help-center_nav"
+            onClick={() => setCurrentSection('coin accuracy limit')}
+            className={`help-center_nav ${
+              currentSection === 'coin accuracy limit'
+                ? 'help-center_nav-active'
+                : ''
+            }`}
           >
             <span>Coin Accuracy Limit</span>
           </div>
           <div
-            onClick={() => setCurrentSection('provably fair')}
-            className="help-center_nav"
+            onClick={() => setCurrentSection('support')}
+            className={`help-center_nav ${
+              currentSection === 'support' ? 'help-center_nav-active' : ''
+            }`}
           >
             <span>Support</span>
           </div>
           <div
-            onClick={() => setCurrentSection('provably fair')}
-            className="help-center_nav"
+            onClick={() => setCurrentSection('fee')}
+            className={`help-center_nav ${
+              currentSection === 'fee' ? 'help-center_nav-active' : ''
+            }`}
           >
             <span>Fee</span>
           </div>
           <div
-            onClick={() => setCurrentSection('provably fair')}
-            className="help-center_nav"
+            onClick={() => setCurrentSection('authenticator')}
+            className={`help-center_nav ${
+              currentSection === 'authenticator' ? 'help-center_nav-active' : ''
+            }`}
           >
             <span>Authenticator</span>
           </div>
@@ -1474,26 +1484,241 @@ const HelpCenterSection = ({ isNavOpen }) => {
                 </ul>
                 <li className="privacy-policy_list">Self-exclusion</li>
                 <ul>
-                    <li className="privacy-policy_list">9.1. By requesting a period of self-exclusion, you agree to follow the below terms and conditions, which will be in effect from the time that CS implements the chosen period of self-exclusion.</li>
-                    <li className="privacy-policy_list">9.2. You may self-exclude for periods of 1, 3, 6, 12 month/s or permanent. Self-exclusion requests are to be made via Live Support.</li>
-                    <li className="privacy-policy_list">9.3. Once you have self-excluded you will not be able to access your account or withdraw during this period.</li>
-                    <li className="privacy-policy_list">9.4. If you have excluded your account whilst you have pending bets on your account, bets placed will remain valid and settle according to official results.</li>
-                    <li className="privacy-policy_list">9.5. Once the period of self-exclusion has lapsed you may withdraw winnings from qualifying bets. ELITEPLAY does not cancel or void any bets placed before a self-exclusion has been affected.</li>
-                    <li className="privacy-policy_list">9.6. Once you have self-excluded you will not be able to change or alter the period for a shorter length of time or have your self-exclusion cancelled until the period that you selected for self-exclusion has passed.</li>
-                    <li className="privacy-policy_list">9.7. Please contact our customer services team if you wish to extend your self-exclusion period.</li>
-                    <li className="privacy-policy_list">9.8. Once your self-exclusion period has elapsed, reinstatement of the account can be done by emailing the request to support@ELITEPLAY.</li>
-                    <li className="privacy-policy_list">9.9. By self-excluding, you agree that:
+                  <li className="privacy-policy_list">
+                    9.1. By requesting a period of self-exclusion, you agree to
+                    follow the below terms and conditions, which will be in
+                    effect from the time that CS implements the chosen period of
+                    self-exclusion.
+                  </li>
+                  <li className="privacy-policy_list">
+                    9.2. You may self-exclude for periods of 1, 3, 6, 12 month/s
+                    or permanent. Self-exclusion requests are to be made via
+                    Live Support.
+                  </li>
+                  <li className="privacy-policy_list">
+                    9.3. Once you have self-excluded you will not be able to
+                    access your account or withdraw during this period.
+                  </li>
+                  <li className="privacy-policy_list">
+                    9.4. If you have excluded your account whilst you have
+                    pending bets on your account, bets placed will remain valid
+                    and settle according to official results.
+                  </li>
+                  <li className="privacy-policy_list">
+                    9.5. Once the period of self-exclusion has lapsed you may
+                    withdraw winnings from qualifying bets. ELITEPLAY does not
+                    cancel or void any bets placed before a self-exclusion has
+                    been affected.
+                  </li>
+                  <li className="privacy-policy_list">
+                    9.6. Once you have self-excluded you will not be able to
+                    change or alter the period for a shorter length of time or
+                    have your self-exclusion cancelled until the period that you
+                    selected for self-exclusion has passed.
+                  </li>
+                  <li className="privacy-policy_list">
+                    9.7. Please contact our customer services team if you wish
+                    to extend your self-exclusion period.
+                  </li>
+                  <li className="privacy-policy_list">
+                    9.8. Once your self-exclusion period has elapsed,
+                    reinstatement of the account can be done by emailing the
+                    request to support@ELITEPLAY.
+                  </li>
+                  <li className="privacy-policy_list">
+                    9.9. By self-excluding, you agree that:
                     <ul>
-                        <li className="privacy-policy_list">a) You will not create another account during this period.</li>
-                        <li className="privacy-policy_list">b) You will not deposit or attempt to deposit funds into a ELITEPLAY account.
-</li>
-                        <li className="privacy-policy_list">c) You will not wager on this website during this period.</li>
-                        <li className="privacy-policy_list">d) This is a voluntary act initiated by yourself, and we will not be liable for any losses you may incur during the period of self-exclusion in any form.</li>
+                      <li className="privacy-policy_list">
+                        a) You will not create another account during this
+                        period.
+                      </li>
+                      <li className="privacy-policy_list">
+                        b) You will not deposit or attempt to deposit funds into
+                        a ELITEPLAY account.
+                      </li>
+                      <li className="privacy-policy_list">
+                        c) You will not wager on this website during this
+                        period.
+                      </li>
+                      <li className="privacy-policy_list">
+                        d) This is a voluntary act initiated by yourself, and we
+                        will not be liable for any losses you may incur during
+                        the period of self-exclusion in any form.
+                      </li>
                     </ul>
-                    </li>
+                  </li>
                 </ul>
               </ol>
               <p>Privacy Policy</p>
+            </>
+          )}
+          {currentSection === 'coin accuracy limit' && (
+            <>
+              <p
+                style={{ display: 'flex', gap: '5px' }}
+                className="privacy-policy_header"
+              >
+                Fiat Currency Display for Cryptocurrency Players
+              </p>
+              <p>
+                Players who elect to view their cryptocurrency balances in terms
+                of fiat currency equivalents ("Converted Balances") should
+                expressly recognize that such Converted Balances are for
+                reference purposes only and serve as approximate estimates.
+                Although ELITEPLAY endorses diligent efforts to ensure that the
+                conversion rates utilized are accurate and updated, all
+                transactions, wagers, and settlements conducted on our platform
+                are denominated and settled in cryptocurrency.
+              </p>
+              <p
+                style={{ display: 'flex', gap: '5px' }}
+                className="privacy-policy_header"
+              >
+                Limitation of Liability
+              </p>
+              <p>
+                ELITEPLAY expressly disclaims any liability for inaccuracies,
+                errors, or discrepancies in the Converted Balances presented.
+                Players are hereby advised that the cryptocurrency amount shall
+                be deemed the primary value for all transactions and wagers, and
+                any reliance on estimated fiat conversions, known as Converted
+                Balances, is at the sole risk of the player.
+              </p>
+              <p
+                style={{ display: 'flex', gap: '5px' }}
+                className="privacy-policy_header"
+              >
+                Third-Party Games
+              </p>
+              <p>
+                Our platform may integrate third-party games offering the
+                display of fiat conversion options ("Third-Party Converted
+                Balances"). ELITEPLAY shall not be held accountable for any
+                discrepancies between the Converted Balances shown on the
+                website and the Third-Party Converted Balances presented within
+                these third-party games
+              </p>
+              <p
+                style={{ display: 'flex', gap: '5px' }}
+                className="privacy-policy_header"
+              >
+                Reporting Discrepancies
+              </p>
+              <p>
+                We actively encourage players to promptly report any
+                discrepancies or irregularities observed between the Converted
+                Balances displayed and the actual cryptocurrency amounts. Such
+                reporting should be directed to our support team for immediate
+                review and action. Timely reporting assists us in the continuous
+                improvement of player experience and the accuracy of information
+                presented.
+              </p>
+            </>
+          )}
+          {currentSection === 'support' && (
+            <div className="support-center">
+              <img src="./headphones.svg" alt="headphone-icon" />
+              <p>
+                You have a question? Can't find the answer on the website? Don't
+                worry! you can contact our 24-hour online customer support any
+                time, Our customer
+                <span className="highlight-support"> support  </span>team is
+                happy to answer any of your questions.
+              </p>
+            </div>
+          )}
+          {currentSection === 'fee' && (
+            <>
+              <p
+                style={{ display: 'flex', gap: '5px' }}
+                className="privacy-policy_header"
+              >
+                Why do you need a Withdraw fee?
+              </p>
+              <p>
+                When we make a transaction, the information is broadcast to the
+                network, and the miners collect and package the production
+                blocks, and only after the block is produced, the transaction is
+                recognized. Although the miners will get a fixed monetary reward
+                after digging into the block, according to the rules, the reward
+                will gradually be halved and become less and less, and
+                eventually the miners may not be profitable. Therefore,
+                transaction fees are needed to maintain the enthusiasm of miners
+                for mining.
+              </p>
+              <p
+                style={{ display: 'flex', gap: '5px' }}
+                className="privacy-policy_header"
+              >
+                The role of the withdrawal fee
+              </p>
+              <ol>
+                <li className="privacy-policy_list">
+                  Encourage miners to mine
+                </li>
+                <li className="privacy-policy_list">
+                  Prevent excessive small transactions from hitting the network.
+                  Due to the P2P network, the ability of transaction processing
+                  is limited. If everyone frequently conducts small
+                  transactions, the network will be congested, causing delays or
+                  even stagnation. So set a threshold, the amount of natural
+                  transactions will be reduced when there is a small
+                  transaction.
+                </li>
+              </ol>
+              <p
+                style={{ display: 'flex', gap: '5px' }}
+                className="privacy-policy_header"
+              >
+                How much is the Withdraw fee?
+              </p>
+              <p>
+                Since the transaction is a two-way charge, it means that the
+                sale of a digital currency requires at least a 0.1% Withdraw fee
+                to the platform.
+              </p>
+            </>
+          )}
+          {currentSection === 'authenticator' && (
+            <>
+              <p
+                style={{ display: 'flex', gap: '5px' }}
+                className="privacy-policy_header"
+              >
+                Authenticator
+              </p>
+              <p>
+                Authenticator could provide an additional layer of security
+                protection for your account. It is a software token that
+                implements a 2-step verification program. In order to use Google
+                authenticator, you must have a mobile phone because it will be
+                installed as a mobile application. You can also use Google
+                authenticator when offline.
+              </p>
+              <p>
+                Authenticator uses an algorithm to calculate one-time passwords
+                based on time. Simply put, once the application is started,
+                Authenticator will display a randomly generated 6-digit sequence
+                of numbers, ie, a one-time password. If you have enabled 2FA in
+                your account, then in addition to entering your usual password,
+                you also need to enter the randomly generated one-time password.
+                2FA provides additional security protection because it makes
+                sure that others cannot login to your account with your username
+                and password alone.
+              </p>
+              <p>
+                We highly values the security of the players, so we strongly
+                recommend you to use Google authenticator. This small extra step
+                could protect you against necessary headache and anxiety.
+              </p>
+              <p>
+                If you have enabled Google authenticator, you will be prompted
+                to complete 2FA every time you login or withdraw. Furthermore,
+                please print out the QR code or write down the manual code that
+                could recover your account. In case of mobile phone breakdown or
+                loss, this will help you to a great extent.
+              </p>
+              <p>To know more about Google authenticator. <span className="highlight-support"> Authenticator </span></p>
             </>
           )}
         </div>
