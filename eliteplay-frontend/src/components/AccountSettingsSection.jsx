@@ -3,6 +3,15 @@ import './AccountSettingsSection.css';
 
 const AccountSettingsSection = ({ isNavOpen }) => {
   const [currentSection, setCurrentSection] = useState('account-info');
+  const [edituserName, setEditUsername] = useState(false);
+  const [verifyEmail, setVerifyEmail] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState(false);
+  const [changePassword, setChangePassword] = useState(false);
+
+  const handleConfirmPassword = () => {
+    setConfirmPassword(!confirmPassword)
+    setChangePassword(!changePassword)
+  }
 
   return (
     <div
@@ -70,7 +79,11 @@ const AccountSettingsSection = ({ isNavOpen }) => {
                         <p>User ID: 12357308</p>
                       </div>
                     </div>
-                    <button>
+                    <button
+                      onClick={() => {
+                        setEditUsername(true);
+                      }}
+                    >
                       Edit <img src="./Edit.svg" alt="edit-icon" />
                     </button>
                   </div>
@@ -88,7 +101,11 @@ const AccountSettingsSection = ({ isNavOpen }) => {
                       alt="verify-icon"
                     />
                   </div>
-                  <button>
+                  <button
+                    onClick={() => {
+                      setVerifyEmail(true);
+                    }}
+                  >
                     verify <img src="./Checkbox.svg" alt="check-icon" />
                   </button>
                 </div>
@@ -109,7 +126,14 @@ const AccountSettingsSection = ({ isNavOpen }) => {
                         Change your password regularly to keep it unique and
                         secure.
                       </p>
-                      <button className="black-btn">Change Password</button>
+                      <button
+                        onClick={() => {
+                          setConfirmPassword(true);
+                        }}
+                        className="black-btn"
+                      >
+                        Change Password
+                      </button>
                     </div>
                     <div className="security_one-box">
                       <img src="./tabler_auth-2fa.svg" alt="2fa-icon" />
@@ -202,6 +226,133 @@ const AccountSettingsSection = ({ isNavOpen }) => {
           )}
         </div>
       </div>
+      {edituserName && (
+        <div className="editusername-popup">
+          <div className="editusername-popup_container">
+            <div className="editusername-popup_header">
+              <p>My Profile</p>
+              <span
+                onClick={() => {
+                  setEditUsername(!edituserName);
+                }}
+                className="close"
+              >
+                X
+              </span>
+            </div>
+            <div className="editusername-popup_main-content">
+              <div className="editusername-popup_edit-avatar">
+                <img src="./profile-img.svg" alt="profile-icon" />
+                <button>Edit Your Avatar</button>
+              </div>
+              <p className="editusername-popup_edit-username">Username</p>
+              <input
+                className="editusername-popup_edit-username-box"
+                type="text"
+              />
+              <p className="edit-username_note">
+                Do not use special symbols, otherwise your account may not be
+                supported
+              </p>
+              <button className="edit-username-popup_btn">Modify</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {verifyEmail && (
+        <div className="editusername-popup">
+          <div className="editusername-popup_container">
+            <div className="editusername-popup_header">
+              <span
+                onClick={() => {
+                  setVerifyEmail(!verifyEmail);
+                }}
+                className="close email-close"
+              >
+                X
+              </span>
+            </div>
+            <div className="editusername-popup_main-content">
+              <div className="editusername-popup_edit-avatar">
+                <img src="./fluent_mail-20-filled.svg" alt="mail-icon" />
+                <p className="email-popup_header">Email Verification</p>
+              </div>
+              <p className="verify-text-sent">
+                We’ve sent a verification code to{' '}
+                <span className="email-bold"> yuxer@example.com</span>, please
+                enter the 6-digit code below:
+              </p>
+              <input
+                className="editusername-popup_edit-username-box"
+                type="text"
+              />
+              <p className="email-popup_resend">Resend</p>
+            </div>
+          </div>
+        </div>
+      )}
+      {confirmPassword && (
+        <div className="editusername-popup">
+          <div className="editusername-popup_container">
+            <div className="editusername-popup_header">
+              <span
+                onClick={() => {
+                  setConfirmPassword(!confirmPassword);
+                }}
+                className="close email-close"
+              >
+                X
+              </span>
+            </div>
+            <div className="editusername-popup_main-content">
+              <div className="editusername-popup_edit-avatar">
+                <img src="./mdi_password.svg" alt="lock-icon" />
+                <p className="email-popup_header">Change Password</p>
+              </div>
+              <p className="verify-text-sent">
+              For your safety, we need to verify your old password first.
+              </p>
+              <p className="editusername-popup_edit-username">Old Password</p>
+              <input
+                className="editusername-popup_edit-username-box"
+                type="text"
+                placeholder='Set Password'
+              />
+              <button onClick={handleConfirmPassword} className="edit-username-popup_btn">Confirm</button>
+            </div>
+          </div>
+        </div>
+      )}
+      {changePassword && (
+        <div className="editusername-popup">
+          <div className="editusername-popup_container">
+            <div className="editusername-popup_header">
+                <span>  </span>
+              <span
+                onClick={() => {
+                  setChangePassword(!changePassword);
+                }}
+                className="close email-close"
+              >
+                X
+              </span>
+            </div>
+            <div className="editusername-popup_main-content">
+              <div className="editusername-popup_edit-avatar">
+                <img src="./mdi_password.svg" alt="lock-icon" />
+                <p className="email-popup_header">Set Password</p>
+              </div>
+              <p className="editusername-popup_edit-username">Old Password</p>
+              <input
+                className="editusername-popup_edit-username-box"
+                type="text"
+                placeholder='Set Password'
+              />
+              <button className="edit-username-popup_btn">Confirm</button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
