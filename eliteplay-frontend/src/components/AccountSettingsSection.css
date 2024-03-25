@@ -686,3 +686,22 @@ input:checked + .slider:before {
     background-color: #0B281F;
     border-radius: 6px;
 }
+
+.currency-table td {
+    padding: 20px;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+    overflow: hidden;
+}
+
+.currency-table td img {
+    margin-bottom: -4px;
+    margin-right: 5px;
+}
+
+.country-name {
+    color: #6E6E71 !important;
+    margin-left: 10px;
+}

@@ -10,6 +10,7 @@ const AccountSettingsSection = ({ isNavOpen }) => {
   const [selfExclusion, setSelfExclusion] = useState(false);
   const [periodExclusion, setPeriodExclusion] = useState(false);
   const [editLanguage, setEditLanguage] = useState(false);
+  const [editCurrency, setEditCurrency] = useState(false);
 
   const handleConfirmPassword = () => {
     setConfirmPassword(!confirmPassword);
@@ -189,7 +190,13 @@ const AccountSettingsSection = ({ isNavOpen }) => {
                   <p>View in fiat</p>
                   <div className="choice-box">
                     <span>USD</span>
-                    <img src="./Edit.svg" alt="edit-icon" />
+                    <img
+                      onClick={() => {
+                        setEditCurrency(!editCurrency);
+                      }}
+                      src="./Edit.svg"
+                      alt="edit-icon"
+                    />
                   </div>
                 </div>
                 <div className="preference-one">
@@ -492,9 +499,7 @@ const AccountSettingsSection = ({ isNavOpen }) => {
 
       {editLanguage && (
         <div className="editusername-popup">
-          <div
-            className="editusername-popup_container"
-          >
+          <div className="editusername-popup_container">
             <div className="editusername-popup_header">
               <p>Language</p>
               <span
@@ -507,44 +512,103 @@ const AccountSettingsSection = ({ isNavOpen }) => {
               </span>
             </div>
             <div className="editusername-popup_main-content">
-              <table className='language-table'>
+              <table className="language-table">
                 <tbody>
-                    <tr>
-                        <td className='language-active'>English</td>
-                        <td>Indian English</td>
-                        <td>Tiếng việt</td>
-                        <td>Indonesian</td>
-                    </tr>
-                    <tr>
-                        <td>日本語</td>
-                        <td>한국어</td>
-                        <td>Français</td>
-                        <td>Español</td>
-                    </tr>
-                    <tr>
-                        <td>Filipino</td>
-                        <td>عربى</td>
-                        <td>Marathi</td>
-                        <td>Türkçe</td>
-                    </tr>
-                    <tr>
-                        <td>فارسی</td>
-                        <td>Português</td>
-                        <td>Руccкий</td>
-                        <td>Deutsch</td>
-                    </tr>
-                    <tr>
-                        <td>ภาษาไทย</td>
-                        <td>Suomi</td>
-                        <td>Polski</td>
-                        <td>Italiano</td>
-                    </tr>
-                    <tr>
-                        <td>বাংলা</td>
-                        <td>اردو</td>
-                        <td>Українська</td>
-                        <td>Melayu</td>
-                    </tr>
+                  <tr>
+                    <td className="language-active">English</td>
+                    <td>Indian English</td>
+                    <td>Tiếng việt</td>
+                    <td>Indonesian</td>
+                  </tr>
+                  <tr>
+                    <td>日本語</td>
+                    <td>한국어</td>
+                    <td>Français</td>
+                    <td>Español</td>
+                  </tr>
+                  <tr>
+                    <td>Filipino</td>
+                    <td>عربى</td>
+                    <td>Marathi</td>
+                    <td>Türkçe</td>
+                  </tr>
+                  <tr>
+                    <td>فارسی</td>
+                    <td>Português</td>
+                    <td>Руccкий</td>
+                    <td>Deutsch</td>
+                  </tr>
+                  <tr>
+                    <td>ภาษาไทย</td>
+                    <td>Suomi</td>
+                    <td>Polski</td>
+                    <td>Italiano</td>
+                  </tr>
+                  <tr>
+                    <td>বাংলা</td>
+                    <td>اردو</td>
+                    <td>Українська</td>
+                    <td>Melayu</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+      {editCurrency && (
+        <div className="editusername-popup">
+          <div className="editusername-popup_container">
+            <div className="editusername-popup_header">
+              <p>View in Fiat</p>
+              <span
+                onClick={() => {
+                  setEditCurrency(!editCurrency);
+                }}
+                className="close email-close"
+              >
+                X
+              </span>
+            </div>
+            <div className="editusername-popup_main-content">
+              <table className="currency-table">
+                <tbody>
+                  <tr>
+                    <td className="language-active"> <img src="./cryptocurrency-color_usd.svg" alt="usd" /> USD US Dollar</td>
+                    <td><img src="./euro.svg" alt="euro" /> EUR <span className='country-name'>Euro</span></td>
+                    <td><img src="./inr.svg" alt="inr" /> INR <span className="country-name">India</span></td>
+                    <td><img src="./brazil.svg" alt="brl" /> BRL <span className="country-name">Brazil</span></td>
+                  </tr>
+                  <tr>
+                    <td><img src="./bdt.svg" alt="bdt" /> BDT <span className="country-name">Bangladesh</span></td>
+                    <td><img src="./idr.svg" alt="idr" /> IDR <span className="country-name">Indonesia</span></td>
+                    <td><img src="./ngn.svg" alt="ngn" /> NGN <span className='country-name'>Nigeria</span></td>
+                    <td><img src="./rub.svg" alt="" /> RUB <span className='country-name'>Russia</span></td>
+                  </tr>
+                  <tr>
+                    <td><img src="./krw.svg" alt="krw" /> KRW <span className='country-name'>Korea</span></td>
+                    <td><img src="./mxn.svg" alt="mxn" />MXN <span className='country-name'>Mexico Peso</span></td>
+                    <td><img src="./kzt.svg" alt="kzt" />KZT <span className="country-name">Kazakstan</span></td>
+                    <td><img src="./cup.svg" alt="cup" />CUP <span className="country-name">Cuba</span></td>
+                  </tr>
+                  <tr>
+                    <td><img src="./jpy.svg" alt="jpy" />JPY <span className="country-name">Japan</span></td>
+                    <td><img src="./pln.svg" alt="pln" />PLN <span className="country-name">Poland</span></td>
+                    <td><img src="./zar.svg" alt="zar" />ZAR <span className="country-name">South Africa</span></td>
+                    <td><img src="./gbp.svg" alt="gbp" />GBP <span className="country-name">United Kingdom</span></td>
+                  </tr>
+                  <tr>
+                    <td><img src="./mad.svg" alt="mad" />MAD <span className="country-name">Morocco</span></td>
+                    <td><img src="./aed.svg" alt="aed" />AED <span className="country-name">UAE-Dirham</span></td>
+                    <td><img src="./pen.svg" alt="pen" />PEN <span className="country-name">Peru Sol</span></td>
+                    <td><img src="./ghs.svg" alt="ghs" />GHS <span className="country-name">Ghana</span></td>
+                  </tr>
+                  <tr>
+                    <td><img src="./isk.svg" alt="isk" />ISK <span className="country-name">Iceland</span></td>
+                    <td><img src="./kes.svg" alt="kes" />KES <span className="country-name">Kenya Shilling</span></td>
+                    <td><img src="./ils.svg" alt="ils" />ILS <span className="country-name">Israel Shekel</span></td>
+                    <td><img src="./clp.svg" alt="clp" />CLP <span className="country-name">Chile Peso</span></td>
+                  </tr>
                 </tbody>
               </table>
             </div>
