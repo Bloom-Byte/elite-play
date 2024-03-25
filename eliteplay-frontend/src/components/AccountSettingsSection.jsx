@@ -7,11 +7,19 @@ const AccountSettingsSection = ({ isNavOpen }) => {
   const [verifyEmail, setVerifyEmail] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState(false);
   const [changePassword, setChangePassword] = useState(false);
+  const [selfExclusion, setSelfExclusion] = useState(false);
+  const [periodExclusion, setPeriodExclusion] = useState(false);
+  const [editLanguage, setEditLanguage] = useState(false);
 
   const handleConfirmPassword = () => {
-    setConfirmPassword(!confirmPassword)
-    setChangePassword(!changePassword)
-  }
+    setConfirmPassword(!confirmPassword);
+    setChangePassword(!changePassword);
+  };
+
+  const handleSelfExclusion = () => {
+    setSelfExclusion(!selfExclusion);
+    setPeriodExclusion(!periodExclusion);
+  };
 
   return (
     <div
@@ -188,7 +196,13 @@ const AccountSettingsSection = ({ isNavOpen }) => {
                   <p>Change Language</p>
                   <div className="choice-box">
                     <span>English</span>
-                    <img src="./Edit.svg" alt="edit-icon" />
+                    <img
+                      onClick={() => {
+                        setEditLanguage(!editLanguage);
+                      }}
+                      src="./Edit.svg"
+                      alt="edit-icon"
+                    />
                   </div>
                 </div>
               </div>
@@ -220,7 +234,14 @@ const AccountSettingsSection = ({ isNavOpen }) => {
                   </p>
                 </div>
 
-                <button className="exclude-btn">Request Self-Exclusion</button>
+                <button
+                  onClick={() => {
+                    setSelfExclusion(!selfExclusion);
+                  }}
+                  className="exclude-btn"
+                >
+                  Request Self-Exclusion
+                </button>
               </div>
             </>
           )}
@@ -310,15 +331,20 @@ const AccountSettingsSection = ({ isNavOpen }) => {
                 <p className="email-popup_header">Change Password</p>
               </div>
               <p className="verify-text-sent">
-              For your safety, we need to verify your old password first.
+                For your safety, we need to verify your old password first.
               </p>
               <p className="editusername-popup_edit-username">Old Password</p>
               <input
                 className="editusername-popup_edit-username-box"
                 type="text"
-                placeholder='Set Password'
+                placeholder="Set Password"
               />
-              <button onClick={handleConfirmPassword} className="edit-username-popup_btn">Confirm</button>
+              <button
+                onClick={handleConfirmPassword}
+                className="edit-username-popup_btn"
+              >
+                Confirm
+              </button>
             </div>
           </div>
         </div>
@@ -327,7 +353,7 @@ const AccountSettingsSection = ({ isNavOpen }) => {
         <div className="editusername-popup">
           <div className="editusername-popup_container">
             <div className="editusername-popup_header">
-                <span>  </span>
+              <span> </span>
               <span
                 onClick={() => {
                   setChangePassword(!changePassword);
@@ -346,9 +372,181 @@ const AccountSettingsSection = ({ isNavOpen }) => {
               <input
                 className="editusername-popup_edit-username-box"
                 type="text"
-                placeholder='Set Password'
+                placeholder="Set Password"
               />
+              <p className="editusername-popup_edit-username">
+                Confirm Password
+              </p>
+              <input
+                className="editusername-popup_edit-username-box"
+                type="text"
+                placeholder="Confirm Password"
+              />
+              <p
+                style={{ marginTop: '2rem', marginBottom: '0px' }}
+                className="verify-text-sent"
+              >
+                Re-login will be required after changing the password.
+              </p>
               <button className="edit-username-popup_btn">Confirm</button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {selfExclusion && (
+        <div className="editusername-popup">
+          <div className="editusername-popup_container">
+            <div className="editusername-popup_header">
+              <p>Self-Exclusion</p>
+              <span
+                onClick={() => {
+                  setSelfExclusion(!selfExclusion);
+                }}
+                className="close email-close"
+              >
+                X
+              </span>
+            </div>
+            <div className="editusername-popup_main-content">
+              <div className="self-exclusion_container">
+                <p>
+                  Please share with us what you want to achieve most through
+                  self-exclusion:
+                </p>
+                <div className="self-exclude_options">
+                  <label className="container-exclude">
+                    Clear myself of negative emotions
+                    <input type="checkbox" />
+                    <span className="checkmark-exclude"></span>
+                  </label>
+                  <label className="container-exclude">
+                    Overcome the addiction
+                    <input type="checkbox" />
+                    <span className="checkmark-exclude"></span>
+                  </label>
+                  <label className="container-exclude">
+                    Cut my spending(time, money, etc.)
+                    <input type="checkbox" />
+                    <span className="checkmark-exclude"></span>
+                  </label>
+                  <label className="container-exclude">
+                    Just be curious about this function
+                    <input type="checkbox" />
+                    <span className="checkmark-exclude"></span>
+                  </label>
+                </div>
+
+                <p>
+                  Or need help? <span className="chatwithus">Chat with us</span>
+                  , we are always here for you.
+                </p>
+                <div className="self-exclusion-btns">
+                  <button className="self-exclusion_cancel">Cancel</button>
+                  <button
+                    onClick={handleSelfExclusion}
+                    className="self-exclusion_next"
+                  >
+                    Next
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {periodExclusion && (
+        <div className="editusername-popup">
+          <div
+            style={{ width: '480px' }}
+            className="editusername-popup_container"
+          >
+            <div className="editusername-popup_header">
+              <p>Self-Exclusion</p>
+              <span
+                onClick={() => {
+                  setPeriodExclusion(!periodExclusion);
+                }}
+                className="close email-close"
+              >
+                X
+              </span>
+            </div>
+            <div className="editusername-popup_main-content">
+              <div className="self-exclusion_container">
+                <p>Select Period</p>
+
+                <select className="period-options" name="period" id="period">
+                  <option value="none">None</option>
+                </select>
+                <div className="self-exclusion-btns">
+                  <button className="self-exclusion_cancel">Cancel</button>
+                  <button className="self-exclusion_next">Next</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {editLanguage && (
+        <div className="editusername-popup">
+          <div
+            className="editusername-popup_container"
+          >
+            <div className="editusername-popup_header">
+              <p>Language</p>
+              <span
+                onClick={() => {
+                  setEditLanguage(!editLanguage);
+                }}
+                className="close email-close"
+              >
+                X
+              </span>
+            </div>
+            <div className="editusername-popup_main-content">
+              <table className='language-table'>
+                <tbody>
+                    <tr>
+                        <td className='language-active'>English</td>
+                        <td>Indian English</td>
+                        <td>Tiếng việt</td>
+                        <td>Indonesian</td>
+                    </tr>
+                    <tr>
+                        <td>日本語</td>
+                        <td>한국어</td>
+                        <td>Français</td>
+                        <td>Español</td>
+                    </tr>
+                    <tr>
+                        <td>Filipino</td>
+                        <td>عربى</td>
+                        <td>Marathi</td>
+                        <td>Türkçe</td>
+                    </tr>
+                    <tr>
+                        <td>فارسی</td>
+                        <td>Português</td>
+                        <td>Руccкий</td>
+                        <td>Deutsch</td>
+                    </tr>
+                    <tr>
+                        <td>ภาษาไทย</td>
+                        <td>Suomi</td>
+                        <td>Polski</td>
+                        <td>Italiano</td>
+                    </tr>
+                    <tr>
+                        <td>বাংলা</td>
+                        <td>اردو</td>
+                        <td>Українська</td>
+                        <td>Melayu</td>
+                    </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
