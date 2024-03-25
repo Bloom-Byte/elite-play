@@ -14,7 +14,7 @@ const AccountSettings = () => {
       <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
       <AccountSettingsSection isNavOpen={isNavOpen} />
 
-      {/* <Footer isNavOpen={isNavOpen} /> */}
+      <Footer isNavOpen={isNavOpen} />
 
     </div>
   )

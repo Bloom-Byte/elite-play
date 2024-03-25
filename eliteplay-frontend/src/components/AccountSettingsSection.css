@@ -18,6 +18,7 @@
   background-color: #0b1210;
   padding: 20px;
   width: 200px;
+  height: fit-content;
 }
 
 .account-settings__sections {
@@ -50,7 +51,7 @@
   font-family: 'Manrope', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  color: #6E6E71;
+  color: #6e6e71;
 }
 
 .account-settings__nav-active {
@@ -59,5 +60,334 @@
 }
 
 .account-settings__nav-active span {
-    color: white !important;
+  color: white !important;
+}
+
+.main-profile-info-box button {
+  font-family: 'Manrope', sans-serif;
+  height: 36px;
+  background-color: #88df95;
+  border: 1px solid #88df95;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  align-self: center;
+  cursor: pointer;
+}
+
+.main-profile-info-box button img {
+  margin-left: 5px;
+  margin-bottom: -2px;
+}
+
+.email-verify_container button img {
+  margin-left: 5px;
+  margin-bottom: -4px;
+}
+
+.main-profile-info-box {
+  display: flex;
+  gap: 20px;
+  margin-top: 1.5rem;
+  justify-content: space-between;
+}
+
+.account-setting-header {
+  background-color: #070c0a;
+  width: 116px;
+  padding: 8px 20px;
+  margin-bottom: 24px;
+  border-radius: 6px;
+}
+
+.account-setting-header span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+}
+
+.setting-section__header {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
+}
+
+.main-profile-info {
+  display: flex;
+  padding: 8px;
+  gap: 20px;
+}
+
+.username_details h2 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: white;
+}
+
+.username_details p {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6e6e71;
+}
+
+.email-verify_container {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem;
+}
+
+.email-verify_container button {
+  font-family: 'Manrope', sans-serif;
+  background-color: #88df95;
+  border: 1px solid #88df95;
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  height: 36px;
+}
+
+.email-verify-txt {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #c5c5c7;
+  margin-top: 3rem;
+}
+
+.email-txt {
+  background-color: #070c0a;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+.email-txt img {
+  margin-left: 5rem;
+  margin-bottom: -4px;
+}
+
+.email-txt span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.security_one {
+  background-color: #0b1210;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.security_one-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.security_one-box {
+  background-color: #070c0a;
+  padding: 16px;
+  border-radius: 6px;
+}
+
+.security_one-box h4 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.security_one-box p {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #6e6e71;
+}
+
+.black-btn {
+  background-color: #0b1210;
+  border: 1px solid #0b1210;
+  border-radius: 6px;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 8px 16px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.active-btn {
+  background: linear-gradient(to right, #158c63 50%, #24e3a1 50%);
+  border: 1px transparent;
+  border-radius: 6px;
+  width: 100%;
+  margin-top: 1rem;
+  padding: 8px 16px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.session-frame {
+  margin-top: 2rem;
+  background-color: #0b1210;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.session-main {
+  background-color: #070c0a;
+  padding: 20px;
+  border-radius: 6px;
+}
+
+.session-table th,
+.session-table td {
+  padding: 20px 40px;
+  text-align: left;
+}
+
+.session-table th {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #6e6e71;
+}
+
+.session-table td {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.preference-box {
+  background-color: #0b1210;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 6px;
+}
+
+.preference-one {
+  display: flex;
+  justify-content: space-between;
+}
+
+.preference-one p {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #ffffff;
+}
+
+.choice-box {
+  margin-top: 10px;
+}
+
+.choice-box img {
+  margin-left: 20px;
+  cursor: pointer;
+}
+
+.choice-box span {
+  background-color: #070c0a;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+}
+
+.exclude-btn {
+  background-color: transparent;
+  border: 2px solid #e14453;
+  padding: 16px;
+  border-radius: 6px;
+  margin-top: 1rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #e14453;
+  cursor: pointer;
+}
+
+.preference-one label {
+  margin-top: 10px;
+}
+
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 40px;
+  height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #44537140;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  bottom: 3px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+}
+
+input:checked + .slider {
+  background-color: #24e3a1;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #24e3a1;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
 }
