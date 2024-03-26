@@ -469,3 +469,13 @@
     border-radius: 6px;
     color: white;
 }
+
+.wallet-option_active {
+  background-color: #0B281F;
+  padding: 8px 16px;
+  border-radius: 6px;
+}
+
+.wallet-option_active span {
+  color: white !important;
+}

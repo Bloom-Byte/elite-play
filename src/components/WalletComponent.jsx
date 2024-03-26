@@ -21,21 +21,27 @@ const WalletComponent = ({ isNavOpen }) => {
         <div className="wallet-comp_wallet-options">
           <div
             onClick={() => setCurrentSection('Balance')}
-            className="wallet-option"
+            className={`wallet-option ${
+              currentSection === 'Balance' ? 'wallet-option_active' : ''
+            }`}
           >
             <img src="./wallet-02.svg" alt="wallet" />
             <span>Balance</span>
           </div>
           <div
             onClick={() => setCurrentSection('Deposit')}
-            className="wallet-option"
+            className={`wallet-option ${
+              currentSection === 'Deposit' ? 'wallet-option_active' : ''
+            }`}
           >
             <img src="./money-receive-01.svg" alt="wallet" />
             <span>Deposit</span>
           </div>
           <div
             onClick={() => setCurrentSection('Withdraw')}
-            className="wallet-option"
+            className={`wallet-option ${
+              currentSection === 'Withdraw' ? 'wallet-option_active' : ''
+            }`}
           >
             <img src="./bitcoin-withdraw.svg" alt="wallet" />
             <span>Withdraw</span>
@@ -44,7 +50,12 @@ const WalletComponent = ({ isNavOpen }) => {
             <img src="./coins-01.svg" alt="wallet" />
             <span>Earnings</span>
           </div>
-          <div className="wallet-option">
+          <div
+            onClick={() => setCurrentSection('Transaction')}
+            className={`wallet-option ${
+              currentSection === 'Transaction' ? 'wallet-option_active' : ''
+            }`}
+          >
             <img src="./bitcoin-transaction.svg" alt="wallet" />
             <span>Transaction</span>
           </div>
@@ -298,50 +309,56 @@ const WalletComponent = ({ isNavOpen }) => {
                       </div>
                     </div>
                     <p>Withdrawal Address</p>
-                    <div className='withdraw-address-box'>
+                    <div className="withdraw-address-box">
                       <input
                         className="withdraw-address_input"
                         type="text"
                         placeholder="Fill in carefully according to the specefied currency"
                       />
                     </div>
-                    <div className='withdraw-amount_title'>
-                    <p>Withdraw Amount</p>
-                    <p>MIN: 50 USDT</p>
+                    <div className="withdraw-amount_title">
+                      <p>Withdraw Amount</p>
+                      <p>MIN: 50 USDT</p>
                     </div>
-                    
-                    <div className='withdraw-address-box'>
-                      <input
-                        className="withdraw-address_input"
-                        type="text"
-                      />
+
+                    <div className="withdraw-address-box">
+                      <input className="withdraw-address_input" type="text" />
                     </div>
                     <div className="withdraw_amounts">
-                      <div className='withdraw_amount-details'>
+                      <div className="withdraw_amount-details">
                         <span>Withdraw Amount:</span>
                         <span>0.00 USDT</span>
                       </div>
-                      <div className='withdraw_amount-details'>
-                        <span>Fee: <img className='more-info_icon' src="./help-circle.svg" alt="" /></span>
+                      <div className="withdraw_amount-details">
+                        <span>
+                          Fee:{' '}
+                          <img
+                            className="more-info_icon"
+                            src="./help-circle.svg"
+                            alt=""
+                          />
+                        </span>
                         <span>0.00 USDT</span>
                       </div>
-                      <div className='withdraw_amount-details'>
+                      <div className="withdraw_amount-details">
                         <span>Total Withdraw Amount:</span>
                         <span>0.00 USDT</span>
                       </div>
                     </div>
-                   
+
                     <div className="crypto-notice">
                       <span className="crypto-notice_notice-head">
                         NOTICE:{' '}
                       </span>
                       <span className="crypto-notice_notice-info">
-                    For security purposes, large or suspicious withdrawal may take 1-3 hours for audit process. We appreciate your patience! 
+                        For security purposes, large or suspicious withdrawal
+                        may take 1-3 hours for audit process. We appreciate your
+                        patience! 
                       </span>
                     </div>
                     <div className="deposit_fiat-btn">
-                        <button>Withdraw</button>
-                      </div>
+                      <button>Withdraw</button>
+                    </div>
                   </div>
                 </div>
               ) : (
@@ -374,7 +391,7 @@ const WalletComponent = ({ isNavOpen }) => {
                         </div>
                         <div>
                           <p>Account Number</p>
-                          <input className='accountnumber-input' type="text" />
+                          <input className="accountnumber-input" type="text" />
                         </div>
                       </div>
                       <div className="fiat-deposit_amount">
@@ -428,6 +445,22 @@ const WalletComponent = ({ isNavOpen }) => {
                   </div>
                 </>
               )}
+            </div>
+          )}
+          {currentSection === 'Transaction' && (
+            <div className="transaction-section">
+              <div className="transaction-filters">
+                <select name="" id="">
+                  <option value="deposit">Deposit</option>
+                </select>
+                <select name="" id="">
+                  <option value="">Past 60 days</option>
+                </select>
+                <select name="" id="">
+                  <option value="">All Status</option>
+                </select>
+              </div>
+              <div className='transaction-main_section'></div>
             </div>
           )}
         </div>
