@@ -34,8 +34,18 @@ body {
     gap: 20px;
 }
 
+.sidenav__link a {
+    background: #070C0A; 
+    padding: 8px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+}
+
 .sidenav__link {
-    background: #070C0A;
+    background: #070C0A; 
     padding: 8px;
     border-radius: 6px;
     display: flex;
@@ -51,7 +61,7 @@ body {
     font-weight: 600;
 }
 
-.sidenav__link span a {
+.sidenav__link a {
     color: #6E6E71;
     font-size: 14px;
     font-family: "Manrope", sans-serif;

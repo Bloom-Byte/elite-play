@@ -1,15 +1,15 @@
-import React, { useState } from 'react'
-import './Sidenav.css'
+import React, { useState } from 'react';
+import './Sidenav.css';
 
 const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
-  const [clickedItems, setClickedItems] = useState(Array(7).fill(false))
+  const [clickedItems, setClickedItems] = useState(Array(7).fill(false));
 
   const handleClick = (index) => {
     const updatedClickedItems = clickedItems.map((item, i) =>
       i === index ? true : false
-    )
-    setClickedItems(updatedClickedItems)
-  }
+    );
+    setClickedItems(updatedClickedItems);
+  };
 
   return (
     <>
@@ -22,7 +22,10 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
               src="./menu-01.svg"
               alt="close-icon"
             />
-           <a href='/'> <img src="./eliteplay.svg" alt="logo" /></a>
+            <a href="/">
+              {' '}
+              <img src="./eliteplay.svg" alt="logo" />
+            </a>
           </div>
           <div className="sidenav__links">
             <div
@@ -48,10 +51,12 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div className="sidenav__link">
-                <img src="./dice.svg" alt="dice-icon" />
-                <span><a href="/dice">Dice</a></span>
-              </div>
+              <a style={{textDecoration: 'none'}} href="/dice">
+                <div className="sidenav__link">
+                  <img src="./dice.svg" alt="dice-icon" />
+                  <span>Dice</span>
+                </div>
+              </a>
             </div>
             <div
               onClick={() => handleClick(2)}
@@ -62,10 +67,12 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div className="sidenav__link">
-                <img src="./chart-increase.svg" alt="crash-icon" />
-                <span><a href="/crash">Crash</a></span>
-              </div>
+              <a style={{textDecoration: 'none'}} href="/crash">
+                <div className="sidenav__link">
+                  <img src="./chart-increase.svg" alt="crash-icon" />
+                  <span>Crash</span>
+                </div>
+              </a>
             </div>
             <div
               onClick={() => handleClick(3)}
@@ -163,7 +170,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
         </div>
       )}
     </>
-  )
-}
+  );
+};
 
-export default Sidenav
+export default Sidenav;

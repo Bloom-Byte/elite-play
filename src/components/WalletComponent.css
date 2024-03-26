@@ -479,3 +479,44 @@
 .wallet-option_active span {
   color: white !important;
 }
+
+.transaction-filters{
+  display: flex;
+  gap: 16px;
+}
+
+.transaction-filters select {
+  background-color: #0B1210;
+  color: white;
+  border-radius: 6px;
+  padding: 16px;
+  border: 1px solid #0B1210;
+}
+
+.transaction-filters select:focus {
+  outline: none;
+  border: 2px solid #24E3A1;
+}
+
+.transaction-main_section {
+  background-color: #0B1210;
+  border-radius: 6px;
+  padding: 20px;
+  margin-top: 2rem;
+}
+
+.no-transanction-img_container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-data_txt {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  padding-bottom: 5rem;
+  text-align: center;
+  margin-top: 2rem;
+}

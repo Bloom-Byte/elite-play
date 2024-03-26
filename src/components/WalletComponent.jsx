@@ -452,15 +452,31 @@ const WalletComponent = ({ isNavOpen }) => {
               <div className="transaction-filters">
                 <select name="" id="">
                   <option value="deposit">Deposit</option>
+                  <option value="withdraw">Withdraw</option>
+                  <option value="withdraw">All Bets</option>
                 </select>
                 <select name="" id="">
                   <option value="">Past 60 days</option>
+                  <option value="">Past 24 hours</option>
+                  <option value="">Past 7 days</option>
+                  <option value="">Past 30 days</option>
+                  <option value="">Past 90 days</option>
+                  <option value="">Custom</option>
                 </select>
                 <select name="" id="">
                   <option value="">All Status</option>
+                  <option value="">Complete</option>
+                  <option value="">Processing</option>
+                  <option value="">Failed</option>
+                  <option value="">Canceled</option>
                 </select>
               </div>
-              <div className='transaction-main_section'></div>
+              <div className='transaction-main_section'>
+                <div className='no-transanction-img_container'>
+                  <img src="./_x31_.png" alt="no-transanction_image" />
+                </div>
+                <p className='no-data_txt'>Oops! There is no data yet!</p>
+              </div>
             </div>
           )}
         </div>
