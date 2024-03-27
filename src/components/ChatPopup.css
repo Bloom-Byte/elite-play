@@ -82,8 +82,16 @@
   overflow-y: scroll;
 }
 
+.minimized {
+    max-height: 40vh;
+}
+
 .chatroom_language {
   padding: 8px 16px;
+}
+
+.chatroom_language img {
+    margin-left: 8px;
 }
 
 .chatroom_language-active {

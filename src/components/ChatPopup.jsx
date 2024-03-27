@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './ChatPopup.css';
 
-const ChatPopup = ({setChatOpen, chatOpen}) => {
+const ChatPopup = ({ setChatOpen, chatOpen }) => {
+  const [minimized, setMinimized] = useState(false);
+
   return (
     <div className="chatroom-popup">
       <div className="chatroom-popup-popup_container">
@@ -9,17 +11,24 @@ const ChatPopup = ({setChatOpen, chatOpen}) => {
           <p>Chatroom</p>
           <div className="chatroom-btn">
             <img
+              onClick={() => setMinimized(!minimized)}
               className="arrow"
-              src="./arrow-shrink-01-round.svg"
+              src={minimized ? "./arrow-expand-01-round.svg" : "./arrow-shrink-01-round.svg"}
               alt="arrow"
             />
-            <img onClick={() => setChatOpen(!chatOpen)} className="close" src="./cancel-x.svg" alt="cancel-x.svg" />
+            <img
+              onClick={() => setChatOpen(!chatOpen)}
+              className="close"
+              src="./cancel-x.svg"
+              alt="cancel-x.svg"
+            />
           </div>
         </div>
         <div className="chatroom-maincontent">
           <div className="chatroom_languages">
             <div className="chatroom_language chatroom_language-active">
               <span>Global</span>
+              <img src="./Exclude.svg" alt="live-icon" />
             </div>
             <div className="chatroom_language">
               <span>English</span>
@@ -35,7 +44,7 @@ const ChatPopup = ({setChatOpen, chatOpen}) => {
             </div>
           </div>
           <div>
-            <div className="chatroom-chatbox__container">
+            <div className = {`chatroom-chatbox__container ${minimized ? 'minimized' : ''}`}>
               <div className="chatroom-chatbox">
                 <div className="chatroom-user-profile">
                   <span>Yuxeer</span>
@@ -91,8 +100,9 @@ const ChatPopup = ({setChatOpen, chatOpen}) => {
                 </div>
                 <div className="chatroom-chat-txt">
                   <span>
-                    Welcome <span className='user-tag'>@NewDice</span> Crash can be a rush, but be careful not to
-                    chase the big payouts. Start slow and learn the curve.
+                    Welcome <span className="user-tag">@NewDice</span> Crash can
+                    be a rush, but be careful not to chase the big payouts.
+                    Start slow and learn the curve.
                   </span>
                 </div>
               </div>
@@ -103,8 +113,9 @@ const ChatPopup = ({setChatOpen, chatOpen}) => {
                 </div>
                 <div className="chatroom-chat-txt">
                   <span>
-                    Welcome <span className='user-tag'>@NewDice</span> Crash can be a rush, but be careful not to
-                    chase the big payouts. Start slow and learn the curve.
+                    Welcome <span className="user-tag">@NewDice</span> Crash can
+                    be a rush, but be careful not to chase the big payouts.
+                    Start slow and learn the curve.
                   </span>
                 </div>
               </div>
@@ -115,20 +126,21 @@ const ChatPopup = ({setChatOpen, chatOpen}) => {
                 </div>
                 <div className="chatroom-chat-txt">
                   <span>
-                    Welcome <span className='user-tag'>@NewDice</span> Crash can be a rush, but be careful not to
-                    chase the big payouts. Start slow and learn the curve.
+                    Welcome <span className="user-tag">@NewDice</span> Crash can
+                    be a rush, but be careful not to chase the big payouts.
+                    Start slow and learn the curve.
                   </span>
                 </div>
               </div>
             </div>
             <div className="chatroom-input">
-                <div>
-                  <input placeholder="Type here..." type="text" />
-                </div>
-                <button>
-                  <img src="./Send.svg" alt="send-icon" />
-                </button>
+              <div>
+                <input placeholder="Type here..." type="text" />
               </div>
+              <button>
+                <img src="./Send.svg" alt="send-icon" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
