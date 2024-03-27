@@ -23,8 +23,12 @@
 .live-support_top-icons {
   position: absolute;
   display: flex;
-  gap: 16px;
+  gap: 30px;
   right: 20px;
+}
+
+.livesupport-cancel {
+    cursor: pointer;
 }
 
 .live-support_hero {

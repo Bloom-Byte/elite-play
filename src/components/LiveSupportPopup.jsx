@@ -16,7 +16,7 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                     src="./live-support_images.png"
                     alt="live-support-icon"
                   />
-                  <img src="./cancel-x.svg" alt="cancel" />
+                  <img className='livesupport-cancel' onClick={() => {setLiveSupport(!liveSupport)}} src="./cancel-x.svg" alt="cancel" />
                 </div>
                 <h1>
                   Hy🎄
