@@ -157,3 +157,146 @@
 .help-center__nav-active span {
     color: #01252C !important;
 }
+
+.live-support_icons_2 {
+    background-color: #01252C;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+}
+
+.message-header {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 800;
+    color: #ffffff;
+    text-align: center;
+}
+
+.message-body {
+    background-color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.live-support_message {
+    border-radius: 10px;
+}
+
+.message-body_content {
+    margin-top: 80px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    text-align: center;
+}
+
+.message-body_text h5 {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #01252C;
+}
+
+.message-body_text img {
+    width: 64px;
+    height: 64px;
+}
+
+.message-body_text p {
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 400;
+    color: #6E6E71;
+}
+
+.message-body_button {
+    background-color: #01252C;
+    border-radius: 6px;
+    padding: 16px 32px;
+    cursor: pointer;
+}
+
+.message-body_button button {
+    background-color: #01252C;
+    border: 1px #01252C;
+    font-family: 'Manrope', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #FFFFFF;
+}
+
+.message-body_button button img {
+    margin-left: 5px;
+    margin-bottom: -5px;
+}
+
+.search__box {
+    position: relative;
+    display: flex;
+    width: 100%;
+    margin-bottom: 8px;
+    background-color: #01252C;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 10px;
+  }
+  
+  .search__box img {
+    position: absolute;
+    top: 40%;
+    left: 30px;
+    transform: translateY(-50%);
+  }
+  
+  .search__box input {
+    padding: 16px 35px;
+    width: 75%;
+    border: 1px transparent;
+    background-color: #ffffff;
+    border-radius: 6px;
+  }
+
+  .help-collections {
+    padding: 20px;
+  }
+
+.user-guides {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-guide {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.help-header {
+    width: 400px;
+}
+
+.help-collections h2 {
+    color: #101018;
+    font-family: 'Manrope', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.user-guide h5 {
+    color: #6E6E71;
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.user-guide p {
+    color: #6E6E71;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+}

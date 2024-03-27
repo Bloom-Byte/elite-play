@@ -16,7 +16,14 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                     src="./live-support_images.png"
                     alt="live-support-icon"
                   />
-                  <img className='livesupport-cancel' onClick={() => {setLiveSupport(!liveSupport)}} src="./cancel-x.svg" alt="cancel" />
+                  <img
+                    className="livesupport-cancel"
+                    onClick={() => {
+                      setLiveSupport(!liveSupport);
+                    }}
+                    src="./cancel-x.svg"
+                    alt="cancel"
+                  />
                 </div>
                 <h1>
                   Hy🎄
@@ -53,14 +60,28 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                 </div>
               </div>
               <div className="help-center__navs">
-                <div className={`help-center__nav ${currentTab == 0 ? 'help-center__nav-active' : ''}`}>
+                <div
+                  onClick={() => {
+                    setCurrentTab(0);
+                  }}
+                  className={`help-center__nav ${
+                    currentTab == 0 ? 'help-center__nav-active' : ''
+                  }`}
+                >
                   <img
                     src={currentTab == 0 ? './Home-active.svg' : './Home.svg'}
                     alt="home-icon"
                   />
                   <span>Home</span>
                 </div>
-                <div className={`help-center__nav ${currentTab == 1 ? 'help-center__nav-active' : ''}`}>
+                <div
+                  onClick={() => {
+                    setCurrentTab(1);
+                  }}
+                  className={`help-center__nav ${
+                    currentTab == 1 ? 'help-center__nav-active' : ''
+                  }`}
+                >
                   <img
                     src={
                       currentTab == 1 ? './Message-active.svg' : './Message.svg'
@@ -69,7 +90,224 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                   />
                   <span>Message</span>
                 </div>
-                <div className={`help-center__nav ${currentTab == 2 ? 'help-center__nav-active' : ''}`}>
+                <div
+                  onClick={() => {
+                    setCurrentTab(2);
+                  }}
+                  className={`help-center__nav ${
+                    currentTab == 2 ? 'help-center__nav-active' : ''
+                  }`}
+                >
+                  <img
+                    src={currentTab == 2 ? './Help-active.svg' : './Help.svg'}
+                    alt="help-icon"
+                  />
+                  <span>Help</span>
+                </div>
+              </div>
+            </div>
+          )}
+          {currentTab === 1 && (
+            <div>
+              <div className="live-support_message">
+                <div className="live-support_icons_2">
+                  <p className="message-header">Messages</p>
+                  <img
+                    className="livesupport-cancel"
+                    onClick={() => {
+                      setLiveSupport(!liveSupport);
+                    }}
+                    src="./cancel-x.svg"
+                    alt="cancel"
+                  />
+                </div>
+                <div className="message-body">
+                  <div className="message-body_content">
+                    <div className="message-body_text">
+                      <img src="./Message-active.svg" alt="message-icon" />
+                      <h5>No messages</h5>
+                      <p>Messages from the team will be shown here</p>
+                    </div>
+                    <div className="message-body_button">
+                      <button>
+                        <span>Send us a message</span>
+                        <img src="./Send.svg" alt="send-icon" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className="help-center__navs">
+                <div
+                  onClick={() => {
+                    setCurrentTab(0);
+                  }}
+                  className={`help-center__nav ${
+                    currentTab == 0 ? 'help-center__nav-active' : ''
+                  }`}
+                >
+                  <img
+                    src={currentTab == 0 ? './Home-active.svg' : './Home.svg'}
+                    alt="home-icon"
+                  />
+                  <span>Home</span>
+                </div>
+                <div
+                  onClick={() => {
+                    setCurrentTab(1);
+                  }}
+                  className={`help-center__nav ${
+                    currentTab == 1 ? 'help-center__nav-active' : ''
+                  }`}
+                >
+                  <img
+                    src={
+                      currentTab == 1 ? './Message-active.svg' : './Message.svg'
+                    }
+                    alt="message-icon"
+                  />
+                  <span>Message</span>
+                </div>
+                <div
+                  onClick={() => {
+                    setCurrentTab(2);
+                  }}
+                  className={`help-center__nav ${
+                    currentTab == 2 ? 'help-center__nav-active' : ''
+                  }`}
+                >
+                  <img
+                    src={currentTab == 2 ? './Help-active.svg' : './Help.svg'}
+                    alt="help-icon"
+                  />
+                  <span>Help</span>
+                </div>
+              </div>
+            </div>
+          )}
+          {currentTab === 2 && (
+            <div>
+              <div className="live-support_message">
+                <div className="live-support_icons_2 help-header">
+                  <p className="message-header">Messages</p>
+                  <img
+                    className="livesupport-cancel"
+                    onClick={() => {
+                      setLiveSupport(!liveSupport);
+                    }}
+                    src="./cancel-x.svg"
+                    alt="cancel"
+                  />
+                </div>
+                <div className='search__box'>
+                  <img src="./Search.svg" alt="search-icon" />
+                  <input type="text" placeholder="Search for help" />
+                </div>
+               <div className="help-collections">
+                <h2>7 Collections</h2>
+                <div className="user-guides">
+                    <div className="user-guide">
+                        <div>
+                        <h5>New User Guide</h5>
+                        <p>24 articles</p>
+                        </div>
+                       <div>
+                       <img src="./Union.svg" alt="arrow-icon" />
+                       </div>
+                    </div>
+                    <hr />
+                    <div className="user-guide">
+                        <div>
+                        <h5>New User Guide</h5>
+                        <p>24 articles</p>
+                        </div>
+                       <div>
+                       <img src="./Union.svg" alt="arrow-icon" />
+                       </div>
+                    </div>
+                    <hr />
+                    <div className="user-guide">
+                        <div>
+                        <h5>New User Guide</h5>
+                        <p>24 articles</p>
+                        </div>
+                       <div>
+                       <img src="./Union.svg" alt="arrow-icon" />
+                       </div>
+                    </div>
+                    <hr />
+                    <div className="user-guide">
+                        <div>
+                        <h5>New User Guide</h5>
+                        <p>24 articles</p>
+                        </div>
+                       <div>
+                       <img src="./Union.svg" alt="arrow-icon" />
+                       </div>
+                    </div>
+                    <hr />
+                    <div className="user-guide">
+                        <div>
+                        <h5>New User Guide</h5>
+                        <p>24 articles</p>
+                        </div>
+                       <div>
+                       <img src="./Union.svg" alt="arrow-icon" />
+                       </div>
+                    </div>
+                    <hr />
+                    <div className="user-guide">
+                        <div>
+                        <h5>New User Guide</h5>
+                        <p>24 articles</p>
+                        </div>
+                       <div>
+                       <img src="./Union.svg" alt="arrow-icon" />
+                       </div>
+                    </div>
+                    <hr />
+                </div>
+               </div>
+              </div>
+              <div className="help-center__navs">
+                <div
+                  onClick={() => {
+                    setCurrentTab(0);
+                  }}
+                  className={`help-center__nav ${
+                    currentTab == 0 ? 'help-center__nav-active' : ''
+                  }`}
+                >
+                  <img
+                    src={currentTab == 0 ? './Home-active.svg' : './Home.svg'}
+                    alt="home-icon"
+                  />
+                  <span>Home</span>
+                </div>
+                <div
+                  onClick={() => {
+                    setCurrentTab(1);
+                  }}
+                  className={`help-center__nav ${
+                    currentTab == 1 ? 'help-center__nav-active' : ''
+                  }`}
+                >
+                  <img
+                    src={
+                      currentTab == 1 ? './Message-active.svg' : './Message.svg'
+                    }
+                    alt="message-icon"
+                  />
+                  <span>Message</span>
+                </div>
+                <div
+                  onClick={() => {
+                    setCurrentTab(2);
+                  }}
+                  className={`help-center__nav ${
+                    currentTab == 2 ? 'help-center__nav-active' : ''
+                  }`}
+                >
                   <img
                     src={currentTab == 2 ? './Help-active.svg' : './Help.svg'}
                     alt="help-icon"
