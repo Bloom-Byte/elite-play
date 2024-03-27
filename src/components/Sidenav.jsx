@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import ChatPopup from './ChatPopup';
+import LiveSupportPopup from './LiveSupportPopup';
 import './Sidenav.css';
 
 const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
   const [clickedItems, setClickedItems] = useState(Array(7).fill(false));
   const [chatOpen, setChatOpen] = useState(false)
+  const [liveSupport, setLiveSupport] = useState(false)
 
   const handleClick = (index) => {
     const updatedClickedItems = clickedItems.map((item, i) =>
@@ -115,7 +117,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div className="sidenav__link">
+              <div onClick={() => setLiveSupport(!liveSupport)} className="sidenav__link">
                 <img src="./customer-support.svg" alt="support-icon" />
                 <span>Live Support</span>
               </div>
@@ -173,6 +175,9 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
       )}
       {chatOpen && (
         <ChatPopup chatOpen={chatOpen} setChatOpen={setChatOpen} />
+      )}
+      {liveSupport && (
+        <LiveSupportPopup liveSupport={liveSupport} setLiveSupport={setLiveSupport} />
       )}
     </>
   );

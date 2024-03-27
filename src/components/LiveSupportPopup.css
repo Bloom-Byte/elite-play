@@ -1,0 +1,155 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.live-support {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.live-suppport_content {
+  position: relative;
+  background-color: white;
+  border-radius: 16px;
+  max-height: 80vh;
+  overflow-y: scroll;
+}
+
+.live-support_top-icons {
+  position: absolute;
+  display: flex;
+  gap: 16px;
+  right: 20px;
+}
+
+.live-support_hero {
+  background-color: #01252c;
+  padding: 20px;
+  border-radius: 10px;
+}
+
+.live-support_hero h1 {
+  margin-top: 100px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 48px;
+  font-weight: 800;
+  color: #ffffff;
+  margin-bottom: 50px;
+}
+
+.send-message_box {
+  display: flex;
+  justify-content: space-between;
+  background-color: #ffffff;
+  margin: 20px;
+  padding: 0px 20px;
+  box-shadow: 16px 20px 16px 20px #4453711a;
+  margin-top: -50px;
+  border-radius: 8px;
+}
+
+.send-message_box h5 {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #01252c;
+}
+
+.send-message_box p {
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #6e6e71;
+}
+
+.search-for-help_box {
+  background-color: #ffffff;
+  margin: 20px;
+  padding: 20px;
+  box-shadow: 16px 20px 16px 20px #4453711a;
+  border-radius: 8px;
+}
+
+.search__input {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.search__input img {
+  position: absolute;
+  top: 50%;
+  left: 8px;
+  transform: translateY(-50%);
+}
+
+.search__input input {
+  padding: 8px 35px;
+  width: 100%;
+  border: 1px transparent;
+  background-color: #ececed;
+  border-radius: 6px;
+}
+
+.help-box {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px;
+  cursor: pointer;
+}
+
+.help-box span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6e6e71;
+}
+
+.help-center__navs {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 20px;
+    background-color: white;
+    position: sticky;
+    bottom: 0;
+}
+
+.help-center__nav {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    cursor: pointer;
+}
+
+.help-center__nav img {
+
+    width: 20px;
+    height: 20px;
+}
+
+.help-center__nav span {
+    font-family: 'Manrope', sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    color: #C5C5C7;
+}
+
+.help-center__nav-active {
+    gap: 10px;
+}
+
+.help-center__nav-active  img{
+    width: 30px;
+    height: 30px;
+}
+
+.help-center__nav-active span {
+    color: #01252C !important;
+}
