@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import ChatPopup from './ChatPopup';
 import './Sidenav.css';
 
 const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
   const [clickedItems, setClickedItems] = useState(Array(7).fill(false));
+  const [chatOpen, setChatOpen] = useState(false)
 
   const handleClick = (index) => {
     const updatedClickedItems = clickedItems.map((item, i) =>
@@ -83,7 +85,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div className="sidenav__link">
+              <div onClick={() => setChatOpen(!chatOpen)} className="sidenav__link">
                 <img src="./message-01.svg" alt="chat-icon" />
                 <span>Chatroom</span>
               </div>
@@ -168,6 +170,9 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
             </div>
           </div>
         </div>
+      )}
+      {chatOpen && (
+        <ChatPopup chatOpen={chatOpen} setChatOpen={setChatOpen} />
       )}
     </>
   );
