@@ -3,6 +3,7 @@ import { isLoggedIn } from '../utils/auth';
 import ProfileDropdown from './ProfileDropdown';
 import NotificationsPopup from './NotificationsPopup';
 import DepositPopup from './DepositPopup';
+import CurrencyDropdown from './CurrencyDropdown';
 import './Navbar.css';
 
 const Navbar = ({ isNavOpen }) => {
@@ -10,6 +11,7 @@ const Navbar = ({ isNavOpen }) => {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [notificationsPopupOpen, setNotificationsPopupOpen] = useState(false);
   const [depositPopupOpen, setDepositPopupOpen] = useState(false);
+  const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false);
 
   return (
     <>
@@ -32,7 +34,7 @@ const Navbar = ({ isNavOpen }) => {
         <div>
           <div className="nav-loggedin">
             <div className="nav-wallet">
-              <div className="nav-wallet_info">
+              <div onClick={() => {setCurrencyDropdownOpen(!currencyDropdownOpen)}} className="nav-wallet_info">
                 <img src="./twemoji_coin.svg" alt="coin" />
                 <span>0.00000</span>
                 <img src="./down-arrow.svg" alt="arrow" />
@@ -70,6 +72,7 @@ const Navbar = ({ isNavOpen }) => {
     {isProfileDropdownOpen && <ProfileDropdown />}
     {notificationsPopupOpen && <NotificationsPopup notificationsPopupOpen={notificationsPopupOpen} setNotificationsPopupOpen={setNotificationsPopupOpen} />}
     {depositPopupOpen && <DepositPopup depositPopupOpen={depositPopupOpen} setDepositPopupOpen={setDepositPopupOpen} />}
+    {currencyDropdownOpen && <CurrencyDropdown />}
     </>
     
   );

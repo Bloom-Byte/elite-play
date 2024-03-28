@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.currencydropdown {
+  position: fixed;
+  top: 80px;
+  right: 20vw;
+}
+
+.currencydropdown-content {
+  position: relative;
+  background-color: #0b281f;
+  border-radius: 16px;
+  padding: 20px;
+}
+
+.currency__box {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin-bottom: 8px;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 10px;
+}
+
+.currency__box img {
+  position: absolute;
+  top: 40%;
+  left: 10px;
+  transform: translateY(-50%);
+}
+
+.currency__box input {
+  padding: 16px 35px;
+  width: 75%;
+  border: 1px transparent;
+  background-color: #0b1210;
+  color: white;
+  border-radius: 6px;
+}
+
+.currency__box input:focus {
+  outline: none;
+  border: 2px solid #24e3a1;
+}
+
+.currencytitle {
+    font-size: 14px;
+    color: #9E9EA2;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+}
+
+.currencydropdown-details {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.currencydropdown-amount{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.currencydropdown-amount span:nth-child(1) {
+    font-size: 16px;
+    color: #ffffff;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.currencydropdown-amount span:nth-child(2) {
+    font-size: 12px;
+    color: #ffffff;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    text-align: right;
+}
+
+.currencydropdown-coin {
+    display: flex;
+    gap: 10px;
+}
+
+.currencydropdown-coin span {
+    font-size: 16px;
+    color: #ffffff;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.togglecurrencyview {
+    background-color: #070C0A;
+    padding: 8px;
+    border-radius: 6px;
+    margin: 20px 0;
+}
+
+.togglecurrencyview span {
+    margin-left: 20px;
+    font-size: 16px;
+    color: #ffffff;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+}
+
+/* The switch - the box around the slider */
+.switch2 {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 24px;
+  }
+  
+  /* Hide default HTML checkbox */
+  .switch2 input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  
+  /* The slider */
+  .slider2 {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #44537140;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  
+  .slider2:before {
+    position: absolute;
+    content: '';
+    height: 20px;
+    width: 20px;
+    left: 4px;
+    bottom: 3px;
+    background-color: white;
+    -webkit-transition: 0.4s;
+    transition: 0.4s;
+  }
+  
+  input:checked + .slider2 {
+    background-color: #24e3a1;
+  }
+  
+  input:focus + .slider2 {
+    box-shadow: 0 0 1px #24e3a1;
+  }
+  
+  input:checked + .slider2:before {
+    -webkit-transform: translateX(16px);
+    -ms-transform: translateX(16px);
+    transform: translateX(16px);
+  }
+  
+  /* Rounded sliders */
+  .slider2.round2 {
+    border-radius: 34px;
+  }
+  
+  .slider2.round2:before {
+    border-radius: 50%;
+  }
+  
