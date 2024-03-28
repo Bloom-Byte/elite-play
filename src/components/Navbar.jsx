@@ -2,12 +2,14 @@ import React, { useState } from 'react'
 import { isLoggedIn } from '../utils/auth';
 import ProfileDropdown from './ProfileDropdown';
 import NotificationsPopup from './NotificationsPopup';
+import DepositPopup from './DepositPopup';
 import './Navbar.css';
 
 const Navbar = ({ isNavOpen }) => {
   const userIsLoggedIn = isLoggedIn();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [notificationsPopupOpen, setNotificationsPopupOpen] = useState(false);
+  const [depositPopupOpen, setDepositPopupOpen] = useState(false);
 
   return (
     <>
@@ -35,12 +37,11 @@ const Navbar = ({ isNavOpen }) => {
                 <span>0.00000</span>
                 <img src="./down-arrow.svg" alt="arrow" />
               </div>
-              <a className='wallet-nav' href="/wallet">
-                <div className="nav-wallet_deposit">
+              
+                <div onClick={() => {setDepositPopupOpen(!depositPopupOpen)}} style={{cursor:'pointer'}} className="nav-wallet_deposit">
                   <img src="./wallet-02.svg" alt="deposit" />
                   <span>Deposit</span>
                 </div>
-              </a>
             </div>
             <div style={{cursor: 'pointer'}} onClick={() => {setNotificationsPopupOpen(!notificationsPopupOpen)}}>
               <img src="./not-bell.svg" alt="notification icon" />
@@ -68,6 +69,7 @@ const Navbar = ({ isNavOpen }) => {
     </div>
     {isProfileDropdownOpen && <ProfileDropdown />}
     {notificationsPopupOpen && <NotificationsPopup notificationsPopupOpen={notificationsPopupOpen} setNotificationsPopupOpen={setNotificationsPopupOpen} />}
+    {depositPopupOpen && <DepositPopup depositPopupOpen={depositPopupOpen} setDepositPopupOpen={setDepositPopupOpen} />}
     </>
     
   );
