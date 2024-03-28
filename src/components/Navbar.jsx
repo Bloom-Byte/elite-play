@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react'
 import { isLoggedIn } from '../utils/auth';
+import ProfileDropdown from './ProfileDropdown';
 import './Navbar.css';
 
 const Navbar = ({ isNavOpen }) => {
   const userIsLoggedIn = isLoggedIn();
+  const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
 
   return (
+    <>
     <div className="nav">
       <div className={`nav-games ${isNavOpen ? 'nav-expanded' : ''}`}>
         <div className="nav-games__dice">
@@ -40,7 +43,9 @@ const Navbar = ({ isNavOpen }) => {
             <div>
               <img src="./not-bell.svg" alt="notification icon" />
             </div>
-            <div className="nav-profile">
+            <div onClick={()=> {
+              setIsProfileDropdownOpen(!isProfileDropdownOpen);
+            }} className="nav-profile">
               <img src="./profile-img.svg" alt="profile-img" />
               <img src="./down-arrow.svg" alt="arrow" />
             </div>
@@ -59,6 +64,10 @@ const Navbar = ({ isNavOpen }) => {
         </>
       )}
     </div>
+    {isProfileDropdownOpen && <ProfileDropdown />}
+
+    </>
+    
   );
 };
 
