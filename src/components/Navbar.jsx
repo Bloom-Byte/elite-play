@@ -1,11 +1,13 @@
 import React, { useState } from 'react'
 import { isLoggedIn } from '../utils/auth';
 import ProfileDropdown from './ProfileDropdown';
+import NotificationsPopup from './NotificationsPopup';
 import './Navbar.css';
 
 const Navbar = ({ isNavOpen }) => {
   const userIsLoggedIn = isLoggedIn();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
+  const [notificationsPopupOpen, setNotificationsPopupOpen] = useState(false);
 
   return (
     <>
@@ -40,7 +42,7 @@ const Navbar = ({ isNavOpen }) => {
                 </div>
               </a>
             </div>
-            <div>
+            <div style={{cursor: 'pointer'}} onClick={() => {setNotificationsPopupOpen(!notificationsPopupOpen)}}>
               <img src="./not-bell.svg" alt="notification icon" />
             </div>
             <div onClick={()=> {
@@ -65,7 +67,7 @@ const Navbar = ({ isNavOpen }) => {
       )}
     </div>
     {isProfileDropdownOpen && <ProfileDropdown />}
-
+    {notificationsPopupOpen && <NotificationsPopup notificationsPopupOpen={notificationsPopupOpen} setNotificationsPopupOpen={setNotificationsPopupOpen} />}
     </>
     
   );
