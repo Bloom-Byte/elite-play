@@ -1,12 +1,16 @@
 import React, { useState } from 'react';
 import ChatPopup from './ChatPopup';
 import LiveSupportPopup from './LiveSupportPopup';
+import VIPPopup from './VIPPopup';
+import LanguagePopup from './LanguagePopup';
 import './Sidenav.css';
 
 const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
   const [clickedItems, setClickedItems] = useState(Array(7).fill(false));
   const [chatOpen, setChatOpen] = useState(false)
   const [liveSupport, setLiveSupport] = useState(false)
+  const [vipSupport, setVipSupport] = useState(false)
+  const [languagePopup, setLanguagePopup] = useState(false)
 
   const handleClick = (index) => {
     const updatedClickedItems = clickedItems.map((item, i) =>
@@ -43,7 +47,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
             >
               <div className="sidenav__link">
                 <img src="./gift.svg" alt="reward-icon" />
-                <span>Rewards</span>
+                <span>Refer and Earn</span>
               </div>
             </div>
             <div
@@ -101,7 +105,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div className="sidenav__link">
+              <div onClick={() => setVipSupport(!vipSupport)} className="sidenav__link">
                 <img src="./VIP.svg" alt="vip-icon" />
                 <span>
                   <span className="sidenav-vip">VIP</span> Club
@@ -131,7 +135,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div className="sidenav__link">
+              <div onClick={() => {setLanguagePopup(!languagePopup)}} className="sidenav__link">
                 <img src="./translate.svg" alt="translate-icon" />
                 <span>Language: English</span>
               </div>
@@ -178,6 +182,12 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
       )}
       {liveSupport && (
         <LiveSupportPopup liveSupport={liveSupport} setLiveSupport={setLiveSupport} />
+      )}
+      {vipSupport && (
+        <VIPPopup vipSupport={vipSupport} setVipSupport={setVipSupport} />
+      )}
+      {languagePopup && (
+        <LanguagePopup languagePopup={languagePopup} setLanguagePopup={setLanguagePopup} />
       )}
     </>
   );
