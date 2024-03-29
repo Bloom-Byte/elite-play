@@ -4,12 +4,17 @@ import './DiceGame.css';
 const DiceGame = ({ isNavOpen }) => {
   const [auto, setAuto] = useState(false);
   const [fairness, setFairness] = useState(false);
+  const [livebet, setLivebet] = useState(false);
 
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
       <div className="dicegame-buttons">
         <button className="dicegame-dice-title">Dice</button>
-        <button>
+        <button
+          onClick={() => {
+            setLivebet(!livebet);
+          }}
+        >
           {' '}
           <img src="./Exclude.svg" alt="" /> Live Games
         </button>
@@ -203,7 +208,7 @@ const DiceGame = ({ isNavOpen }) => {
             </div>
             <div className="editusername-popup_main-content">
               <div className="self-exclusion_container">
-                <p style={{textAlign: 'center'}}>
+                <p style={{ textAlign: 'center' }}>
                   Eliteplay uses a provably fair cryptographic system. Each roll
                   is cryptographically fair and can be verified to be
                   manipulation free. A pair of server and client seeds calculate
@@ -211,22 +216,113 @@ const DiceGame = ({ isNavOpen }) => {
                   pair of seeds before one bet:
                 </p>
                 <p>User Seed</p>
-                <div className='randomize-seed'>
-                  <div className='randomize-seedbox'>
+                <div className="randomize-seed">
+                  <div className="randomize-seedbox">
                     <p>QuVbgOAhQ9gAjG3hfEoGh7IhpHIjXjvJ</p>
                   </div>
                   <button>Randomize</button>
                 </div>
                 <p>Server Seed (Hashed)</p>
-                <div className='randomize-seed'>
-                  <div className='randomize-seedbox'>
-                    <p>9bb0f140e20e6809d1c54a2aa21efb324e0eaa959e2faf259e4a50662fa5e247</p>
+                <div className="randomize-seed">
+                  <div className="randomize-seedbox">
+                    <p>
+                      9bb0f140e20e6809d1c54a2aa21efb324e0eaa959e2faf259e4a50662fa5e247
+                    </p>
                   </div>
                   <button>Randomize</button>
                 </div>
 
-                <p style={{textAlign:'center', marginTop: '20px'}}>To learn more information about our provably fair system, please check our <a href='/helpcenter' style={{color:'#88DF95', textDecoration:'none'}}>Help Center</a> Page.</p>
+                <p style={{ textAlign: 'center', marginTop: '20px' }}>
+                  To learn more information about our provably fair system,
+                  please check our 
+                  <a
+                    href="/helpcenter"
+                    style={{ color: '#88DF95', textDecoration: 'none' }}
+                  >
+                    Help Center
+                  </a>
+                   Page.
+                </p>
               </div>
+            </div>
+          </div>
+        </div>
+      )}
+      {livebet && (
+        <div className="editusername-popup">
+          <div className="editusername-popup_container">
+            <div className="editusername-popup_header">
+              <p>Live Bet</p>
+              <span
+                onClick={() => {
+                  setLivebet(!livebet);
+                }}
+                className="close email-close"
+              >
+                X
+              </span>
+            </div>
+            <div className="editusername-popup_main-content">
+              <table className='dice--livebet-table'>
+                <thead>
+                  <tr>
+                    <th>Player</th>
+                    <th>Roll</th>
+                    <th>Amount</th>
+                    <th>Profit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
+                    <td>&lt;52/13</td>
+                    <td>100</td>
+                    <td>Betting</td>
+                  </tr>
+                  <tr>
+                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
+                    <td>&lt;52/13</td>
+                    <td>100</td>
+                    <td>Betting</td>
+                  </tr>
+                  <tr>
+                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
+                    <td>&lt;52<span className='red'>/13</span></td>
+                    <td>100</td>
+                    <td className='red'>-100</td>
+                  </tr>
+                  <tr>
+                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
+                    <td>&lt;52<span className='green'>/13</span></td>
+                    <td>100</td>
+                    <td className='green'>+1000</td>
+                  </tr>
+                  <tr>
+                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
+                    <td>&lt;52<span className='green'>/13</span></td>
+                    <td>100</td>
+                    <td className='green'>+1000</td>
+                  </tr>
+                  <tr>
+                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
+                    <td>&lt;52<span className='red'>/13</span></td>
+                    <td>100</td>
+                    <td className='red'>-100</td>
+                  </tr>
+                  <tr>
+                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
+                    <td>&lt;52<span className='red'>/13</span></td>
+                    <td>100</td>
+                    <td className='red'>-100</td>
+                  </tr>
+                  <tr>
+                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
+                    <td>&lt;52<span className='red'>/13</span></td>
+                    <td>100</td>
+                    <td className='red'>-100</td>
+                  </tr>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
