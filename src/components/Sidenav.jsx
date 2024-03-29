@@ -7,10 +7,10 @@ import './Sidenav.css';
 
 const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
   const [clickedItems, setClickedItems] = useState(Array(7).fill(false));
-  const [chatOpen, setChatOpen] = useState(false)
-  const [liveSupport, setLiveSupport] = useState(false)
-  const [vipSupport, setVipSupport] = useState(false)
-  const [languagePopup, setLanguagePopup] = useState(false)
+  const [chatOpen, setChatOpen] = useState(false);
+  const [liveSupport, setLiveSupport] = useState(false);
+  const [vipSupport, setVipSupport] = useState(false);
+  const [languagePopup, setLanguagePopup] = useState(false);
 
   const handleClick = (index) => {
     const updatedClickedItems = clickedItems.map((item, i) =>
@@ -45,10 +45,12 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div className="sidenav__link">
-                <img src="./gift.svg" alt="reward-icon" />
-                <span>Refer and Earn</span>
-              </div>
+              <a style={{ textDecoration: 'none' }}  href="/referrals">
+                <div className="sidenav__link">
+                  <img src="./gift.svg" alt="reward-icon" />
+                  <span>Refer and Earn</span>
+                </div>
+              </a>
             </div>
             <div
               onClick={() => handleClick(1)}
@@ -59,7 +61,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <a style={{textDecoration: 'none'}} href="/dice">
+              <a style={{ textDecoration: 'none' }} href="/dice">
                 <div className="sidenav__link">
                   <img src="./dice.svg" alt="dice-icon" />
                   <span>Dice</span>
@@ -75,7 +77,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <a style={{textDecoration: 'none'}} href="/crash">
+              <a style={{ textDecoration: 'none' }} href="/crash">
                 <div className="sidenav__link">
                   <img src="./chart-increase.svg" alt="crash-icon" />
                   <span>Crash</span>
@@ -91,7 +93,10 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div onClick={() => setChatOpen(!chatOpen)} className="sidenav__link">
+              <div
+                onClick={() => setChatOpen(!chatOpen)}
+                className="sidenav__link"
+              >
                 <img src="./message-01.svg" alt="chat-icon" />
                 <span>Chatroom</span>
               </div>
@@ -105,7 +110,10 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div onClick={() => setVipSupport(!vipSupport)} className="sidenav__link">
+              <div
+                onClick={() => setVipSupport(!vipSupport)}
+                className="sidenav__link"
+              >
                 <img src="./VIP.svg" alt="vip-icon" />
                 <span>
                   <span className="sidenav-vip">VIP</span> Club
@@ -121,7 +129,10 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div onClick={() => setLiveSupport(!liveSupport)} className="sidenav__link">
+              <div
+                onClick={() => setLiveSupport(!liveSupport)}
+                className="sidenav__link"
+              >
                 <img src="./customer-support.svg" alt="support-icon" />
                 <span>Live Support</span>
               </div>
@@ -135,7 +146,12 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div onClick={() => {setLanguagePopup(!languagePopup)}} className="sidenav__link">
+              <div
+                onClick={() => {
+                  setLanguagePopup(!languagePopup);
+                }}
+                className="sidenav__link"
+              >
                 <img src="./translate.svg" alt="translate-icon" />
                 <span>Language: English</span>
               </div>
@@ -177,17 +193,21 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
           </div>
         </div>
       )}
-      {chatOpen && (
-        <ChatPopup chatOpen={chatOpen} setChatOpen={setChatOpen} />
-      )}
+      {chatOpen && <ChatPopup chatOpen={chatOpen} setChatOpen={setChatOpen} />}
       {liveSupport && (
-        <LiveSupportPopup liveSupport={liveSupport} setLiveSupport={setLiveSupport} />
+        <LiveSupportPopup
+          liveSupport={liveSupport}
+          setLiveSupport={setLiveSupport}
+        />
       )}
       {vipSupport && (
         <VIPPopup vipSupport={vipSupport} setVipSupport={setVipSupport} />
       )}
       {languagePopup && (
-        <LanguagePopup languagePopup={languagePopup} setLanguagePopup={setLanguagePopup} />
+        <LanguagePopup
+          languagePopup={languagePopup}
+          setLanguagePopup={setLanguagePopup}
+        />
       )}
     </>
   );

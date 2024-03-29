@@ -1,0 +1,225 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.referral-section {
+  margin-left: 8rem;
+  margin-top: 2rem;
+  margin-right: 5vw;
+  margin-bottom: 10rem;
+}
+
+.referral-section-extended {
+  margin-left: 18rem;
+}
+
+.referral-details {
+    display: flex;
+    justify-content: space-between;
+}
+
+.referralpot {
+    background-color: #0B1210;
+    padding: 20px;
+    border-radius: 6px;
+    display: flex;
+    gap: 50px;
+    width: 40%;
+}
+
+.referralpota {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+.referralpota-txt {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.referralpotb {
+    display: flex;
+    gap: 10px;
+    width: 100%;
+    align-items: center;
+}
+
+.referralpotb-txt {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.referralpota span:nth-child(1) {
+    color: #C5C5C7;
+    font-size: 12px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.referralpotb span:nth-child(1) {
+    color: #C5C5C7;
+    font-size: 12px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.referralpota span:nth-child(2) {
+    color: #ffffff;
+    font-size: 18px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.referralpotb span:nth-child(2) {
+    color: #ffffff;
+    font-size: 18px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.referralvalue {
+    background-color: #0B1210;
+    padding: 20px;
+    border-radius: 6px;
+    display: flex;
+    gap: 50px;
+    width: 40%;
+}
+
+.referralvalue-txt {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.referralvalue-txt span:nth-child(1) {
+    color: #C5C5C7;
+    font-size: 12px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+}
+
+.referralvalue-txt span:nth-child(2) {
+    color: #FF9D3F;
+    font-size: 18px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.referral-btn button {
+    background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+    border: 1px transparent;
+    border-radius: 6px;
+    color: #fff;
+    padding: 8px 24px;
+    width: 159px;
+}
+
+.refer-dashboard {
+    border-radius: 6px;
+    background-color: #070C0A;
+    padding: 8px 20px;
+    color: #FFf;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    width: 130px;
+}
+
+.refer-invite {
+    background-color: #0B1210;
+    border-radius: 6px;
+    margin: 20px;
+    padding: 20px;
+}
+
+.refer-invite-txt {
+    display: flex;
+    justify-content: space-between;
+}
+
+.refer-invite-txt span:nth-child(1) {
+    color: #FFf;
+    font-size: 16px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 800;
+}
+
+.refer-invite-txt span:nth-child(2) {
+    color: #88DF95;
+    font-size: 12px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+    text-decoration: underline;
+}
+
+.refer-commissionrewards {
+    margin-top: 20px;
+    color: #fff;
+    font-size: 12px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.refer-commissionrewards .percentagecommission {
+    color: #FF9D3F !important;
+}
+
+.pinfo {
+    color: #6E6E71;
+    font-size: 12px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+}
+
+.referral-cta{
+    background-color: #0B1210;
+    margin: 20px;
+    padding: 20px;
+    border-radius: 6px;
+}
+
+.referral-cta_boxes {
+    display: flex;
+    margin: 20px 0;
+    gap: 30px;
+}
+
+.referral-cta_box-info {
+    display: flex;
+    gap: 10px;
+    background-color: #070C0A;
+    border-radius: 6px;
+    padding: 16px;
+    align-items: center;
+    justify-content: center;
+}
+
+.referral-cta_box p{
+    color: #C5C5C7;
+    font-size: 16px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+}
+
+.referral-cta_box-info span{
+    color: #fff;
+    font-size: 16px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+}
+
+.share-refer-link {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.share-refer-link span {
+    color: #fff;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 400;
+}
