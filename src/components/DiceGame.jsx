@@ -63,6 +63,10 @@ const DiceGame = ({ isNavOpen }) => {
                 <div className="dicegame-placebet__amonut-toggle">
                   <span>/2</span>
                   <span>2</span>
+                  <span className='count-arrows'>
+                    <img src="./count_arrow-top.svg" alt="" />
+                    <img src="./count_arrow-down.svg" alt="" />
+                  </span>
                 </div>
               </div>
               <p>Number of Bets</p>
@@ -124,6 +128,10 @@ const DiceGame = ({ isNavOpen }) => {
                   <div className="dicegame-placebet__amonut-toggle">
                     <span>/2</span>
                     <span>2</span>
+                    <span className='count-arrows'>
+                    <img src="./count_arrow-top.svg" alt="" />
+                    <img src="./count_arrow-down.svg" alt="" />
+                  </span>
                   </div>
                 </div>
                 <div className="dicegame-placebet__select-amount">

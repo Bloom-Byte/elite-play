@@ -258,29 +258,43 @@
     display: flex;
     gap: 5px;
     margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 .gamedice-reset_btn {
     background-color: #070c0a;
     padding: 8px;
     border-radius: 6px;
+    width: 138px;
+    margin-right: 5px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .dicegame-pecent-bx {
     position: relative;
-    display: inline-block;
+    display: flex;
+    width: 118px;
+  margin-bottom: 8px;
 }
 
 .dicegame-pecent-bx input {
-    padding-right: 20px;
-    width: 100px;
+  padding: 8px;
+  width: 100%;
+  height: 40px;
+  border: 1px transparent;
+  background-color: #070C0A;
+  border-radius: 6px;
 }
 
 .dicegame-pecent-bx span {
-    position: absolute;
-    top: 50%;
-    right: 5px;
-    transform: 'translateY(-50%)';
+  position: absolute;
+  top: 50%;
+  right: 8px;
+  transform: translateY(-50%);
+  color: white;
 }
 
 .dicegame-reset-bx {
@@ -295,7 +309,10 @@
 }
 
 .dicegame-increase {
-    
+    color: #6E6E71;
+    font-family: 'Manrope', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
 }
 
 .dice--livebet-table th {
@@ -303,4 +320,10 @@
   font-size: 12px;
   font-weight: 600;
   color: #ffffff;
+}
+
+.count-arrows {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
