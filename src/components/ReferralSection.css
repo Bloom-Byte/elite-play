@@ -223,3 +223,58 @@
     font-family: "Manrope", sans-serif;
     font-weight: 400;
 }
+
+.terms-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .terms-popup_container {
+    position: relative;
+    background-color: #0b1210;
+    border-radius: 6px;
+    max-height: 90vh;
+    overflow-y: scroll;
+  }
+  
+  .terms-popup_header {
+    background-color: #0b281f;
+    top: 0;
+    height: 56px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+  }
+  .terms-popup_header p {
+      margin: 0;
+      font-family: 'Manrope', sans-serif;
+      font-size: 16px;
+      font-weight: 800;
+      color: #ffffff;
+  }
+  
+  .close {
+    cursor: pointer;
+    background-color: #070C0A;
+    border-radius: 6px;
+    padding: 16px;
+    color: white;
+  }
+  
+  .terms-popup_main-content {
+      padding: 20px;
+  }
+
+  .terms-close {
+    position: absolute;
+    right: 20px;
+}
+  

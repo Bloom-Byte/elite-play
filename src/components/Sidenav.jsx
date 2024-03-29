@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import ChatPopup from './ChatPopup';
 import LiveSupportPopup from './LiveSupportPopup';
 import VIPPopup from './VIPPopup';
@@ -11,6 +12,11 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
   const [liveSupport, setLiveSupport] = useState(false);
   const [vipSupport, setVipSupport] = useState(false);
   const [languagePopup, setLanguagePopup] = useState(false);
+
+  const location = useLocation();
+  const isReferralsPage = location.pathname === '/referrals';
+  const isDicePage = location.pathname === '/dice'
+  const isCrashPage = location.pathname == '/crash'
 
   const handleClick = (index) => {
     const updatedClickedItems = clickedItems.map((item, i) =>
@@ -37,11 +43,10 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
           </div>
           <div className="sidenav__links">
             <div
-              onClick={() => handleClick(0)}
               style={{
-                backgroundColor: clickedItems[0] ? '#0B281F' : 'transparent',
-                padding: clickedItems[0] ? '10px' : '0',
-                borderRadius: clickedItems[0] ? '9px' : '0',
+                backgroundColor: isReferralsPage ? '#0B281F' : 'transparent',
+                padding: isReferralsPage ? '10px' : '0',
+                borderRadius: isReferralsPage ? '9px' : '0',
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
@@ -53,11 +58,10 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
               </a>
             </div>
             <div
-              onClick={() => handleClick(1)}
               style={{
-                backgroundColor: clickedItems[1] ? '#0B281F' : 'transparent',
-                padding: clickedItems[1] ? '10px' : '0',
-                borderRadius: clickedItems[1] ? '9px' : '0',
+                backgroundColor: isDicePage ? '#0B281F' : 'transparent',
+                padding:isDicePage ? '10px' : '0',
+                borderRadius: isDicePage ? '9px' : '0',
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
@@ -69,11 +73,10 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
               </a>
             </div>
             <div
-              onClick={() => handleClick(2)}
               style={{
-                backgroundColor: clickedItems[2] ? '#0B281F' : 'transparent',
-                padding: clickedItems[2] ? '10px' : '0',
-                borderRadius: clickedItems[2] ? '9px' : '0',
+                backgroundColor: isCrashPage ? '#0B281F' : 'transparent',
+                padding: isCrashPage ? '10px' : '0',
+                borderRadius: isCrashPage ? '9px' : '0',
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
@@ -85,11 +88,10 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
               </a>
             </div>
             <div
-              onClick={() => handleClick(3)}
               style={{
-                backgroundColor: clickedItems[3] ? '#0B281F' : 'transparent',
-                padding: clickedItems[3] ? '10px' : '0',
-                borderRadius: clickedItems[3] ? '9px' : '0',
+                backgroundColor: chatOpen ? '#0B281F' : 'transparent',
+                padding: chatOpen ? '10px' : '0',
+                borderRadius: chatOpen ? '9px' : '0',
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
@@ -102,11 +104,10 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
               </div>
             </div>
             <div
-              onClick={() => handleClick(4)}
               style={{
-                backgroundColor: clickedItems[4] ? '#0B281F' : 'transparent',
-                padding: clickedItems[4] ? '10px' : '0',
-                borderRadius: clickedItems[4] ? '9px' : '0',
+                backgroundColor: vipSupport ? '#0B281F' : 'transparent',
+                padding: vipSupport ? '10px' : '0',
+                borderRadius: vipSupport ? '9px' : '0',
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
@@ -121,11 +122,10 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
               </div>
             </div>
             <div
-              onClick={() => handleClick(5)}
               style={{
-                backgroundColor: clickedItems[5] ? '#0B281F' : 'transparent',
-                padding: clickedItems[5] ? '10px' : '0',
-                borderRadius: clickedItems[5] ? '9px' : '0',
+                backgroundColor: liveSupport ? '#0B281F' : 'transparent',
+                padding: liveSupport ? '10px' : '0',
+                borderRadius: liveSupport ? '9px' : '0',
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
@@ -138,11 +138,10 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
               </div>
             </div>
             <div
-              onClick={() => handleClick(6)}
               style={{
-                backgroundColor: clickedItems[6] ? '#0B281F' : 'transparent',
-                padding: clickedItems[6] ? '10px' : '0',
-                borderRadius: clickedItems[6] ? '9px' : '0',
+                backgroundColor: languagePopup ? '#0B281F' : 'transparent',
+                padding: languagePopup ? '10px' : '0',
+                borderRadius: languagePopup ? '9px' : '0',
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >

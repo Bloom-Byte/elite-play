@@ -100,3 +100,35 @@ tr {
   font-weight: 600;
   color: #9e9ea2;
 }
+
+.randomize-seed {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+  align-items: center;
+}
+
+.randomize-seedbox {
+  background-color: #070C0A;
+  padding: 16px;
+  border-radius: 6px;
+  width: 299px;
+}
+
+.randomize-seedbox p {
+  max-width: 100px;
+  color: #6E6E71;
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  word-wrap: break-word;
+  margin: 0;
+}
+
+.randomize-seed button {
+  background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+  border: 1px transparent;
+  border-radius: 6px;
+  color: #fff;
+  padding: 16px;
+}
