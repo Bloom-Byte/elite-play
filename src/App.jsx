@@ -8,6 +8,9 @@ import Wallet from './pages/Wallet'
 import HelpCenter from './pages/HelpCenter'
 import AccountSettings from './pages/AccountSettings'
 import Referral from './pages/Referral'
+import DiceBeginner from './pages/DiceBeginner'
+import DiceAutomation from './pages/DiceAutomation'
+import DiceStrategy from './pages/DiceStrategy'
 import PrivateRoutes from './utils/PrivateRoutes'
 import './App.css'
 
@@ -25,6 +28,9 @@ function App() {
       <Route path="/helpcenter" element={<HelpCenter/>}/>
       <Route path="/accountsettings" element={<AccountSettings/>}/>
       <Route path="/referrals" element={<Referral />} />
+      <Route path="/dicebeginner" element={<DiceBeginner />} />
+      <Route path="/dicestartegy" element={<DiceStrategy />} />
+      <Route path="/diceautomation" element={<DiceAutomation />} />
 
       {/* <Route element={<PrivateRoutes />}>
         <Route path="/" element={<Home/>}/>
