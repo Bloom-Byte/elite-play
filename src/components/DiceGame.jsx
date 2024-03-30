@@ -5,6 +5,7 @@ const DiceGame = ({ isNavOpen }) => {
   const [auto, setAuto] = useState(false);
   const [fairness, setFairness] = useState(false);
   const [livebet, setLivebet] = useState(false);
+  const [tutorial, setTutorial] = useState(false);
 
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
@@ -30,6 +31,17 @@ const DiceGame = ({ isNavOpen }) => {
             alt="fairness"
           />{' '}
           Fairness Checker
+        </button>
+        <button
+          onClick={() => {setTutorial(!tutorial)}}
+        >
+          {' '}
+          <img
+            className="dicegame-fairnesslogo"
+            src="./book-open-01.svg"
+            alt="fairness"
+          />{' '}
+          Tutorial
         </button>
       </div>
       <div className="dicegame-gamesection">
@@ -334,6 +346,18 @@ const DiceGame = ({ isNavOpen }) => {
             </div>
           </div>
         </div>
+      )}
+      {tutorial && (
+         <div className={`tutorial-dropdown ${isNavOpen ? 'tutorial-dropdown-open' : ''}`}>
+         <div className="tutorial-dropdown-content">
+          <a href="">Beginners Guide</a>
+          <p>Learn the basics here. <br /> How to play dice gambling, and how to roll dice?</p>
+          <a href="">Startegies</a>
+          <p>Some popular winning strategies for bitcoin dice can be found here.</p>
+          <a href="">Automation Scripts</a>
+          <p>Running scripts is an advanced way to play bitcoin dice that presumably offers easier wins.</p>
+          </div>
+       </div>
       )}
     </div>
   );
