@@ -350,11 +350,11 @@ const DiceGame = ({ isNavOpen }) => {
       {tutorial && (
          <div className={`tutorial-dropdown ${isNavOpen ? 'tutorial-dropdown-open' : ''}`}>
          <div className="tutorial-dropdown-content">
-          <a href="">Beginners Guide</a>
+          <a href="/dicebeginner">Beginners Guide</a>
           <p>Learn the basics here. <br /> How to play dice gambling, and how to roll dice?</p>
-          <a href="">Startegies</a>
+          <a href="dicestrategy">Strategies</a>
           <p>Some popular winning strategies for bitcoin dice can be found here.</p>
-          <a href="">Automation Scripts</a>
+          <a href="/diceautomation">Automation Scripts</a>
           <p>Running scripts is an advanced way to play bitcoin dice that presumably offers easier wins.</p>
           </div>
        </div>

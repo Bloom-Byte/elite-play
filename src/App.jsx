@@ -29,7 +29,7 @@ function App() {
       <Route path="/accountsettings" element={<AccountSettings/>}/>
       <Route path="/referrals" element={<Referral />} />
       <Route path="/dicebeginner" element={<DiceBeginner />} />
-      <Route path="/dicestartegy" element={<DiceStrategy />} />
+      <Route path="/dicestrategy" element={<DiceStrategy />} />
       <Route path="/diceautomation" element={<DiceAutomation />} />
 
       {/* <Route element={<PrivateRoutes />}>
