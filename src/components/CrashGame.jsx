@@ -1,24 +1,35 @@
-import React, { useState } from 'react'
+import React, { useState } from 'react';
+import './CrashGame.css';
 
 const CrashGame = ({ isNavOpen }) => {
-    const [auto, setAuto] = useState(false)
+  const [auto, setAuto] = useState(false);
+  const [livebet, setLivebet] = useState(false);
+  const [tutorial, setTutorial] = useState(false);
 
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
       <div className="dicegame-buttons">
         <button className="dicegame-dice-title">Dice</button>
-        <button>
+        <button
+          onClick={() => {
+            setLivebet(!livebet);
+          }}
+        >
+          {' '}
+          <img src="./Exclude.svg" alt="" /> Live Games
+        </button>
+        <button
+          onClick={() => {
+            setTutorial(!tutorial);
+          }}
+        >
           {' '}
           <img
             className="dicegame-fairnesslogo"
-            src="./fairness.svg"
+            src="./book-open-01.svg"
             alt="fairness"
           />{' '}
-          Fairness Checker
-        </button>
-        <button>
-          {' '}
-          <img src="./Exclude.svg" alt="" /> Live Games
+          Tutorial
         </button>
       </div>
       <div className="dicegame-gamesection">
@@ -26,7 +37,7 @@ const CrashGame = ({ isNavOpen }) => {
           <div className="dicegame-placebet_type">
             <span
               onClick={() => {
-                setAuto(false)
+                setAuto(false);
               }}
               className={`${!auto ? 'active' : ''}`}
             >
@@ -35,7 +46,7 @@ const CrashGame = ({ isNavOpen }) => {
             <span
               className={`${auto ? 'active' : ''}`}
               onClick={() => {
-                setAuto(true)
+                setAuto(true);
               }}
             >
               Auto
@@ -65,22 +76,22 @@ const CrashGame = ({ isNavOpen }) => {
               </div>
               <p>On win</p>
               <div className="dicegame-onwin">
-                <div className='gamedice-reset_btn'>
-                  <span className='dicegame-reset-bx'>Reset</span>
-                  <span className='dicegame-increase'>Increase by</span>
+                <div className="gamedice-reset_btn">
+                  <span className="dicegame-reset-bx">Reset</span>
+                  <span className="dicegame-increase">Increase by</span>
                 </div>
-                <div className='dicegame-pecent-bx'>
+                <div className="dicegame-pecent-bx">
                   <input type="text" />
                   <span>%</span>
                 </div>
               </div>
               <p>On lose</p>
               <div className="dicegame-onwin">
-                <div className='gamedice-reset_btn'>
-                  <span className='dicegame-reset-bx'>Reset</span>
-                  <span className='dicegame-increase'>Increase by</span>
+                <div className="gamedice-reset_btn">
+                  <span className="dicegame-reset-bx">Reset</span>
+                  <span className="dicegame-increase">Increase by</span>
                 </div>
-                <div className='dicegame-pecent-bx'>
+                <div className="dicegame-pecent-bx">
                   <input type="text" />
                   <span>%</span>
                 </div>
@@ -181,8 +192,139 @@ const CrashGame = ({ isNavOpen }) => {
           </div>
         </div>
       </div>
+      {livebet && (
+        <div className="editusername-popup">
+          <div className="editusername-popup_container">
+            <div className="editusername-popup_header">
+              <p>Live Bet</p>
+              <span
+                onClick={() => {
+                  setLivebet(!livebet);
+                }}
+                className="close email-close"
+              >
+                X
+              </span>
+            </div>
+            <div className="editusername-popup_main-content">
+              <table className="dice--livebet-table">
+                <thead>
+                  <tr>
+                    <th>Player</th>
+                    <th>Roll</th>
+                    <th>Amount</th>
+                    <th>Profit</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>&lt;52/13</td>
+                    <td>100</td>
+                    <td>Betting</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>&lt;52/13</td>
+                    <td>100</td>
+                    <td>Betting</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="red">/13</span>
+                    </td>
+                    <td>100</td>
+                    <td className="red">-100</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="green">/13</span>
+                    </td>
+                    <td>100</td>
+                    <td className="green">+1000</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="green">/13</span>
+                    </td>
+                    <td>100</td>
+                    <td className="green">+1000</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="red">/13</span>
+                    </td>
+                    <td>100</td>
+                    <td className="red">-100</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="red">/13</span>
+                    </td>
+                    <td>100</td>
+                    <td className="red">-100</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="red">/13</span>
+                    </td>
+                    <td>100</td>
+                    <td className="red">-100</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      )}
+      {tutorial && (
+        <div
+          className={`tutorial-dropdown-crash ${
+            isNavOpen ? 'tutorial-dropdown-crash-open' : ''
+          }`}
+        >
+          <div className="tutorial-dropdown-crash-content">
+            <a href="/crashbeginner">Beginners Guide</a>
+            <p>
+              Learn the basics here. <br />What is crash gambling, and how to play crash gambling games?
+            </p>
+            <a href="/crashstrategy">Strategies</a>
+            <p>
+              Some popular winning strategies for crash gambling can be found
+              here.
+            </p>
+            <a href="/crashautomation">Automation Scripts</a>
+            <p>
+              Running scripts is an advanced way to play crash that
+              presumably offers easier wins.
+            </p>
+          </div>
+        </div>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default CrashGame
+export default CrashGame;

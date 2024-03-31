@@ -11,6 +11,9 @@ import Referral from './pages/Referral'
 import DiceBeginner from './pages/DiceBeginner'
 import DiceAutomation from './pages/DiceAutomation'
 import DiceStrategy from './pages/DiceStrategy'
+import CrashBeginner from './pages/CrashBeginner'
+import CrashAutomation from './pages/CrashAutomation'
+import CrashStrategy from './pages/CrashStrategy'
 import PrivateRoutes from './utils/PrivateRoutes'
 import './App.css'
 
@@ -31,6 +34,9 @@ function App() {
       <Route path="/dicebeginner" element={<DiceBeginner />} />
       <Route path="/dicestrategy" element={<DiceStrategy />} />
       <Route path="/diceautomation" element={<DiceAutomation />} />
+      <Route path="/crashbeginner" element={<CrashBeginner />} />
+      <Route path="/crashstrategy" element={<CrashStrategy />} />
+      <Route path="/crashautomation" element={<CrashAutomation />} />
 
       {/* <Route element={<PrivateRoutes />}>
         <Route path="/" element={<Home/>}/>

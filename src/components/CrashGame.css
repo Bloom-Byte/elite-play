@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
+
+.tutorial-dropdown-crash {
+    position: fixed;
+    top: 150px;
+    right: 60vw;
+  }
+  
+  .tutorial-dropdown-crash-open {
+    right: 50vw;
+  }
+  
+  .tutorial-dropdown-crash-content {
+    position: relative;
+    background-color: #0B281F;
+    border-radius: 16px;
+    padding: 20px;
+    max-width: 150px;
+  }
+  
+  .tutorial-dropdown-crash-content a {
+    color: #88DF95;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+  }
+  
+  .tutorial-dropdown-crash-content p {
+    color: #FFFFFF;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+  }
