@@ -12,6 +12,7 @@ const CrashAutomation = () => {
       <Navbar isNavOpen={isNavOpen} />
       <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
       <CrashAutomationComponent isNavOpen={isNavOpen} />
+      <Footer isNavOpen={isNavOpen} />
     </div>
   );
 };
