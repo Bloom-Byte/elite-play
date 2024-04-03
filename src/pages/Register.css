@@ -228,7 +228,9 @@ body {
         background-color: #0B1210;
         justify-self: center;
         align-self: center;
-        margin: 50px;
+        margin: 50px 0;
+        padding: 2rem;
+        border-radius: 6px;
     }
 
     .register {
@@ -248,10 +250,16 @@ body {
     }
 
     .register-form__google-signin {
-        width: 252px;
+        width: 212px;
     }
 
     .register-form__option-box {
         width: 252px;
+    }
+
+    .register-form__form {
+        padding: 4rem;
+        align-items: center;
+        justify-content: center;
     }
 }
