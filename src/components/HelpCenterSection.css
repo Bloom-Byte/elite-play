@@ -165,3 +165,13 @@
 .highlight-support {
     color: #24E3A1;
 }
+
+
+
+/* --------- MOBILE RESPONSIVENESS ---------- */
+
+@media screen and (max-width: 768px) {
+    .help-center {
+      margin-left: 8px;
+    }
+  }

@@ -705,3 +705,12 @@ input:checked + .slider:before {
     color: #6E6E71 !important;
     margin-left: 10px;
 }
+
+
+/* --------- MOBILE RESPONSIVENESS ---------- */
+
+@media screen and (max-width: 768px) {
+  .account-settings {
+    margin-left: 8px;
+  }
+}

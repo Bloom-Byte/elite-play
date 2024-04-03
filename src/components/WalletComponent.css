@@ -520,3 +520,11 @@
   text-align: center;
   margin-top: 2rem;
 }
+
+/* --------- MOBILE RESPONSIVENESS ---------- */
+
+@media screen and (max-width: 768px) {
+  .wallet-comp {
+    margin-left: 8px;
+  }
+}
