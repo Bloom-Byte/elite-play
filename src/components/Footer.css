@@ -79,3 +79,27 @@
     color: white;
     margin-bottom: 40px;
 }
+
+
+/* --------- MOBILE RESPONSIVENESS ---------- */
+
+@media screen and (max-width: 768px) {
+  .footer-sponsor{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  .footer-cta {
+    flex-direction: column;
+  }
+
+  .footer-cta__right {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 0px;
+  }
+
+  .footer-cta-items {
+    width: 136px;
+  }
+}

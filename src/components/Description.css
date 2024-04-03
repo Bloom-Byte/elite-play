@@ -45,3 +45,11 @@
   color: #88DF95;
   margin: 0;
 }
+
+
+/* --------- MOBILE RESPONSIVENESS --------- */
+@media screen and (max-width: 768px) {
+  .desc {
+    width: 100%;
+  }
+ }

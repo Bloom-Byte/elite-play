@@ -61,3 +61,10 @@
     font-weight: 600;
     color: #34B263;
 }
+
+/* --------- MOBILE RESPONSIVENESS --------- */
+@media screen and (max-width: 768px) {
+    .recent-wins {
+        width: 100%;
+    }
+}
