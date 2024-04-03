@@ -121,3 +121,24 @@ body {
 .wallet-nav {
     text-decoration: none;
 }
+
+/* --------- MOBILE RESPONSIVENESS --------- */
+@media screen and (max-width: 768px) {
+    .nav {
+        width: 100vw;
+    }
+
+    .nav-games {
+        margin-left: 0;
+    }
+
+    .nav-games__dice {
+        display: none;
+    }
+
+    .nav-loggedin {
+        margin-left: 50px;
+    }
+
+
+}

@@ -89,3 +89,19 @@ body {
     padding: 8px;
     border-radius: 6px;
 }
+
+
+/* --------- MOBILE RESPONSIVENESS --------- */
+@media screen and (max-width: 768px) {
+    /* .sidenav-expanded {
+        display: none;
+    } */
+
+    .sidenav-mini {
+        display: none;
+    }
+
+    .sidenav__icon {
+        margin-bottom: 0;
+    }
+}
