@@ -5,7 +5,7 @@ import CrashStrategyComponent from '../components/CrashStrategyComponent';
 import Footer from '../components/Footer';
 
 const CrashStrategy = () => {
-  const [isNavOpen, setIsNavOpen] = useState(true)
+  const [isNavOpen, setIsNavOpen] = useState(false)
 
   return (
     <div>

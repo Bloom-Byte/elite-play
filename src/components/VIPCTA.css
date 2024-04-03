@@ -63,5 +63,6 @@
 @media screen and (max-width: 768px) {
   .vip-cta {
     width: 100%;
+    margin-left: 8px;
   }
 }

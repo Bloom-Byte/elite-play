@@ -130,7 +130,7 @@
 @media screen and (max-width: 768px) {
   .home-hero {
     align-self: center;
-    margin-right: 0;
+    margin-left: 8px;
     margin-top: 0;
     height: 250px;
     width: 100%;

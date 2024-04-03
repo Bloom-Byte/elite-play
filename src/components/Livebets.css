@@ -96,3 +96,12 @@
 .livebets-table_table .red {
   color: #e14453;
 }
+
+
+/* --------- MOBILE RESPONSIVENESS --------- */
+@media screen and (max-width: 768px) {
+  
+.livebets {
+  margin-left: 8px;
+}
+}

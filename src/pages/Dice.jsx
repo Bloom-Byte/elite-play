@@ -7,7 +7,7 @@ import Footer from '../components/Footer'
 import './Dice.css'
 
 const Dice = () => {
-  const [isNavOpen, setIsNavOpen] = useState(true)
+  const [isNavOpen, setIsNavOpen] = useState(false)
 
   return (
     <div>

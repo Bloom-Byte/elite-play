@@ -11,7 +11,7 @@ import Footer from '../components/Footer'
 import './Home.css'
 
 const Home = () => {
-  const [isNavOpen, setIsNavOpen] = useState(true)
+  const [isNavOpen, setIsNavOpen] = useState(false)
 
   return (
     <div>

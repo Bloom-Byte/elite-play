@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import DiceStrategyComponent from '../components/DiceStrategyComponent';
 
 const DiceStrategy = () => {
-  const [isNavOpen, setIsNavOpen] = useState(true);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   return (
     <div>
