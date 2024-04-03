@@ -132,3 +132,13 @@ tr {
   color: #fff;
   padding: 16px;
 }
+
+
+
+/* --------- MOBILE RESPONSIVENESS ---------- */
+
+@media screen and (max-width: 768px) {
+  .dicetable {
+    margin-left: 8px;
+  }
+}

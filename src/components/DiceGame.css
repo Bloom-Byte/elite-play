@@ -360,3 +360,17 @@
   font-size: 10px;
   font-weight: 400;
 }
+
+
+
+/* --------- MOBILE RESPONSIVENESS ---------- */
+
+@media screen and (max-width: 768px) {
+  .dicegame {
+    margin-left: 8px;
+  }
+
+  .dicegame-gamesection {
+    flex-direction: column-reverse;
+  }
+}

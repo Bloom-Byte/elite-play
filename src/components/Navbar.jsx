@@ -12,8 +12,7 @@ import LanguagePopup from './LanguagePopup';
 import './Navbar.css';
 
 const Navbar = ({ isNavOpen }) => {
-  // const userIsLoggedIn = isLoggedIn();
-  const userIsLoggedIn = false;
+  const userIsLoggedIn = isLoggedIn();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [notificationsPopupOpen, setNotificationsPopupOpen] = useState(false);
   const [depositPopupOpen, setDepositPopupOpen] = useState(false);

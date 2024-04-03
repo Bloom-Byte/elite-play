@@ -164,4 +164,9 @@
   .home-hero__user-info-box__level {
     margin-top: 1rem;
   }
+
+  .mobile__page-navigation {
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
 }
