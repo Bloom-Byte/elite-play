@@ -11,7 +11,7 @@ import VIPPopup from './VIPPopup';
 import LanguagePopup from './LanguagePopup';
 import './Navbar.css';
 
-const Navbar = ({ isNavOpen }) => {
+const Navbar = ({ isNavOpen, user }) => {
   const userIsLoggedIn = isLoggedIn();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [notificationsPopupOpen, setNotificationsPopupOpen] = useState(false);
@@ -33,7 +33,7 @@ const Navbar = ({ isNavOpen }) => {
     <>
       <div className="nav">
         <div className={`nav-games ${isNavOpen ? 'nav-expanded' : ''}`}>
-          <div className="sidenav__icon">
+          <div style={{display: 'none'}} className="sidenav__icon">
             <img
               className="nav-icon"
               onClick={() => setIsMobileNavOpen(!isMobileNavOpen)}
@@ -200,7 +200,7 @@ const Navbar = ({ isNavOpen }) => {
                   className="nav-wallet_info"
                 >
                   <img src="./twemoji_coin.svg" alt="coin" />
-                  <span>0.00000</span>
+                  <span>{user ? user.balance : '0'}</span>
                   <img src="./down-arrow.svg" alt="arrow" />
                 </div>
 
@@ -229,7 +229,7 @@ const Navbar = ({ isNavOpen }) => {
                 }}
                 className="nav-profile"
               >
-                <img src="./profile-img.svg" alt="profile-img" />
+                <img style={{borderRadius: '50%'}} src={`${user.profilePictureUrl ? user.profilePictureUrl : './profile-img.svg'}`} alt="profile-img" />
                 <img src="./down-arrow.svg" alt="arrow" />
               </div>
             </div>

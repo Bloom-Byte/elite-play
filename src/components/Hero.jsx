@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { isLoggedIn } from '../utils/auth';
 import './Hero.css';
 
-const Hero = ({ isNavOpen }) => {
+const Hero = ({ isNavOpen, user }) => {
   const [level, setLevel] = useState(0);
   const userIsLoggedIn = isLoggedIn();
 
@@ -47,7 +47,7 @@ const Hero = ({ isNavOpen }) => {
               <div className="home-hero__user-info-box__level">
                 <div className="hero__rank-info">
                   <span>Rank:</span>
-                  <span className="bronze"> Bronze</span>
+                  <span className="bronze">{user? user.tier : 'Bronze'}</span>
                 </div>
                 <div className="hero__rank-info">
                   <span>Next:</span>

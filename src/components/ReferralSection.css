@@ -278,3 +278,12 @@
     right: 20px;
 }
   
+
+
+
+/* --------- MOBILE RESPONSIVENESS --------- */
+@media screen and (max-width: 768px) {
+    .referral-section {
+        margin-left: 8px;
+    }
+}

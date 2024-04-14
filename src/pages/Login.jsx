@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 import './Login.css';
 
 const Login = () => {
@@ -6,6 +8,8 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -13,6 +17,24 @@ const Login = () => {
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post('https://be.eliteplay.bloombyte.dev/user/auth/login', {
+        email,
+        password,
+      });
+
+      localStorage.setItem('accessToken', response.data.accessToken);
+
+      navigate('/');
+    } catch (error) {
+      console.log(error)
+      setError(error.response.data.message);
+    }
   };
 
   return (
@@ -26,7 +48,7 @@ const Login = () => {
             <h4>Sign In</h4>
           </div>
           <div className="register-form__form">
-            <form className="register-form__form-input" action="">
+            <form className="register-form__form-input" onSubmit={handleSubmit}>
               <div className="register-form__input-box">
                 <img
                   className="input-icon"
@@ -72,6 +94,7 @@ const Login = () => {
                 Sign In
               </button>
             </form>
+            {error && <p>{error}</p>}
             <div className="register-form__signin">
               <p>
                 New to eliteplay? <a href="/register">Sign Up</a>

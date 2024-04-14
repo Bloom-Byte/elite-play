@@ -1,5 +1,4 @@
 export const isLoggedIn = () => {
-    const token = localStorage.getItem('authToken');
-    // return token !== null;
-    return true
+    const token = localStorage.getItem('accessToken');
+    return token !== null;
   };

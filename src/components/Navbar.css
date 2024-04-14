@@ -140,5 +140,7 @@ body {
         margin-left: 50px;
     }
 
-
+    .sidenav__icon {
+        display: flex !important;
+    }
 }

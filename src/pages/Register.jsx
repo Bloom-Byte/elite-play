@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './Register.css';
 
 const Register = () => {
@@ -8,6 +9,7 @@ const Register = () => {
   const [usernameFocused, setUsernameFocused] = useState(false);
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const [message, setMessage] = useState('');
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -21,6 +23,22 @@ const Register = () => {
     setPassword(event.target.value);
   };
 
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    try {
+      const response = await axios.post('https://be.eliteplay.bloombyte.dev/user/auth/signup', {
+        username,
+        email,
+        password,
+      });
+
+      setMessage(response.data.message);
+    } catch (error) {
+      setMessage(error.response.data.message); 
+    }
+  };
+
   return (
     <div className='mobile-auth'>
       <div className="register">
@@ -32,7 +50,7 @@ const Register = () => {
             <h4>Sign Up</h4>
           </div>
           <div className="register-form__form">
-            <form className="register-form__form-input" action="">
+            <form className="register-form__form-input" onSubmit={handleSubmit}>
               <div className="register-form__input-box">
                 <img
                   className="input-icon"
@@ -102,7 +120,9 @@ const Register = () => {
                 {' '}
                 Sign Up Now{' '}
               </button>
+              {message && <p style={{color: '#24E3A1'}}>{message}</p>}
             </form>
+            
             <div className="register-form__signin">
               <p>
                 Already have an account? <a href="/login">Sign In</a>
