@@ -143,4 +143,24 @@ body {
     .sidenav__icon {
         display: flex !important;
     }
+
+    .nav-icon {
+        width: 30px !important;
+        height: 30px !important;
+        padding: 5px !important;
+    }
+
+    .nav-logo {
+        width: 100px !important;
+        height: 50px;
+    }
+
+    .nav-wallet_deposit{
+        display: none !important;
+    }
+
+    .nav-loggedin {
+        margin-left: 0;
+        gap: 10px;
+    }
 }

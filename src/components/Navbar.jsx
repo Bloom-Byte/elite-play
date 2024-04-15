@@ -42,7 +42,7 @@ const Navbar = ({ isNavOpen, user }) => {
             />
             <a href="/">
               {' '}
-              <img src="./eliteplay.svg" alt="logo" />
+              <img className='nav-logo' src="./eliteplay.svg" alt="logo" />
             </a>
           </div>
           <div className="nav-games__dice">
