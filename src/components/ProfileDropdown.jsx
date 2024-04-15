@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import UserInformationPopup from './UserInformationPopup';
 import './ProfileDropdown.css';
 
-const ProfileDropdown = () => {
+const ProfileDropdown = ({user}) => {
   const [isUserInformationPopupOpen, setIsUserInformationPopupOpen] =
     useState(false);
   const [isStatPopupOpen, setIsStatPopupOpen] = useState(false);
@@ -55,6 +55,7 @@ const ProfileDropdown = () => {
       </div>
       {isUserInformationPopupOpen && (
         <UserInformationPopup
+          user={user}
           isUserInformationPopupOpen={isUserInformationPopupOpen}
           setIsUserInformationPopupOpen={setIsUserInformationPopupOpen}
           isStatPopupOpen={isStatPopupOpen}

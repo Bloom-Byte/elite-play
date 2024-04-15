@@ -40,7 +40,9 @@ const Home = () => {
         console.error('Failed to fetch user profile:', response.statusText);
         setLoading(false);
       }
+      console.log(response)
     } catch (error) {
+
       console.error('Error fetching user profile:', error.message);
       setLoading(false);
     }

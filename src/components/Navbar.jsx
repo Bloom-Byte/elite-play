@@ -229,7 +229,7 @@ const Navbar = ({ isNavOpen, user }) => {
                 }}
                 className="nav-profile"
               >
-                <img style={{borderRadius: '50%'}} src={`${user.profilePictureUrl ? user.profilePictureUrl : './profile-img.svg'}`} alt="profile-img" />
+                <img style={{borderRadius: '50%'}} src={`${user?.profilePictureUrl? user.profilePictureUrl : './profile-img.svg'}`} alt="profile-img" />
                 <img src="./down-arrow.svg" alt="arrow" />
               </div>
             </div>
@@ -247,7 +247,7 @@ const Navbar = ({ isNavOpen, user }) => {
           </>
         )}
       </div>
-      {isProfileDropdownOpen && <ProfileDropdown />}
+      {isProfileDropdownOpen && <ProfileDropdown user={user} />}
       {notificationsPopupOpen && (
         <NotificationsPopup
           notificationsPopupOpen={notificationsPopupOpen}

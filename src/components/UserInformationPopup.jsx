@@ -6,7 +6,8 @@ const UserInformationPopup = ({
   setIsUserInformationPopupOpen,
   isUserInformationPopupOpen,
     isStatPopupOpen,
-    setIsStatPopupOpen
+    setIsStatPopupOpen,
+    user
 }) => {
   return (
     <>
@@ -29,8 +30,8 @@ const UserInformationPopup = ({
                 src="./profile-img.svg"
                 alt="image"
               />
-              <p>Yuxeer</p>
-              <p>USER ID: 12357308</p>
+              <p>{user? user.name : 'Yuxeer'}</p>
+              <p>USER ID: {user? user._id : '12357308'}</p>
             </div>
             <img className="edit-icon" src="./Edit.svg" alt="edit-icon" />
           </div>

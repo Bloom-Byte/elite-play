@@ -29,11 +29,10 @@ const Login = () => {
       });
 
       localStorage.setItem('accessToken', response.data.accessToken);
-
       navigate('/');
     } catch (error) {
       console.log(error)
-      setError(error.response.data.message);
+      setError(error.response.data.error);
     }
   };
 
@@ -94,7 +93,7 @@ const Login = () => {
                 Sign In
               </button>
             </form>
-            {error && <p>{error}</p>}
+            {error && <p style={{color: '#E14453'}}>{error}</p>}
             <div className="register-form__signin">
               <p>
                 New to eliteplay? <a href="/register">Sign Up</a>

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ReferralSection.css';
 
-const ReferralSection = ({ isNavOpen }) => {
+const ReferralSection = ({ isNavOpen, referralInfo,  referralCount}) => {
   const [terms, setTerms] = useState(false);
   return (
     <>
@@ -24,7 +24,7 @@ const ReferralSection = ({ isNavOpen }) => {
               <img src="./speaker.svg" alt="speaker" />
               <div className="referralpotb-txt">
                 <span>Total Friends</span>
-                <span>0</span>
+                <span>{referralCount ? referralCount.count : 0}</span>
               </div>
             </div>
           </div>
@@ -64,7 +64,7 @@ const ReferralSection = ({ isNavOpen }) => {
               <p>Referral Link</p>
               <div className="referral-cta_box-info">
                 <img src="./link-02.svg" alt="link-icon" />
-                <span>https://eliteplay.com/yuxeer/</span>
+                <span>{referralInfo ? referralInfo.fullReferralUrl : 'https://eliteplay.com/yuxeer/'}</span>
                 <img
                   style={{ marginLeft: '30px' }}
                   src="./copy-01.svg"
@@ -84,7 +84,7 @@ const ReferralSection = ({ isNavOpen }) => {
                     src="./tag-01.svg"
                     alt="tag-icon"
                   />
-                  <span>yuxeer</span>
+                  <span>{referralInfo? referralInfo.referralCode : 'yuxeer'}</span>
                 </div>
 
                 <img

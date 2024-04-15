@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './AccountSettingsSection.css';
 
-const AccountSettingsSection = ({ isNavOpen }) => {
+const AccountSettingsSection = ({ isNavOpen, user }) => {
   const [currentSection, setCurrentSection] = useState('account-info');
   const [edituserName, setEditUsername] = useState(false);
   const [verifyEmail, setVerifyEmail] = useState(false);
@@ -11,6 +11,7 @@ const AccountSettingsSection = ({ isNavOpen }) => {
   const [periodExclusion, setPeriodExclusion] = useState(false);
   const [editLanguage, setEditLanguage] = useState(false);
   const [editCurrency, setEditCurrency] = useState(false);
+  const [username, setUsername] = useState('');
 
   const handleConfirmPassword = () => {
     setConfirmPassword(!confirmPassword);
@@ -20,6 +21,23 @@ const AccountSettingsSection = ({ isNavOpen }) => {
   const handleSelfExclusion = () => {
     setSelfExclusion(!selfExclusion);
     setPeriodExclusion(!periodExclusion);
+  };
+
+
+  const handleUsernameChange = (event) => {
+    const { value } = event.target;
+    const invalidChars = /[^a-zA-Z0-9]/g;
+
+    if (!invalidChars.test(value)) {
+      setUsername(value);
+    } else {
+      alert("Please only use alphanumeric characters.");
+    }
+  };
+
+  const handleUsernameSubmit = (event) => {
+    event.preventDefault();
+    console.log("Submitted username:", username);
   };
 
   return (
@@ -84,8 +102,8 @@ const AccountSettingsSection = ({ isNavOpen }) => {
                     <div className="main-profile-info">
                       <img src="./profile-img.svg" alt="profile-image" />
                       <div className="username_details">
-                        <h2>Yuxeer</h2>
-                        <p>User ID: 12357308</p>
+                        <h2>{user? user.name : 'Yuxeer'}</h2>
+                        <p>User ID: {user? user._id : '12357308'}</p>
                       </div>
                     </div>
                     <button
@@ -277,12 +295,14 @@ const AccountSettingsSection = ({ isNavOpen }) => {
               <input
                 className="editusername-popup_edit-username-box"
                 type="text"
+                value={username}
+                onChange={handleUsernameChange}
               />
               <p className="edit-username_note">
                 Do not use special symbols, otherwise your account may not be
                 supported
               </p>
-              <button className="edit-username-popup_btn">Modify</button>
+              <button onClick={handleUsernameSubmit} className="edit-username-popup_btn">Modify</button>
             </div>
           </div>
         </div>
