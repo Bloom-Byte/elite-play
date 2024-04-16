@@ -109,6 +109,10 @@
   color: white;
 }
 
+.accountsettings-mobile_nav {
+  display: none;
+}
+
 .setting-section__header {
   font-family: 'Manrope', sans-serif;
   font-size: 16px;
@@ -712,5 +716,75 @@ input:checked + .slider:before {
 @media screen and (max-width: 768px) {
   .account-settings {
     margin-left: 8px;
+  }
+
+  .accountsettings-mobile_nav {
+    display: block;
+    background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+    border: 1px transparent;
+    border-radius: 6px;
+    padding: 8px;
+    height: 30px;
+    cursor: pointer;
+  }
+
+  .accountsettings-mobile_nav img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .settings-dropdown {
+    position: fixed;
+    top: 200px;
+    left: 60vw;
+  }
+
+  .settings-dropdown-content {
+    position: relative;
+    background-color: #0B1210;
+    border-radius: 16px;
+    padding: 20px;
+  }
+
+  .settings-dropdown-content hr {
+      margin-bottom: 20px;
+  }
+
+  .settings-dropdown-cta {
+      margin-bottom: 20px;
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      cursor: pointer;
+  }
+
+  .settings-dropdown-cta a {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+  }
+
+  .settings-dropdown-cta span {
+      color: #6E6E71;
+      font-size: 14px;
+      font-family: "Manrope", sans-serif;
+      font-weight: 600;
+  }
+
+  .settings-dropdown-cta a {
+      color: #6E6E71;
+      font-size: 14px;
+      font-family: "Manrope", sans-serif;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+  }
+
+  .settings-dropdown-cta .vip {
+      color: #F29100;
+  }
+
+  .account-settings__navs {
+    display: none;
   }
 }

@@ -11,7 +11,9 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
   const [periodExclusion, setPeriodExclusion] = useState(false);
   const [editLanguage, setEditLanguage] = useState(false);
   const [editCurrency, setEditCurrency] = useState(false);
+  const [mobileNav, setMobileNav] = useState(false);
   const [username, setUsername] = useState('');
+
 
   const handleConfirmPassword = () => {
     setConfirmPassword(!confirmPassword);
@@ -46,9 +48,15 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
         isNavOpen ? 'account-settings-extended' : ''
       }`}
     >
-      <div className="account-setting-header">
-        <span>Account Settings</span>
+      <div style={{display:'flex', justifyContent:'space-between'}}>
+        <div className="account-setting-header">
+          <span>Account Settings</span>
+        </div>
+        <div onClick={() => {setMobileNav(!mobileNav)}} className='accountsettings-mobile_nav'>
+          <img src="./slant-menu.svg" alt="" />
+        </div>
       </div>
+      
       <div className="account-settings__sections">
         <div className="account-settings__navs">
           <div
@@ -635,6 +643,33 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
           </div>
         </div>
       )}
+      {mobileNav && 
+        <div className="settings-dropdown">
+        <div className="settings-dropdown-content">
+          <div  onClick={() => {
+              setCurrentSection('account-info');
+            }} className="settings-dropdown-cta">
+            <img src="./user.svg" alt="user-icon" />
+              <span>Account Info</span>
+          </div>
+          <div
+           onClick={() => {
+            setCurrentSection('security');
+          }}
+            className="profile-dropdown-cta"
+          >
+            <img src="./lock-key.svg" alt="lock-key" />
+            <span>Security</span>
+          </div>
+          <div  onClick={() => {
+              setCurrentSection('preferences');
+            }} className="profile-dropdown-cta">
+            <img src="./list-setting.svg" alt="list-icon" />
+            <span>Preferences</span>
+          </div>
+        </div>
+      </div>
+      }
     </div>
   );
 };
