@@ -787,4 +787,8 @@ input:checked + .slider:before {
   .account-settings__navs {
     display: none;
   }
+
+  .security_one-container {
+    flex-direction: column;
+  }
 }
