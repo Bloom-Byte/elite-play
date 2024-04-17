@@ -521,10 +521,55 @@
   margin-top: 2rem;
 }
 
+.wallet-setting-header {
+  background-color: #070c0a;
+  padding: 8px 20px;
+  margin-bottom: 24px;
+  border-radius: 6px;
+}
+
+.wallet-setting-header span {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: white;
+}
+
 /* --------- MOBILE RESPONSIVENESS ---------- */
 
 @media screen and (max-width: 768px) {
   .wallet-comp {
     margin-left: 8px;
+  }
+
+  .wallet-comp_wallet-options {
+    display: none;
+  }
+
+  .wallet-comp_wallet-balance {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    grid-gap: 10px; 
+  }
+
+  .potline{
+    display: none;
+  }
+
+  .pot-info {
+    grid-column: 1 / 3;
+    border-bottom: 1px solid #44537140;
+    padding-bottom: 24px;
+    margin-bottom: 24px;
+  }
+
+  .cryptoAddress, .middleAddress {
+    display: block;
+    max-width: 200px;
+  }
+
+  .middleAddress {
+    display: block;
+    max-width: 100px;
   }
 }

@@ -23,9 +23,9 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
     setPeriodExclusion(!periodExclusion);
   };
 
-  const copyToClipboard = () => {
+  const copyToClipboard = (text) => {
     const tempInput = document.createElement("input");
-    tempInput.value = '76Y73NZRWD32HRVQ';
+    tempInput.value = text;
 
     document.body.appendChild(tempInput);
 
@@ -35,7 +35,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
 
     document.body.removeChild(tempInput);
 
-    alert("Copied to clipboard: " + '76Y73NZRWD32HRVQ');
+    alert("Copied to clipboard: " + text);
 };
 
   return (
@@ -322,7 +322,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                 </p>
                 <div className='auth-secret-key'>
                   <span>76Y73NZRWD32HRVQ</span>
-                  <span onClick={copyToClipboard} style={{ cursor: 'pointer' }}>
+                  <span onClick={() => {copyToClipboard('76Y73NZRWD32HRVQ')}} style={{ cursor: 'pointer' }}>
                     <img src="./copy-01.svg" alt="copy-icon" /> <span className='auth-security-copy'>Copy</span>
                   </span>
                 </div>

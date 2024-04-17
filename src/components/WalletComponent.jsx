@@ -12,11 +12,39 @@ const options = [
 
 const WalletComponent = ({ isNavOpen }) => {
   const [currentSection, setCurrentSection] = useState('Balance');
-  const [depositmethod, setDepositMethod] = useState('crypto');
+  const [mobileNav, setMobileNav] = useState(false);
+
+  const copyToClipboard = (text) => {
+    const tempInput = document.createElement("input");
+    tempInput.value = text;
+
+    document.body.appendChild(tempInput);
+
+    tempInput.select();
+
+    document.execCommand("copy");
+
+    document.body.removeChild(tempInput);
+
+    alert("Copied to clipboard: " + text);
+};
 
   return (
     <div className={`wallet-comp ${isNavOpen ? 'wallet-comp-extended' : ''}`}>
-      <button className="wallet-header">Wallet</button>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <div className="wallet-setting-header">
+          <span>Wallet</span>
+        </div>
+        <div
+          onClick={() => {
+            setMobileNav(!mobileNav);
+          }}
+          className="accountsettings-mobile_nav"
+        >
+          <img src="./slant-menu.svg" alt="" />
+        </div>
+      </div>
+
       <div className="wallet-comps">
         <div className="wallet-comp_wallet-options">
           <div
@@ -70,8 +98,9 @@ const WalletComponent = ({ isNavOpen }) => {
                     <span className="real-balance">Total Balance</span>
                     <span className="real-balance_amount">USD 300.00</span>
                   </div>
+                 
                 </div>
-                <hr />
+                <hr className='potline' />
                 <div className="pot-balance">
                   <span>Real Balance</span>
                   <span>USD 300.00</span>
@@ -82,83 +111,35 @@ const WalletComponent = ({ isNavOpen }) => {
                 </div>
               </div>
               <div className="mainBalance-section">
-                <div className="mainBalance_hide">
-                  <span>Hide 0 Balance</span>
-                  <input type="text" placeholder="Search" />
-                </div>
-                <p>Fiat Currency</p>
-                <div className="mainBalance-fiat-currency">
-                  <div className="currency-title">
-                    <img src="./cryptocurrency-color_usd.svg" alt="crypto" />
-                    <span>USD</span>
-                  </div>
-                  <div className="mainBalance-amount">
-                    <span>20.00</span>
-                    <span>Deposit</span>
-                    <span>Withdraw</span>
-                  </div>
-                </div>
-                <p>Cryptocurrency</p>
                 <div className="mainBalance-fiat-currency">
                   <div className="currency-title">
                     <img src="./twemoji_coin.svg" alt="crypto" />
                     <span>eGold</span>
                   </div>
-                  <span className="crypto-amount-balance">300.00</span>
+                  <div className="mainBalance-amount">
+                    <span>300.00</span>
+                    <span>Deposit</span>
+                    <span>Withdraw</span>
+                  </div>
                 </div>
               </div>
             </div>
           )}
           {currentSection === 'Deposit' && (
             <div className="wallet-deposit">
-              <div className="wallet-deposit_headers">
-                <span
-                  onClick={() => {
-                    setDepositMethod('crypto');
-                  }}
-                  className={`${
-                    depositmethod === 'crypto' ? 'wallet-deposit_active' : ''
-                  }`}
-                >
-                  Crypto
-                </span>
-                <span
-                  onClick={() => {
-                    setDepositMethod('fiat');
-                  }}
-                  className={`${
-                    depositmethod === 'fiat' ? 'wallet-deposit_active' : ''
-                  }`}
-                >
-                  Fiat
-                </span>
-              </div>
-              {depositmethod === 'crypto' ? (
                 <div className="deposit-wallet_main">
-                  <div className="wallet-deposit_cryptocoins">
-                    <div>
-                      <img src="./usdt.svg" alt="usdt" />
-                      <span>USDT</span>
-                    </div>
-                    <div>
-                      <img src="./solana.svg" alt="solana" />
-                      <span>SOL</span>
-                    </div>
-                  </div>
                   <div>
                     <div className="crypto-deposit-method_type">
                       <div>
                         <p>Deposit Currency</p>
                         <select className="options-list">
-                          <option value="usdt">USDT</option>
-                          <option value="solana">SOL</option>
+                          <option value="usdt">eGold</option>
                         </select>
                       </div>
                       <div>
                         <p>Choose Network</p>
                         <select className="options-list">
                           <option value="erc20">ERC 20</option>
-                          <option value="erc21">ERC 21</option>
                         </select>
                       </div>
                     </div>
@@ -171,7 +152,7 @@ const WalletComponent = ({ isNavOpen }) => {
                         </span>
                         Ce5A794
                       </span>
-                      <div className="copy-box">
+                      <div onClick={() => {copyToClipboard('0x678bD9B31a318af10bb0897905E425dBbCe5A794')}} style={{ cursor: 'pointer' }} className="copy-box">
                         <img src="./copy-01.svg" alt="copy-icon" />
                         <span>Copy</span>
                       </div>
@@ -191,120 +172,24 @@ const WalletComponent = ({ isNavOpen }) => {
                     </div>
                   </div>
                 </div>
-              ) : (
-                <>
-                  <div className="deposit-wallet_main">
-                    <div>
-                      <div className="crypto-deposit-method_type">
-                        <div>
-                          <p>Deposit Currency</p>
-                          <select className="options-list">
-                            <option value="usd">USD</option>
-                            <option value="ngn">NGN</option>
-                          </select>
-                        </div>
-                        <div>
-                          <p>Choose Network</p>
-                          <select className="options-list">
-                            <option value="paystack">PayStack</option>
-                            <option value="interswitch">Interswitch1</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className="fiat-deposit_amount">
-                        <p>Deposit Amount</p>
-                        <p className="fial-deposit_range">10 - 100000 USD</p>
-                      </div>
-
-                      <div className="mainBalance-fiat-currency">
-                        <span className="middleAddress">10</span>
-                        <span className="deposit-currency">USD</span>
-                      </div>
-                      <div className="fiat-deposit_options">
-                        <div className="fiat-deposit_option fiat-deposit_option_active">
-                          <span>USD 10</span>
-                        </div>
-                        <div className="fiat-deposit_option">
-                          <span>USD 50</span>
-                        </div>
-                        <div className="fiat-deposit_option">
-                          <span>USD 100</span>
-                        </div>
-                        <div className="fiat-deposit_option">
-                          <span>USD 500</span>
-                        </div>
-                        <div className="fiat-deposit_option">
-                          <span>USD 1000</span>
-                        </div>
-                      </div>
-                      <div className="deposit_fiat-btn">
-                        <button>Deposit Fiat</button>
-                      </div>
-                      <div className="crypto-notice">
-                        <span className="crypto-notice_notice-info">
-                          1.Your transfer amount has to MATCH the submission
-                          amount. <br />
-                          2.Each Order ID can ONLY be used once to avoid
-                          duplicates. <br />
-                          3.DO NOT save and deposit to previous's bank account.
-                          Please follow the deposit guideline to make deposit,
-                          otherwise your deposit will be missing.
-                        </span>
-                      </div>
-                      <div className="fiat-deposit_info">
-                        <span>
-                          You will be redirected to a third-party site verified
-                          by elitepay for a secure and trustworthy browsing
-                          experience
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
             </div>
           )}
 
           {currentSection === 'Withdraw' && (
             <div className="wallet-deposit">
-              <div className="wallet-deposit_headers">
-                <span
-                  onClick={() => {
-                    setDepositMethod('crypto');
-                  }}
-                  className={`${
-                    depositmethod === 'crypto' ? 'wallet-deposit_active' : ''
-                  }`}
-                >
-                  Crypto
-                </span>
-                <span
-                  onClick={() => {
-                    setDepositMethod('fiat');
-                  }}
-                  className={`${
-                    depositmethod === 'fiat' ? 'wallet-deposit_active' : ''
-                  }`}
-                >
-                  Fiat
-                </span>
-              </div>
-              {depositmethod === 'crypto' ? (
                 <div className="deposit-wallet_main">
                   <div>
                     <div className="crypto-deposit-method_type">
                       <div>
                         <p>Withdraw Currency</p>
                         <select className="options-list">
-                          <option value="usdt">USDT</option>
-                          <option value="solana">SOL</option>
+                          <option value="usdt">eGold</option>
                         </select>
                       </div>
                       <div>
                         <p>Choose Network</p>
                         <select className="options-list">
                           <option value="erc20">ERC 20</option>
-                          <option value="erc21">ERC 21</option>
                         </select>
                       </div>
                     </div>
@@ -318,7 +203,7 @@ const WalletComponent = ({ isNavOpen }) => {
                     </div>
                     <div className="withdraw-amount_title">
                       <p>Withdraw Amount</p>
-                      <p>MIN: 50 USDT</p>
+                      <p>MIN: 50 eGold</p>
                     </div>
 
                     <div className="withdraw-address-box">
@@ -327,7 +212,7 @@ const WalletComponent = ({ isNavOpen }) => {
                     <div className="withdraw_amounts">
                       <div className="withdraw_amount-details">
                         <span>Withdraw Amount:</span>
-                        <span>0.00 USDT</span>
+                        <span>0.00 eGold</span>
                       </div>
                       <div className="withdraw_amount-details">
                         <span>
@@ -338,11 +223,11 @@ const WalletComponent = ({ isNavOpen }) => {
                             alt=""
                           />
                         </span>
-                        <span>0.00 USDT</span>
+                        <span>0.00 eGold</span>
                       </div>
                       <div className="withdraw_amount-details">
                         <span>Total Withdraw Amount:</span>
-                        <span>0.00 USDT</span>
+                        <span>0.00 eGold</span>
                       </div>
                     </div>
 
@@ -361,90 +246,6 @@ const WalletComponent = ({ isNavOpen }) => {
                     </div>
                   </div>
                 </div>
-              ) : (
-                <>
-                  <div className="deposit-wallet_main">
-                    <div>
-                      <div className="crypto-deposit-method_type">
-                        <div>
-                          <p>Withdraw Currency</p>
-                          <select className="options-list">
-                            <option value="usd">USD</option>
-                            <option value="ngn">NGN</option>
-                          </select>
-                        </div>
-                        <div>
-                          <p>Payment Method</p>
-                          <select className="options-list">
-                            <option value="bank">Bank Transfer</option>
-                            <option value="ussd">USSD Transfer</option>
-                          </select>
-                        </div>
-                      </div>
-                      <div className="crypto-deposit-method_type">
-                        <div>
-                          <p>Bank Name</p>
-                          <select className="options-list">
-                            <option value="usd">Access</option>
-                            <option value="ngn">GTB</option>
-                          </select>
-                        </div>
-                        <div>
-                          <p>Account Number</p>
-                          <input className="accountnumber-input" type="text" />
-                        </div>
-                      </div>
-                      <div className="fiat-deposit_amount">
-                        <p>Deposit Amount</p>
-                        <p className="fial-deposit_range">10 - 100000 USD</p>
-                      </div>
-
-                      <div className="mainBalance-fiat-currency">
-                        <span className="middleAddress">10</span>
-                        <span className="deposit-currency">USD</span>
-                      </div>
-                      <div className="fiat-deposit_options">
-                        <div className="fiat-deposit_option fiat-deposit_option_active">
-                          <span>USD 10</span>
-                        </div>
-                        <div className="fiat-deposit_option">
-                          <span>USD 50</span>
-                        </div>
-                        <div className="fiat-deposit_option">
-                          <span>USD 100</span>
-                        </div>
-                        <div className="fiat-deposit_option">
-                          <span>USD 500</span>
-                        </div>
-                        <div className="fiat-deposit_option">
-                          <span>USD 1000</span>
-                        </div>
-                      </div>
-                      <div className="deposit_fiat-btn">
-                        <button>Deposit Fiat</button>
-                      </div>
-                      <div className="crypto-notice">
-                        <span className="crypto-notice_notice-info">
-                          1.Your transfer amount has to MATCH the submission
-                          amount. <br />
-                          2.Each Order ID can ONLY be used once to avoid
-                          duplicates. <br />
-                          3.DO NOT save and deposit to previous's bank account.
-                          Please follow the deposit guideline to make deposit,
-                          otherwise your deposit will be missing.
-                        </span>
-                      </div>
-                      <div className="fiat-deposit_info">
-                        <span>
-                          You will be redirected to a third-party site verified
-                          by elitepay for a secure and trustworthy browsing
-                          experience
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
             </div>
           )}
           {currentSection === 'Transaction' && (
@@ -471,16 +272,67 @@ const WalletComponent = ({ isNavOpen }) => {
                   <option value="">Canceled</option>
                 </select>
               </div>
-              <div className='transaction-main_section'>
-                <div className='no-transanction-img_container'>
+              <div className="transaction-main_section">
+                <div className="no-transanction-img_container">
                   <img src="./_x31_.png" alt="no-transanction_image" />
                 </div>
-                <p className='no-data_txt'>Oops! There is no data yet!</p>
+                <p className="no-data_txt">Oops! There is no data yet!</p>
               </div>
             </div>
           )}
         </div>
       </div>
+      {mobileNav && (
+        <div className="settings-dropdown">
+          <div className="settings-dropdown-content">
+            <div
+              onClick={() => {
+                setCurrentSection('Balance');
+              }}
+              className="settings-dropdown-cta"
+            >
+              <img src="./wallet-02.svg" alt="wallet" />
+              <span>Balance</span>
+            </div>
+            <div
+              onClick={() => {
+                setCurrentSection('Deposit');
+              }}
+              className="profile-dropdown-cta"
+            >
+              <img src="./money-receive-01.svg" alt="wallet" />
+              <span>Deposit</span>
+            </div>
+            <div
+              onClick={() => {
+                setCurrentSection('Withdraw');
+              }}
+              className="profile-dropdown-cta"
+            >
+              <img src="./bitcoin-withdraw.svg" alt="wallet" />
+              <span>Withdraw</span>
+            </div>
+            <div
+              onClick={() => {
+                setCurrentSection('Withdraw');
+              }}
+              className="profile-dropdown-cta"
+            >
+              <img src="./coins-01.svg" alt="wallet" />
+              <span>Earnings</span>
+            </div>
+            <div
+              onClick={() => {
+                setCurrentSection('Transaction');
+              }}
+              className="profile-dropdown-cta"
+            >
+              <img src="./bitcoin-transaction.svg" alt="wallet" />
+              <span>Transaction</span>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
