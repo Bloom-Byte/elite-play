@@ -47,6 +47,8 @@ jobs:
            if docker ps -a --format '{{.Names}}' | grep -q '^elite-play$'; then
             docker stop elite-play || true
             docker rm elite-play || true
+            docker image prune -af || true
+            docker system prune --force || true
           fi 
 
             # Pull the new image
