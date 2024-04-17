@@ -12,8 +12,6 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
   const [editLanguage, setEditLanguage] = useState(false);
   const [editCurrency, setEditCurrency] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
-  const [username, setUsername] = useState('');
-
 
   const handleConfirmPassword = () => {
     setConfirmPassword(!confirmPassword);
@@ -25,22 +23,20 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
     setPeriodExclusion(!periodExclusion);
   };
 
+  const copyToClipboard = () => {
+    const tempInput = document.createElement("input");
+    tempInput.value = '76Y73NZRWD32HRVQ';
 
-  const handleUsernameChange = (event) => {
-    const { value } = event.target;
-    const invalidChars = /[^a-zA-Z0-9]/g;
+    document.body.appendChild(tempInput);
 
-    if (!invalidChars.test(value)) {
-      setUsername(value);
-    } else {
-      alert("Please only use alphanumeric characters.");
-    }
-  };
+    tempInput.select();
 
-  const handleUsernameSubmit = (event) => {
-    event.preventDefault();
-    console.log("Submitted username:", username);
-  };
+    document.execCommand("copy");
+
+    document.body.removeChild(tempInput);
+
+    alert("Copied to clipboard: " + '76Y73NZRWD32HRVQ');
+};
 
   return (
     <div
@@ -48,15 +44,20 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
         isNavOpen ? 'account-settings-extended' : ''
       }`}
     >
-      <div style={{display:'flex', justifyContent:'space-between'}}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div className="account-setting-header">
           <span>Account Settings</span>
         </div>
-        <div onClick={() => {setMobileNav(!mobileNav)}} className='accountsettings-mobile_nav'>
+        <div
+          onClick={() => {
+            setMobileNav(!mobileNav);
+          }}
+          className="accountsettings-mobile_nav"
+        >
           <img src="./slant-menu.svg" alt="" />
         </div>
       </div>
-      
+
       <div className="account-settings__sections">
         <div className="account-settings__navs">
           <div
@@ -110,8 +111,8 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                     <div className="main-profile-info">
                       <img src="./profile-img.svg" alt="profile-image" />
                       <div className="username_details">
-                        <h2>{user? user.name : 'Yuxeer'}</h2>
-                        <p>User ID: {user? user._id : '12357308'}</p>
+                        <h2>{user ? user.name : 'Yuxeer'}</h2>
+                        <p>User ID: {user ? user._id : '12357308'}</p>
                       </div>
                     </div>
                     <button
@@ -131,18 +132,18 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                 <div className="email-verify_container">
                   <div className="email-txt">
                     <span>yuxer@example.com</span>
-                    <img
-                      src="./bitcoin-icons_verify-filled.svg"
-                      alt="verify-icon"
-                    />
+                    <span className="email-txt-verified">
+                      Verified <img src="./verfied-green.svg" />
+                    </span>
                   </div>
-                  <button
+
+                  {/* <button
                     onClick={() => {
                       setVerifyEmail(true);
                     }}
                   >
                     verify <img src="./Checkbox.svg" alt="check-icon" />
-                  </button>
+                  </button> */}
                 </div>
               </div>
             </>
@@ -151,7 +152,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
             <>
               <div>
                 <div className="security_one">
-                  <p className="setting-section__header">Security Checkup</p>
+                  <p className="setting-section__header">Security Setup</p>
                   <hr />
                   <div className="security_one-container">
                     <div className="security_one-box">
@@ -177,7 +178,14 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                         Enable Two-factor to protect your account from
                         unauthorized access.
                       </p>
-                      <button className="active-btn">Enable 2FA</button>
+                      <button
+                        onClick={() => {
+                          setCurrentSection('auth');
+                        }}
+                        className="active-btn"
+                      >
+                        Enable 2FA
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -278,6 +286,62 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
               </div>
             </>
           )}
+          {currentSection === 'auth' && (
+            <>
+              <div className='auth-security'>
+                <p className="setting-section__header">Security Setup</p>
+                <hr />
+                <p className="setting-section__header">
+                  Google Authenticator(2FA)
+                </p>
+                <p className='auth-security-p'>
+                  Using Google Authentication to improve account security is
+                  highly recommended.
+                </p>
+                <p className='auth-security-p'>
+                  You can follow the steps below to enable Google
+                  Authentication.
+                </p>
+                <p className="setting-section__header">
+                  (1) Download and install the Google Authenticator app
+                </p>
+                <p className='auth-security-p'>
+                  Using Google Authentication to improve account security is
+                  highly recommended.
+                </p>
+                <p className='auth-security-p'>
+                  You can follow the steps below to enable Google
+                  Authentication.
+                </p>
+                <p className="setting-section__header">
+                  (2) Add secret key in Google Authenticator and backup
+                </p>
+                <p className='auth-security-p'>
+                  To enable Google Authentication, please scan or manually enter
+                  this Secret Key into the Google Authenticator
+                </p>
+                <div className='auth-secret-key'>
+                  <span>76Y73NZRWD32HRVQ</span>
+                  <span onClick={copyToClipboard} style={{ cursor: 'pointer' }}>
+                    <img src="./copy-01.svg" alt="copy-icon" /> <span className='auth-security-copy'>Copy</span>
+                  </span>
+                </div>
+                <img src="" alt="" />
+                <p className='auth-security-p'>
+                  Ensure you backup your Google Authentication information (save
+                  this QR code or secret key) before enabling it. <br /> This
+                  will allow you to recover your Google Authentication in case
+                  of phone loss.
+                </p>
+                <p className="setting-section__header">
+                (3) Enter the 6-digit code in your Google Authenticator and login password
+                </p>
+                <input type="text" placeholder='Password' />
+                <input type="text" placeholder='Authentication Code' />
+                <button>Submit</button>
+              </div>
+            </>
+          )}
         </div>
       </div>
       {edituserName && (
@@ -300,17 +364,11 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                 <button>Edit Your Avatar</button>
               </div>
               <p className="editusername-popup_edit-username">Username</p>
-              <input
-                className="editusername-popup_edit-username-box"
-                type="text"
-                value={username}
-                onChange={handleUsernameChange}
-              />
               <p className="edit-username_note">
                 Do not use special symbols, otherwise your account may not be
                 supported
               </p>
-              <button onClick={handleUsernameSubmit} className="edit-username-popup_btn">Modify</button>
+              <button className="edit-username-popup_btn">Modify</button>
             </div>
           </div>
         </div>
@@ -602,40 +660,113 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
               <table className="currency-table">
                 <tbody>
                   <tr>
-                    <td className="language-active"> <img src="./cryptocurrency-color_usd.svg" alt="usd" /> USD US Dollar</td>
-                    <td><img src="./euro.svg" alt="euro" /> EUR <span className='country-name'>Euro</span></td>
-                    <td><img src="./inr.svg" alt="inr" /> INR <span className="country-name">India</span></td>
-                    <td><img src="./brazil.svg" alt="brl" /> BRL <span className="country-name">Brazil</span></td>
+                    <td className="language-active">
+                      {' '}
+                      <img src="./cryptocurrency-color_usd.svg" alt="usd" /> USD
+                      US Dollar
+                    </td>
+                    <td>
+                      <img src="./euro.svg" alt="euro" /> EUR{' '}
+                      <span className="country-name">Euro</span>
+                    </td>
+                    <td>
+                      <img src="./inr.svg" alt="inr" /> INR{' '}
+                      <span className="country-name">India</span>
+                    </td>
+                    <td>
+                      <img src="./brazil.svg" alt="brl" /> BRL{' '}
+                      <span className="country-name">Brazil</span>
+                    </td>
                   </tr>
                   <tr>
-                    <td><img src="./bdt.svg" alt="bdt" /> BDT <span className="country-name">Bangladesh</span></td>
-                    <td><img src="./idr.svg" alt="idr" /> IDR <span className="country-name">Indonesia</span></td>
-                    <td><img src="./ngn.svg" alt="ngn" /> NGN <span className='country-name'>Nigeria</span></td>
-                    <td><img src="./rub.svg" alt="" /> RUB <span className='country-name'>Russia</span></td>
+                    <td>
+                      <img src="./bdt.svg" alt="bdt" /> BDT{' '}
+                      <span className="country-name">Bangladesh</span>
+                    </td>
+                    <td>
+                      <img src="./idr.svg" alt="idr" /> IDR{' '}
+                      <span className="country-name">Indonesia</span>
+                    </td>
+                    <td>
+                      <img src="./ngn.svg" alt="ngn" /> NGN{' '}
+                      <span className="country-name">Nigeria</span>
+                    </td>
+                    <td>
+                      <img src="./rub.svg" alt="" /> RUB{' '}
+                      <span className="country-name">Russia</span>
+                    </td>
                   </tr>
                   <tr>
-                    <td><img src="./krw.svg" alt="krw" /> KRW <span className='country-name'>Korea</span></td>
-                    <td><img src="./mxn.svg" alt="mxn" />MXN <span className='country-name'>Mexico Peso</span></td>
-                    <td><img src="./kzt.svg" alt="kzt" />KZT <span className="country-name">Kazakstan</span></td>
-                    <td><img src="./cup.svg" alt="cup" />CUP <span className="country-name">Cuba</span></td>
+                    <td>
+                      <img src="./krw.svg" alt="krw" /> KRW{' '}
+                      <span className="country-name">Korea</span>
+                    </td>
+                    <td>
+                      <img src="./mxn.svg" alt="mxn" />
+                      MXN <span className="country-name">Mexico Peso</span>
+                    </td>
+                    <td>
+                      <img src="./kzt.svg" alt="kzt" />
+                      KZT <span className="country-name">Kazakstan</span>
+                    </td>
+                    <td>
+                      <img src="./cup.svg" alt="cup" />
+                      CUP <span className="country-name">Cuba</span>
+                    </td>
                   </tr>
                   <tr>
-                    <td><img src="./jpy.svg" alt="jpy" />JPY <span className="country-name">Japan</span></td>
-                    <td><img src="./pln.svg" alt="pln" />PLN <span className="country-name">Poland</span></td>
-                    <td><img src="./zar.svg" alt="zar" />ZAR <span className="country-name">South Africa</span></td>
-                    <td><img src="./gbp.svg" alt="gbp" />GBP <span className="country-name">United Kingdom</span></td>
+                    <td>
+                      <img src="./jpy.svg" alt="jpy" />
+                      JPY <span className="country-name">Japan</span>
+                    </td>
+                    <td>
+                      <img src="./pln.svg" alt="pln" />
+                      PLN <span className="country-name">Poland</span>
+                    </td>
+                    <td>
+                      <img src="./zar.svg" alt="zar" />
+                      ZAR <span className="country-name">South Africa</span>
+                    </td>
+                    <td>
+                      <img src="./gbp.svg" alt="gbp" />
+                      GBP <span className="country-name">United Kingdom</span>
+                    </td>
                   </tr>
                   <tr>
-                    <td><img src="./mad.svg" alt="mad" />MAD <span className="country-name">Morocco</span></td>
-                    <td><img src="./aed.svg" alt="aed" />AED <span className="country-name">UAE-Dirham</span></td>
-                    <td><img src="./pen.svg" alt="pen" />PEN <span className="country-name">Peru Sol</span></td>
-                    <td><img src="./ghs.svg" alt="ghs" />GHS <span className="country-name">Ghana</span></td>
+                    <td>
+                      <img src="./mad.svg" alt="mad" />
+                      MAD <span className="country-name">Morocco</span>
+                    </td>
+                    <td>
+                      <img src="./aed.svg" alt="aed" />
+                      AED <span className="country-name">UAE-Dirham</span>
+                    </td>
+                    <td>
+                      <img src="./pen.svg" alt="pen" />
+                      PEN <span className="country-name">Peru Sol</span>
+                    </td>
+                    <td>
+                      <img src="./ghs.svg" alt="ghs" />
+                      GHS <span className="country-name">Ghana</span>
+                    </td>
                   </tr>
                   <tr>
-                    <td><img src="./isk.svg" alt="isk" />ISK <span className="country-name">Iceland</span></td>
-                    <td><img src="./kes.svg" alt="kes" />KES <span className="country-name">Kenya Shilling</span></td>
-                    <td><img src="./ils.svg" alt="ils" />ILS <span className="country-name">Israel Shekel</span></td>
-                    <td><img src="./clp.svg" alt="clp" />CLP <span className="country-name">Chile Peso</span></td>
+                    <td>
+                      <img src="./isk.svg" alt="isk" />
+                      ISK <span className="country-name">Iceland</span>
+                    </td>
+                    <td>
+                      <img src="./kes.svg" alt="kes" />
+                      KES <span className="country-name">Kenya Shilling</span>
+                    </td>
+                    <td>
+                      <img src="./ils.svg" alt="ils" />
+                      ILS <span className="country-name">Israel Shekel</span>
+                    </td>
+                    <td>
+                      <img src="./clp.svg" alt="clp" />
+                      CLP <span className="country-name">Chile Peso</span>
+                    </td>
                   </tr>
                 </tbody>
               </table>
@@ -643,33 +774,39 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
           </div>
         </div>
       )}
-      {mobileNav && 
+      {mobileNav && (
         <div className="settings-dropdown">
-        <div className="settings-dropdown-content">
-          <div  onClick={() => {
-              setCurrentSection('account-info');
-            }} className="settings-dropdown-cta">
-            <img src="./user.svg" alt="user-icon" />
+          <div className="settings-dropdown-content">
+            <div
+              onClick={() => {
+                setCurrentSection('account-info');
+              }}
+              className="settings-dropdown-cta"
+            >
+              <img src="./user.svg" alt="user-icon" />
               <span>Account Info</span>
-          </div>
-          <div
-           onClick={() => {
-            setCurrentSection('security');
-          }}
-            className="profile-dropdown-cta"
-          >
-            <img src="./lock-key.svg" alt="lock-key" />
-            <span>Security</span>
-          </div>
-          <div  onClick={() => {
-              setCurrentSection('preferences');
-            }} className="profile-dropdown-cta">
-            <img src="./list-setting.svg" alt="list-icon" />
-            <span>Preferences</span>
+            </div>
+            <div
+              onClick={() => {
+                setCurrentSection('security');
+              }}
+              className="profile-dropdown-cta"
+            >
+              <img src="./lock-key.svg" alt="lock-key" />
+              <span>Security</span>
+            </div>
+            <div
+              onClick={() => {
+                setCurrentSection('preferences');
+              }}
+              className="profile-dropdown-cta"
+            >
+              <img src="./list-setting.svg" alt="list-icon" />
+              <span>Preferences</span>
+            </div>
           </div>
         </div>
-      </div>
-      }
+      )}
     </div>
   );
 };

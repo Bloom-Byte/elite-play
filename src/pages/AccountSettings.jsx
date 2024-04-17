@@ -52,7 +52,7 @@ const AccountSettings = () => {
 
   return (
     <div>
-      <Navbar isNavOpen={isNavOpen} />
+      <Navbar isNavOpen={isNavOpen} user={userProfile} />
       <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
       <AccountSettingsSection isNavOpen={isNavOpen} user={userProfile} />
 
