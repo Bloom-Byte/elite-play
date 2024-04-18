@@ -171,3 +171,10 @@
 .user-tag {
     color: #88DF95 !important;
 }
+
+.chatmsg-error {
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+}

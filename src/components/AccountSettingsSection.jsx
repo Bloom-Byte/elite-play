@@ -326,7 +326,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                     <img src="./copy-01.svg" alt="copy-icon" /> <span className='auth-security-copy'>Copy</span>
                   </span>
                 </div>
-                <img src="" alt="" />
+                <img style={{marginTop:'1rem'}} src="./qr-auth.png" alt="qr-code" />
                 <p className='auth-security-p'>
                   Ensure you backup your Google Authentication information (save
                   this QR code or secret key) before enabling it. <br /> This
