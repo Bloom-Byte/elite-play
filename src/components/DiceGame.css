@@ -182,6 +182,21 @@
 .dicegame-diceroll__die {
   display: flex;
   justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+.dicegame-diceroll__die img {
+  width: 86px;
+  height: 100px;
+}
+
+.dicegame-diceroll__die span {
+  position: absolute;
+  color: #070C0A;
+  font-size: 16px;
+  font-weight: 800;
+  font-family: 'Manrope', sans-serif;
 }
 
 .dicegame-diceroll__range {
@@ -197,7 +212,7 @@
 
 .dicegame-diceroll__range_values {
   display: flex;
-  gap: 30%;
+  gap: 22.5%;
   margin-left: 20px;
   margin-top: 8px;
 }

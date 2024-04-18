@@ -6,6 +6,11 @@ const DiceGame = ({ isNavOpen }) => {
   const [fairness, setFairness] = useState(false);
   const [livebet, setLivebet] = useState(false);
   const [tutorial, setTutorial] = useState(false);
+  const [diceRoll, setDiceRoll] = useState(50)
+
+  const handleChange = (event) => {
+    setDiceRoll(event.target.value);
+};
 
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
@@ -176,15 +181,17 @@ const DiceGame = ({ isNavOpen }) => {
             <span>51.73</span>
           </div>
           <div className="dicegame-diceroll__die">
-            <img src="./die.svg" alt="die" />
+            <img src="./dice-cube.png" alt="die" />
+            <span>{diceRoll}</span>
           </div>
           <div className="dicegame-diceroll__range">
-            <input type="range" min="0" max="100" value="50" />
+            <input type="range" min="0" max="100" value={diceRoll} onChange={handleChange} />
           </div>
           <div className="dicegame-diceroll__range_values">
             <span>0</span>
             <span>25</span>
             <span>50</span>
+            <span>75</span>
             <span>100</span>
           </div>
           <div className="dicegame-diceroll__box">
