@@ -17,6 +17,43 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
   const [newPassword, setNewPassword] = useState('')
   const [error, setError] = useState('');
 
+  const [profileImage, setProfileImage] = useState(null);
+
+  const handleImageChange = (event) => {
+    const file = event.target.files[0];
+    setProfileImage(file);
+  };
+
+  const handleUploadProfile = async () => {
+    const url = 'https://be.eliteplay.bloombyte.dev/user/me/update/upload-profile';
+    const accessToken = localStorage.getItem('accessToken');
+
+    const formData = new FormData();
+    formData.append('profile', profileImage);
+
+    const headers = {
+      Authorization: `Bearer ${accessToken}`
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: formData
+      });
+
+      if (response.status === 201) {
+        const responseData = await response.json();
+        console.log('Profile picture updated:', responseData.message);
+      } else {
+        throw new Error('Failed to update profile picture');
+      }
+    } catch (error) {
+      console.error('Error updating profile picture:', error);
+    }
+  };
+
+
   const handleSelfExclusion = () => {
     setSelfExclusion(!selfExclusion);
     setPeriodExclusion(!periodExclusion);
@@ -414,10 +451,11 @@ const updatePassword = async () => {
             </div>
             <div style={{width: '200px'}} className="editusername-popup_main-content">
               <div className="editusername-popup_edit-avatar">
-                <img src="./profile-img.svg" alt="profile-icon" />
-                <button>Edit Your Avatar</button>
+                {profileImage ? (<img style={{borderRadius: '50%'}} src={URL.createObjectURL(profileImage)} alt="selected-profile" />) : (<img src={user?.profilePictureUrl} alt="selected-profile" />)}
+                <input style={{display: 'none'}} id="getFile" type="file" accept="image/*" onChange={handleImageChange} />
+                <label htmlFor="getFile">Edit Your Avatar</label>
               </div>
-              <button className="edit-username-popup_btn">Modify</button>
+              <button className="edit-username-popup_btn" onClick={handleUploadProfile}>Modify</button>
             </div>
           </div>
         </div>

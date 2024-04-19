@@ -458,7 +458,7 @@ input:checked + .slider:before {
     height: 120px;
 }
 
-.editusername-popup_edit-avatar button {
+.editusername-popup_edit-avatar label {
     background-color: #0B281F;
     border: 1px solid #0B281F;
     padding: 8px;
@@ -467,6 +467,7 @@ input:checked + .slider:before {
     font-size: 14px;
     font-weight: 600;
     color: #ffffff;
+    cursor: pointer;
 }
 
 .editusername-popup_edit-username {
