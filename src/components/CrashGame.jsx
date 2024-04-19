@@ -1,10 +1,20 @@
 import React, { useState } from 'react';
+import CrashGraph from './CrashGraph';
 import './CrashGame.css';
 
 const CrashGame = ({ isNavOpen }) => {
   const [auto, setAuto] = useState(false);
   const [livebet, setLivebet] = useState(false);
   const [tutorial, setTutorial] = useState(false);
+
+  const state = {
+    crashData: [
+      { value: 1 },
+      { value: 1.5 },
+      { value: 2 },
+      // Add more data points as needed
+    ]
+  };
 
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
@@ -155,41 +165,7 @@ const CrashGame = ({ isNavOpen }) => {
             <span>67.89</span>
             <span>51.73</span>
           </div>
-          <div className="dicegame-diceroll__die">
-            <img src="./die.svg" alt="die" />
-          </div>
-          <div className="dicegame-diceroll__range">
-            <input type="range" min="0" max="100" value="50" />
-          </div>
-          <div className="dicegame-diceroll__range_values">
-            <span>0</span>
-            <span>25</span>
-            <span>50</span>
-            <span>100</span>
-          </div>
-          <div className="dicegame-diceroll__box">
-            <div className="dicegame-diceroll__outer-box">
-              <p>Payout</p>
-              <div className="dicegame-diceroll__box-info">
-                <span>1.98</span>
-                <span>x</span>
-              </div>
-            </div>
-            <div className="dicegame-diceroll__outer-box">
-              <p>Roll Under</p>
-              <div className="dicegame-diceroll__box-info dicegame-diceroll-rollover">
-                <span>50</span>
-                <img src="./rollover.svg" alt="rollover" />
-              </div>
-            </div>
-            <div className="dicegame-diceroll__outer-box">
-              <p>Win Chance</p>
-              <div className="dicegame-diceroll__box-info">
-                <span>50</span>
-                <span>%</span>
-              </div>
-            </div>
-          </div>
+          <CrashGraph data={state.crashData} />
         </div>
       </div>
       {livebet && (
