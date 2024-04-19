@@ -6,15 +6,37 @@ const CrashGame = ({ isNavOpen }) => {
   const [auto, setAuto] = useState(false);
   const [livebet, setLivebet] = useState(false);
   const [tutorial, setTutorial] = useState(false);
+  const [betAmount, setBetAmount] = useState(10);
+  const [multiplier, setMultiplier] = useState(2.00)
+  const [autoBet, setAutoBet] = useState(false);
 
   const state = {
-    crashData: [
-      { value: 1 },
-      { value: 1.5 },
-      { value: 2 },
-      // Add more data points as needed
-    ]
+    crashData: [{ value: 1 }, { value: 1.5 }, { value: 2 }],
   };
+
+  const handleBetAmount = (event) => {
+    if (event.target.value >= 1) {
+      setBetAmount(event.target.value);
+    }
+  };
+
+  const handleBetAmountCount = (count) => {
+    if (count >= 1) {
+      setBetAmount(count);
+    }
+  };
+
+  const handleCashAmount = (event) => {
+    if (event.target.value >= 2) {
+      setMultiplier(event.target.value);
+    }
+  };
+
+  const handleCashUpdate = (cash) => {
+    if (cash >= 2) {
+      setMultiplier(cash)
+    }
+  }
 
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
@@ -65,14 +87,50 @@ const CrashGame = ({ isNavOpen }) => {
           {auto ? (
             <div className="dicegame-placebet__bet">
               <p>Amount</p>
-              <div className="mrg-b dicegame-placebet__amount">
-                <span>
+              <div className="dicegame-placebet__amount">
+                <div className="dicegame-placebet__amount-display">
                   <img src="./twemoji_coin.svg" alt="coin" />
-                  10
-                </span>
-                <div className="dicegame-placebet__amonut-toggle">
-                  <span>/2</span>
-                  <span>2</span>
+                  <input
+                    type="text"
+                    value={betAmount}
+                    onChange={handleBetAmount}
+                  />
+                </div>
+                <div className="dicegame-placebet__amount-toggle">
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setBetAmount(betAmount / 2);
+                    }}
+                  >
+                    /2
+                  </span>
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setBetAmount(betAmount * 2);
+                    }}
+                  >
+                    2
+                  </span>
+                  <div className="count-arrows">
+                    <img
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        setBetAmount(betAmount + 1);
+                      }}
+                      src="./count_arrow-top.svg"
+                      alt="arrow"
+                    />
+                    <img
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        setBetAmount(betAmount - 1);
+                      }}
+                      src="./count_arrow-down.svg"
+                      alt="arrow"
+                    />
+                  </div>
                 </div>
               </div>
               <p>Number of Bets</p>
@@ -127,27 +185,117 @@ const CrashGame = ({ isNavOpen }) => {
               <div className="dicegame-placebet__bet">
                 <p>Amount</p>
                 <div className="dicegame-placebet__amount">
-                  <span>
+                  <div className="dicegame-placebet__amount-display">
                     <img src="./twemoji_coin.svg" alt="coin" />
-                    10
-                  </span>
-                  <div className="dicegame-placebet__amonut-toggle">
-                    <span>/2</span>
-                    <span>2</span>
+                    <input
+                      type="text"
+                      value={betAmount}
+                      onChange={handleBetAmount}
+                    />
+                  </div>
+                  <div className="dicegame-placebet__amount-toggle">
+                    <span
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        handleBetAmountCount(betAmount / 2)
+                      }}
+                    >
+                      /2
+                    </span>
+                    <span
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        handleBetAmountCount(betAmount * 2)
+                      }}
+                    >
+                      2
+                    </span>
+                    <div className="count-arrows">
+                      <img
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                          handleBetAmountCount(betAmount + 1)
+                        }}
+                        src="./count_arrow-top.svg"
+                        alt="arrow"
+                      />
+                      <img
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                          handleBetAmountCount(betAmount - 1)
+                        }}
+                        src="./count_arrow-down.svg"
+                        alt="arrow"
+                      />
+                    </div>
                   </div>
                 </div>
                 <div className="dicegame-placebet__select-amount">
-                  <span>10</span>
-                  <span>100</span>
-                  <span>1000</span>
-                  <span>10000</span>
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setBetAmount(10);
+                    }}
+                  >
+                    10
+                  </span>
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setBetAmount(100);
+                    }}
+                  >
+                    100
+                  </span>
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setBetAmount(1000);
+                    }}
+                  >
+                    1000
+                  </span>
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setBetAmount(10000);
+                    }}
+                  >
+                    10000
+                  </span>
                 </div>
                 <p>Win Amount</p>
                 <div className="dicegame-placebet__amount">
-                  <span>
-                    <img src="./twemoji_coin.svg" alt="coin" />
-                    10
-                  </span>
+                  <div className="dicegame-placebet__amount-display">
+                    
+                    <input
+                      type="text"
+                      value={multiplier}
+                      onChange={handleCashAmount}
+                    />
+                    <span style={{marginLeft:'5px'}}>x</span>
+                  </div>
+                  <div className="dicegame-placebet__amount-toggle">
+                   
+                    <div className="crash-arrows">
+                      <img
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                          handleCashUpdate(multiplier + 1)
+                        }}
+                        src="./crash-l.svg"
+                        alt="arrow"
+                      />
+                      <img
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                          handleCashUpdate(multiplier - 1)
+                        }}
+                        src="./crash-r.svg"
+                        alt="arrow"
+                      />
+                    </div>
+                  </div>
                 </div>
                 <button className="dicegame-rollnow">Roll Now</button>
               </div>
@@ -284,7 +432,8 @@ const CrashGame = ({ isNavOpen }) => {
           <div className="tutorial-dropdown-crash-content">
             <a href="/crashbeginner">Beginners Guide</a>
             <p>
-              Learn the basics here. <br />What is crash gambling, and how to play crash gambling games?
+              Learn the basics here. <br />
+              What is crash gambling, and how to play crash gambling games?
             </p>
             <a href="/crashstrategy">Strategies</a>
             <p>
@@ -293,8 +442,8 @@ const CrashGame = ({ isNavOpen }) => {
             </p>
             <a href="/crashautomation">Automation Scripts</a>
             <p>
-              Running scripts is an advanced way to play crash that
-              presumably offers easier wins.
+              Running scripts is an advanced way to play crash that presumably
+              offers easier wins.
             </p>
           </div>
         </div>
