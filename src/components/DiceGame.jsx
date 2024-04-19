@@ -14,6 +14,7 @@ const DiceGame = ({ isNavOpen }) => {
   const [stopOnWin, setStopOnWin] = useState('');
   const [isInfinity, setIsInfinity] = useState(true);
   const [stopOnLoss, setStopOnLoss] = useState('');
+  const [diceGameResponse, setDiceGameResponse] = useState()
   const [stopConditions, setStopConditions] = useState({
     resetWin: 100,
     resetLose: 50,
@@ -73,6 +74,7 @@ const DiceGame = ({ isNavOpen }) => {
       .then((response) => {
         if (response.status === 201) {
           console.log('Bet placed:', response.data);
+          setDiceGameResponse(response.data)
         } else {
           throw new Error('Failed to place bet');
         }
@@ -411,7 +413,7 @@ const DiceGame = ({ isNavOpen }) => {
           </div>
           <div className="dicegame-diceroll__die">
             <img src="./dice-cube.png" alt="die" />
-            <span>{diceRoll}</span>
+            <span className={`${diceGameResponse?.betStatus === 'win' ? 'green' : ''} ${diceGameResponse?.betStatus === 'loss' ? 'red' : ''}`}>{diceRoll}</span>
           </div>
           <div className="dicegame-diceroll__range">
             <input

@@ -24,6 +24,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
 
     if (depositAmount < 50) {
       setValidateMessage("Minimum Deposit is 50 eGold")
+      return;
     }
 
     const requestBody = {
@@ -40,7 +41,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
       const response = await fetch(url, {
         method: 'POST',
         headers: headers,
-        body: JSON.stringify(requestBody)
+        body: requestBody
       });
   
       if (response.status === 201) {
@@ -58,13 +59,16 @@ const WalletComponent = ({ isNavOpen, user }) => {
   
 
   async function initiateWithdrawal() {
-    const url = 'https://be.eliteplay.bloombyte.dev/withdraw-transaction';
+    const url = 'https://be.eliteplay.bloombyte.dev/transactions/withdraw';
     const accessToken = localStorage.getItem('accessToken');
 
     if (withdrawalAmount < 50) {
       setValidateMessage("Minimum Withdrawal is 50 eGold")
+      return;
+    } else {
+      setValidateMessage("")
     }
-
+    console.log(user._id)
     const requestBody = {
       amount: withdrawalAmount,
       eliteUserId: user._id,

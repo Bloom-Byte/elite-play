@@ -430,6 +430,14 @@
   cursor: not-allowed;
 }
 
+.green {
+  color: #34b263 !important;
+}
+
+.red {
+  color: #E14453 !important;
+}
+
 
 
 /* --------- MOBILE RESPONSIVENESS ---------- */
