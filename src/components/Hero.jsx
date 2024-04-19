@@ -33,7 +33,7 @@ const Hero = ({ isNavOpen, user }) => {
       >
         {userIsLoggedIn ? (
           <div className="home-hero__user-info">
-            <h4 className="vip-progress-head">Welcome Back, Yuxeer</h4>
+            <h4 className="vip-progress-head">Welcome Back, {user?.name}</h4>
             <div className="home-hero__user-info-box">
               <h4>VIP Progress</h4>
               <input
