@@ -140,5 +140,6 @@ tr {
 @media screen and (max-width: 768px) {
   .dicetable {
     margin-left: 8px;
+    overflow-x: scroll;
   }
 }

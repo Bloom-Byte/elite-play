@@ -450,4 +450,8 @@
   .dicegame-gamesection {
     flex-direction: column-reverse;
   }
+
+  .dicegame-diceroll__odds {
+    overflow-x: scroll;
+  }
 }

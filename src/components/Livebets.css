@@ -8,7 +8,7 @@
 }
 
 .livebets-extended {
-    margin-left: 18rem;
+  margin-left: 18rem;
 }
 
 .livebets h5 {
@@ -32,15 +32,15 @@
 }
 
 .livebets .big-bets {
-    background-color: #070C0A;
-    border: 1px solid #070C0A;
-    border-radius: 6px;
-    padding: 10px 20px;
-    font-size: 14px;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 600;
-    color: #6E6E71;
-  }
+  background-color: #070c0a;
+  border: 1px solid #070c0a;
+  border-radius: 6px;
+  padding: 10px 20px;
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: #6e6e71;
+}
 
 .livebets-table {
   background-color: #070c0a;
@@ -97,11 +97,10 @@
   color: #e14453;
 }
 
-
 /* --------- MOBILE RESPONSIVENESS --------- */
 @media screen and (max-width: 768px) {
-  
-.livebets {
-  margin-left: 8px;
-}
+  .livebets {
+    margin-left: 8px;
+    overflow-x: scroll;
+  }
 }
