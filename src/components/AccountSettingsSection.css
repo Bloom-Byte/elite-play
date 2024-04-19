@@ -506,6 +506,7 @@ input:checked + .slider:before {
     border-radius: 6px;
     color: #fff; 
     padding: 10px 20px;
+    cursor: pointer;
 }
 
 .email-popup_header {

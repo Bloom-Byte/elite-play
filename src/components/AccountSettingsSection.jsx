@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './AccountSettingsSection.css';
 
 const AccountSettingsSection = ({ isNavOpen, user }) => {
@@ -12,11 +13,8 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
   const [editLanguage, setEditLanguage] = useState(false);
   const [editCurrency, setEditCurrency] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
-
-  const handleConfirmPassword = () => {
-    setConfirmPassword(!confirmPassword);
-    setChangePassword(!changePassword);
-  };
+  const [confirmOldPassword, setConfirmOldPassword] = useState('')
+  const [error, setError] = useState('');
 
   const handleSelfExclusion = () => {
     setSelfExclusion(!selfExclusion);
@@ -36,6 +34,24 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
     document.body.removeChild(tempInput);
 
     alert("Copied to clipboard: " + text);
+};
+
+const  handleConfirmPassword = async (event) => {
+  event.preventDefault();
+
+  try {
+    const response = await axios.post('https://be.eliteplay.bloombyte.dev/user/auth/login', {
+      email: user?.email,
+      password: confirmOldPassword,
+    });
+
+    localStorage.setItem('accessToken', response.data.accessToken);
+    setConfirmPassword(!confirmPassword);
+    setChangePassword(!changePassword);
+  } catch (error) {
+    console.log(error)
+    setError(error.response.data.error);
+  }
 };
 
   return (
@@ -431,7 +447,10 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                 className="editusername-popup_edit-username-box"
                 type="text"
                 placeholder="Set Password"
+                value={confirmOldPassword}
+                onChange={(event) => {setConfirmOldPassword(event.target.value)}}
               />
+              {error && <p style={{color: '#E14453'}}>{error}</p>}
               <button
                 onClick={handleConfirmPassword}
                 className="edit-username-popup_btn"
