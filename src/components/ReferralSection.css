@@ -286,4 +286,37 @@
     .referral-section {
         margin-left: 8px;
     }
+
+    .referral-details{
+        flex-direction: column;
+    }
+
+    .refer-code-box {
+        display: none;
+    }
+
+    .referralpot {
+        width: 100%;
+    }
+
+    .referralvalue {
+        width: 100%;
+    }
+
+    
+.referralpota span:nth-child(1) {
+    font-size: 11px;
+}
+
+.referralpotb span:nth-child(1) {
+    font-size: 11px;
+}
+
+.referralpota span:nth-child(2) {
+    font-size: 16px;
+}
+
+.referralpotb span:nth-child(2) {
+    font-size: 16px;
+}
 }

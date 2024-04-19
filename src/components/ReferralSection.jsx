@@ -72,7 +72,7 @@ const ReferralSection = ({ isNavOpen, referralInfo,  referralCount}) => {
                 />
               </div>
             </div>
-            <div style={{ width: '100%' }} className="referral-cta_box">
+            <div style={{ width: '100%' }} className="referral-cta_box refer-code-box">
               <p>Referral Code</p>
               <div
                 style={{ width: '90%', justifyContent: 'space-between' }}
