@@ -10,6 +10,7 @@ const Register = () => {
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [message, setMessage] = useState('');
+  const [referralCode, setReferralCode] = useState('')
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -31,6 +32,7 @@ const Register = () => {
         username,
         email,
         password,
+        referralCode: referralCode
       });
 
       setMessage(response.data.message);
@@ -106,6 +108,14 @@ const Register = () => {
                   onChange={handlePasswordChange}
                   onFocus={() => setPasswordFocused(true)}
                   onBlur={() => setPasswordFocused(false)}
+                />
+              </div>
+              <div className="register-form__input-box">
+                <input
+                  type="text"
+                  placeholder="Referral Code"
+                  value={referralCode}
+                  onChange={(event) => {setReferralCode(event.target.value)}}
                 />
               </div>
               <div className="register-form__check-box">
