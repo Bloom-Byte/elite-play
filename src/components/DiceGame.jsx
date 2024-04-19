@@ -1,4 +1,4 @@
-import React, { useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './DiceGame.css';
 
@@ -11,11 +11,12 @@ const DiceGame = ({ isNavOpen }) => {
   const [betAmount, setBetAmount] = useState(10);
   const [autoBet, setAutoBet] = useState(false);
   const [numBets, setNumBets] = useState(0);
-  const [stopOnWin, setStopOnWin] = useState(false);
-  const [stopOnLoss, setStopOnLoss] = useState(false);
+  const [stopOnWin, setStopOnWin] = useState('');
+  const [isInfinity, setIsInfinity] = useState(true);
+  const [stopOnLoss, setStopOnLoss] = useState('');
   const [stopConditions, setStopConditions] = useState({
     resetWin: 100,
-    resetLose: 50
+    resetLose: 50,
   });
 
   const handleChange = (event) => {
@@ -30,31 +31,53 @@ const DiceGame = ({ isNavOpen }) => {
     }
   };
 
+  const handleToggleInfinity = () => {
+    setIsInfinity(!isInfinity);
+    setNumBets(isInfinity ? 0 : Infinity);
+  };
+
+  const handleChangeStopOnWin = (event) => {
+    const input = event.target.value;
+    // Check if input is a valid number
+    if (/^\d*\.?\d*$/.test(input)) {
+      setStopOnWin(input);
+    }
+  };
+
+  const handleChangeStopOnLoss = (event) => {
+    const input = event.target.value;
+    // Check if input is a valid number
+    if (/^\d*\.?\d*$/.test(input)) {
+      setStopOnLoss(input);
+    }
+  };
+
   const accessToken = localStorage.getItem('accessToken');
 
-  function placeBet() {
+  function placeBet(isAutoBet) {
     const url = `https://be.eliteplay.bloombyte.dev/game/place-bet`;
-    const pay = Number((100 / diceRoll).toFixed(4))
+    const pay = Number((100 / diceRoll).toFixed(4));
 
     const data = {
       amount: betAmount,
-      isRollOver: false,
+      isRollOver: isAutoBet,
       targetValue: Number(diceRoll),
-      payout: pay
+      payout: pay,
     };
     const headers = {
-      'Authorization': `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`,
     };
-  
-    axios.post(url, data, { headers })
-      .then(response => {
+
+    axios
+      .post(url, data, { headers })
+      .then((response) => {
         if (response.status === 201) {
           console.log('Bet placed:', response.data);
         } else {
           throw new Error('Failed to place bet');
         }
       })
-      .catch(error => {
+      .catch((error) => {
         console.error('Error:', error);
       });
   }
@@ -62,21 +85,21 @@ const DiceGame = ({ isNavOpen }) => {
   const startAutoBet = () => {
     setAutoBet(true);
   };
-  
+
   const stopAutoBet = () => {
     setAutoBet(false);
   };
-  
+
   useEffect(() => {
     let interval;
     if (autoBet) {
       interval = setInterval(() => {
-        placeBet();
-      }, 1000); // Adjust time as needed
+        placeBet(true);
+      }, 1000);
     } else {
       clearInterval(interval);
     }
-  
+
     return () => clearInterval(interval);
   }, [autoBet]);
 
@@ -143,29 +166,86 @@ const DiceGame = ({ isNavOpen }) => {
             <div className="dicegame-placebet__bet">
               <p>Amount</p>
               <div className="dicegame-placebet__amount">
-                  <div className="dicegame-placebet__amount-display">
-                    <img src="./twemoji_coin.svg" alt="coin" />
-                    <input type="text" value={betAmount} onChange={handleBetAmount} />
-                  </div>
-                  <div className="dicegame-placebet__amount-toggle">
-                    <span style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount/2)}}>/2</span>
-                    <span style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount*2)}}>2</span>
-                    <div className="count-arrows">
-                      <img style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount+1)}} src="./count_arrow-top.svg" alt="" />
-                      <img style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount-1)}} src="./count_arrow-down.svg" alt="" />
-                    </div>
-                  </div>
+                <div className="dicegame-placebet__amount-display">
+                  <img src="./twemoji_coin.svg" alt="coin" />
+                  <input
+                    type="text"
+                    value={betAmount}
+                    onChange={handleBetAmount}
+                  />
                 </div>
-              <p style={{marginTop: '1rem'}}>Number of Bets</p>
-              <div className="mrg-b dicegame-placebet__amount">
-                <span>&infin;</span>
-                <div className="dicegame-placebet__amonut-toggle">
-                  <span>&infin;</span>
-                  <span>10</span>
-                  <span>100</span>
+                <div className="dicegame-placebet__amount-toggle">
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setBetAmount(betAmount / 2);
+                    }}
+                  >
+                    /2
+                  </span>
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setBetAmount(betAmount * 2);
+                    }}
+                  >
+                    2
+                  </span>
+                  <div className="count-arrows">
+                    <img
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        setBetAmount(betAmount + 1);
+                      }}
+                      src="./count_arrow-top.svg"
+                      alt=""
+                    />
+                    <img
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        setBetAmount(betAmount - 1);
+                      }}
+                      src="./count_arrow-down.svg"
+                      alt=""
+                    />
+                  </div>
                 </div>
               </div>
-              <p>On win</p>
+              <p style={{ marginTop: '1rem' }}>Number of Bets</p>
+              <div className="dicegame-placebet__amount">
+                <div className="dicegame-placebet__amount-display">
+                  <input
+                    type="text"
+                    value={isInfinity ? '∞' : numBets}
+                    // onChange={handleBetAmount}
+                  />
+                </div>
+                <div className="dicegame-placebet__amount-toggle">
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setNumBets(10);
+                    }}
+                  >
+                    10
+                  </span>
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      setNumBets(100);
+                    }}
+                  >
+                    100
+                  </span>
+                  <span
+                    style={{ cursor: 'pointer' }}
+                    onClick={handleToggleInfinity}
+                  >
+                    &infin;
+                  </span>
+                </div>
+              </div>
+              <p style={{ marginTop: '1rem' }}>On win</p>
               <div className="dicegame-onwin">
                 <div className="gamedice-reset_btn">
                   <span className="dicegame-reset-bx">Reset</span>
@@ -188,21 +268,41 @@ const DiceGame = ({ isNavOpen }) => {
                 </div>
               </div>
               <p>Stop on win</p>
-              <div className="mrg-b dicegame-placebet__amount">
-                <span>
-                  <img src="./twemoji_coin.svg" alt="coin" />
-                  10
-                </span>
-              </div>
-              <p>Stop on lose</p>
               <div className="dicegame-placebet__amount">
-                <span>
+                <div className="dicegame-placebet__amount-display">
                   <img src="./twemoji_coin.svg" alt="coin" />
-                  10
-                </span>
+                  <input
+                    type="text"
+                    value={stopOnWin}
+                    onChange={handleChangeStopOnWin}
+                  />
+                </div>
               </div>
-              <button className="dicegame-rollnow" onClick={startAutoBet} disabled={autoBet}>Start Auto Bet</button>
-              <button className="dicegame-rollnow" onClick={stopAutoBet} disabled={!autoBet}>Stop Auto Bet</button>
+              <p style={{ marginTop: '1rem' }}>Stop on lose</p>
+              <div className="dicegame-placebet__amount">
+                <div className="dicegame-placebet__amount-display">
+                  <img src="./twemoji_coin.svg" alt="coin" />
+                  <input
+                    type="text"
+                    value={stopOnLoss}
+                    onChange={handleChangeStopOnLoss}
+                  />
+                </div>
+              </div>
+              <button
+                className={`dicegame-rollnow ${autoBet ? 'disabled' : ''}`}
+                onClick={startAutoBet}
+                disabled={autoBet}
+              >
+                Start Auto Bet
+              </button>
+              <button
+                className={`dicegame-rollnow ${autoBet ? 'disabled' : ''}`}
+                onClick={stopAutoBet}
+                disabled={!autoBet}
+              >
+                Stop Auto Bet
+              </button>
             </div>
           ) : (
             <>
@@ -211,22 +311,78 @@ const DiceGame = ({ isNavOpen }) => {
                 <div className="dicegame-placebet__amount">
                   <div className="dicegame-placebet__amount-display">
                     <img src="./twemoji_coin.svg" alt="coin" />
-                    <input type="text" value={betAmount} onChange={handleBetAmount} />
+                    <input
+                      type="text"
+                      value={betAmount}
+                      onChange={handleBetAmount}
+                    />
                   </div>
                   <div className="dicegame-placebet__amount-toggle">
-                    <span style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount/2)}}>/2</span>
-                    <span style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount*2)}}>2</span>
+                    <span
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        setBetAmount(betAmount / 2);
+                      }}
+                    >
+                      /2
+                    </span>
+                    <span
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                        setBetAmount(betAmount * 2);
+                      }}
+                    >
+                      2
+                    </span>
                     <div className="count-arrows">
-                      <img style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount+1)}} src="./count_arrow-top.svg" alt="" />
-                      <img style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount-1)}} src="./count_arrow-down.svg" alt="" />
+                      <img
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                          setBetAmount(betAmount + 1);
+                        }}
+                        src="./count_arrow-top.svg"
+                        alt=""
+                      />
+                      <img
+                        style={{ cursor: 'pointer' }}
+                        onClick={() => {
+                          setBetAmount(betAmount - 1);
+                        }}
+                        src="./count_arrow-down.svg"
+                        alt=""
+                      />
                     </div>
                   </div>
                 </div>
                 <div className="dicegame-placebet__select-amount">
-                  <span onClick={() => {setBetAmount(10)}}>10</span>
-                  <span onClick={() => {setBetAmount(100)}}>100</span>
-                  <span onClick={() => {setBetAmount(1000)}}>1000</span>
-                  <span onClick={() => {setBetAmount(10000)}}>10000</span>
+                  <span
+                    onClick={() => {
+                      setBetAmount(10);
+                    }}
+                  >
+                    10
+                  </span>
+                  <span
+                    onClick={() => {
+                      setBetAmount(100);
+                    }}
+                  >
+                    100
+                  </span>
+                  <span
+                    onClick={() => {
+                      setBetAmount(1000);
+                    }}
+                  >
+                    1000
+                  </span>
+                  <span
+                    onClick={() => {
+                      setBetAmount(10000);
+                    }}
+                  >
+                    10000
+                  </span>
                 </div>
                 <p>Win Amount</p>
                 <div className="dicegame-placebet__amount">
@@ -235,7 +391,9 @@ const DiceGame = ({ isNavOpen }) => {
                     {betAmount * (100 / diceRoll).toFixed(4)}
                   </span>
                 </div>
-                <button onClick={placeBet} className="dicegame-rollnow">Roll Now</button>
+                <button onClick={() => placeBet(false)} className="dicegame-rollnow">
+                  Roll Now
+                </button>
               </div>
             </>
           )}

@@ -1,8 +1,24 @@
 import React, { useState } from 'react';
 import './ReferralSection.css';
 
-const ReferralSection = ({ isNavOpen, referralInfo,  referralCount}) => {
+const ReferralSection = ({ isNavOpen, referralInfo, referralCount }) => {
   const [terms, setTerms] = useState(false);
+
+  const copyToClipboard = (text) => {
+    const tempInput = document.createElement('input');
+    tempInput.value = text;
+
+    document.body.appendChild(tempInput);
+
+    tempInput.select();
+
+    document.execCommand('copy');
+
+    document.body.removeChild(tempInput);
+
+    alert('Copied to clipboard: ' + text);
+  };
+
   return (
     <>
       <div
@@ -64,15 +80,31 @@ const ReferralSection = ({ isNavOpen, referralInfo,  referralCount}) => {
               <p>Referral Link</p>
               <div className="referral-cta_box-info">
                 <img src="./link-02.svg" alt="link-icon" />
-                <span>{referralInfo ? referralInfo.fullReferralUrl : 'https://eliteplay.com/yuxeer/'}</span>
+                <span>
+                  {referralInfo
+                    ? referralInfo.fullReferralUrl
+                    : 'https://eliteplay.com/yuxeer/'}
+                </span>
                 <img
-                  style={{ marginLeft: '30px' }}
+                  onClick={() => {
+                    copyToClipboard(
+                      `${
+                        referralInfo
+                          ? referralInfo.fullReferralUrl
+                          : 'https://eliteplay.com/yuxeer/'
+                      }`
+                    );
+                  }}
+                  style={{ cursor: 'pointer', marginLeft: '30px' }}
                   src="./copy-01.svg"
                   alt="copy-icon"
                 />
               </div>
             </div>
-            <div style={{ width: '100%' }} className="referral-cta_box refer-code-box">
+            <div
+              style={{ width: '100%' }}
+              className="referral-cta_box refer-code-box"
+            >
               <p>Referral Code</p>
               <div
                 style={{ width: '90%', justifyContent: 'space-between' }}
@@ -84,11 +116,18 @@ const ReferralSection = ({ isNavOpen, referralInfo,  referralCount}) => {
                     src="./tag-01.svg"
                     alt="tag-icon"
                   />
-                  <span>{referralInfo? referralInfo.referralCode : 'yuxeer'}</span>
+                  <span>
+                    {referralInfo ? referralInfo.referralCode : 'yuxeer'}
+                  </span>
                 </div>
 
                 <img
-                  style={{ alignSelf: 'flex-end' }}
+                  onClick={() => {
+                    copyToClipboard(
+                      `${referralInfo ? referralInfo.referralCode : 'yuxeer'}`
+                    );
+                  }}
+                  style={{ cursor: 'pointer', alignSelf: 'flex-end' }}
                   src="./copy-01.svg"
                   alt="copy-icon"
                 />
@@ -462,8 +501,6 @@ const ReferralSection = ({ isNavOpen, referralInfo,  referralCount}) => {
                   Friends 0 Referral Rewards $0.00 Commission Rewards $0.00
                   Rewards Activities
                 </p>
-
-               
               </div>
             </div>
           </div>

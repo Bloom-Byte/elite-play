@@ -13,6 +13,8 @@ const options = [
 const WalletComponent = ({ isNavOpen }) => {
   const [currentSection, setCurrentSection] = useState('Balance');
   const [mobileNav, setMobileNav] = useState(false);
+  const [withdrawalAddress, setWithdrawalAddress] = useState('')
+  const [withdrawalAmount, setWithdrawalAmount] = useState(0)
 
   const copyToClipboard = (text) => {
     const tempInput = document.createElement("input");
@@ -28,6 +30,39 @@ const WalletComponent = ({ isNavOpen }) => {
 
     alert("Copied to clipboard: " + text);
 };
+
+async function initiateWithdrawal() {
+  const url = 'https://api.example.com/withdraw-transaction';
+  const accessToken = '{{elitePlayAccessToken}}'; // Replace with your actual access token
+
+  const requestBody = {
+    amount: 4,
+    eliteUserId: 8727757
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${accessToken}`
+      },
+      body: JSON.stringify(requestBody)
+    });
+
+    if (response.status === 201) {
+      const responseData = await response.json();
+      console.log('Transaction initiated successfully:', responseData);
+      // Handle successful response here
+    } else {
+      console.error('Failed to initiate transaction:', response.statusText);
+      // Handle error response here
+    }
+  } catch (error) {
+    console.error('Error occurred while initiating transaction:', error);
+    // Handle network errors or other exceptions here
+  }
+}
 
   return (
     <div className={`wallet-comp ${isNavOpen ? 'wallet-comp-extended' : ''}`}>
