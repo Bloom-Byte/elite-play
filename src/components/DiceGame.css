@@ -102,9 +102,9 @@
   justify-content: space-between;
 }
 
-.dicegame-placebet__amonut-toggle {
+.dicegame-placebet__amount-toggle {
   display: flex;
-  gap: 5px;
+  gap: 8px;
 }
 
 .dicegame-placebet__amount span {
@@ -137,6 +137,7 @@
   font-size: 14px;
   font-weight: 400;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .dicegame-rollnow {
@@ -212,8 +213,8 @@
 
 .dicegame-diceroll__range_values {
   display: flex;
-  gap: 22.5%;
-  margin-left: 20px;
+  gap: 21%;
+  margin-left: 10px;
   margin-top: 8px;
 }
 
@@ -375,6 +376,54 @@
   font-size: 10px;
   font-weight: 400;
 }
+
+
+.dicegame-placebet__amount {
+  margin-top: 1rem;
+  background: #070c0a;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.dicegame-placebet__amount-display {
+  display: flex;
+  align-items: center;
+}
+
+.dicegame-placebet__amount-display img {
+  margin-right: 5px;
+}
+
+.dicegame-placebet__amount-display input {
+  background: none;
+  border: none;
+  color: white;
+  width: 30px; /* adjust as needed */
+  text-align: center;
+}
+
+.dicegame-placebet__amonut-toggle {
+  display: flex !important;
+  gap: 5px;
+}
+
+.dicegame-placebet__amonut-toggle span {
+  background: #0b1210;
+  border-radius: 6px;
+  padding: 8px;
+  color: white;
+}
+
+.dicegame-placebet__amount span img {
+  margin-right: 5px;
+}
+
+.count-arrows img {
+  cursor: pointer; /* makes it clear they're interactive */
+}
+
 
 
 

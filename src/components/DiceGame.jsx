@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import './DiceGame.css';
 
 const DiceGame = ({ isNavOpen }) => {
@@ -6,11 +7,49 @@ const DiceGame = ({ isNavOpen }) => {
   const [fairness, setFairness] = useState(false);
   const [livebet, setLivebet] = useState(false);
   const [tutorial, setTutorial] = useState(false);
-  const [diceRoll, setDiceRoll] = useState(50)
+  const [diceRoll, setDiceRoll] = useState(50);
+  const [betAmount, setBetAmount] = useState(10);
 
   const handleChange = (event) => {
-    setDiceRoll(event.target.value);
-};
+    if (event.target.value >= 5 && event.target.value <= 96) {
+      setDiceRoll(event.target.value);
+    }
+  };
+
+  const handleBetAmount = (event) => {
+    if (event.target.value >= 1) {
+      setBetAmount(event.target.value);
+    }
+  };
+
+  const accessToken = localStorage.getItem('accessToken');
+
+  function placeBet() {
+    const url = `https://be.eliteplay.bloombyte.dev/game/place-bet`;
+    const pay = Number((100 / diceRoll).toFixed(4))
+
+    const data = {
+      amount: betAmount,
+      isRollOver: false,
+      targetValue: diceRoll,
+      payout: pay
+    };
+    const headers = {
+      'Authorization': `Bearer ${accessToken}`
+    };
+  
+    axios.post(url, data, { headers })
+      .then(response => {
+        if (response.status === 201) {
+          console.log('Bet placed:', response.data);
+        } else {
+          throw new Error('Failed to place bet');
+        }
+      })
+      .catch(error => {
+        console.error('Error:', error);
+      });
+  }
 
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
@@ -38,7 +77,9 @@ const DiceGame = ({ isNavOpen }) => {
           Fairness Checker
         </button>
         <button
-          onClick={() => {setTutorial(!tutorial)}}
+          onClick={() => {
+            setTutorial(!tutorial);
+          }}
         >
           {' '}
           <img
@@ -72,21 +113,21 @@ const DiceGame = ({ isNavOpen }) => {
           {auto ? (
             <div className="dicegame-placebet__bet">
               <p>Amount</p>
-              <div className="mrg-b dicegame-placebet__amount">
-                <span>
-                  <img src="./twemoji_coin.svg" alt="coin" />
-                  10
-                </span>
-                <div className="dicegame-placebet__amonut-toggle">
-                  <span>/2</span>
-                  <span>2</span>
-                  <span className='count-arrows'>
-                    <img src="./count_arrow-top.svg" alt="" />
-                    <img src="./count_arrow-down.svg" alt="" />
-                  </span>
+              <div className="dicegame-placebet__amount">
+                  <div className="dicegame-placebet__amount-display">
+                    <img src="./twemoji_coin.svg" alt="coin" />
+                    <input type="text" value={betAmount} onChange={handleBetAmount} />
+                  </div>
+                  <div className="dicegame-placebet__amount-toggle">
+                    <span style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount/2)}}>/2</span>
+                    <span style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount*2)}}>2</span>
+                    <div className="count-arrows">
+                      <img style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount+1)}} src="./count_arrow-top.svg" alt="" />
+                      <img style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount-1)}} src="./count_arrow-down.svg" alt="" />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <p>Number of Bets</p>
+              <p style={{marginTop: '1rem'}}>Number of Bets</p>
               <div className="mrg-b dicegame-placebet__amount">
                 <span>&infin;</span>
                 <div className="dicegame-placebet__amonut-toggle">
@@ -138,33 +179,33 @@ const DiceGame = ({ isNavOpen }) => {
               <div className="dicegame-placebet__bet">
                 <p>Amount</p>
                 <div className="dicegame-placebet__amount">
-                  <span>
+                  <div className="dicegame-placebet__amount-display">
                     <img src="./twemoji_coin.svg" alt="coin" />
-                    10
-                  </span>
-                  <div className="dicegame-placebet__amonut-toggle">
-                    <span>/2</span>
-                    <span>2</span>
-                    <span className='count-arrows'>
-                    <img src="./count_arrow-top.svg" alt="" />
-                    <img src="./count_arrow-down.svg" alt="" />
-                  </span>
+                    <input type="text" value={betAmount} onChange={handleBetAmount} />
+                  </div>
+                  <div className="dicegame-placebet__amount-toggle">
+                    <span style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount/2)}}>/2</span>
+                    <span style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount*2)}}>2</span>
+                    <div className="count-arrows">
+                      <img style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount+1)}} src="./count_arrow-top.svg" alt="" />
+                      <img style={{cursor: 'pointer'}} onClick={() => {setBetAmount(betAmount-1)}} src="./count_arrow-down.svg" alt="" />
+                    </div>
                   </div>
                 </div>
                 <div className="dicegame-placebet__select-amount">
-                  <span>10</span>
-                  <span>100</span>
-                  <span>1000</span>
-                  <span>10000</span>
+                  <span onClick={() => {setBetAmount(10)}}>10</span>
+                  <span onClick={() => {setBetAmount(100)}}>100</span>
+                  <span onClick={() => {setBetAmount(1000)}}>1000</span>
+                  <span onClick={() => {setBetAmount(10000)}}>10000</span>
                 </div>
                 <p>Win Amount</p>
                 <div className="dicegame-placebet__amount">
                   <span>
                     <img src="./twemoji_coin.svg" alt="coin" />
-                    10
+                    {betAmount * (100 / diceRoll).toFixed(4)}
                   </span>
                 </div>
-                <button className="dicegame-rollnow">Roll Now</button>
+                <button onClick={placeBet} className="dicegame-rollnow">Roll Now</button>
               </div>
             </>
           )}
@@ -185,7 +226,13 @@ const DiceGame = ({ isNavOpen }) => {
             <span>{diceRoll}</span>
           </div>
           <div className="dicegame-diceroll__range">
-            <input type="range" min="0" max="100" value={diceRoll} onChange={handleChange} />
+            <input
+              type="range"
+              min="0"
+              max="100"
+              value={diceRoll}
+              onChange={handleChange}
+            />
           </div>
           <div className="dicegame-diceroll__range_values">
             <span>0</span>
@@ -198,21 +245,21 @@ const DiceGame = ({ isNavOpen }) => {
             <div className="dicegame-diceroll__outer-box">
               <p>Payout</p>
               <div className="dicegame-diceroll__box-info">
-                <span>1.98</span>
+                <span>{(100 / diceRoll).toFixed(4)}</span>
                 <span>x</span>
               </div>
             </div>
             <div className="dicegame-diceroll__outer-box">
               <p>Roll Under</p>
               <div className="dicegame-diceroll__box-info dicegame-diceroll-rollover">
-                <span>50</span>
+                <span>{diceRoll}</span>
                 <img src="./rollover.svg" alt="rollover" />
               </div>
             </div>
             <div className="dicegame-diceroll__outer-box">
               <p>Win Chance</p>
               <div className="dicegame-diceroll__box-info">
-                <span>50</span>
+                <span>{diceRoll - 1}</span>
                 <span>%</span>
               </div>
             </div>
@@ -290,7 +337,7 @@ const DiceGame = ({ isNavOpen }) => {
               </span>
             </div>
             <div className="editusername-popup_main-content">
-              <table className='dice--livebet-table'>
+              <table className="dice--livebet-table">
                 <thead>
                   <tr>
                     <th>Player</th>
@@ -301,52 +348,80 @@ const DiceGame = ({ isNavOpen }) => {
                 </thead>
                 <tbody>
                   <tr>
-                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
                     <td>&lt;52/13</td>
                     <td>100</td>
                     <td>Betting</td>
                   </tr>
                   <tr>
-                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
                     <td>&lt;52/13</td>
                     <td>100</td>
                     <td>Betting</td>
                   </tr>
                   <tr>
-                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
-                    <td>&lt;52<span className='red'>/13</span></td>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="red">/13</span>
+                    </td>
                     <td>100</td>
-                    <td className='red'>-100</td>
+                    <td className="red">-100</td>
                   </tr>
                   <tr>
-                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
-                    <td>&lt;52<span className='green'>/13</span></td>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="green">/13</span>
+                    </td>
                     <td>100</td>
-                    <td className='green'>+1000</td>
+                    <td className="green">+1000</td>
                   </tr>
                   <tr>
-                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
-                    <td>&lt;52<span className='green'>/13</span></td>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="green">/13</span>
+                    </td>
                     <td>100</td>
-                    <td className='green'>+1000</td>
+                    <td className="green">+1000</td>
                   </tr>
                   <tr>
-                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
-                    <td>&lt;52<span className='red'>/13</span></td>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="red">/13</span>
+                    </td>
                     <td>100</td>
-                    <td className='red'>-100</td>
+                    <td className="red">-100</td>
                   </tr>
                   <tr>
-                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
-                    <td>&lt;52<span className='red'>/13</span></td>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="red">/13</span>
+                    </td>
                     <td>100</td>
-                    <td className='red'>-100</td>
+                    <td className="red">-100</td>
                   </tr>
                   <tr>
-                    <td><img src="./twemoji_coin.svg" alt="coin" /> Yuxeer</td>
-                    <td>&lt;52<span className='red'>/13</span></td>
+                    <td>
+                      <img src="./twemoji_coin.svg" alt="coin" /> Yuxeer
+                    </td>
+                    <td>
+                      &lt;52<span className="red">/13</span>
+                    </td>
                     <td>100</td>
-                    <td className='red'>-100</td>
+                    <td className="red">-100</td>
                   </tr>
                 </tbody>
               </table>
@@ -355,16 +430,29 @@ const DiceGame = ({ isNavOpen }) => {
         </div>
       )}
       {tutorial && (
-         <div className={`tutorial-dropdown ${isNavOpen ? 'tutorial-dropdown-open' : ''}`}>
-         <div className="tutorial-dropdown-content">
-          <a href="/dicebeginner">Beginners Guide</a>
-          <p>Learn the basics here. <br /> How to play dice gambling, and how to roll dice?</p>
-          <a href="/dicestrategy">Strategies</a>
-          <p>Some popular winning strategies for bitcoin dice can be found here.</p>
-          <a href="/diceautomation">Automation Scripts</a>
-          <p>Running scripts is an advanced way to play bitcoin dice that presumably offers easier wins.</p>
+        <div
+          className={`tutorial-dropdown ${
+            isNavOpen ? 'tutorial-dropdown-open' : ''
+          }`}
+        >
+          <div className="tutorial-dropdown-content">
+            <a href="/dicebeginner">Beginners Guide</a>
+            <p>
+              Learn the basics here. <br /> How to play dice gambling, and how
+              to roll dice?
+            </p>
+            <a href="/dicestrategy">Strategies</a>
+            <p>
+              Some popular winning strategies for bitcoin dice can be found
+              here.
+            </p>
+            <a href="/diceautomation">Automation Scripts</a>
+            <p>
+              Running scripts is an advanced way to play bitcoin dice that
+              presumably offers easier wins.
+            </p>
           </div>
-       </div>
+        </div>
       )}
     </div>
   );
