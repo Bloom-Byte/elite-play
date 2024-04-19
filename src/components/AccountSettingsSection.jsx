@@ -14,6 +14,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
   const [editCurrency, setEditCurrency] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
   const [confirmOldPassword, setConfirmOldPassword] = useState('')
+  const [newPassword, setNewPassword] = useState('')
   const [error, setError] = useState('');
 
   const handleSelfExclusion = () => {
@@ -38,6 +39,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
 
 const  handleConfirmPassword = async (event) => {
   event.preventDefault();
+  setError('');
 
   try {
     const response = await axios.post('https://be.eliteplay.bloombyte.dev/user/auth/login', {
@@ -53,6 +55,45 @@ const  handleConfirmPassword = async (event) => {
     setError(error.response.data.error);
   }
 };
+
+const updatePassword = async () => {
+  setError('');
+  const url = 'https://be.eliteplay.bloombyte.dev/user/update/password';
+  const accessToken = localStorage.getItem('accessToken');
+
+  const requestBody = {
+    oldPassword: confirmOldPassword,
+    newPassword: newPassword
+  };
+
+  const headers = {
+    'Content-Type': 'application/json',
+    'Authorization': `Bearer ${accessToken}`
+  };
+
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: headers,
+      body: JSON.stringify(requestBody)
+    });
+
+    const responseData = await response.json();
+    console.log(response)
+
+    if (response.status === 201) {
+      console.log('Password updated successfully:', responseData);
+      window.location.href ='/login'
+    } else {
+      throw new Error(responseData.message || 'Failed to update password');
+    }
+  } catch (error) {
+    console.error('Error occurred during password update:', error.message);
+    setError(error.message || error.response.message)
+  }
+};
+
+
 
   return (
     <div
@@ -445,7 +486,7 @@ const  handleConfirmPassword = async (event) => {
               <p className="editusername-popup_edit-username">Old Password</p>
               <input
                 className="editusername-popup_edit-username-box"
-                type="text"
+                type="password"
                 placeholder="Set Password"
                 value={confirmOldPassword}
                 onChange={(event) => {setConfirmOldPassword(event.target.value)}}
@@ -483,16 +524,20 @@ const  handleConfirmPassword = async (event) => {
               <p className="editusername-popup_edit-username">Old Password</p>
               <input
                 className="editusername-popup_edit-username-box"
-                type="text"
+                type="password"
                 placeholder="Set Password"
+                value={confirmOldPassword}
+                onChange={(event) => {setConfirmOldPassword(event.target.value)}}
               />
               <p className="editusername-popup_edit-username">
                 Confirm Password
               </p>
               <input
                 className="editusername-popup_edit-username-box"
-                type="text"
+                type="password"
                 placeholder="Confirm Password"
+                value={newPassword}
+                onChange={(event) => {setNewPassword(event.target.value)}}
               />
               <p
                 style={{ marginTop: '2rem', marginBottom: '0px' }}
@@ -500,7 +545,8 @@ const  handleConfirmPassword = async (event) => {
               >
                 Re-login will be required after changing the password.
               </p>
-              <button className="edit-username-popup_btn">Confirm</button>
+              {error && <p style={{color: '#E14453'}}>{error}</p>}
+              <button onClick={updatePassword} className="edit-username-popup_btn">Confirm</button>
             </div>
           </div>
         </div>
