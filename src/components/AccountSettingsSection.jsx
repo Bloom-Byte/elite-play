@@ -412,16 +412,11 @@ const updatePassword = async () => {
                 X
               </span>
             </div>
-            <div className="editusername-popup_main-content">
+            <div style={{width: '200px'}} className="editusername-popup_main-content">
               <div className="editusername-popup_edit-avatar">
                 <img src="./profile-img.svg" alt="profile-icon" />
                 <button>Edit Your Avatar</button>
               </div>
-              <p className="editusername-popup_edit-username">Username</p>
-              <p className="edit-username_note">
-                Do not use special symbols, otherwise your account may not be
-                supported
-              </p>
               <button className="edit-username-popup_btn">Modify</button>
             </div>
           </div>
