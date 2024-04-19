@@ -31,9 +31,9 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                 </h1>
               </div>
               <div
-                onClick={() => {
-                  setCurrentTab(4);
-                }}
+                // onClick={() => {
+                //   setCurrentTab(4);
+                // }}
                 className="send-message_box"
               >
                 <div>
@@ -85,9 +85,9 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                   <span>Home</span>
                 </div>
                 <div
-                  onClick={() => {
-                    setCurrentTab(1);
-                  }}
+                  // onClick={() => {
+                  //   setCurrentTab(1);
+                  // }}
                   className={`help-center__nav ${
                     currentTab == 1 ? 'help-center__nav-active' : ''
                   }`}
