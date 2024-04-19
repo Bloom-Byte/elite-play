@@ -151,6 +151,7 @@
   font-size: 16px;
   font-weight: 600;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .dicegame-diceroll {
@@ -422,9 +423,12 @@
 }
 
 .count-arrows img {
-  cursor: pointer; /* makes it clear they're interactive */
+  cursor: pointer;
 }
-
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
 
 
 

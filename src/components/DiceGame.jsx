@@ -297,7 +297,7 @@ const DiceGame = ({ isNavOpen }) => {
                 Start Auto Bet
               </button>
               <button
-                className={`dicegame-rollnow ${autoBet ? 'disabled' : ''}`}
+                className={`dicegame-rollnow ${autoBet ? '' : 'disabled'}`}
                 onClick={stopAutoBet}
                 disabled={!autoBet}
               >
