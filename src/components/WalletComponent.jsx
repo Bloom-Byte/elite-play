@@ -153,8 +153,8 @@ async function initiateWithdrawal() {
                   </div>
                   <div className="mainBalance-amount">
                     <span>300.00</span>
-                    <span>Deposit</span>
-                    <span>Withdraw</span>
+                    <span style={{cursor: 'pointer'}} onClick={() => setCurrentSection('Deposit')}>Deposit</span>
+                    <span style={{cursor: 'pointer'}} onClick={() => setCurrentSection('Withdraw')}>Withdraw</span>
                   </div>
                 </div>
               </div>
@@ -178,25 +178,15 @@ async function initiateWithdrawal() {
                         </select>
                       </div>
                     </div>
-                    <p>Deposit Address</p>
-                    <div className="mainBalance-fiat-currency">
-                      <span className="cryptoAddress">
-                        0x67
-                        <span className="middleAddress">
-                          8bD9B31a318af10bb0897905E425dBb
-                        </span>
-                        Ce5A794
-                      </span>
-                      <div onClick={() => {copyToClipboard('0x678bD9B31a318af10bb0897905E425dBbCe5A794')}} style={{ cursor: 'pointer' }} className="copy-box">
-                        <img src="./copy-01.svg" alt="copy-icon" />
-                        <span>Copy</span>
-                      </div>
+                    <p>Deposit Amount</p>
+                    <div className="withdraw-address-box">
+                      <input className="withdraw-address_input" type="text" />
                     </div>
                     <div className="deposit-crypto">
                       <img src="./alert-01.svg" alt="alert-icon" />
-                      <span>Minimum Deposit: 0.1 USDT</span>
+                      <span>Minimum Deposit: 50 eGold</span>
                     </div>
-                    <div className="crypto-notice">
+                    {/* <div className="crypto-notice">
                       <span className="crypto-notice_notice-head">
                         NOTICE:{' '}
                       </span>
@@ -204,7 +194,7 @@ async function initiateWithdrawal() {
                         Send only USDT to this deposit address. Coins will be
                         deposited automatically after 20 network confirmations. 
                       </span>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
             </div>
@@ -228,14 +218,14 @@ async function initiateWithdrawal() {
                         </select>
                       </div>
                     </div>
-                    <p>Withdrawal Address</p>
+                    {/* <p>Withdrawal Address</p>
                     <div className="withdraw-address-box">
                       <input
                         className="withdraw-address_input"
                         type="text"
                         placeholder="Fill in carefully according to the specefied currency"
                       />
-                    </div>
+                    </div> */}
                     <div className="withdraw-amount_title">
                       <p>Withdraw Amount</p>
                       <p>MIN: 50 eGold</p>
