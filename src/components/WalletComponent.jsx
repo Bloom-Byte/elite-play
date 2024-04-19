@@ -1,62 +1,97 @@
 import React, { useState } from 'react';
 import './WalletComponent.css';
-import icon1 from '../assets/usdt.svg';
-import icon2 from '../assets/solana.svg';
 
-
-const WalletComponent = ({ isNavOpen }) => {
+const WalletComponent = ({ isNavOpen, user }) => {
   const [currentSection, setCurrentSection] = useState('Balance');
   const [mobileNav, setMobileNav] = useState(false);
-  const [withdrawalAddress, setWithdrawalAddress] = useState('')
-  const [withdrawalAmount, setWithdrawalAmount] = useState(0)
+  const [withdrawalAmount, setWithdrawalAmount] = useState(0);
+  const [validatemessage, setValidateMessage] = useState('')
+  const [depositAmount, setDepositAmount] = useState(0)
+  const [successMessage, setSuccessMessage] = useState('')
 
-  const copyToClipboard = (text) => {
-    const tempInput = document.createElement("input");
-    tempInput.value = text;
 
-    document.body.appendChild(tempInput);
-
-    tempInput.select();
-
-    document.execCommand("copy");
-
-    document.body.removeChild(tempInput);
-
-    alert("Copied to clipboard: " + text);
-};
-
-async function initiateWithdrawal() {
-  const url = 'https://api.example.com/withdraw-transaction';
-  const accessToken = localStorage.getItem('accessToken')
-
-  const requestBody = {
-    amount: 4,
-    eliteUserId: 8727757
+  const handleWithdrawalChange = (event) => {
+      setWithdrawalAmount(event.target.value);
   };
 
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${accessToken}`
-      },
-      body: JSON.stringify(requestBody)
-    });
-
-    if (response.status === 201) {
-      const responseData = await response.json();
-      console.log('Transaction initiated successfully:', responseData);
-      // Handle successful response here
-    } else {
-      console.error('Failed to initiate transaction:', response.statusText);
-      // Handle error response here
-    }
-  } catch (error) {
-    console.error('Error occurred while initiating transaction:', error);
-    // Handle network errors or other exceptions here
+  const handleDepositChange = (event) => {
+    setDepositAmount(event.target.value);
   }
-}
+
+  const depositToEliteplay = async (amount, accountId) => {
+    const url = 'https://be.eliteplay.bloombyte.dev/transactions/deposit';
+    const accessToken = localStorage.getItem('accessToken');
+
+    if (depositAmount < 50) {
+      setValidateMessage("Minimum Deposit is 50 eGold")
+    }
+
+    const requestBody = {
+      amount: amount,
+      accountId: user._id
+    };
+  
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${accessToken}`
+    };
+  
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(requestBody)
+      });
+  
+      if (response.status === 201) {
+        const responseData = await response.json();
+        console.log('Deposit successful:', responseData);
+        setSuccessMessage(responseData.data.message)
+      } else {
+        throw new Error('Failed to deposit');
+      }
+    } catch (error) {
+      console.error('Error occurred during deposit:', error);
+      setValidateMessage(error.response.data.message)
+    }
+  };
+  
+
+  async function initiateWithdrawal() {
+    const url = 'https://be.eliteplay.bloombyte.dev/withdraw-transaction';
+    const accessToken = localStorage.getItem('accessToken');
+
+    if (withdrawalAmount < 50) {
+      setValidateMessage("Minimum Withdrawal is 50 eGold")
+    }
+
+    const requestBody = {
+      amount: withdrawalAmount,
+      eliteUserId: user._id,
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(requestBody),
+      });
+
+      if (response.status === 201) {
+        const responseData = await response.json();
+        setSuccessMessage(responseData.data.message)
+        console.log('Transaction initiated successfully:', responseData);
+      } else {
+        console.error('Failed to initiate transaction:', response.statusText);
+      }
+    } catch (error) {
+      console.error('Error occurred while initiating transaction:', error);
+      setValidateMessage(error.response.data.message)
+    }
+  }
 
   return (
     <div className={`wallet-comp ${isNavOpen ? 'wallet-comp-extended' : ''}`}>
@@ -127,9 +162,8 @@ async function initiateWithdrawal() {
                     <span className="real-balance">Total Balance</span>
                     <span className="real-balance_amount">USD 300.00</span>
                   </div>
-                 
                 </div>
-                <hr className='potline' />
+                <hr className="potline" />
                 <div className="pot-balance">
                   <span>Real Balance</span>
                   <span>USD 300.00</span>
@@ -147,8 +181,18 @@ async function initiateWithdrawal() {
                   </div>
                   <div className="mainBalance-amount">
                     <span>300.00</span>
-                    <span style={{cursor: 'pointer'}} onClick={() => setCurrentSection('Deposit')}>Deposit</span>
-                    <span style={{cursor: 'pointer'}} onClick={() => setCurrentSection('Withdraw')}>Withdraw</span>
+                    <span
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => setCurrentSection('Deposit')}
+                    >
+                      Deposit
+                    </span>
+                    <span
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => setCurrentSection('Withdraw')}
+                    >
+                      Withdraw
+                    </span>
                   </div>
                 </div>
               </div>
@@ -156,31 +200,36 @@ async function initiateWithdrawal() {
           )}
           {currentSection === 'Deposit' && (
             <div className="wallet-deposit">
-                <div className="deposit-wallet_main">
-                  <div>
-                    <div className="crypto-deposit-method_type">
-                      <div>
-                        <p>Deposit Currency</p>
-                        <select className="options-list">
-                          <option value="usdt">eGold</option>
-                        </select>
-                      </div>
-                      <div>
-                        <p>Choose Network</p>
-                        <select className="options-list">
-                          <option value="erc20">ERC 20</option>
-                        </select>
-                      </div>
+              <div className="deposit-wallet_main">
+                <div>
+                  <div className="crypto-deposit-method_type">
+                    <div>
+                      <p>Deposit Currency</p>
+                      <select className="options-list">
+                        <option value="usdt">eGold</option>
+                      </select>
                     </div>
-                    <p>Deposit Amount</p>
-                    <div className="withdraw-address-box">
-                      <input className="withdraw-address_input" type="text" />
+                    <div>
+                      <p>Choose Network</p>
+                      <select className="options-list">
+                        <option value="erc20">ERC 20</option>
+                      </select>
                     </div>
-                    <div className="deposit-crypto">
-                      <img src="./alert-01.svg" alt="alert-icon" />
-                      <span>Minimum Deposit: 50 eGold</span>
-                    </div>
-                    {/* <div className="crypto-notice">
+                  </div>
+                  <p>Deposit Amount</p>
+                  <div className="withdraw-address-box">
+                    <input className="withdraw-address_input" type="text" value={depositAmount} onChange={handleDepositChange} />
+                  </div>
+                  {validatemessage && <p style={{color: '#E14453'}}>{validatemessage}</p>}
+                  {successMessage && <p style={{color: '#34B263'}}>{successMessage}</p>}
+                  <div className="deposit-crypto">
+                    <img src="./alert-01.svg" alt="alert-icon" />
+                    <span>Minimum Deposit: 50 eGold</span>
+                  </div>
+                  <div className="deposit_fiat-btn">
+                    <button onClick={depositToEliteplay}>Deposit</button>
+                  </div>
+                  {/* <div className="crypto-notice">
                       <span className="crypto-notice_notice-head">
                         NOTICE:{' '}
                       </span>
@@ -189,30 +238,30 @@ async function initiateWithdrawal() {
                         deposited automatically after 20 network confirmations. 
                       </span>
                     </div> */}
-                  </div>
                 </div>
+              </div>
             </div>
           )}
 
           {currentSection === 'Withdraw' && (
             <div className="wallet-deposit">
-                <div className="deposit-wallet_main">
-                  <div>
-                    <div className="crypto-deposit-method_type">
-                      <div>
-                        <p>Withdraw Currency</p>
-                        <select className="options-list">
-                          <option value="usdt">eGold</option>
-                        </select>
-                      </div>
-                      <div>
-                        <p>Choose Network</p>
-                        <select className="options-list">
-                          <option value="erc20">ERC 20</option>
-                        </select>
-                      </div>
+              <div className="deposit-wallet_main">
+                <div>
+                  <div className="crypto-deposit-method_type">
+                    <div>
+                      <p>Withdraw Currency</p>
+                      <select className="options-list">
+                        <option value="usdt">eGold</option>
+                      </select>
                     </div>
-                    {/* <p>Withdrawal Address</p>
+                    <div>
+                      <p>Choose Network</p>
+                      <select className="options-list">
+                        <option value="erc20">ERC 20</option>
+                      </select>
+                    </div>
+                  </div>
+                  {/* <p>Withdrawal Address</p>
                     <div className="withdraw-address-box">
                       <input
                         className="withdraw-address_input"
@@ -220,51 +269,56 @@ async function initiateWithdrawal() {
                         placeholder="Fill in carefully according to the specefied currency"
                       />
                     </div> */}
-                    <div className="withdraw-amount_title">
-                      <p>Withdraw Amount</p>
-                      <p>MIN: 50 eGold</p>
-                    </div>
+                  <div className="withdraw-amount_title">
+                    <p>Withdraw Amount</p>
+                    <p>MIN: 50 eGold</p>
+                  </div>
 
-                    <div className="withdraw-address-box">
-                      <input className="withdraw-address_input" type="text" />
+                  <div className="withdraw-address-box">
+                    <input
+                      className="withdraw-address_input"
+                      type="text"
+                      value={withdrawalAmount}
+                      onChange={handleWithdrawalChange}
+                    />
+                  </div>
+                  {validatemessage && <p style={{color: '#E14453'}}>{validatemessage}</p>}
+                  {successMessage && <p style={{color: '#34B263'}}>{successMessage}</p>}
+                  <div className="withdraw_amounts">
+                    <div className="withdraw_amount-details">
+                      <span>Withdraw Amount:</span>
+                      <span>0.00 eGold</span>
                     </div>
-                    <div className="withdraw_amounts">
-                      <div className="withdraw_amount-details">
-                        <span>Withdraw Amount:</span>
-                        <span>0.00 eGold</span>
-                      </div>
-                      <div className="withdraw_amount-details">
-                        <span>
-                          Fee:{' '}
-                          <img
-                            className="more-info_icon"
-                            src="./help-circle.svg"
-                            alt=""
-                          />
-                        </span>
-                        <span>0.00 eGold</span>
-                      </div>
-                      <div className="withdraw_amount-details">
-                        <span>Total Withdraw Amount:</span>
-                        <span>0.00 eGold</span>
-                      </div>
-                    </div>
-
-                    <div className="crypto-notice">
-                      <span className="crypto-notice_notice-head">
-                        NOTICE:{' '}
+                    <div className="withdraw_amount-details">
+                      <span>
+                        Fee:{' '}
+                        <img
+                          className="more-info_icon"
+                          src="./help-circle.svg"
+                          alt=""
+                        />
                       </span>
-                      <span className="crypto-notice_notice-info">
-                        For security purposes, large or suspicious withdrawal
-                        may take 1-3 hours for audit process. We appreciate your
-                        patience! 
-                      </span>
+                      <span>0.00 eGold</span>
                     </div>
-                    <div className="deposit_fiat-btn">
-                      <button>Withdraw</button>
+                    <div className="withdraw_amount-details">
+                      <span>Total Withdraw Amount:</span>
+                      <span>0.00 eGold</span>
                     </div>
                   </div>
+
+                  <div className="crypto-notice">
+                    <span className="crypto-notice_notice-head">NOTICE: </span>
+                    <span className="crypto-notice_notice-info">
+                      For security purposes, large or suspicious withdrawal may
+                      take 1-3 hours for audit process. We appreciate your
+                      patience! 
+                    </span>
+                  </div>
+                  <div className="deposit_fiat-btn">
+                    <button onClick={initiateWithdrawal}>Withdraw</button>
+                  </div>
                 </div>
+              </div>
             </div>
           )}
           {currentSection === 'Transaction' && (

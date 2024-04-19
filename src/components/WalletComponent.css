@@ -387,6 +387,7 @@
     font-family: "Manrope", sans-serif;
     font-weight: 600;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .fiat-deposit_info {
