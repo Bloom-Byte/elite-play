@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import SocketIO from 'socket.io-client';
 
 const accessToken = localStorage.getItem('accessToken');
-const socket = SocketIO('http://localhost:3000', {
+const socket = SocketIO('https://be.eliteplay.bloombyte.dev', {
   transports: ['websocket'],
   autoConnect: true,
   query: {
@@ -109,7 +109,8 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
   //   }
   // };
 
-  const sendMessage = () => {
+  const sendMessage = (event) => {
+    event.preventDefault();
     const trimmedMessage = inputMessage.trim();
     if (trimmedMessage !== '') {
       const message = {
@@ -169,9 +170,13 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
                 minimized ? 'minimized' : ''
               }`}
             >
-              {isLoadingSavedMessages && <h3 className='chatmsg-error'>Loading saved messages...</h3>}
+              {isLoadingSavedMessages && (
+                <h3 className="chatmsg-error">Loading saved messages...</h3>
+              )}
               {loadMessagesError && (
-                <h3 className='chatmsg-error'>Error loading messages: {loadMessagesError}</h3>
+                <h3 className="chatmsg-error">
+                  Error loading messages: {loadMessagesError}
+                </h3>
               )}
 
               {messages.map((msg, index) => (
@@ -273,19 +278,21 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
                 </div>
               </div> */}
             </div>
-            <div className="chatroom-input">
-              <div>
-                <input
-                  placeholder="Type here..."
-                  type="text"
-                  value={inputMessage}
-                  onChange={(e) => setInputMessage(e.target.value)}
-                  onKeyDown={handleSendMessage}
-                />
-              </div>
-              <button onClick={sendMessage}>
-                <img src="./Send.svg" alt="send-icon" />
-              </button>
+            <div>
+              <form className="chatroom-input" onSubmit={sendMessage}>
+                <div>
+                  <input
+                    placeholder="Type here..."
+                    type="text"
+                    value={inputMessage}
+                    onChange={(e) => setInputMessage(e.target.value)}
+                    onKeyDown={handleSendMessage}
+                  />
+                </div>
+                <button type='submit'>
+                  <img src="./Send.svg" alt="send-icon" />
+                </button>
+              </form>
             </div>
           </div>
         </div>
