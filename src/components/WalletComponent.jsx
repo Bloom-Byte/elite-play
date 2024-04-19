@@ -2,13 +2,7 @@ import React, { useState } from 'react';
 import './WalletComponent.css';
 import icon1 from '../assets/usdt.svg';
 import icon2 from '../assets/solana.svg';
-import CustomDropdown from './CustomDropdown';
 
-const options = [
-  { text: 'USDT', value: 'usdt', icon: icon1 },
-  { text: 'SOL', value: 'solana', icon: icon2 },
-  // Add more options as needed
-];
 
 const WalletComponent = ({ isNavOpen }) => {
   const [currentSection, setCurrentSection] = useState('Balance');
@@ -33,7 +27,7 @@ const WalletComponent = ({ isNavOpen }) => {
 
 async function initiateWithdrawal() {
   const url = 'https://api.example.com/withdraw-transaction';
-  const accessToken = '{{elitePlayAccessToken}}'; // Replace with your actual access token
+  const accessToken = localStorage.getItem('accessToken')
 
   const requestBody = {
     amount: 4,
