@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 import axios from 'axios';
 import './DiceGame.css';
 
@@ -9,6 +9,14 @@ const DiceGame = ({ isNavOpen }) => {
   const [tutorial, setTutorial] = useState(false);
   const [diceRoll, setDiceRoll] = useState(50);
   const [betAmount, setBetAmount] = useState(10);
+  const [autoBet, setAutoBet] = useState(false);
+  const [numBets, setNumBets] = useState(0);
+  const [stopOnWin, setStopOnWin] = useState(false);
+  const [stopOnLoss, setStopOnLoss] = useState(false);
+  const [stopConditions, setStopConditions] = useState({
+    resetWin: 100,
+    resetLose: 50
+  });
 
   const handleChange = (event) => {
     if (event.target.value >= 5 && event.target.value <= 96) {
@@ -31,7 +39,7 @@ const DiceGame = ({ isNavOpen }) => {
     const data = {
       amount: betAmount,
       isRollOver: false,
-      targetValue: diceRoll,
+      targetValue: Number(diceRoll),
       payout: pay
     };
     const headers = {
@@ -50,6 +58,27 @@ const DiceGame = ({ isNavOpen }) => {
         console.error('Error:', error);
       });
   }
+
+  const startAutoBet = () => {
+    setAutoBet(true);
+  };
+  
+  const stopAutoBet = () => {
+    setAutoBet(false);
+  };
+  
+  useEffect(() => {
+    let interval;
+    if (autoBet) {
+      interval = setInterval(() => {
+        placeBet();
+      }, 1000); // Adjust time as needed
+    } else {
+      clearInterval(interval);
+    }
+  
+    return () => clearInterval(interval);
+  }, [autoBet]);
 
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
@@ -172,7 +201,8 @@ const DiceGame = ({ isNavOpen }) => {
                   10
                 </span>
               </div>
-              <button className="dicegame-rollnow">Start Auto Bet</button>
+              <button className="dicegame-rollnow" onClick={startAutoBet} disabled={autoBet}>Start Auto Bet</button>
+              <button className="dicegame-rollnow" onClick={stopAutoBet} disabled={!autoBet}>Stop Auto Bet</button>
             </div>
           ) : (
             <>
