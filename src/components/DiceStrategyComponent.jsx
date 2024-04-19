@@ -6,7 +6,7 @@ const DiceStrategyComponent = ({ isNavOpen }) => {
     <div className={`dicetutorial ${isNavOpen ? 'dicetutorial-extended' : ''}`}>
       <div className="dicetutorial-hero">
         <h1>Bitcoin Dice Strategy : How to Win at Bitcoin Dice</h1>
-        <img src="./die.png" alt="" />
+        <img src="./die.png" alt="dice-img" />
       </div>
       <p>
         There are many different casino games available online. Dice is widely

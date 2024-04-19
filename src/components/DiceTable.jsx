@@ -196,6 +196,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span>100</span>
                     </td>
@@ -204,6 +205,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span className="green">+33600</span>
                     </td>
@@ -215,6 +217,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span>100</span>
                     </td>
@@ -223,6 +226,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span className="green">+33600</span>
                     </td>
@@ -234,6 +238,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span>100</span>
                     </td>
@@ -242,6 +247,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span className="red">-100</span>
                     </td>
@@ -253,6 +259,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span>100</span>
                     </td>
@@ -261,6 +268,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span className="green">+33600</span>
                     </td>
@@ -272,6 +280,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span>100</span>
                     </td>
@@ -280,6 +289,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span className="green">+33600</span>
                     </td>
@@ -291,6 +301,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span>100</span>
                     </td>
@@ -299,6 +310,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span className="red">-100</span>
                     </td>
@@ -310,6 +322,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span>100</span>
                     </td>
@@ -318,6 +331,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span className="red">-100</span>
                     </td>
@@ -329,6 +343,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span>100</span>
                     </td>
@@ -337,6 +352,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span className="red">-100</span>
                     </td>
@@ -348,6 +364,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span>100</span>
                     </td>
@@ -356,6 +373,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span className="green">+33600</span>
                     </td>
@@ -367,6 +385,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span>100</span>
                     </td>
@@ -375,6 +394,7 @@ const DiceTable = ({ isNavOpen }) => {
                       <img
                         className="coin"
                         src="./cryptocurrency-color_usd.svg"
+                        alt='coin'
                       />{' '}
                       <span className="green">+33600</span>
                     </td>

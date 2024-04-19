@@ -6,7 +6,7 @@ const DiceBeginnerComponent = ({ isNavOpen }) => {
     <div className={`dicetutorial ${isNavOpen ? 'dicetutorial-extended' : ''}`}>
       <div className="dicetutorial-hero">
         <h1>Bitcoin Dice Roll Game Guide</h1>
-        <img src="./die.png" alt="" />
+        <img src="./die.png" alt="dice-image" />
       </div>
       <h3>What is Dice?</h3>
       <p>
@@ -33,7 +33,7 @@ const DiceBeginnerComponent = ({ isNavOpen }) => {
         Below is a screenshot that explains everything about the online dice
         game.
       </p>
-      <img style={{ width: '100%' }} src="./dicegame-screenshot.png" alt="" />
+      <img style={{ width: '100%' }} src="./dicegame-screenshot.png" alt="dice-screenshot" />
       <p>Here’s the breakdown of the above screenshot.</p>
       <p>
         1- Mode: There are mainly two modes of betting: Automated & Manual In

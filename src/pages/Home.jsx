@@ -20,7 +20,6 @@ const Home = () => {
   const fetchUserProfile = async (accessToken) => {
     try {
       setLoading(true);
-      console.log(accessToken)
       const response = await fetch(
         'https://be.eliteplay.bloombyte.dev/user/me',
         {
@@ -33,14 +32,12 @@ const Home = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        console.log(data)
         setUserProfile(data);
         setLoading(false);
       } else {
         console.error('Failed to fetch user profile:', response.statusText);
         setLoading(false);
       }
-      console.log(response)
     } catch (error) {
 
       console.error('Error fetching user profile:', error.message);

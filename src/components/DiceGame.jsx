@@ -73,7 +73,6 @@ const DiceGame = ({ isNavOpen }) => {
       .post(url, data, { headers })
       .then((response) => {
         if (response.status === 201) {
-          console.log('Bet placed:', response.data);
           setDiceGameResponse(response.data)
         } else {
           throw new Error('Failed to place bet');
@@ -115,7 +114,7 @@ const DiceGame = ({ isNavOpen }) => {
           }}
         >
           {' '}
-          <img src="./Exclude.svg" alt="" /> Live Games
+          <img src="./Exclude.svg" alt="icon" /> Live Games
         </button>
         <button
           onClick={() => {
@@ -200,7 +199,7 @@ const DiceGame = ({ isNavOpen }) => {
                         setBetAmount(betAmount + 1);
                       }}
                       src="./count_arrow-top.svg"
-                      alt=""
+                      alt="arrow"
                     />
                     <img
                       style={{ cursor: 'pointer' }}
@@ -208,7 +207,7 @@ const DiceGame = ({ isNavOpen }) => {
                         setBetAmount(betAmount - 1);
                       }}
                       src="./count_arrow-down.svg"
-                      alt=""
+                      alt="arrow"
                     />
                   </div>
                 </div>
@@ -343,7 +342,7 @@ const DiceGame = ({ isNavOpen }) => {
                           setBetAmount(betAmount + 1);
                         }}
                         src="./count_arrow-top.svg"
-                        alt=""
+                        alt="arrow"
                       />
                       <img
                         style={{ cursor: 'pointer' }}
@@ -351,7 +350,7 @@ const DiceGame = ({ isNavOpen }) => {
                           setBetAmount(betAmount - 1);
                         }}
                         src="./count_arrow-down.svg"
-                        alt=""
+                        alt="arrow"
                       />
                     </div>
                   </div>

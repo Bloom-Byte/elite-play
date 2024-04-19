@@ -46,7 +46,6 @@ const WalletComponent = ({ isNavOpen, user }) => {
   
       if (response.status === 201) {
         const responseData = await response.json();
-        console.log('Deposit successful:', responseData);
         setSuccessMessage(responseData.data.message)
       } else {
         throw new Error('Failed to deposit');
@@ -68,7 +67,6 @@ const WalletComponent = ({ isNavOpen, user }) => {
     } else {
       setValidateMessage("")
     }
-    console.log(user._id)
     const requestBody = {
       amount: withdrawalAmount,
       eliteUserId: user._id,
@@ -87,7 +85,6 @@ const WalletComponent = ({ isNavOpen, user }) => {
       if (response.status === 201) {
         const responseData = await response.json();
         setSuccessMessage(responseData.data.message)
-        console.log('Transaction initiated successfully:', responseData);
       } else {
         console.error('Failed to initiate transaction:', response.statusText);
       }

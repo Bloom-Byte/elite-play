@@ -31,7 +31,6 @@ const Login = () => {
       localStorage.setItem('accessToken', response.data.accessToken);
       navigate('/');
     } catch (error) {
-      console.log(error)
       setError(error.response.data.error);
     }
   };

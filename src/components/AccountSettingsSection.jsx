@@ -51,7 +51,6 @@ const  handleConfirmPassword = async (event) => {
     setConfirmPassword(!confirmPassword);
     setChangePassword(!changePassword);
   } catch (error) {
-    console.log(error)
     setError(error.response.data.error);
   }
 };
@@ -79,10 +78,8 @@ const updatePassword = async () => {
     });
 
     const responseData = await response.json();
-    console.log(response)
 
     if (response.status === 201) {
-      console.log('Password updated successfully:', responseData);
       window.location.href ='/login'
     } else {
       throw new Error(responseData.message || 'Failed to update password');

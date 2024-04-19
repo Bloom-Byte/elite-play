@@ -9,7 +9,7 @@ const DiceAutomationComponent = ({ isNavOpen }) => {
           Guide: BGuide: Bitcoin Dice Script & Bots | Enhancing Your Gambling
           Experience Bitcoin Dice Script & Bots
         </h1>
-        <img src="./die.png" alt="" />
+        <img src="./die.png" alt="dice-img" />
       </div>
       <h3>What is a Dice Script?</h3>
       <p>
