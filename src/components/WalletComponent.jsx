@@ -164,17 +164,17 @@ const WalletComponent = ({ isNavOpen, user }) => {
                   <img src="./pot-coin.svg" alt="" />
                   <div className="pot-balance">
                     <span className="real-balance">Total Balance</span>
-                    <span className="real-balance_amount">USD 300.00</span>
+                    <span className="real-balance_amount">USD {user?.balance}</span>
                   </div>
                 </div>
                 <hr className="potline" />
                 <div className="pot-balance">
                   <span>Real Balance</span>
-                  <span>USD 300.00</span>
+                  <span>USD {user?.balance}</span>
                 </div>
                 <div className="pot-balance">
                   <span>Bonus Balance</span>
-                  <span>USD 300.00</span>
+                  <span>USD {user?.balance}</span>
                 </div>
               </div>
               <div className="mainBalance-section">
@@ -184,7 +184,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
                     <span>eGold</span>
                   </div>
                   <div className="mainBalance-amount">
-                    <span>300.00</span>
+                    <span>{user?.balance}</span>
                     <span
                       style={{ cursor: 'pointer' }}
                       onClick={() => setCurrentSection('Deposit')}
