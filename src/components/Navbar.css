@@ -30,9 +30,14 @@ body {
 .nav-games__dice {
     display: flex;
     gap: 10px;
+    cursor: pointer;
 }
 
-.nav-games__dice span a {
+.nav-games__dice span:hover {
+    color: #88df95;
+}
+
+.nav-games__dice span {
     color: #6E6E71;
     font-size: 14px;
     font-family: "Manrope", sans-serif;
