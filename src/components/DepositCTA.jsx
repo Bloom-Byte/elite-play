@@ -11,7 +11,7 @@ const DepositCTA = ({isNavOpen}) => {
     if (userIsLoggedIn) {
       navigate('/wallet');
     } else {
-      navigate('/login');
+      navigate('/register');
     }
   };
 
