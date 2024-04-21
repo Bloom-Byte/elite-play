@@ -1,7 +1,20 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
+import { isLoggedIn } from '../utils/auth';
 import './DepositCTA.css'
 
 const DepositCTA = ({isNavOpen}) => {
+  const userIsLoggedIn = isLoggedIn();
+  const navigate = useNavigate();
+
+  const handleDepositClick = () => {
+    if (userIsLoggedIn) {
+      navigate('/wallet');
+    } else {
+      navigate('/login');
+    }
+  };
+
   return (
     <div
       style={{ backgroundImage: 'url("/deposit-bg.svg")' }}
@@ -10,7 +23,7 @@ const DepositCTA = ({isNavOpen}) => {
       <div className="deposit-cta__txt">
         <h4>Quick & Easy Start:<br></br> Your Gateway to Fun <span className='begin-now'>Begins Now! </span></h4>
       </div>
-      <button>Deposit</button>
+      <button onClick={handleDepositClick}>Deposit</button>
     </div>
   )
 }

@@ -20,6 +20,10 @@
   margin-top: 2rem;
 }
 
+.livebets-toggle {
+  display: flex;
+}
+
 .livebets .all-bets {
   background-color: #077e551a;
   border: 1px solid #077e551a;
@@ -29,6 +33,7 @@
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
   color: #ffffff;
+  cursor: pointer;
 }
 
 .livebets .big-bets {
@@ -40,6 +45,7 @@
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
   color: #6e6e71;
+  cursor: pointer;
 }
 
 .livebets-table {
