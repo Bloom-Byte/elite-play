@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './DiceGame.css';
+import { set } from 'date-fns';
 
-const DiceGame = ({ isNavOpen }) => {
+const DiceGame = ({ isNavOpen, user }) => {
   const [auto, setAuto] = useState(false);
   const [fairness, setFairness] = useState(false);
   const [livebet, setLivebet] = useState(false);
@@ -59,6 +60,10 @@ const DiceGame = ({ isNavOpen }) => {
     const url = `https://be.eliteplay.bloombyte.dev/game/place-bet`;
     const pay = Number((100 / diceRoll).toFixed(4));
 
+    if (!user | user?.balance < betAmount) {
+      alert("Balance low, Deposit Please")
+    }
+
     const data = {
       amount: betAmount,
       isRollOver: isAutoBet,
@@ -74,6 +79,7 @@ const DiceGame = ({ isNavOpen }) => {
       .then((response) => {
         if (response.status === 201) {
           setDiceGameResponse(response.data)
+          setDiceRoll(response.data.targetValue)
         } else {
           throw new Error('Failed to place bet');
         }
@@ -389,7 +395,7 @@ const DiceGame = ({ isNavOpen }) => {
                 <div className="dicegame-placebet__amount">
                   <span>
                     <img src="./twemoji_coin.svg" alt="coin" />
-                    {betAmount * (100 / diceRoll).toFixed(4)}
+                    {(betAmount * (100 / diceRoll)).toFixed(2)}
                   </span>
                 </div>
                 <button onClick={() => placeBet(false)} className="dicegame-rollnow">
@@ -410,7 +416,7 @@ const DiceGame = ({ isNavOpen }) => {
             <span>67.89</span>
             <span>51.73</span>
           </div>
-          <div className="dicegame-diceroll__die">
+          <div style={{left: diceRoll-5+'%'}} className="dicegame-diceroll__die">
             <img src="./dice-cube.png" alt="die" />
             <span className={`${diceGameResponse?.betStatus === 'win' ? 'green' : ''} ${diceGameResponse?.betStatus === 'loss' ? 'red' : ''}`}>{diceRoll}</span>
           </div>

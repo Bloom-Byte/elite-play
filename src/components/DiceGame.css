@@ -183,9 +183,10 @@
 
 .dicegame-diceroll__die {
   display: flex;
-  justify-content: center;
-  align-items: center;
+  /* justify-content: center;
+  align-items: center; */
   position: relative;
+  /* left: 35%; */
 }
 
 .dicegame-diceroll__die img {
@@ -194,6 +195,8 @@
 }
 
 .dicegame-diceroll__die span {
+  top: 50%;
+  left: 4%;
   position: absolute;
   color: #070C0A;
   font-size: 16px;

@@ -127,7 +127,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <div
+              {/* <div
                 onClick={() => {
                   setLanguagePopup(!languagePopup);
                 }}
@@ -135,7 +135,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
               >
                 <img src="./translate.svg" alt="translate-icon" />
                 <span>Language: English</span>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
@@ -171,11 +171,11 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
             <div onClick={() => setLiveSupport(!liveSupport)} className="sidenav__link-mini">
               <img src="./customer-support.svg" alt="support-icon" />
             </div>
-            <div onClick={() => {
+            {/* <div onClick={() => {
                   setLanguagePopup(!languagePopup);
                 }} className="sidenav__link-mini">
               <img src="./translate.svg" alt="translate-icon" />
-            </div>
+            </div> */}
           </div>
         </div>
       )}
