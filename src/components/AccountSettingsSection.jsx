@@ -222,7 +222,7 @@ const updatePassword = async () => {
                 <p className="email-verify-txt">Email Verification</p>
                 <div className="email-verify_container">
                   <div className="email-txt">
-                    <span>yuxer@example.com</span>
+                    <span>{user?.email}</span>
                     <span className="email-txt-verified">
                       Verified <img src="./verfied-green.svg" />
                     </span>
@@ -763,104 +763,6 @@ const updatePassword = async () => {
                     <td>
                       <img src="./euro.svg" alt="euro" /> EUR{' '}
                       <span className="country-name">Euro</span>
-                    </td>
-                    <td>
-                      <img src="./inr.svg" alt="inr" /> INR{' '}
-                      <span className="country-name">India</span>
-                    </td>
-                    <td>
-                      <img src="./brazil.svg" alt="brl" /> BRL{' '}
-                      <span className="country-name">Brazil</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="./bdt.svg" alt="bdt" /> BDT{' '}
-                      <span className="country-name">Bangladesh</span>
-                    </td>
-                    <td>
-                      <img src="./idr.svg" alt="idr" /> IDR{' '}
-                      <span className="country-name">Indonesia</span>
-                    </td>
-                    <td>
-                      <img src="./ngn.svg" alt="ngn" /> NGN{' '}
-                      <span className="country-name">Nigeria</span>
-                    </td>
-                    <td>
-                      <img src="./rub.svg" alt="" /> RUB{' '}
-                      <span className="country-name">Russia</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="./krw.svg" alt="krw" /> KRW{' '}
-                      <span className="country-name">Korea</span>
-                    </td>
-                    <td>
-                      <img src="./mxn.svg" alt="mxn" />
-                      MXN <span className="country-name">Mexico Peso</span>
-                    </td>
-                    <td>
-                      <img src="./kzt.svg" alt="kzt" />
-                      KZT <span className="country-name">Kazakstan</span>
-                    </td>
-                    <td>
-                      <img src="./cup.svg" alt="cup" />
-                      CUP <span className="country-name">Cuba</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="./jpy.svg" alt="jpy" />
-                      JPY <span className="country-name">Japan</span>
-                    </td>
-                    <td>
-                      <img src="./pln.svg" alt="pln" />
-                      PLN <span className="country-name">Poland</span>
-                    </td>
-                    <td>
-                      <img src="./zar.svg" alt="zar" />
-                      ZAR <span className="country-name">South Africa</span>
-                    </td>
-                    <td>
-                      <img src="./gbp.svg" alt="gbp" />
-                      GBP <span className="country-name">United Kingdom</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="./mad.svg" alt="mad" />
-                      MAD <span className="country-name">Morocco</span>
-                    </td>
-                    <td>
-                      <img src="./aed.svg" alt="aed" />
-                      AED <span className="country-name">UAE-Dirham</span>
-                    </td>
-                    <td>
-                      <img src="./pen.svg" alt="pen" />
-                      PEN <span className="country-name">Peru Sol</span>
-                    </td>
-                    <td>
-                      <img src="./ghs.svg" alt="ghs" />
-                      GHS <span className="country-name">Ghana</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <img src="./isk.svg" alt="isk" />
-                      ISK <span className="country-name">Iceland</span>
-                    </td>
-                    <td>
-                      <img src="./kes.svg" alt="kes" />
-                      KES <span className="country-name">Kenya Shilling</span>
-                    </td>
-                    <td>
-                      <img src="./ils.svg" alt="ils" />
-                      ILS <span className="country-name">Israel Shekel</span>
-                    </td>
-                    <td>
-                      <img src="./clp.svg" alt="clp" />
-                      CLP <span className="country-name">Chile Peso</span>
                     </td>
                   </tr>
                 </tbody>

@@ -161,17 +161,17 @@ const WalletComponent = ({ isNavOpen, user }) => {
                   <img src="./pot-coin.svg" alt="" />
                   <div className="pot-balance">
                     <span className="real-balance">Total Balance</span>
-                    <span className="real-balance_amount">USD {user?.balance}</span>
+                    <span className="real-balance_amount">eGold {user?.balance}</span>
                   </div>
                 </div>
                 <hr className="potline" />
                 <div className="pot-balance">
                   <span>Real Balance</span>
-                  <span>USD {user?.balance}</span>
+                  <span>eGold {user?.balance}</span>
                 </div>
                 <div className="pot-balance">
                   <span>Bonus Balance</span>
-                  <span>USD {user?.balance}</span>
+                  <span>eGold {user?.balance}</span>
                 </div>
               </div>
               <div className="mainBalance-section">

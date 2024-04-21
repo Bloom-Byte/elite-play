@@ -27,13 +27,13 @@ const UserInformationPopup = ({
             <div className="userinfopopup-profile_info-edit">
               <img
                 className="userinfo-pimg"
-                src="./profile-img.svg"
+                src={user?.profilePictureUrl || './placeholder-profile-img.jpg'}
                 alt="image"
               />
               <p>{user? user.name : 'Yuxeer'}</p>
               <p>USER ID: {user? user._id : '12357308'}</p>
             </div>
-            <img className="edit-icon" src="./Edit.svg" alt="edit-icon" />
+            {/* <img className="edit-icon" src="./Edit.svg" alt="edit-icon" /> */}
           </div>
           <div className="statcards-container">
             <div className="statcards-nav">

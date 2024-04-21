@@ -20,39 +20,7 @@ const LanguagePopup = ({languagePopup, setLanguagePopup}) => {
                 <tbody>
                   <tr>
                     <td className="language-active">English</td>
-                    <td>Indian English</td>
-                    <td>Tiếng việt</td>
-                    <td>Indonesian</td>
-                  </tr>
-                  <tr>
-                    <td>日本語</td>
-                    <td>한국어</td>
-                    <td>Français</td>
-                    <td>Español</td>
-                  </tr>
-                  <tr>
-                    <td>Filipino</td>
-                    <td>عربى</td>
-                    <td>Marathi</td>
-                    <td>Türkçe</td>
-                  </tr>
-                  <tr>
-                    <td>فارسی</td>
-                    <td>Português</td>
-                    <td>Руccкий</td>
-                    <td>Deutsch</td>
-                  </tr>
-                  <tr>
-                    <td>ภาษาไทย</td>
-                    <td>Suomi</td>
-                    <td>Polski</td>
-                    <td>Italiano</td>
-                  </tr>
-                  <tr>
-                    <td>বাংলা</td>
-                    <td>اردو</td>
-                    <td>Українська</td>
-                    <td>Melayu</td>
+                    <td>German</td>
                   </tr>
                 </tbody>
               </table>

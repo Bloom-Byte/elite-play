@@ -6,7 +6,7 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen }) => {
     <div className="depositpopup">
       <div className="depositpopup-content">
         <div className="depositpopup-header">
-          <h3>Notification</h3>
+          <h3>Deposit</h3>
           <img
             onClick={() => {
               setDepositPopupOpen(!depositPopupOpen);
@@ -26,7 +26,7 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen }) => {
           <div className="depositpopup-box">
             <p>Choose Network</p>
             <select name="" id="">
-              <option value="erc20">ERC 20</option>
+              <option value="erc20">Normal Deposit</option>
             </select>
           </div>
         </div>
@@ -45,13 +45,12 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen }) => {
         </div>
         <div className="depositpopup-min">
           <img src="./alert-01.svg" alt="alert-icon" />
-          <span>Minimum Deposit: 0.1 eGold</span>
+          <span>Minimum Deposit: 1 eGold</span>
         </div>
         <div className="depositpopup-notice">
           <span className='notice-txt'>NOTICE: </span>{' '}
           <span>
-            Send only eGold to this deposit address. Coins will be deposited
-            automatically after 20 network confirmations.
+          If your eGold deposit has not been processed within 10 minutes, please contact our support team!
           </span>
         </div>
       </div>

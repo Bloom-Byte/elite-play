@@ -18,11 +18,16 @@
 }
 
 .profile-dropdown-cta {
-    margin-bottom: 20px;
+    padding: 10px;
     display: flex;
     gap: 10px;
     align-items: center;
     cursor: pointer;
+}
+
+.profile-dropdown-cta:hover {
+    background-color: #24e3a1;
+    border-radius: 8px;
 }
 
 .profile-dropdown-cta a {

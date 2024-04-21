@@ -1,11 +1,18 @@
 import React, { useState } from 'react';
 import UserInformationPopup from './UserInformationPopup';
+import { useNavigate } from 'react-router-dom';
 import './ProfileDropdown.css';
 
 const ProfileDropdown = ({user}) => {
   const [isUserInformationPopupOpen, setIsUserInformationPopupOpen] =
     useState(false);
   const [isStatPopupOpen, setIsStatPopupOpen] = useState(false);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem('accessToken');
+    navigate('/');
+  };
 
   return (
     <>
@@ -27,27 +34,13 @@ const ProfileDropdown = ({user}) => {
             <span>User Information</span>
           </div>
           <div className="profile-dropdown-cta">
-            <img src="./bitcoin-withdraw.svg" alt="wallet" />
-            <span>Withdraw</span>
-          </div>
-          <div className="profile-dropdown-cta">
-            <img src="./bitcoin-transaction.svg" alt="wallet" />
-            <span>Transaction</span>
-          </div>
-          <div className="profile-dropdown-cta">
-            <img src="./VIP.svg" alt="vip-icon" />
-            <span>
-              <span className="vip">VIP</span> Transaction
-            </span>
-          </div>
-          <div className="profile-dropdown-cta">
             <a href="/accountsettings">
               <img src="./Settings.svg" alt="setting-icon" />
               <span>Account Settings</span>
             </a>
           </div>
           <hr />
-          <div className="profile-dropdown-cta">
+          <div onClick={handleLogout} className="profile-dropdown-cta">
             <img src="./logout-03.svg" alt="setting-icon" />
             <span>Log out</span>
           </div>
