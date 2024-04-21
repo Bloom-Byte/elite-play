@@ -207,6 +207,16 @@ body {
     color: white;
 }
 
+.error-msg {
+    font-family: "Manrope", sans-serif;
+    color: #E14453;
+}
+
+.success-msg {
+    font-family: "Manrope", sans-serif;
+    color: #34B263;
+}
+
 
 
 /* --------- MOBILE RESPONSIVENESS --------- */

@@ -19,8 +19,28 @@ const Login = () => {
     setPassword(event.target.value);
   };
 
+  const validateEmail = (email) => {
+    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return re.test(email);
+  };
+
+  const validatePassword = (password) => {
+    const re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
+    return re.test(password);
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
+
+    if (!validateEmail(email)) {
+      setError('Please enter a valid email address.');
+      return;
+    }
+
+    if (!validatePassword(password)) {
+      setError('Password must be at least 8 characters long and include at least one number and one special character.');
+      return;
+    }
 
     try {
       const response = await axios.post('https://be.eliteplay.bloombyte.dev/user/auth/login', {
@@ -92,7 +112,7 @@ const Login = () => {
                 Sign In
               </button>
             </form>
-            {error && <p style={{color: '#E14453'}}>{error}</p>}
+            {error && <p className='error-msg'>{error}</p>}
             <div className="register-form__signin">
               <p>
                 New to eliteplay? <a href="/register">Sign Up</a>
