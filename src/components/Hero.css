@@ -49,10 +49,14 @@
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
   padding: 10px 20px;
-  border: none;
+  border: 2px transparent;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
+}
+
+.home-hero__txt-section button:hover {
+  background: transparent;
+  border: 2px solid #24e3a1;
 }
 
 .home-hero__user-info {

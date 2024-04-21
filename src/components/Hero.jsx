@@ -61,7 +61,7 @@ const Hero = ({ isNavOpen, user }) => {
           <div className="home-hero__txt-section">
             <h4>Turn Playtime to Paytime</h4>
             <p>Dive into a world of incredible rewards.</p>
-            <button>Sign Up Now</button>
+            <a style={{ textDecoration: 'none' }} href="/register"> <button>Sign Up Now</button></a>
           </div>
         )}
       </div>
