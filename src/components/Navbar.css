@@ -52,23 +52,34 @@ body {
 
 .nav-auth__signin {
     background: transparent;
-    border: none;
+    border: 2px transparent;
     color: #6E6E71;
     font-size: 14px;
     font-family: "Manrope", sans-serif;
     font-weight: 600;
     padding: 10px 20px;
+    cursor: pointer;
+}
+
+.nav-auth__signin:hover {
+    color: #88df95;
 }
 
 .nav-auth__signup {
     background-color:#077E551A;
     padding: 10px 20px;
-    border: 2px #077E551A;
+    border: 2px solid #077E551A;
     border-radius: 6px;
     color: #88df95;
     font-size: 14px;
     font-family: "Manrope", sans-serif;
     font-weight: 600;
+    cursor: pointer;
+}
+
+.nav-auth__signup:hover {
+    background-color: transparent;
+    border: 2px solid #24e3a1;
 }
 
 .nav-loggedin {

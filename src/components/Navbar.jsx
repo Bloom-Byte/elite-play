@@ -245,10 +245,10 @@ const Navbar = ({ isNavOpen, user }) => {
         ) : (
           <>
             <div className="nav-auth">
-              <a href="/login">
+              <a style={{ textDecoration: 'none'}} href="/login">
                 <button className="nav-auth__signin">Sign In</button>
               </a>
-              <a href="/register">
+              <a style={{ textDecoration: 'none'}} href="/register">
                 <button className="nav-auth__signup">Sign Up</button>
               </a>
             </div>
