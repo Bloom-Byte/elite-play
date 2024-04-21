@@ -28,7 +28,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
   return (
     <>
       {isNavOpen ? (
-        <div className="sidenav-expanded">
+        <div className={`sidenav-expanded ${isNavOpen ? 'open' : ''}`}>
           <div className="sidenav__icon">
             <img
               className="nav-icon"
@@ -105,24 +105,6 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
             </div>
             <div
               style={{
-                backgroundColor: vipSupport ? '#0B281F' : 'transparent',
-                padding: vipSupport ? '10px' : '0',
-                borderRadius: vipSupport ? '9px' : '0',
-                transition: 'background-color 0.3s, padding 0.3s',
-              }}
-            >
-              <div
-                onClick={() => setVipSupport(!vipSupport)}
-                className="sidenav__link"
-              >
-                <img src="./VIP.svg" alt="vip-icon" />
-                <span>
-                  <span className="sidenav-vip">VIP</span> Club
-                </span>
-              </div>
-            </div>
-            <div
-              style={{
                 backgroundColor: liveSupport ? '#0B281F' : 'transparent',
                 padding: liveSupport ? '10px' : '0',
                 borderRadius: liveSupport ? '9px' : '0',
@@ -168,25 +150,30 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
             />
           </div>
           <div className="sidenav__links">
+            <a href="/referrals">
             <div className="sidenav__link-mini">
               <img src="./gift.svg" alt="reward-icon" />
             </div>
+            </a>
+            <a href="/dice">
             <div className="sidenav__link-mini">
               <img src="./dice.svg" alt="dice-icon" />
             </div>
+            </a>
+            <a href="/crash">
             <div className="sidenav__link-mini">
               <img src="./chart-increase.svg" alt="crash-icon" />
             </div>
+            </a>
             <div className="sidenav__link-mini">
               <img src="./message-01.svg" alt="chat-icon" />
             </div>
-            <div className="sidenav__link-mini">
-              <img src="./VIP.svg" alt="vip-icon" />
-            </div>
-            <div className="sidenav__link-mini">
+            <div onClick={() => setLiveSupport(!liveSupport)} className="sidenav__link-mini">
               <img src="./customer-support.svg" alt="support-icon" />
             </div>
-            <div className="sidenav__link-mini">
+            <div onClick={() => {
+                  setLanguagePopup(!languagePopup);
+                }} className="sidenav__link-mini">
               <img src="./translate.svg" alt="translate-icon" />
             </div>
           </div>
