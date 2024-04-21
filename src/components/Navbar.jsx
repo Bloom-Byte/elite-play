@@ -268,7 +268,7 @@ const Navbar = ({ isNavOpen, user }) => {
           setDepositPopupOpen={setDepositPopupOpen}
         />
       )}
-      {currencyDropdownOpen && <CurrencyDropdown />}
+      {currencyDropdownOpen && <CurrencyDropdown balance={user?.balance} />}
       {chatOpen && <ChatPopup chatOpen={chatOpen} setChatOpen={setChatOpen} />}
       {liveSupport && (
         <LiveSupportPopup

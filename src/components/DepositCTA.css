@@ -40,7 +40,7 @@
 
 .deposit-cta button {
     background: linear-gradient(to right,  #F4900C 50%,  #FFAC33 50%);
-    border: 1px transparent;
+    border: 2px transparent;
     border-radius: 6px;
     padding: 10px 40px;
     margin-right: 50px;
@@ -48,6 +48,12 @@
     font-family: 'Manrope', sans-serif;
     font-weight: 600;
     color: #ffffff;
+    cursor: pointer;
+}
+
+.deposit-cta button:hover {
+    background: transparent;
+    border: 2px solid #FFAC33;
 }
 
 

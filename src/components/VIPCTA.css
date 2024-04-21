@@ -50,11 +50,15 @@
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
   padding: 10px 20px;
-  border: none;
+  border: 2px transparent;
   border-radius: 8px;
   cursor: pointer;
-  transition: all 0.3s ease;
   margin-top: 2rem;
+}
+
+.vip-cta_text button:hover {
+  background: transparent;
+  border: 2px solid #FFAC33;
 }
 
 
