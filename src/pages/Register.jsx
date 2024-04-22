@@ -13,6 +13,7 @@ const Register = () => {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [referralCode, setReferralCode] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -38,33 +39,40 @@ const Register = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     if (!username.match(/^[a-zA-Z0-9_]+$/)) {
       setError('Username must not contain special characters.');
+      setIsLoading(false);
       return;
     } else {
-      setError('')
+      setError('');
     }
 
     if (!validateEmail(email)) {
       setError('Please enter a valid email address.');
+      setIsLoading(false);
       return;
     } else {
-      setError('')
+      setError('');
     }
 
     if (!validatePassword(password)) {
-      setError('Password must be at least 8 characters long and include at least one number and one special character.');
+      setError(
+        'Password must be at least 8 characters long and include at least one number and one special character.'
+      );
+      setIsLoading(false);
       return;
     } else {
-      setError('')
+      setError('');
     }
 
     if (!termsChecked) {
       setError('You must agree to the terms and conditions.');
+      setIsLoading(false);
       return;
-    }  else {
-      setError('')
+    } else {
+      setError('');
     }
 
     try {
@@ -81,6 +89,8 @@ const Register = () => {
       setMessage(response.data.message);
     } catch (error) {
       setError(error.response.data.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -154,7 +164,11 @@ const Register = () => {
                 />
               </div>
               <div className="register-form__input-box">
-              <img className="input-icon" src="./gift.svg" alt="reward-icon" />
+                <img
+                  className="input-icon"
+                  src="./gift.svg"
+                  alt="reward-icon"
+                />
                 <input
                   type="text"
                   placeholder="Referral Code"
@@ -177,11 +191,10 @@ const Register = () => {
                 </label>
               </div>
               <button className="register-form__submit-btn" type="submit">
-                {' '}
-                Sign Up Now{' '}
+                {isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Sign Up Now'}
               </button>
-              {message && <p className='success-msg'>{message}</p>}
-              {error && <p className='error-msg'>{error}</p>}
+              {message && <p className="success-msg">{message}</p>}
+              {error && <p className="error-msg">{error}</p>}
             </form>
 
             <div className="register-form__signin">

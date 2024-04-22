@@ -9,6 +9,7 @@ const Login = () => {
   const [emailFocused, setEmailFocused] = useState(false);
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const handleEmailChange = (event) => {
@@ -31,14 +32,17 @@ const Login = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     if (!validateEmail(email)) {
       setError('Please enter a valid email address.');
+      setIsLoading(false);
       return;
     }
 
     if (!validatePassword(password)) {
       setError('Password must be at least 8 characters long and include at least one number and one special character.');
+      setIsLoading(false);
       return;
     }
 
@@ -109,7 +113,7 @@ const Login = () => {
                 <a href="/forgot-password">Forgot Password?</a>
               </div>
               <button className="register-form__submit-btn" type="submit">
-                Sign In
+              {isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Sign In'}
               </button>
             </form>
             {error && <p className='error-msg'>{error}</p>}
