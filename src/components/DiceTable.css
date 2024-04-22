@@ -11,6 +11,10 @@
   margin-left: 18rem;
 }
 
+.dicebets-toggle {
+  display: flex;
+}
+
 .dicebets-toggle .dice-bets {
   background-color: #077e551a;
   border: 1px solid #077e551a;

@@ -9,6 +9,26 @@ const CrashGame = ({ isNavOpen }) => {
   const [betAmount, setBetAmount] = useState(10);
   const [multiplier, setMultiplier] = useState(2.00)
   const [autoBet, setAutoBet] = useState(false);
+  const [gameState, setGameState] = useState({
+    isGameRunning: false,
+    isGameCrashed: false,
+    isBettingAllowed: false,
+    currentMultiplier: 1,
+    currentCrashPoint: 0,
+  });
+
+  const [isGameStarting, setIsGameStarting] = useState(false);
+  
+  const chartData = {
+    labels: [],
+    datasets: [{
+      label: 'Multiplier',
+      data: [],
+      borderColor: 'blue',
+      backgroundColor: gameState.isGameCrashed ? 'red' : 'transparent',
+    }],
+  };
+
 
   const state = {
     crashData: [{ value: 1 }, { value: 1.5 }, { value: 2 }],
@@ -41,7 +61,7 @@ const CrashGame = ({ isNavOpen }) => {
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
       <div className="dicegame-buttons">
-        <button className="dicegame-dice-title">Dice</button>
+        <button className="dicegame-dice-title">Crash</button>
         <button
           onClick={() => {
             setLivebet(!livebet);

@@ -10,6 +10,9 @@ const Dice = () => {
   const [isNavOpen, setIsNavOpen] = useState(false)
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [bets, setBets] = useState([]);
+  const [userBets, setUserBets] = useState([]);
+  const accessToken = localStorage.getItem('accessToken');
 
   const fetchUserProfile = async (accessToken) => {
     try {
@@ -48,13 +51,66 @@ const Dice = () => {
     }
   }, []);
 
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+
+    // Construct the EventSource object
+    const eventSource = new EventSource(`https://be.eliteplay.bloombyte.dev/game/all-bets`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+
+    // Handle incoming messages
+    eventSource.onmessage = (event) => {
+      const newBet = JSON.parse(event.data);
+      setBets((prevBets) => [...prevBets, newBet]);
+    };
+
+    // Handle any errors
+    eventSource.onerror = (error) => {
+      console.error('EventSource failed:', error);
+      eventSource.close();
+    };
+
+    // Clean up
+    return () => {
+      eventSource.close();
+    };
+  }, [accessToken]);
+
+  useEffect(() => {
+    // Create an EventSource object to listen to events from the server
+    const eventSource = new EventSource(`https://be.eliteplay.bloombyte.dev/game/user-bets`, {
+      headers: {
+        Authorization: `Bearer ${accessToken}`
+      }
+    });
+
+    // Listen to messages on the event stream
+    eventSource.onmessage = function(event) {
+      const newBet = JSON.parse(event.data);
+      setUserBets(prevBets => [...prevBets, newBet]);
+    };
+
+    // Listen for errors
+    eventSource.onerror = function(error) {
+      console.error('EventSource failed:', error);
+      eventSource.close();
+    };
+
+    // Cleanup when component unmounts
+    return () => eventSource.close();
+  }, [accessToken]);
+
+
 
   return (
     <div>
       <Navbar isNavOpen={isNavOpen} user={userProfile} />
       <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
       <DiceGame isNavOpen={isNavOpen} user={userProfile} />
-      <DiceTable isNavOpen={isNavOpen} />
+      <DiceTable isNavOpen={isNavOpen} bets={bets} userBets={userBets} />
       <Footer isNavOpen={isNavOpen} />
     </div>
   )

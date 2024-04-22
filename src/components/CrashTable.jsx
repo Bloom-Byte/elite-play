@@ -12,7 +12,7 @@ const CrashTable = ({ isNavOpen }) => {
             setToggle(!toggle)
           }}
         >
-          Dice
+          Crash
         </button>
         <button
           className={`${toggle ? 'dice-bets' : 'desc-info'}`}
@@ -25,9 +25,9 @@ const CrashTable = ({ isNavOpen }) => {
       </div>
       {toggle ? (
         <div className='dicetable-description-information'>
-          <h3>Dice at ELITEPLAY: Overview</h3>
+          <h3>Crash at ELITEPLAY: Overview</h3>
           <p>
-            ELITEPLAY Dice is a popular and long-standing game in the online
+            ELITEPLAY Crash is a popular and long-standing game in the online
             gambling industry. It is a dice game that utilizes blockchain
             technology for its fairness and transparency. The game is based on
             probability and involves calculating blockchain hash values and
@@ -63,9 +63,9 @@ const CrashTable = ({ isNavOpen }) => {
             win the game and receive their payout based on the odds and the
             amount of their bet.
           </p>
-          <h3>About Dice at ELITEPLAY</h3>
+          <h3>About Crash at ELITEPLAY</h3>
           <p>
-            At ELITEPLAY Dice, players can enjoy a game with a deficient 1%
+            At ELITEPLAY Crash, players can enjoy a game with a deficient 1%
             House Edge, ensuring a fair and competitive environment. The process
             of generating results is meticulously calculated to maintain
             transparency and provable fairness.

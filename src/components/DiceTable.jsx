@@ -1,15 +1,16 @@
-import React, { useState } from 'react'
-import './DiceTable.css'
+import React, { useState } from 'react';
+import './DiceTable.css';
 
-const DiceTable = ({ isNavOpen }) => {
-  const [toggle, setToggle] = useState(false)
+const DiceTable = ({ isNavOpen, bets, userBets }) => {
+  const [toggle, setToggle] = useState(false);
+  const [userBetsOpen, setUserBetsOpen] = useState(false)
   return (
     <div className={`dicetable ${isNavOpen ? 'dicetable-extended' : ''}`}>
       <div className="dicebets-toggle">
         <button
           className={`${toggle ? 'desc-info' : 'dice-bets'}`}
           onClick={() => {
-            setToggle(!toggle)
+            setToggle(!toggle);
           }}
         >
           Dice
@@ -17,14 +18,14 @@ const DiceTable = ({ isNavOpen }) => {
         <button
           className={`${toggle ? 'dice-bets' : 'desc-info'}`}
           onClick={() => {
-            setToggle(!toggle)
+            setToggle(!toggle);
           }}
         >
           Description
         </button>
       </div>
       {toggle ? (
-        <div className='dicetable-description-information'>
+        <div className="dicetable-description-information">
           <h3>Dice at ELITEPLAY: Overview</h3>
           <p>
             ELITEPLAY Dice is a popular and long-standing game in the online
@@ -174,8 +175,8 @@ const DiceTable = ({ isNavOpen }) => {
         <>
           <div className="dicetable-section">
             <div className="dicetable-betstitle">
-              <div className="dicetable-betstitle_all-bets">All Bets</div>
-              <div className="dicetable-betstitle_my-bets">My Bets</div>
+              <div onClick={() => {setUserBetsOpen(!userBetsOpen)}} className={userBetsOpen? 'dicetable-betstitle_all-bets' : 'dicetable-betstitle_my-bets'}>All Bets</div>
+              <div onClick={() => {setUserBetsOpen(!userBetsOpen)}} className={userBetsOpen? 'dicetable-betstitle_my-bets' : 'dicetable-betstitle_all-bets'}>My Bets</div>
             </div>
             <div>
               <table className="livebets-table_table">
@@ -189,216 +190,60 @@ const DiceTable = ({ isNavOpen }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span className="red">-100</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span className="red">-100</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span className="red">-100</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span className="red">-100</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                        alt='coin'
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
+                  {userBetsOpen ? (
+                    userBets.map((bet, index) => (
+                      <tr>
+                        <td className="game-icon">{bet._id}</td>
+                        <td>
+                          <img
+                            className="coin"
+                            src="./twemoji_coin.svg"
+                            alt="coin"
+                          />
+                          {bet.amount}
+                        </td>
+                        <td>{bet.payout}x</td>
+                        <td
+                          className={bet.betStatus === 'loss' ? 'red' : 'green'}
+                        >
+                          {' '}
+                          <img
+                            className="coin"
+                            src="./twemoji_coin.svg"
+                            alt="coin"
+                          />
+                          {bet.winAmount}x
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    bets.map((bet, index) => (
+                      <tr>
+                        <td className="game-icon">{bet._id}</td>
+                        <td>
+                          <img
+                            className="coin"
+                            src="./twemoji_coin.svg"
+                            alt="coin"
+                          />
+                          {bet.amount}
+                        </td>
+                        <td>{bet.payout}x</td>
+                        <td
+                          className={bet.betStatus === 'loss' ? 'red' : 'green'}
+                        >
+                          {' '}
+                          <img
+                            className="coin"
+                            src="./twemoji_coin.svg"
+                            alt="coin"
+                          />
+                          {bet.winAmount}x
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                 
                 </tbody>
               </table>
             </div>
@@ -406,7 +251,7 @@ const DiceTable = ({ isNavOpen }) => {
         </>
       )}
     </div>
-  )
-}
+  );
+};
 
-export default DiceTable
+export default DiceTable;
