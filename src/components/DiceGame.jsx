@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './DiceGame.css';
-import { set } from 'date-fns';
 
-const DiceGame = ({ isNavOpen, user }) => {
+const DiceGame = ({ isNavOpen, user, userBets }) => {
   const [auto, setAuto] = useState(false);
   const [fairness, setFairness] = useState(false);
   const [livebet, setLivebet] = useState(false);
@@ -415,14 +414,9 @@ const DiceGame = ({ isNavOpen, user }) => {
         </div>
         <div className="dicegame-diceroll">
           <div className="dicegame-diceroll__odds">
-            <span>88.59</span>
-            <span>74.17</span>
-            <span className="dicegame-diceroll__odds-active">37.56</span>
-            <span className="dicegame-diceroll__odds-active">32.95</span>
-            <span>55.34</span>
-            <span>92.81</span>
-            <span>67.89</span>
-            <span>51.73</span>
+            {userBets.map((bet, index) => {
+              <span className={bet.betStatus === 'win' ? 'dicegame-diceroll__odds-active' : ''}>{bet.payout}</span>
+            })}
           </div>
           <div style={{left: diceRoll-5+'%'}} className="dicegame-diceroll__die">
             <img src="./dice-cube.png" alt="die" />
