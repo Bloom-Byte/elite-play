@@ -54,6 +54,11 @@ const DiceGame = ({ isNavOpen, user }) => {
     }
   };
 
+  function playSound() {
+    const sound = new Audio('/dice_roll.mp3');
+    sound.play();
+  }
+
   const accessToken = localStorage.getItem('accessToken');
 
   function placeBet(isAutoBet) {
@@ -62,7 +67,10 @@ const DiceGame = ({ isNavOpen, user }) => {
 
     if (!user | user?.balance < betAmount) {
       alert("Balance low, Deposit Please")
+      return
     }
+
+    playSound();
 
     const data = {
       amount: betAmount,

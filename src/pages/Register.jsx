@@ -42,21 +42,29 @@ const Register = () => {
     if (!username.match(/^[a-zA-Z0-9_]+$/)) {
       setError('Username must not contain special characters.');
       return;
+    } else {
+      setError('')
     }
 
     if (!validateEmail(email)) {
       setError('Please enter a valid email address.');
       return;
+    } else {
+      setError('')
     }
 
     if (!validatePassword(password)) {
       setError('Password must be at least 8 characters long and include at least one number and one special character.');
       return;
+    } else {
+      setError('')
     }
 
     if (!termsChecked) {
       setError('You must agree to the terms and conditions.');
       return;
+    }  else {
+      setError('')
     }
 
     try {

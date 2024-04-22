@@ -151,7 +151,7 @@ body {
 
 .register-form__submit-btn {
     background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
-    border: 1px transparent;
+    border: 2px transparent;
     border-radius: 6px;
     color: #fff; 
     padding: 10px 20px;
@@ -160,6 +160,12 @@ body {
     font-family: "Manrope", sans-serif;
     font-weight: 600;
     font-size: 16px;
+    cursor: pointer;
+}
+
+.register-form__submit-btn:hover {
+    background: transparent;
+    border: 2px solid #24E3A1 ;
 }
 
 .register-form__signin p {
