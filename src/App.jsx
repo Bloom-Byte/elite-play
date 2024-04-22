@@ -14,6 +14,7 @@ import DiceStrategy from './pages/DiceStrategy'
 import CrashBeginner from './pages/CrashBeginner'
 import CrashAutomation from './pages/CrashAutomation'
 import CrashStrategy from './pages/CrashStrategy'
+import ForgotPassword from './pages/ForgotPassword'
 import PrivateRoutes from './utils/PrivateRoutes'
 import './App.css'
 
@@ -37,6 +38,7 @@ function App() {
       <Route path="/crashbeginner" element={<CrashBeginner />} />
       <Route path="/crashstrategy" element={<CrashStrategy />} />
       <Route path="/crashautomation" element={<CrashAutomation />} />
+      <Route path="/forgot-password" element={<ForgotPassword />} />
 
       {/* <Route element={<PrivateRoutes />}>
         <Route path="/" element={<Home/>}/>

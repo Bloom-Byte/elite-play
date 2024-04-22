@@ -146,6 +146,7 @@ const Register = () => {
                 />
               </div>
               <div className="register-form__input-box">
+              <img className="input-icon" src="./gift.svg" alt="reward-icon" />
                 <input
                   type="text"
                   placeholder="Referral Code"
