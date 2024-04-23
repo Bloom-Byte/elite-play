@@ -16,6 +16,8 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
   const [confirmOldPassword, setConfirmOldPassword] = useState('')
   const [newPassword, setNewPassword] = useState('')
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+  const [message, setMessage] = useState('');
 
   const [profileImage, setProfileImage] = useState(null);
 
@@ -25,6 +27,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
   };
 
   const handleUploadProfile = async () => {
+    setIsLoading(true);
     const url = 'https://be.eliteplay.bloombyte.dev/user/me/update/upload-profile';
     const accessToken = localStorage.getItem('accessToken');
 
@@ -45,11 +48,16 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
       if (response.status === 201) {
         const responseData = await response.json();
         console.log('Profile picture updated:', responseData.message);
+        setEditUsername(!edituserName);
       } else {
+        setError(response.message)
         throw new Error('Failed to update profile picture');
       }
     } catch (error) {
+      setError(response.message)
       console.error('Error updating profile picture:', error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -451,11 +459,13 @@ const updatePassword = async () => {
             </div>
             <div style={{width: '200px'}} className="editusername-popup_main-content">
               <div className="editusername-popup_edit-avatar">
-                {profileImage ? (<img style={{borderRadius: '50%'}} src={URL.createObjectURL(profileImage)} alt="selected-profile" />) : (<img src={user?.profilePictureUrl} alt="selected-profile" />)}
+                {profileImage ? (<img src={URL.createObjectURL(profileImage)} alt="selected-profile" />) : (<img src={user?.profilePictureUrl} alt="selected-profile" />)}
                 <input style={{display: 'none'}} id="getFile" type="file" accept="image/*" onChange={handleImageChange} />
-                <label htmlFor="getFile">Edit Your Avatar</label>
+                <label htmlFor="getFile">{isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Edit Your Avatar'}</label>
               </div>
               <button className="edit-username-popup_btn" onClick={handleUploadProfile}>Modify</button>
+              {message && <p className="success-msg">{message}</p>}
+              {error && <p className="error-msg">{error}</p>}
             </div>
           </div>
         </div>
@@ -666,10 +676,14 @@ const updatePassword = async () => {
                 <p>Select Period</p>
 
                 <select className="period-options" name="period" id="period">
-                  <option value="none">None</option>
+                  <option value="7">1 week</option>
+                  <option value="30">1 month</option>
+                  <option value="365">1 year</option>
                 </select>
                 <div className="self-exclusion-btns">
-                  <button className="self-exclusion_cancel">Cancel</button>
+                  <button  onClick={() => {
+                  setPeriodExclusion(!periodExclusion);
+                }} className="self-exclusion_cancel">Cancel</button>
                   <button className="self-exclusion_next">Next</button>
                 </div>
               </div>

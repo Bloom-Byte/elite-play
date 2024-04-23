@@ -32,8 +32,8 @@ const Footer = ({ isNavOpen }) => {
         <div className="footer-cta__right">
             <div className='footer-cta-items'>
                 <p>Games</p>
-                <a href=''>Dice</a>
-                <a href=''>Crash</a>
+                <a href='/dice'>Dice</a>
+                <a href='/crash'>Crash</a>
             </div>
             <div className='footer-cta-items'>
                 <p>Promo</p>
@@ -41,10 +41,10 @@ const Footer = ({ isNavOpen }) => {
             </div>
             <div className='footer-cta-items'>
                 <p>Support/Legal</p>
-                <a href=''>Help Center</a>
-                <a href=''>FAQ</a>
-                <a href=''>Privacy Policy</a>
-                <a href=''>Terms of Service</a>
+                <a href='/helpcenter'>Help Center</a>
+                <a href='/helpcenter'>FAQ</a>
+                <a href='/helpcenter'>Privacy Policy</a>
+                <a href='/helpcenter'>Terms of Service</a>
                 <a href=''>Live Support</a>
             </div>
             <div>

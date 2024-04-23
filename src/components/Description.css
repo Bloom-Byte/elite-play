@@ -36,6 +36,7 @@
 .desc-cta {
   display: flex;
   gap: 10px;
+  cursor: pointer;
 }
 
 .desc-cta span {
@@ -44,6 +45,10 @@
   font-weight: 600;
   color: #88DF95;
   margin: 0;
+}
+
+.desc-cta span:hover {
+  color: white;
 }
 
 

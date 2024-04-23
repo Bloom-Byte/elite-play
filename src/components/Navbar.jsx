@@ -230,11 +230,11 @@ const Navbar = ({ isNavOpen, user }) => {
                 className="nav-profile"
               >
                 <img
-                  style={{ borderRadius: '50%' }}
+                  style={{ borderRadius: '50%', width: '40px', height: '40px' }}
                   src={`${
                     user?.profilePictureUrl
                       ? user.profilePictureUrl
-                      : './profile-img.svg'
+                      : './placeholder-profile-img.jpg'
                   }`}
                   alt="profile-img"
                 />

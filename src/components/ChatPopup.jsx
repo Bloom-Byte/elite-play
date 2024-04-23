@@ -122,7 +122,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
   };
 
   return (
-    <div className="chatroom-popup">
+    <div  className={`chatroom-popup ${chatOpen ? 'open' : ''}`}>
       <div className="chatroom-popup-popup_container">
         <div className="chatroom-popup_header">
           <p>Chatroom</p>
@@ -146,24 +146,12 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
           </div>
         </div>
         <div className="chatroom-maincontent">
-          <div className="chatroom_languages">
+          {/* <div className="chatroom_languages">
             <div className="chatroom_language chatroom_language-active">
               <span>Global</span>
               <img src="./Exclude.svg" alt="live-icon" />
             </div>
-            <div className="chatroom_language">
-              <span>English</span>
-            </div>
-            <div className="chatroom_language">
-              <span>Indonesia</span>
-            </div>
-            <div className="chatroom_language">
-              <span>বাংল</span>
-            </div>
-            <div className="chatroom_language">
-              <span>Руccкий</span>
-            </div>
-          </div>
+          </div> */}
           <div>
             <div
               className={`chatroom-chatbox__container ${
@@ -280,7 +268,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
             </div>
             <div>
               <form className="chatroom-input" onSubmit={sendMessage}>
-                <div>
+                <div style={{width: '100%'}}>
                   <input
                     placeholder="Type here..."
                     type="text"
