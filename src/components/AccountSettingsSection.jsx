@@ -13,11 +13,12 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
   const [editLanguage, setEditLanguage] = useState(false);
   const [editCurrency, setEditCurrency] = useState(false);
   const [mobileNav, setMobileNav] = useState(false);
-  const [confirmOldPassword, setConfirmOldPassword] = useState('')
-  const [newPassword, setNewPassword] = useState('')
+  const [confirmOldPassword, setConfirmOldPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [selectedPeriod, setSelectedPeriod] = useState('');
 
   const [profileImage, setProfileImage] = useState(null);
 
@@ -28,21 +29,22 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
 
   const handleUploadProfile = async () => {
     setIsLoading(true);
-    const url = 'https://be.eliteplay.bloombyte.dev/user/me/update/upload-profile';
+    const url =
+      'https://be.eliteplay.bloombyte.dev/user/me/update/upload-profile';
     const accessToken = localStorage.getItem('accessToken');
 
     const formData = new FormData();
     formData.append('profile', profileImage);
 
     const headers = {
-      Authorization: `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`,
     };
 
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: headers,
-        body: formData
+        body: formData,
       });
 
       if (response.status === 201) {
@@ -50,92 +52,136 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
         console.log('Profile picture updated:', responseData.message);
         setEditUsername(!edituserName);
       } else {
-        setError(response.message)
+        setError(response.message);
         throw new Error('Failed to update profile picture');
       }
     } catch (error) {
-      setError(response.message)
+      setError(response.message);
       console.error('Error updating profile picture:', error);
     } finally {
       setIsLoading(false);
     }
   };
 
-
   const handleSelfExclusion = () => {
-    setSelfExclusion(!selfExclusion);
-    setPeriodExclusion(!periodExclusion);
+    const checkboxes = document.querySelectorAll(
+      '.container-exclude input[type="checkbox"]'
+    );
+    let atLeastOneChecked = false;
+
+    checkboxes.forEach((checkbox) => {
+      if (checkbox.checked) {
+        atLeastOneChecked = true;
+      }
+    });
+
+    if (atLeastOneChecked) {
+      setSelfExclusion(!selfExclusion);
+      setPeriodExclusion(!periodExclusion);
+    } else {
+      alert('Please select at least one option before proceeding.');
+    }
+  };
+
+  const handleSelfExclusionPeriod = async () => {
+    try {
+      const response = await fetch('https://your-api-url/user/self-exclude', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${elitePlayAcessToken}`,
+        },
+        body: JSON.stringify({
+          days: parseInt(selectedPeriod),
+        }),
+      });
+
+      if (response.ok) {
+        const responseData = await response.json();
+        console.log(responseData.message);
+        setMessage(responseData.message);
+
+        setTimeout(() => {
+          window.location.href = '/';
+        }, 2000);
+      } else {
+        console.error('Self-exclusion failed:', response.status);
+      }
+    } catch (error) {
+      console.error('Error:', error);
+    }
   };
 
   const copyToClipboard = (text) => {
-    const tempInput = document.createElement("input");
+    const tempInput = document.createElement('input');
     tempInput.value = text;
 
     document.body.appendChild(tempInput);
 
     tempInput.select();
 
-    document.execCommand("copy");
+    document.execCommand('copy');
 
     document.body.removeChild(tempInput);
 
-    alert("Copied to clipboard: " + text);
-};
-
-const  handleConfirmPassword = async (event) => {
-  event.preventDefault();
-  setError('');
-
-  try {
-    const response = await axios.post('https://be.eliteplay.bloombyte.dev/user/auth/login', {
-      email: user?.email,
-      password: confirmOldPassword,
-    });
-
-    localStorage.setItem('accessToken', response.data.accessToken);
-    setConfirmPassword(!confirmPassword);
-    setChangePassword(!changePassword);
-  } catch (error) {
-    setError(error.response.data.error);
-  }
-};
-
-const updatePassword = async () => {
-  setError('');
-  const url = 'https://be.eliteplay.bloombyte.dev/user/update/password';
-  const accessToken = localStorage.getItem('accessToken');
-
-  const requestBody = {
-    oldPassword: confirmOldPassword,
-    newPassword: newPassword
+    alert('Copied to clipboard: ' + text);
   };
 
-  const headers = {
-    'Content-Type': 'application/json',
-    'Authorization': `Bearer ${accessToken}`
-  };
+  const handleConfirmPassword = async (event) => {
+    event.preventDefault();
+    setError('');
 
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: headers,
-      body: JSON.stringify(requestBody)
-    });
+    try {
+      const response = await axios.post(
+        'https://be.eliteplay.bloombyte.dev/user/auth/login',
+        {
+          email: user?.email,
+          password: confirmOldPassword,
+        }
+      );
 
-    const responseData = await response.json();
-
-    if (response.status === 201) {
-      window.location.href ='/login'
-    } else {
-      throw new Error(responseData.message || 'Failed to update password');
+      localStorage.setItem('accessToken', response.data.accessToken);
+      setConfirmPassword(!confirmPassword);
+      setChangePassword(!changePassword);
+    } catch (error) {
+      setError(error.response.data.error);
     }
-  } catch (error) {
-    console.error('Error occurred during password update:', error.message);
-    setError(error.message || error.response.message)
-  }
-};
+  };
 
+  const updatePassword = async () => {
+    setError('');
+    const url = 'https://be.eliteplay.bloombyte.dev/user/update/password';
+    const accessToken = localStorage.getItem('accessToken');
 
+    const requestBody = {
+      oldPassword: confirmOldPassword,
+      newPassword: newPassword,
+    };
+
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: JSON.stringify(requestBody),
+      });
+
+      const responseData = await response.json();
+
+      if (response.status === 201) {
+        window.location.href = '/login';
+      } else {
+        throw new Error(responseData.message || 'Failed to update password');
+      }
+    } catch (error) {
+      console.error('Error occurred during password update:', error.message);
+      setError(error.message || error.response.message);
+    }
+  };
 
   return (
     <div
@@ -387,56 +433,67 @@ const updatePassword = async () => {
           )}
           {currentSection === 'auth' && (
             <>
-              <div className='auth-security'>
+              <div className="auth-security">
                 <p className="setting-section__header">Security Setup</p>
                 <hr />
                 <p className="setting-section__header">
                   Google Authenticator(2FA)
                 </p>
-                <p className='auth-security-p'>
+                <p className="auth-security-p">
                   Using Google Authentication to improve account security is
                   highly recommended.
                 </p>
-                <p className='auth-security-p'>
+                <p className="auth-security-p">
                   You can follow the steps below to enable Google
                   Authentication.
                 </p>
                 <p className="setting-section__header">
                   (1) Download and install the Google Authenticator app
                 </p>
-                <p className='auth-security-p'>
+                <p className="auth-security-p">
                   Using Google Authentication to improve account security is
                   highly recommended.
                 </p>
-                <p className='auth-security-p'>
+                <p className="auth-security-p">
                   You can follow the steps below to enable Google
                   Authentication.
                 </p>
                 <p className="setting-section__header">
                   (2) Add secret key in Google Authenticator and backup
                 </p>
-                <p className='auth-security-p'>
+                <p className="auth-security-p">
                   To enable Google Authentication, please scan or manually enter
                   this Secret Key into the Google Authenticator
                 </p>
-                <div className='auth-secret-key'>
+                <div className="auth-secret-key">
                   <span>76Y73NZRWD32HRVQ</span>
-                  <span onClick={() => {copyToClipboard('76Y73NZRWD32HRVQ')}} style={{ cursor: 'pointer' }}>
-                    <img src="./copy-01.svg" alt="copy-icon" /> <span className='auth-security-copy'>Copy</span>
+                  <span
+                    onClick={() => {
+                      copyToClipboard('76Y73NZRWD32HRVQ');
+                    }}
+                    style={{ cursor: 'pointer' }}
+                  >
+                    <img src="./copy-01.svg" alt="copy-icon" />{' '}
+                    <span className="auth-security-copy">Copy</span>
                   </span>
                 </div>
-                <img style={{marginTop:'1rem'}} src="./qr-auth.png" alt="qr-code" />
-                <p className='auth-security-p'>
+                <img
+                  style={{ marginTop: '1rem' }}
+                  src="./qr-auth.png"
+                  alt="qr-code"
+                />
+                <p className="auth-security-p">
                   Ensure you backup your Google Authentication information (save
                   this QR code or secret key) before enabling it. <br /> This
                   will allow you to recover your Google Authentication in case
                   of phone loss.
                 </p>
                 <p className="setting-section__header">
-                (3) Enter the 6-digit code in your Google Authenticator and login password
+                  (3) Enter the 6-digit code in your Google Authenticator and
+                  login password
                 </p>
-                <input type="text" placeholder='Password' />
-                <input type="text" placeholder='Authentication Code' />
+                <input type="text" placeholder="Password" />
+                <input type="text" placeholder="Authentication Code" />
                 <button>Submit</button>
               </div>
             </>
@@ -457,13 +514,45 @@ const updatePassword = async () => {
                 X
               </span>
             </div>
-            <div style={{width: '200px'}} className="editusername-popup_main-content">
+            <div
+              style={{ width: '200px' }}
+              className="editusername-popup_main-content"
+            >
               <div className="editusername-popup_edit-avatar">
-                {profileImage ? (<img src={URL.createObjectURL(profileImage)} alt="selected-profile" />) : (<img src={user?.profilePictureUrl} alt="selected-profile" />)}
-                <input style={{display: 'none'}} id="getFile" type="file" accept="image/*" onChange={handleImageChange} />
-                <label htmlFor="getFile">{isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Edit Your Avatar'}</label>
+                {profileImage ? (
+                  <img
+                    src={URL.createObjectURL(profileImage)}
+                    alt="selected-profile"
+                  />
+                ) : (
+                  <img src={user?.profilePictureUrl} alt="selected-profile" />
+                )}
+                <input
+                  style={{ display: 'none' }}
+                  id="getFile"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                />
+                <label htmlFor="getFile">
+                  {isLoading ? (
+                    <div class="lds-ring">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  ) : (
+                    'Edit Your Avatar'
+                  )}
+                </label>
               </div>
-              <button className="edit-username-popup_btn" onClick={handleUploadProfile}>Modify</button>
+              <button
+                className="edit-username-popup_btn"
+                onClick={handleUploadProfile}
+              >
+                Modify
+              </button>
               {message && <p className="success-msg">{message}</p>}
               {error && <p className="error-msg">{error}</p>}
             </div>
@@ -529,9 +618,11 @@ const updatePassword = async () => {
                 type="password"
                 placeholder="Set Password"
                 value={confirmOldPassword}
-                onChange={(event) => {setConfirmOldPassword(event.target.value)}}
+                onChange={(event) => {
+                  setConfirmOldPassword(event.target.value);
+                }}
               />
-              {error && <p style={{color: '#E14453'}}>{error}</p>}
+              {error && <p style={{ color: '#E14453' }}>{error}</p>}
               <button
                 onClick={handleConfirmPassword}
                 className="edit-username-popup_btn"
@@ -567,7 +658,9 @@ const updatePassword = async () => {
                 type="password"
                 placeholder="Set Password"
                 value={confirmOldPassword}
-                onChange={(event) => {setConfirmOldPassword(event.target.value)}}
+                onChange={(event) => {
+                  setConfirmOldPassword(event.target.value);
+                }}
               />
               <p className="editusername-popup_edit-username">
                 Confirm Password
@@ -577,7 +670,9 @@ const updatePassword = async () => {
                 type="password"
                 placeholder="Confirm Password"
                 value={newPassword}
-                onChange={(event) => {setNewPassword(event.target.value)}}
+                onChange={(event) => {
+                  setNewPassword(event.target.value);
+                }}
               />
               <p
                 style={{ marginTop: '2rem', marginBottom: '0px' }}
@@ -585,8 +680,13 @@ const updatePassword = async () => {
               >
                 Re-login will be required after changing the password.
               </p>
-              {error && <p style={{color: '#E14453'}}>{error}</p>}
-              <button onClick={updatePassword} className="edit-username-popup_btn">Confirm</button>
+              {error && <p style={{ color: '#E14453' }}>{error}</p>}
+              <button
+                onClick={updatePassword}
+                className="edit-username-popup_btn"
+              >
+                Confirm
+              </button>
             </div>
           </div>
         </div>
@@ -675,16 +775,27 @@ const updatePassword = async () => {
               <div className="self-exclusion_container">
                 <p>Select Period</p>
 
-                <select className="period-options" name="period" id="period">
+                <select
+                  className="period-options"
+                  name="period"
+                  id="period"
+                  value={selectedPeriod}
+                  onChange={(e) => setSelectedPeriod(e.target.value)}
+                >
                   <option value="7">1 week</option>
                   <option value="30">1 month</option>
                   <option value="365">1 year</option>
                 </select>
                 <div className="self-exclusion-btns">
-                  <button  onClick={() => {
-                  setPeriodExclusion(!periodExclusion);
-                }} className="self-exclusion_cancel">Cancel</button>
-                  <button className="self-exclusion_next">Next</button>
+                  <button
+                    onClick={() => {
+                      setPeriodExclusion(!periodExclusion);
+                    }}
+                    className="self-exclusion_cancel"
+                  >
+                    Cancel
+                  </button>
+                  <button onClick={handleSelfExclusionPeriod} className="self-exclusion_next">Next</button>
                 </div>
               </div>
             </div>
