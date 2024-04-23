@@ -56,6 +56,8 @@ const Login = () => {
       navigate('/');
     } catch (error) {
       setError(error.response.data.error);
+    } finally {
+      setIsLoading(false);
     }
   };
 

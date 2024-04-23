@@ -134,6 +134,11 @@
     font-size: 14px;
     font-family: "Manrope", sans-serif;
     font-weight: 600;
+    cursor: pointer;
+}
+
+.stat-next-icon:hover {
+    color: white;
 }
 
 .statcard p {

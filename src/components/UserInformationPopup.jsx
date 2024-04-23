@@ -9,6 +9,17 @@ const UserInformationPopup = ({
     setIsStatPopupOpen,
     user
 }) => {
+
+  const formatDate = (isoDateString) => {
+    const date = new Date(isoDateString);
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+    const year = date.getFullYear();
+    return `Joined on ${month}/${day}/${year}`;
+  };
+
+  const formattedDate = formatDate(user?.dateUserJoined);
+
   return (
     <>
       <div className="userinfopopup">
@@ -52,15 +63,15 @@ const UserInformationPopup = ({
             <div className="statcards">
               <div className="statcard">
                 <p>Total Wins</p>
-                <h5>3377</h5>
+                <h5>{user?.totalWins}</h5>
               </div>
               <div className="statcard">
                 <p>Total Bets</p>
-                <h5>4771</h5>
+                <h5>{user?.totalBets}</h5>
               </div>
               <div className="statcard">
                 <p>Total Wagered</p>
-                <h5>18,1...</h5>
+                <h5>{user?.totalBetAmount}</h5>
               </div>
             </div>
           </div>
@@ -78,7 +89,7 @@ const UserInformationPopup = ({
               </div>
             </div>
           </div>
-          <p className="join-txt">Joined on 4/11/2023</p>
+          <p className="join-txt">{formattedDate}</p>
         </div>
       </div>
       {isStatPopupOpen && <StatPopup isStatPopupOpen={isStatPopupOpen} setIsStatPopupOpen={setIsStatPopupOpen} />}

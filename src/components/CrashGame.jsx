@@ -33,6 +33,23 @@ const CrashGame = ({ isNavOpen }) => {
   const state = {
     crashData: [{ value: 1 }, { value: 1.5 }, { value: 2 }, { value: 2.2 }, { value: 2.5 }, { value: 2.6 }],
   };
+  const accessToken = localStorage.getItem('accessToken');
+  useEffect(() => {
+    const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/crash-game/game-state', {
+      headers: {
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    eventSource.onmessage = (event) => {
+      const eventData = JSON.parse(event.data);
+      setGameState(eventData);
+    };
+
+    return () => {
+      eventSource.close();
+    };
+  }, []);
 
   const handleBetAmount = (event) => {
     if (event.target.value >= 1) {
@@ -333,7 +350,7 @@ const CrashGame = ({ isNavOpen }) => {
             <span>67.89</span>
             <span>51.73</span>
           </div>
-          <CrashGraph data={state.crashData} />
+          <CrashGraph gameState={gameState} />
         </div>
       </div>
       {livebet && (

@@ -40,19 +40,19 @@ const Hero = ({ isNavOpen, user }) => {
                 className="range-level"
                 type="range"
                 min="0"
-                max="20"
-                value={level}
-                onChange={(event) => setLevel(event.target.value)}
+                max="20000000"
+                value={user?.totalBetAmount}
+                // onChange={(event) => setLevel(event.target.value)}
               />
               <div className="home-hero__user-info-box__level">
                 <div className="hero__rank-info">
                   <span>Rank:</span>
-                  <span className="bronze">{user? user.tier : 'Bronze'}</span>
+                  <span className="bronze">{user?.currentTier}</span>
                 </div>
                 <div className="hero__rank-info">
                   <span>Next:</span>
-                  <span className="silver"> Silver</span>
-                  <span className="xp"> 350XP</span>
+                  <span className="silver"> {user?.nextTier}</span>
+                  <span className="xp">{user?.amountToNextTier}XP</span>
                 </div>
               </div>
             </div>

@@ -1,32 +1,24 @@
 import React, { useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
 
-const CrashGraph = ({ data }) => {
+const CrashGraph = ({ gameState }) => {
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
 
 
   useEffect(() => {
-    if (!data || !data.length) {
-      data = [{ value: 0 }, { value: 0 }, { value: 0 }, { value: 0 },{ value: 0 }, { value: 0 }, { value: 0 }]
-    };
-
-    const labels = data.map((item, index) => index.toString());
-    const values = data.map(item => item.value);
+    if (!chartRef.current || !gameState) return;
 
     const ctx = chartRef.current.getContext('2d');
 
-    if (chartInstance.current) {
-        chartInstance.current.destroy();
-      }
-
+    if (!chartInstance.current) {
       chartInstance.current = new Chart(ctx, {
         type: 'line',
         data: {
-          labels: labels,
+          labels: [],
           datasets: [{
             label: 'Crash Multiplier',
-            data: values,
+            data: [],
             fill: true,
             borderColor: '#88DF95',
             borderWidth: 4,
@@ -42,13 +34,24 @@ const CrashGraph = ({ data }) => {
           }
         }
       });
-  
-      return () => {
-        if (chartInstance.current) {
-          chartInstance.current.destroy();
-        }
-      };
-  }, [data]);
+    }
+
+    // Update chart data
+    const newDataIndex = chartInstance.current.data.labels.length;
+    chartInstance.current.data.labels.push(newDataIndex.toString());
+    chartInstance.current.data.datasets[0].data.push(gameState.currentMultiplier);
+
+    // Limit chart data length to prevent it from growing indefinitely
+    const maxDataLength = 10;
+    if (chartInstance.current.data.labels.length > maxDataLength) {
+      chartInstance.current.data.labels.shift();
+      chartInstance.current.data.datasets[0].data.shift();
+    }
+
+    // Update chart
+    chartInstance.current.update();
+
+  }, [gameState]);
 
   return <canvas ref={chartRef} />;
 };
