@@ -7,7 +7,9 @@ const CrashGraph = ({ data }) => {
 
 
   useEffect(() => {
-    if (!data || !data.length) return;
+    if (!data || !data.length) {
+      data = [{ value: 0 }, { value: 0 }, { value: 0 }, { value: 0 },{ value: 0 }, { value: 0 }, { value: 0 }]
+    };
 
     const labels = data.map((item, index) => index.toString());
     const values = data.map(item => item.value);
@@ -25,10 +27,12 @@ const CrashGraph = ({ data }) => {
           datasets: [{
             label: 'Crash Multiplier',
             data: values,
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 2,
-            pointRadius: 0
-          }]
+            fill: true,
+            borderColor: '#88DF95',
+            borderWidth: 4,
+            pointRadius: 0,
+            backgroundColor: '#34B263'
+          }],
         },
         options: {
           scales: {

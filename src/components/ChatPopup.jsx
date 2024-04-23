@@ -171,7 +171,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
                 <div key={index} className="chatroom-chatbox">
                   <div className="chatroom-user-profile">
                     <span>{msg.username}</span>
-                    <img src={msg.profileUrl} alt="profile-img" />
+                    <img src={msg.profilePictureUrl || './placeholder-profile-img.jpg'} alt="profile-img" />
                   </div>
                   <div className="chatroom-chat-txt">
                     <span>{msg.message}</span>

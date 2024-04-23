@@ -31,7 +31,7 @@ const CrashGame = ({ isNavOpen }) => {
 
 
   const state = {
-    crashData: [{ value: 1 }, { value: 1.5 }, { value: 2 }],
+    crashData: [{ value: 1 }, { value: 1.5 }, { value: 2 }, { value: 2.2 }, { value: 2.5 }, { value: 2.6 }],
   };
 
   const handleBetAmount = (event) => {
@@ -317,7 +317,7 @@ const CrashGame = ({ isNavOpen }) => {
                     </div>
                   </div>
                 </div>
-                <button className="dicegame-rollnow">Roll Now</button>
+                <button className="dicegame-rollnow">Bet</button>
               </div>
             </>
           )}

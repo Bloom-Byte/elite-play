@@ -165,7 +165,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
               <img src="./chart-increase.svg" alt="crash-icon" />
             </div>
             </a>
-            <div className="sidenav__link-mini">
+            <div onClick={() => setChatOpen(!chatOpen)} className="sidenav__link-mini">
               <img src="./message-01.svg" alt="chat-icon" />
             </div>
             <div onClick={() => setLiveSupport(!liveSupport)} className="sidenav__link-mini">
