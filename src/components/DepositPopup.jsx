@@ -1,7 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './DepositPopup.css';
 
 const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen }) => {
+  const [depositAmountpop, setDepositAmountpop] = useState(0);
+  const [depositAccountIdpop, setDepositAccountIdpop] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
+  const [validatemessage, setValidateMessage] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
+
+  const copyToClipboard = (text) => {
+    const tempInput = document.createElement('input');
+    tempInput.value = text;
+
+    document.body.appendChild(tempInput);
+
+    tempInput.select();
+
+    document.execCommand('copy');
+
+    document.body.removeChild(tempInput);
+
+    alert('Copied to clipboard: ' + text);
+  };
+
+  const handleDepositChange = (event) => {
+    setDepositAmountpop(event.target.value);
+  };
+
+  const handleDepositAccountId = (event) => {
+    setDepositAccountIdpop(event.target.value);
+  };
+
+  const depositToEliteplay = async () => {
+    const url = 'https://be.eliteplay.bloombyte.dev/transactions/deposit';
+    const accessToken = localStorage.getItem('accessToken');
+    setIsLoading(true);
+
+    if (depositAmountpop < 1) {
+      setValidateMessage('Minimum Deposit is 1 eGold');
+      setIsLoading(false);
+      return;
+    }
+
+    const requestBody = {
+      amount: depositAmountpop,
+      accountId: depositAccountIdpop,
+    };
+
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${accessToken}`,
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: headers,
+        body: requestBody,
+      });
+
+      if (response.status === 201) {
+        const responseData = await response.json();
+        setSuccessMessage(responseData.data.message);
+      } else {
+        throw new Error('Failed to deposit');
+      }
+    } catch (error) {
+      console.error('Error occurred during deposit:', error);
+      setValidateMessage(error.response.data.message);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div className="depositpopup">
       <div className="depositpopup-content">
@@ -23,34 +94,70 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen }) => {
               <option value="egold">eGold</option>
             </select>
           </div>
-          <div className="depositpopup-box">
-            <p>Choose Network</p>
-            <select name="" id="">
-              <option value="erc20">Normal Deposit</option>
-            </select>
-          </div>
         </div>
         <div className="deposit-details">
           <p>Deposit Address</p>
           <div className="deposit-address">
             <span className="eg-address">
-              <span className="eAddress">0x67</span>
-              8bD9B31a318af10bb0897905E425dBb
-              <span className="eAddress">Ce5A794</span>
+              <span className="eAddress">8722767</span>
             </span>
-            <span className="copy-bx">
+            <span
+              onClick={() => {
+                copyToClipboard('8722767');
+              }}
+              className="copy-bx"
+            >
               <img src="./copy-01.svg" alt="" /> copy
             </span>
           </div>
+          <p>Deposit Amount</p>
+          <div className="withdraw-address-box">
+            <input
+              className="withdraw-address_input"
+              type="text"
+              value={depositAmountpop}
+              onChange={handleDepositChange}
+            />
+          </div>
+          <p>Account Id</p>
+          <div className="withdraw-address-box">
+            <input
+              className="withdraw-address_input"
+              type="text"
+              value={depositAccountIdpop}
+              onChange={handleDepositAccountId}
+            />
+          </div>
+          <div className="deposit_fiat-btn">
+            <button onClick={depositToEliteplay}>
+              {isLoading ? (
+                <div class="lds-ring">
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                  <div></div>
+                </div>
+              ) : (
+                'Deposit'
+              )}
+            </button>
+          </div>
+          {validatemessage && (
+            <p style={{ color: '#E14453' }}>{validatemessage}</p>
+          )}
+          {successMessage && (
+            <p style={{ color: '#34B263' }}>{successMessage}</p>
+          )}
         </div>
         <div className="depositpopup-min">
           <img src="./alert-01.svg" alt="alert-icon" />
           <span>Minimum Deposit: 1 eGold</span>
         </div>
         <div className="depositpopup-notice">
-          <span className='notice-txt'>NOTICE: </span>{' '}
+          <span className="notice-txt">NOTICE: </span>{' '}
           <span>
-          If your eGold deposit has not been processed within 10 minutes, please contact our support team!
+            If your eGold deposit has not been processed within 10 minutes,
+            please contact our support team!
           </span>
         </div>
       </div>

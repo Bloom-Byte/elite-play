@@ -7,7 +7,9 @@ const WalletComponent = ({ isNavOpen, user }) => {
   const [withdrawalAmount, setWithdrawalAmount] = useState(0);
   const [validatemessage, setValidateMessage] = useState('')
   const [depositAmount, setDepositAmount] = useState(0)
+  const [depositAccountId, setDepositAccountId] = useState('')
   const [successMessage, setSuccessMessage] = useState('')
+  const [isLoading, setIsLoading] = useState(false);
 
 
   const handleWithdrawalChange = (event) => {
@@ -18,18 +20,27 @@ const WalletComponent = ({ isNavOpen, user }) => {
     setDepositAmount(event.target.value);
   }
 
-  const depositToEliteplay = async (amount, accountId) => {
+  const handleDepositAccountId = (event) => {
+    setDepositAccountId(event.target.value);
+  }
+
+  const depositToEliteplay = async () => {
     const url = 'https://be.eliteplay.bloombyte.dev/transactions/deposit';
     const accessToken = localStorage.getItem('accessToken');
+    console.log(accessToken)
+    setIsLoading(true);
 
-    if (depositAmount < 50) {
-      setValidateMessage("Minimum Deposit is 50 eGold")
+    if (depositAmount < 1) {
+      setValidateMessage("Minimum Deposit is 1 eGold")
+      setIsLoading(false);
       return;
+    } else {
+      setValidateMessage("")
     }
 
     const requestBody = {
-      amount: amount,
-      accountId: user._id
+      amount: depositAmount,
+      accountId: depositAccountId
     };
   
     const headers = {
@@ -53,6 +64,8 @@ const WalletComponent = ({ isNavOpen, user }) => {
     } catch (error) {
       console.error('Error occurred during deposit:', error);
       setValidateMessage(error.response.data.message)
+    } finally {
+      setIsLoading(false);
     }
   };
   
@@ -210,25 +223,23 @@ const WalletComponent = ({ isNavOpen, user }) => {
                         <option value="usdt">eGold</option>
                       </select>
                     </div>
-                    <div>
-                      <p>Choose Network</p>
-                      <select className="options-list">
-                        <option value="erc20">ERC 20</option>
-                      </select>
-                    </div>
                   </div>
                   <p>Deposit Amount</p>
                   <div className="withdraw-address-box">
                     <input className="withdraw-address_input" type="text" value={depositAmount} onChange={handleDepositChange} />
                   </div>
+                  <p>Account Id</p>
+                  <div className="withdraw-address-box">
+                    <input className="withdraw-address_input" type="text" value={depositAccountId} onChange={handleDepositAccountId} />
+                  </div>
                   {validatemessage && <p style={{color: '#E14453'}}>{validatemessage}</p>}
                   {successMessage && <p style={{color: '#34B263'}}>{successMessage}</p>}
                   <div className="deposit-crypto">
                     <img src="./alert-01.svg" alt="alert-icon" />
-                    <span>Minimum Deposit: 50 eGold</span>
+                    <span>Minimum Deposit: 1 eGold</span>
                   </div>
                   <div className="deposit_fiat-btn">
-                    <button onClick={depositToEliteplay}>Deposit</button>
+                    <button onClick={depositToEliteplay}>{isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Deposit'}</button>
                   </div>
                   {/* <div className="crypto-notice">
                       <span className="crypto-notice_notice-head">
