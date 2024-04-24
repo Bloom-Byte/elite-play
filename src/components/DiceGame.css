@@ -405,8 +405,7 @@
   background: none;
   border: none;
   color: white;
-  width: 30px; /* adjust as needed */
-  text-align: center;
+  text-align: left;
 }
 
 .dicegame-placebet__amonut-toggle {
