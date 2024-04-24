@@ -170,7 +170,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
             <img src="./bitcoin-withdraw.svg" alt="wallet" />
             <span>Withdraw</span>
           </div>
-          <div className="wallet-option">
+          <div className="wallet-option" onClick={() => setCurrentSection('Earnings')}>
             <img src="./coins-01.svg" alt="wallet" />
             <span>Earnings</span>
           </div>
@@ -430,6 +430,13 @@ const WalletComponent = ({ isNavOpen, user }) => {
                 <p className="no-data_txt">Oops! There is no data yet!</p>
               </div>
             </div>
+          )}
+           {currentSection === 'Earnings' && (
+              <div>
+                <div className="earnings-img_container">
+                  <img src="./game.png" alt="earnings_image" />
+                </div>
+              </div>
           )}
         </div>
       </div>

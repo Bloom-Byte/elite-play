@@ -506,6 +506,10 @@
   margin-top: 2rem;
 }
 
+.earnings-img_container img {
+  width: 100%;
+}
+
 .no-transanction-img_container{
   display: flex;
   justify-content: center;

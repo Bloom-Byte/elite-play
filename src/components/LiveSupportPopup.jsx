@@ -1,8 +1,77 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './LiveSupportPopup.css';
 
 const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
   const [currentTab, setCurrentTab] = useState(0);
+  const [details, setDetails] = useState('');
+  const [error, setError] = useState('');
+  const [tickets, setTickets] = useState('');
+  const [userSupportInfo, setUserSupportInfo] = useState(null);
+  const accessToken = localStorage.getItem('accessToken');
+
+  const handleDetailsChange = (event) => {
+    setDetails(event.target.value);
+  };
+
+  const createSupportTicket = async () => {
+    if (!details) {
+      setError('Support ticket details are required');
+      return;
+    }
+
+    const url = 'https://be.eliteplay.bloombyte.dev/support';
+
+    const payload = {
+      details: details,
+    };
+
+    try {
+      const response = await fetch(url, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create support ticket');
+      }
+
+      const responseData = await response.json();
+      console.log('New support ticket created:', responseData);
+    } catch (error) {
+      console.error('Error:', error);
+    }
+  };
+
+  
+  useEffect(() => {
+    const fetchUserSupportInfo = async () => {
+      try {
+        const response = await fetch('https://be.eliteplay.bloombyte.dev/support/user/all', {
+          method: 'GET',
+          headers: {
+            Authorization: `Bearer ${accessToken}`,
+          },
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to fetch user support information');
+        }
+
+        const data = await response.json();
+        console.log(data)
+        setUserSupportInfo(data);
+      } catch (error) {
+        setError(error.message);
+      }
+    };
+
+    fetchUserSupportInfo();
+  }, []);
+
 
   return (
     <div className="live-support">
@@ -31,9 +100,9 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                 </h1>
               </div>
               <div
-                // onClick={() => {
-                //   setCurrentTab(4);
-                // }}
+                onClick={() => {
+                  setCurrentTab(4);
+                }}
                 className="send-message_box"
               >
                 <div>
@@ -85,9 +154,9 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                   <span>Home</span>
                 </div>
                 <div
-                  // onClick={() => {
-                  //   setCurrentTab(1);
-                  // }}
+                  onClick={() => {
+                    setCurrentTab(1);
+                  }}
                   className={`help-center__nav ${
                     currentTab == 1 ? 'help-center__nav-active' : ''
                   }`}
@@ -466,9 +535,16 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                   </h5>
                   <p className="help-you">How can we help you? ❤️</p>
                 </div>
-                <div className="chat-contents"></div>
+                <div className="chat-contents">
+                  {error && <p className="error-msg">{error}</p>}
+                </div>
                 <div className="chat-support-send">
-                  <input type="text" placeholder="Type here..." />
+                  <input
+                    type="text"
+                    placeholder="Type here..."
+                    value={details}
+                    onChange={handleDetailsChange}
+                  />
                   <img src="./emoji-happy.svg" alt="emoji-icon" />
                   <img
                     className="attach-icon"

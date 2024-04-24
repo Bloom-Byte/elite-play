@@ -56,7 +56,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
         throw new Error('Failed to update profile picture');
       }
     } catch (error) {
-      // setError(error.response.message);
+      setError(error.response.message);
       console.error('Error updating profile picture:', error);
     } finally {
       setIsLoading(false);

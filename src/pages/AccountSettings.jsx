@@ -13,7 +13,7 @@ const AccountSettings = () => {
     const userIsLoggedIn = isLoggedIn();
 
     if (!userIsLoggedIn) {
-      window.location.href('/')
+      window.location.href='/'
     }
   
     const fetchUserProfile = async (accessToken) => {
