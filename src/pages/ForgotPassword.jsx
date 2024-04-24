@@ -7,6 +7,7 @@ const ForgotPassword = () => {
   const [emailFocused, setEmailFocused] = useState(true);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -21,9 +22,11 @@ const ForgotPassword = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    setIsLoading(true);
 
     if (!validateEmail(email)) {
       setError('Please enter a valid email address.');
+      setIsLoading(false);
       return;
     }
 
@@ -35,6 +38,8 @@ const ForgotPassword = () => {
       setMessage('Reset Email Sent successfully and token will expire in 10 MINS');
     } catch (error) {
       setError(error.response.data.error);
+    }  finally {
+      setIsLoading(false);
     }
   };
 
@@ -73,7 +78,7 @@ const ForgotPassword = () => {
               {message && <p className='success-msg'>{message}</p>}
               
               <button className="register-form__submit-btn" type="submit">
-                Reset Password
+              {isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Reset Password'}
               </button>
             </form>
           </div>

@@ -89,8 +89,9 @@ const ResetPassword = () => {
                 />
               </div>
               <button className="register-form__submit-btn" type="submit">
-              {isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Sign In'}
+              {isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Reset Password'}
               </button>
+              {error && <p className='error-msg'>{error}</p>}
             </form>
           </div>
         </div>
