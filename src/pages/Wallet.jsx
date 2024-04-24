@@ -6,7 +6,7 @@ import Footer from '../components/Footer';
 import './Wallet.css';
 
 const Wallet = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(true);
   const [userProfile, setUserProfile] = useState(null);
     const [loading, setLoading] = useState(false);
   

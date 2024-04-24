@@ -4,7 +4,7 @@ import './Login.css';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
-  const [emailFocused, setEmailFocused] = useState(false);
+  const [emailFocused, setEmailFocused] = useState(true);
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 

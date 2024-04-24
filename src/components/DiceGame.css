@@ -351,7 +351,7 @@
 }
 
 .tutorial-dropdown {
-  position: fixed;
+  position: absolute;
   top: 150px;
   right: 45vw;
 }

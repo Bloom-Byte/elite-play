@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 .tutorial-dropdown-crash {
-    position: fixed;
+    position: absolute;
     top: 150px;
     right: 60vw;
   }

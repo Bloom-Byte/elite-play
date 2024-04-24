@@ -5,7 +5,7 @@ import ReferralSection from '../components/ReferralSection'
 import Footer from '../components/Footer';
 
 const Referral = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(true);
   const [referralInfo, setReferralInfo] = useState(null);
   const [referralCount, setReferralCount] = useState(null);
 

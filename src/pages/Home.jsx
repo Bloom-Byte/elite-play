@@ -13,7 +13,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import './Home.css';
 
 const Home = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(true);
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(false);
 

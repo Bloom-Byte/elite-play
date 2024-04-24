@@ -5,7 +5,7 @@ import HelpCenterSection from '../components/HelpCenterSection';
 import Footer from '../components/Footer';
 
 const HelpCenter = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(true);
 
   return (
     <div>

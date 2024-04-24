@@ -5,7 +5,7 @@ import CrashBeginnerComponent from '../components/CrashBeginnerComponent';
 import Footer from '../components/Footer';
 
 const CrashBeginner = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false)
+  const [isNavOpen, setIsNavOpen] = useState(true)
 
   return (
     <div>

@@ -7,7 +7,7 @@ import Footer from '../components/Footer'
 import './Crash.css'
 
 const Crash = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(true);
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(false);
 

@@ -399,7 +399,7 @@ input:checked + .slider:before {
 }
 
 .editusername-popup {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
@@ -805,7 +805,7 @@ input:checked + .slider:before {
   }
 
   .settings-dropdown {
-    position: fixed;
+    position: absolute;
     top: 200px;
     left: 60vw;
   }

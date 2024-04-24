@@ -5,7 +5,7 @@ import Footer from '../components/Footer';
 import DiceAutomationComponent from '../components/DiceAutomationComponent';
 
 const DiceAutomation = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isNavOpen, setIsNavOpen] = useState(true);
 
   return (
     <div>

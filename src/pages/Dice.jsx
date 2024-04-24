@@ -8,7 +8,7 @@ import Footer from '../components/Footer'
 import './Dice.css'
 
 const Dice = () => {
-  const [isNavOpen, setIsNavOpen] = useState(false)
+  const [isNavOpen, setIsNavOpen] = useState(true)
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [bets, setBets] = useState([]);
