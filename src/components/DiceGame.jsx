@@ -86,7 +86,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
       .then((response) => {
         if (response.status === 201) {
           setDiceGameResponse(response.data)
-          setDiceRoll(response.data.targetValue)
+          setDiceRoll(response.data.roll)
         } else {
           throw new Error('Failed to place bet');
         }

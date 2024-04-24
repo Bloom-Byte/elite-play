@@ -18,7 +18,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
-  const [selectedPeriod, setSelectedPeriod] = useState('');
+  const [selectedPeriod, setSelectedPeriod] = useState('7');
 
   const [profileImage, setProfileImage] = useState(null);
 
@@ -85,11 +85,13 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
 
   const handleSelfExclusionPeriod = async () => {
     try {
-      const response = await fetch('https://your-api-url/user/self-exclude', {
+      setIsLoading(true);
+      const accessToken = localStorage.getItem('accessToken');
+      const response = await fetch('https://be.eliteplay.bloombyte.dev/user/self-exclude', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${elitePlayAcessToken}`,
+          Authorization: `Bearer ${accessToken}`,
         },
         body: JSON.stringify({
           days: parseInt(selectedPeriod),
@@ -102,6 +104,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
         setMessage(responseData.message);
 
         setTimeout(() => {
+          localStorage.removeItem('accessToken');
           window.location.href = '/';
         }, 2000);
       } else {
@@ -109,6 +112,8 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
       }
     } catch (error) {
       console.error('Error:', error);
+    }  finally {
+      setIsLoading(false);
     }
   };
 
@@ -795,7 +800,16 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                   >
                     Cancel
                   </button>
-                  <button onClick={handleSelfExclusionPeriod} className="self-exclusion_next">Next</button>
+                  <button onClick={handleSelfExclusionPeriod} className="self-exclusion_next"> {isLoading ? (
+                    <div class="lds-ring">
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                      <div></div>
+                    </div>
+                  ) : (
+                    'Next'
+                  )}</button>
                 </div>
               </div>
             </div>

@@ -119,7 +119,7 @@ body {
 }
 
 .nav-wallet_deposit {
-    background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+    background:  #24E3A1;
     display: flex;
     gap: 10px;
     align-items: center;

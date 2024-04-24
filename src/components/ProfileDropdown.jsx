@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect  } from 'react';
 import UserInformationPopup from './UserInformationPopup';
 import { useNavigate } from 'react-router-dom';
 import './ProfileDropdown.css';
@@ -8,15 +8,27 @@ const ProfileDropdown = ({user}) => {
     useState(false);
   const [isStatPopupOpen, setIsStatPopupOpen] = useState(false);
   const navigate = useNavigate();
+  const dropdownRef = useRef(null);
+
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
     navigate('/');
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsUserInformationPopupOpen(false);
+      }
+    };
+  
+    document.addEventListener('click', handleClickOutside);
+  }, []);
+
   return (
     <>
-      <div className="profile-dropdown">
+      <div className="profile-dropdown" ref={dropdownRef}>
         <div className="profile-dropdown-content">
           <div className="profile-dropdown-cta">
             <a href="/wallet">

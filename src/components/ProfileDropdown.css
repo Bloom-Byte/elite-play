@@ -3,11 +3,10 @@
 .profile-dropdown {
   position: fixed;
   top: 80px;
-  right: 2vw;
+  right: 0;
 }
 
 .profile-dropdown-content {
-  position: relative;
   background-color: #0B281F;
   border-radius: 16px;
   padding: 20px;

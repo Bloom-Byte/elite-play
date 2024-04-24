@@ -200,7 +200,7 @@ const Navbar = ({ isNavOpen, user }) => {
                   className="nav-wallet_info"
                 >
                   <img src="./twemoji_coin.svg" alt="coin" />
-                  <span>{user ? user.balance : '0'}</span>
+                  <span>{(user?.balance)?.toFixed(2)}</span>
                   <img src="./down-arrow.svg" alt="arrow" />
                 </div>
 

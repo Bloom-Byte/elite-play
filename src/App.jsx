@@ -15,6 +15,7 @@ import CrashBeginner from './pages/CrashBeginner'
 import CrashAutomation from './pages/CrashAutomation'
 import CrashStrategy from './pages/CrashStrategy'
 import ForgotPassword from './pages/ForgotPassword'
+import ResetPassword from './pages/ResetPassword'
 import PrivateRoutes from './utils/PrivateRoutes'
 import './App.css'
 
@@ -39,6 +40,7 @@ function App() {
       <Route path="/crashstrategy" element={<CrashStrategy />} />
       <Route path="/crashautomation" element={<CrashAutomation />} />
       <Route path="/forgot-password" element={<ForgotPassword />} />
+      <Route path="/reset-password/:token" element={<ResetPassword />} />
 
       {/* <Route element={<PrivateRoutes />}>
         <Route path="/" element={<Home/>}/>

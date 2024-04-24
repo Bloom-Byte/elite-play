@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import axios from 'axios';
 import Navbar from '../components/Navbar'
 import Sidenav from '../components/Sidenav'
 import DiceGame from '../components/DiceGame'
@@ -13,6 +14,41 @@ const Dice = () => {
   const [bets, setBets] = useState([]);
   const [userBets, setUserBets] = useState([]);
   const accessToken = localStorage.getItem('accessToken');
+
+
+  const fetchAllBets = async () => {
+    try {
+      const response = await axios.get(
+        'https://be.eliteplay.bloombyte.dev/game/all-bets',
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      );
+      setBets(response.data);
+      console.log('all bets', response.data)
+    } catch (error) {
+      console.error('Error fetching all bets:', error);
+    }
+  };
+
+  const fetchUserBets = async () => {
+    try {
+      const response = await axios.get(
+        'https://be.eliteplay.bloombyte.dev/game/user-bets',
+        {
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        }
+      );
+      setUserBets(response.data);
+      console.log('user bets', response.data)
+    } catch (error) {
+      console.error('Error fetching user bets:', error);
+    }
+  };
 
   const fetchUserProfile = async (accessToken) => {
     try {
@@ -43,66 +79,29 @@ const Dice = () => {
   };
 
   useEffect(() => {
+    const fetchBetsData = async () => {
+      await fetchAllBets();
+      await fetchUserBets();
+    };
+
     const accessToken = localStorage.getItem('accessToken');
     if (accessToken) {
       fetchUserProfile(accessToken);
+      fetchBetsData();
     } else {
       setLoading(false);
     }
   }, []);
 
-  useEffect(() => {
-    const accessToken = localStorage.getItem('accessToken');
+  // useEffect(() => {
+  //       // Fetch data every 1 minute
+  //       const intervalId = setInterval(fetchBetsData, 60000);
 
-    // Construct the EventSource object
-    const eventSource = new EventSource(`https://be.eliteplay.bloombyte.dev/game/all-bets`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    });
+  //       // Cleanup
+  //       return () => clearInterval(intervalId);
+  // }, [])
 
-    // Handle incoming messages
-    eventSource.onmessage = (event) => {
-      const newBet = JSON.parse(event.data);
-      setBets((prevBets) => [...prevBets, newBet]);
-    };
-
-    // Handle any errors
-    eventSource.onerror = (error) => {
-      console.error('EventSource failed:', error);
-      eventSource.close();
-    };
-
-    // Clean up
-    return () => {
-      eventSource.close();
-    };
-  }, [accessToken]);
-
-  useEffect(() => {
-    // Create an EventSource object to listen to events from the server
-    const eventSource = new EventSource(`https://be.eliteplay.bloombyte.dev/game/user-bets`, {
-      headers: {
-        Authorization: `Bearer ${accessToken}`
-      }
-    });
-
-    // Listen to messages on the event stream
-    eventSource.onmessage = function(event) {
-      const newBet = JSON.parse(event.data);
-      setUserBets(prevBets => [...prevBets, newBet]);
-    };
-
-    // Listen for errors
-    eventSource.onerror = function(error) {
-      console.error('EventSource failed:', error);
-      eventSource.close();
-    };
-
-    // Cleanup when component unmounts
-    return () => eventSource.close();
-  }, [accessToken]);
-
+  
 
 
   return (

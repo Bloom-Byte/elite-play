@@ -234,7 +234,7 @@
 }
 
 .active-btn {
-  background: linear-gradient(to right, #158c63 50%, #24e3a1 50%);
+  background: #24e3a1;
   border: 1px transparent;
   border-radius: 6px;
   width: 100%;
@@ -503,7 +503,7 @@ input:checked + .slider:before {
 .edit-username-popup_btn {
     margin-top: 40px;
     width: 100%;
-    background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+    background: #24E3A1 50%;
     border: 1px transparent;
     border-radius: 6px;
     color: #fff; 
@@ -659,7 +659,7 @@ input:checked + .slider:before {
 }
 
 .self-exclusion_next {
-    background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+    background:  #24E3A1;
     border: 2px transparent;
     border-radius: 6px;
     padding: 8px 16px;
@@ -771,7 +771,7 @@ input:checked + .slider:before {
 }
 
 .auth-security button {
-  background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+  background:  #24E3A1;
   border: 1px transparent;
   border-radius: 6px;
   color: #fff; 
@@ -791,7 +791,7 @@ input:checked + .slider:before {
 
   .accountsettings-mobile_nav {
     display: block;
-    background: linear-gradient(to right,  #158C63 50%,  #24E3A1 50%);
+    background: #24E3A1;
     border: 1px transparent;
     border-radius: 6px;
     padding: 8px;
