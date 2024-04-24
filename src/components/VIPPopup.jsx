@@ -1,7 +1,56 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './VIPPopup.css';
 
 const VIPPopup = ({vipSupport, setVipSupport}) => {
+    const [lastClaimTime, setLastClaimTime] = useState(null);
+    const [nextClaimTime, setNextClaimTime] = useState(null);
+    const [timeLeft, setTimeLeft] = useState(0);
+    
+    useEffect(() => {
+        const intervalId = setInterval(() => {
+          if (nextClaimTime) {
+            const currentTime = new Date().getTime();
+            const timeRemaining = Math.max(nextClaimTime - currentTime, 0);
+            setTimeLeft(timeRemaining);
+          }
+        }, 1000);
+    
+        return () => clearInterval(intervalId);
+      }, [nextClaimTime]);
+    
+      // Function to handle claiming the token
+      const handleClaimToken = async () => {
+        try {
+            const accessToken = localStorage.getItem('accessToken');
+          const response = await fetch('https://be.eliteplay.bloombyte.dev/faucet/claim', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              Authorization: `Bearer ${accessToken}`
+            },
+            body: JSON.stringify({}) // Include an empty object as the body for POST request
+          });
+      
+          if (response.ok) {
+            // Claim successful, update last claim time and calculate next claim time
+            setLastClaimTime(new Date().getTime());
+            setNextClaimTime(new Date().getTime() + (30 * 60 * 1000)); // Set next claim time 30 minutes ahead
+            // Optionally, you can handle the response from the claim request
+            const responseData = await response.json();
+            console.log('Claim successful:', responseData);
+          } else {
+            // Handle non-successful response
+            console.error('Error claiming token:', response.statusText);
+            // Optionally, you can handle errors from the claim request
+          }
+        } catch (error) {
+          console.error('Error claiming token:', error);
+          // Optionally, you can handle errors from the claim request
+        }
+      };
+    
+
   return (
     <div className="vippopup">
       <div className="vippopup-content">
@@ -27,8 +76,8 @@ const VIPPopup = ({vipSupport, setVipSupport}) => {
             <div className='vippopup-reward-box'>
                 <h3>Faucet Reward</h3>
                 <h2><img className='levelcoin' src="./twemoji_coin.svg" alt="coin-icon" /> <span className='coinlevel-rewards'>0.0029</span></h2>
-                <p className='reward-details'>Total Reward Claimed <span className='coinamount'>0.0029</span> <span>Nest Reward in: <span className='nextrewardtime'>10m</span></span></p>
-                <button className='vippopup-claimreward-btn'>Claim Reward</button>
+                <p className='reward-details'>Total Reward Claimed <span className='coinamount'>0.0029</span> <span>Nest Reward in: <span className='nextrewardtime'>(${Math.ceil(timeLeft / 1000)}s left)</span></span></p>
+                <button  onClick={handleClaimToken} disabled={timeLeft > 0} className={`${timeLeft > 0 ? 'disabled ': ''}vippopup-claimreward-btn'`}>Claim Reward</button>
             </div>
         </div>
         <div className='alllevels'>
