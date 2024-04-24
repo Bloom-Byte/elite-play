@@ -255,7 +255,7 @@ const Navbar = ({ isNavOpen, user }) => {
           </>
         )}
       </div>
-      {isProfileDropdownOpen && <ProfileDropdown user={user} />}
+      {isProfileDropdownOpen && <ProfileDropdown isOpen={isProfileDropdownOpen} setIsOpen={setIsProfileDropdownOpen} user={user} />}
       {notificationsPopupOpen && (
         <NotificationsPopup
           notificationsPopupOpen={notificationsPopupOpen}
@@ -268,7 +268,7 @@ const Navbar = ({ isNavOpen, user }) => {
           setDepositPopupOpen={setDepositPopupOpen}
         />
       )}
-      {currencyDropdownOpen && <CurrencyDropdown balance={user?.balance} />}
+      {currencyDropdownOpen && <CurrencyDropdown isOpen={currencyDropdownOpen} setIsOpen={setCurrencyDropdownOpen} balance={user?.balance} />}
       {chatOpen && <ChatPopup chatOpen={chatOpen} setChatOpen={setChatOpen} />}
       {liveSupport && (
         <LiveSupportPopup

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect  } from 'react';
 import axios from 'axios';
 import './DiceGame.css';
 
@@ -19,6 +19,31 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
     resetWin: 100,
     resetLose: 50,
   });
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        tutorial &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setTutorial(false);
+      }
+    };
+
+    if (tutorial) {
+      // Only attach the listener if the dropdown is open
+      window.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      if (tutorial) {
+        // Only remove the listener if it was previously added
+        window.removeEventListener('mousedown', handleClickOutside);
+      }
+    };
+  }, [tutorial]);
 
   const handleChange = (event) => {
     if (event.target.value >= 5 && event.target.value <= 96) {
@@ -630,7 +655,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
         <div
           className={`tutorial-dropdown ${
             isNavOpen ? 'tutorial-dropdown-open' : ''
-          }`}
+          }`} ref={dropdownRef}
         >
           <div className="tutorial-dropdown-content">
             <a href="/dicebeginner">Beginners Guide</a>

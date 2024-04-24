@@ -4,6 +4,7 @@
   position: absolute;
   top: 80px;
   right: 0;
+  z-index: 1000;
 }
 
 .profile-dropdown-content {

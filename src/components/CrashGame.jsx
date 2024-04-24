@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useRef, useEffect  } from 'react';
 import CrashGraph from './CrashGraph';
 import './CrashGame.css';
 
@@ -18,6 +18,32 @@ const CrashGame = ({ isNavOpen }) => {
   });
 
   const [isGameStarting, setIsGameStarting] = useState(false);
+
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        tutorial &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setTutorial(false);
+      }
+    };
+
+    if (tutorial) {
+      // Only attach the listener if the dropdown is open
+      window.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      if (tutorial) {
+        // Only remove the listener if it was previously added
+        window.removeEventListener('mousedown', handleClickOutside);
+      }
+    };
+  }, [tutorial]);
   
   const chartData = {
     labels: [],
@@ -464,7 +490,7 @@ const CrashGame = ({ isNavOpen }) => {
         <div
           className={`tutorial-dropdown-crash ${
             isNavOpen ? 'tutorial-dropdown-crash-open' : ''
-          }`}
+          }`}  ref={dropdownRef}
         >
           <div className="tutorial-dropdown-crash-content">
             <a href="/crashbeginner">Beginners Guide</a>

@@ -1,19 +1,44 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect  } from 'react';
 import './CurrencyDropdown.css';
 
-const CurrencyDropdown = ({balance}) => {
+const CurrencyDropdown = ({balance, isOpen, setIsOpen}) => {
 
   const [viewInFiat, setViewInFiat] = useState(false);
   const exchangeRate = 40;
+  const dropdownRef = useRef(null);
 
-  const displayBalance = viewInFiat ? (balance / exchangeRate).toFixed(2) : balance.toFixed(2);
+  const displayBalance = balance ? (viewInFiat ? (balance / exchangeRate).toFixed(2) : balance.toFixed(2)) : '0';
 
   const handleToggle = () => {
     setViewInFiat(!viewInFiat);
   };
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    if (isOpen) {
+      // Only attach the listener if the dropdown is open
+      window.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      if (isOpen) {
+        // Only remove the listener if it was previously added
+        window.removeEventListener('mousedown', handleClickOutside);
+      }
+    };
+  }, [isOpen]);
   
   return (
-    <div className="currencydropdown">
+    <div className="currencydropdown" ref={dropdownRef}>
       <div className="currencydropdown-content">
         <p className="currencytitle">Currencys</p>
         <div className="currencydropdown-details">

@@ -3,7 +3,7 @@ import UserInformationPopup from './UserInformationPopup';
 import { useNavigate } from 'react-router-dom';
 import './ProfileDropdown.css';
 
-const ProfileDropdown = ({user}) => {
+const ProfileDropdown = ({user, isOpen, setIsOpen}) => {
   const [isUserInformationPopupOpen, setIsUserInformationPopupOpen] =
     useState(false);
   const [isStatPopupOpen, setIsStatPopupOpen] = useState(false);
@@ -18,13 +18,27 @@ const ProfileDropdown = ({user}) => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsUserInformationPopupOpen(false);
+      if (
+        isOpen &&
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target)
+      ) {
+        setIsOpen(false);
       }
     };
-  
-    document.addEventListener('click', handleClickOutside);
-  }, []);
+
+    if (isOpen) {
+      // Only attach the listener if the dropdown is open
+      window.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      if (isOpen) {
+        // Only remove the listener if it was previously added
+        window.removeEventListener('mousedown', handleClickOutside);
+      }
+    };
+  }, [isOpen]);
 
   return (
     <>

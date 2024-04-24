@@ -408,6 +408,7 @@ input:checked + .slider:before {
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 1000;
 }
 
 .editusername-popup_container {
