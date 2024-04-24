@@ -5,84 +5,87 @@ const WalletComponent = ({ isNavOpen, user }) => {
   const [currentSection, setCurrentSection] = useState('Balance');
   const [mobileNav, setMobileNav] = useState(false);
   const [withdrawalAmount, setWithdrawalAmount] = useState(0);
-  const [validatemessage, setValidateMessage] = useState('')
-  const [depositAmount, setDepositAmount] = useState(0)
-  const [depositAccountId, setDepositAccountId] = useState('')
-  const [successMessage, setSuccessMessage] = useState('')
+  const [withdrawalAccount, setWithdrawalAccount] = useState('');
+  const [validatemessage, setValidateMessage] = useState('');
+  const [depositAmount, setDepositAmount] = useState(0);
+  const [depositAccountId, setDepositAccountId] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-
   const handleWithdrawalChange = (event) => {
-      setWithdrawalAmount(event.target.value);
+    setWithdrawalAmount(event.target.value);
+  };
+
+  const handleWithdrawalAccount = (event) => {
+    setWithdrawalAmount(event.target.value);
   };
 
   const handleDepositChange = (event) => {
     setDepositAmount(event.target.value);
-  }
+  };
 
   const handleDepositAccountId = (event) => {
     setDepositAccountId(event.target.value);
-  }
+  };
 
   const depositToEliteplay = async () => {
     const url = 'https://be.eliteplay.bloombyte.dev/transactions/deposit';
     const accessToken = localStorage.getItem('accessToken');
-    console.log(accessToken)
+    console.log(accessToken);
     setIsLoading(true);
 
     if (depositAmount < 1) {
-      setValidateMessage("Minimum Deposit is 1 eGold")
+      setValidateMessage('Minimum Deposit is 1 eGold');
       setIsLoading(false);
       return;
     } else {
-      setValidateMessage("")
+      setValidateMessage('');
     }
 
     const requestBody = {
       amount: depositAmount,
-      accountId: depositAccountId
+      accountId: depositAccountId,
     };
-  
+
     const headers = {
       'Content-Type': 'application/json',
-      'Authorization': `Bearer ${accessToken}`
+      Authorization: `Bearer ${accessToken}`,
     };
-  
+
     try {
       const response = await fetch(url, {
         method: 'POST',
         headers: headers,
-        body: requestBody
+        body: requestBody,
       });
-  
+
       if (response.status === 201) {
         const responseData = await response.json();
-        setSuccessMessage(responseData.data.message)
+        setSuccessMessage(responseData.data.message);
       } else {
         throw new Error('Failed to deposit');
       }
     } catch (error) {
       console.error('Error occurred during deposit:', error);
-      setValidateMessage(error.response.data.message)
+      setValidateMessage(error.response.data.message);
     } finally {
       setIsLoading(false);
     }
   };
-  
 
   async function initiateWithdrawal() {
     const url = 'https://be.eliteplay.bloombyte.dev/transactions/withdraw';
     const accessToken = localStorage.getItem('accessToken');
 
     if (withdrawalAmount < 50) {
-      setValidateMessage("Minimum Withdrawal is 50 eGold")
+      setValidateMessage('Minimum Withdrawal is 50 eGold');
       return;
     } else {
-      setValidateMessage("")
+      setValidateMessage('');
     }
     const requestBody = {
       amount: withdrawalAmount,
-      eliteUserId: user._id,
+      eliteUserId: withdrawalAccount,
     };
 
     try {
@@ -97,13 +100,13 @@ const WalletComponent = ({ isNavOpen, user }) => {
 
       if (response.status === 201) {
         const responseData = await response.json();
-        setSuccessMessage(responseData.data.message)
+        setSuccessMessage(responseData.data.message);
       } else {
         console.error('Failed to initiate transaction:', response.statusText);
       }
     } catch (error) {
       console.error('Error occurred while initiating transaction:', error);
-      setValidateMessage(error.response.data.message)
+      setValidateMessage(error.response.data.message);
     }
   }
 
@@ -174,7 +177,9 @@ const WalletComponent = ({ isNavOpen, user }) => {
                   <img src="./pot-coin.svg" alt="" />
                   <div className="pot-balance">
                     <span className="real-balance">Total Balance</span>
-                    <span className="real-balance_amount">eGold {user?.balance}</span>
+                    <span className="real-balance_amount">
+                      eGold {user?.balance}
+                    </span>
                   </div>
                 </div>
                 <hr className="potline" />
@@ -219,27 +224,52 @@ const WalletComponent = ({ isNavOpen, user }) => {
                   <div className="crypto-deposit-method_type">
                     <div>
                       <p>Deposit Currency</p>
-                      <select className="options-list">
+                      <select className="options-list" disabled={true}>
                         <option value="usdt">eGold</option>
                       </select>
                     </div>
                   </div>
                   <p>Deposit Amount</p>
                   <div className="withdraw-address-box">
-                    <input className="withdraw-address_input" type="text" value={depositAmount} onChange={handleDepositChange} />
+                    <input
+                      className="withdraw-address_input"
+                      type="text"
+                      value={depositAmount}
+                      onChange={handleDepositChange}
+                    />
                   </div>
                   <p>Account Id</p>
                   <div className="withdraw-address-box">
-                    <input className="withdraw-address_input" type="text" value={depositAccountId} onChange={handleDepositAccountId} />
+                    <input
+                      className="withdraw-address_input"
+                      type="text"
+                      value={depositAccountId}
+                      onChange={handleDepositAccountId}
+                    />
                   </div>
-                  {validatemessage && <p style={{color: '#E14453'}}>{validatemessage}</p>}
-                  {successMessage && <p style={{color: '#34B263'}}>{successMessage}</p>}
+                  {validatemessage && (
+                    <p style={{ color: '#E14453' }}>{validatemessage}</p>
+                  )}
+                  {successMessage && (
+                    <p style={{ color: '#34B263' }}>{successMessage}</p>
+                  )}
                   <div className="deposit-crypto">
                     <img src="./alert-01.svg" alt="alert-icon" />
                     <span>Minimum Deposit: 1 eGold</span>
                   </div>
                   <div className="deposit_fiat-btn">
-                    <button onClick={depositToEliteplay}>{isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Deposit'}</button>
+                    <button onClick={depositToEliteplay}>
+                      {isLoading ? (
+                        <div class="lds-ring">
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                          <div></div>
+                        </div>
+                      ) : (
+                        'Deposit'
+                      )}
+                    </button>
                   </div>
                   {/* <div className="crypto-notice">
                       <span className="crypto-notice_notice-head">
@@ -262,17 +292,21 @@ const WalletComponent = ({ isNavOpen, user }) => {
                   <div className="crypto-deposit-method_type">
                     <div>
                       <p>Withdraw Currency</p>
-                      <select className="options-list">
+                      <select className="options-list" disabled={true}>
                         <option value="usdt">eGold</option>
                       </select>
                     </div>
-                    <div>
-                      <p>Choose Network</p>
-                      <select className="options-list">
-                        <option value="erc20">ERC 20</option>
-                      </select>
-                    </div>
+                    
                   </div>
+                  <p>Account Id</p>
+                    <div className="withdraw-address-box">
+                      <input
+                        className="withdraw-address_input"
+                        type="text"
+                        value={withdrawalAccount}
+                        onChange={handleWithdrawalAccount}
+                      />
+                    </div>
                   {/* <p>Withdrawal Address</p>
                     <div className="withdraw-address-box">
                       <input
@@ -294,8 +328,12 @@ const WalletComponent = ({ isNavOpen, user }) => {
                       onChange={handleWithdrawalChange}
                     />
                   </div>
-                  {validatemessage && <p style={{color: '#E14453'}}>{validatemessage}</p>}
-                  {successMessage && <p style={{color: '#34B263'}}>{successMessage}</p>}
+                  {validatemessage && (
+                    <p style={{ color: '#E14453' }}>{validatemessage}</p>
+                  )}
+                  {successMessage && (
+                    <p style={{ color: '#34B263' }}>{successMessage}</p>
+                  )}
                   <div className="withdraw_amounts">
                     <div className="withdraw_amount-details">
                       <span>Withdraw Amount:</span>

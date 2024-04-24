@@ -10,14 +10,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  z-index: 100;
 }
 
 .depositpopup-content {
   position: relative;
   background-color: #0b1210;
   border-radius: 16px;
-  max-height: 90vh;
-  /* overflow-y: scroll; */
 }
 
 .depositpopup-header {
@@ -40,6 +39,11 @@
   width: 20px;
   background-color: #070c0a;
   cursor: pointer;
+}
+
+.depositcontent-main-content {
+  height: 80vh;
+  overflow-y: scroll;
 }
 
 .depositpopup-boxes {
