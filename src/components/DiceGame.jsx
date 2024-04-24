@@ -20,6 +20,51 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
     resetLose: 50,
   });
   const dropdownRef = useRef(null);
+  const [userSeed, setUserSeed] = useState('');
+  const [serverSeed, setServerSeed] = useState('')
+  const accessToken = localStorage.getItem('accessToken');
+
+  function generateRandomToken(length) {
+    const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let token = '';
+    for (let i = 0; i < length; i++) {
+      const randomIndex = Math.floor(Math.random() * charset.length);
+      token += charset[randomIndex];
+    }
+    setUserSeed(token)
+    return token;
+  }
+
+  function getserverToken() {
+    const url = `https://be.eliteplay.bloombyte.dev/game/randomize-server-seed`;
+    const headers = {
+      Authorization: `Bearer ${accessToken}`,
+      'Content-Type': 'application/json', // Make sure to set the Content-Type header
+    };
+  
+    fetch(url, {
+      method: 'POST',
+      headers: headers,
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Failed to randomize server seed');
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setServerSeed(data.message);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }
+
+  useEffect(() => {
+    generateRandomToken(36);
+    getserverToken();
+  }, [])
+
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -82,8 +127,6 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
     const sound = new Audio('/dice_roll.mp3');
     sound.play();
   }
-
-  const accessToken = localStorage.getItem('accessToken');
 
   function placeBet(isAutoBet) {
     const url = `https://be.eliteplay.bloombyte.dev/game/place-bet`;
@@ -514,18 +557,18 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
                 <p>User Seed</p>
                 <div className="randomize-seed">
                   <div className="randomize-seedbox">
-                    <p>QuVbgOAhQ9gAjG3hfEoGh7IhpHIjXjvJ</p>
+                    <p>{userSeed}</p>
                   </div>
-                  <button>Randomize</button>
+                  <button style={{cursor: 'pointer'}} onClick={() => {generateRandomToken(36)}}>Randomize</button>
                 </div>
                 <p>Server Seed (Hashed)</p>
                 <div className="randomize-seed">
                   <div className="randomize-seedbox">
                     <p>
-                      9bb0f140e20e6809d1c54a2aa21efb324e0eaa959e2faf259e4a50662fa5e247
+                     {serverSeed}
                     </p>
                   </div>
-                  <button>Randomize</button>
+                  <button style={{cursor: 'pointer'}} onClick={getserverToken}>Randomize</button>
                 </div>
 
                 <p style={{ textAlign: 'center', marginTop: '20px' }}>

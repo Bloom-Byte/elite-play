@@ -28,6 +28,21 @@ const WalletComponent = ({ isNavOpen, user }) => {
     setDepositAccountId(event.target.value);
   };
 
+  const copyToClipboard = (text) => {
+    const tempInput = document.createElement('input');
+    tempInput.value = text;
+
+    document.body.appendChild(tempInput);
+
+    tempInput.select();
+
+    document.execCommand('copy');
+
+    document.body.removeChild(tempInput);
+
+    alert('Copied to clipboard: ' + text);
+  };
+
   const depositToEliteplay = async () => {
     const url = 'https://be.eliteplay.bloombyte.dev/transactions/deposit';
     const accessToken = localStorage.getItem('accessToken');
@@ -229,6 +244,20 @@ const WalletComponent = ({ isNavOpen, user }) => {
                       </select>
                     </div>
                   </div>
+                  <p>Deposit Address</p>
+                  <div className="deposit-address">
+                    <span className="eg-address">
+                      <span className="eAddress">8722767</span>
+                    </span>
+                    <span
+                      onClick={() => {
+                        copyToClipboard('8722767');
+                      }}
+                      className="copy-bx"
+                    >
+                      <img src="./copy-01.svg" alt="" /> copy
+                    </span>
+                  </div>
                   <p>Deposit Amount</p>
                   <div className="withdraw-address-box">
                     <input
@@ -296,17 +325,16 @@ const WalletComponent = ({ isNavOpen, user }) => {
                         <option value="usdt">eGold</option>
                       </select>
                     </div>
-                    
                   </div>
                   <p>Account Id</p>
-                    <div className="withdraw-address-box">
-                      <input
-                        className="withdraw-address_input"
-                        type="text"
-                        value={withdrawalAccount}
-                        onChange={handleWithdrawalAccount}
-                      />
-                    </div>
+                  <div className="withdraw-address-box">
+                    <input
+                      className="withdraw-address_input"
+                      type="text"
+                      value={withdrawalAccount}
+                      onChange={handleWithdrawalAccount}
+                    />
+                  </div>
                   {/* <p>Withdrawal Address</p>
                     <div className="withdraw-address-box">
                       <input

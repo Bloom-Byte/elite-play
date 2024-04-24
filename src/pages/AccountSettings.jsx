@@ -3,12 +3,18 @@ import Navbar from '../components/Navbar'
 import Sidenav from '../components/Sidenav'
 import AccountSettingsSection from '../components/AccountSettingsSection'
 import Footer from '../components/Footer'
+import { isLoggedIn } from '../utils/auth';
 import './AccountSettings.css'
 
 const AccountSettings = () => {
     const [isNavOpen, setIsNavOpen] = useState(true)
     const [userProfile, setUserProfile] = useState(null);
     const [loading, setLoading] = useState(false);
+    const userIsLoggedIn = isLoggedIn();
+
+    if (!userIsLoggedIn) {
+      window.location.href('/')
+    }
   
     const fetchUserProfile = async (accessToken) => {
       try {

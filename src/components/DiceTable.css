@@ -131,10 +131,16 @@ tr {
 
 .randomize-seed button {
   background: #24E3A1;
-  border: 1px transparent;
+  border: 2px transparent;
   border-radius: 6px;
   color: #fff;
   padding: 16px;
+  cursor: pointer;
+}
+
+.randomize-seed button:hover {
+  background: transparent;
+  border: 2px solid #24E3A1;
 }
 
 

@@ -8,6 +8,8 @@ const Referral = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [referralInfo, setReferralInfo] = useState(null);
   const [referralCount, setReferralCount] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     const accessToken = localStorage.getItem('accessToken');
@@ -51,11 +53,50 @@ const Referral = () => {
     fetchReferralCount();
   }, []);
 
+  const fetchUserProfile = async (accessToken) => {
+    try {
+      setLoading(true);
+      const response = await fetch(
+        'https://be.eliteplay.bloombyte.dev/user/me',
+        {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${accessToken}`,
+          },
+        }
+      );
+      if (response.ok) {
+        const data = await response.json();
+        setUserProfile(data);
+        setLoading(false);
+      } else {
+        console.error('Failed to fetch user profile:', response.statusText);
+        setLoading(false);
+      }
+    } catch (error) {
+
+      console.error('Error fetching user profile:', error.message);
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    const accessToken = localStorage.getItem('accessToken');
+    console.log(accessToken)
+    if (accessToken) {
+      fetchUserProfile(accessToken);
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+
   return (
     <div>
-      <Navbar isNavOpen={isNavOpen} />
+      <Navbar isNavOpen={isNavOpen} user={userProfile} />
       <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
-      <ReferralSection isNavOpen={isNavOpen} referralInfo={referralInfo} referralCount={referralCount} />
+      <ReferralSection isNavOpen={isNavOpen} referralInfo={referralInfo} referralCount={referralCount} user={userProfile} />
       <Footer isNavOpen={isNavOpen} />
     </div>
   );

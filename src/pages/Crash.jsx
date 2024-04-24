@@ -4,12 +4,18 @@ import Sidenav from '../components/Sidenav'
 import CrashGame from '../components/CrashGame'
 import CrashTable from '../components/CrashTable'
 import Footer from '../components/Footer'
+import { isLoggedIn } from '../utils/auth';
 import './Crash.css'
 
 const Crash = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const userIsLoggedIn = isLoggedIn();
+
+  if (!userIsLoggedIn) {
+    window.location.href('/')
+  }
 
   const fetchUserProfile = async (accessToken) => {
     try {

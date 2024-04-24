@@ -56,7 +56,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
         throw new Error('Failed to update profile picture');
       }
     } catch (error) {
-      setError(response.message);
+      // setError(error.response.message);
       console.error('Error updating profile picture:', error);
     } finally {
       setIsLoading(false);
@@ -259,7 +259,15 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                 <div>
                   <div className="main-profile-info-box">
                     <div className="main-profile-info">
-                      <img src="./profile-img.svg" alt="profile-image" />
+                    <img
+                  style={{ borderRadius: '50%', width: '40px', height: '40px' }}
+                  src={`${
+                    user?.profilePictureUrl
+                      ? user.profilePictureUrl
+                      : './placeholder-profile-img.jpg'
+                  }`}
+                  alt="profile-img"
+                />
                       <div className="username_details">
                         <h2>{user ? user.name : 'Yuxeer'}</h2>
                         <p>User ID: {user ? user._id : '12357308'}</p>

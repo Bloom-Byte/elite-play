@@ -53,6 +53,8 @@ const Login = () => {
       });
 
       localStorage.setItem('accessToken', response.data.accessToken);
+      const loginTime = new Date().getTime();
+      localStorage.setItem('loginTime', loginTime);
       navigate('/');
     } catch (error) {
       setError(error.response.data.error);

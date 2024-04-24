@@ -5,6 +5,7 @@ import Sidenav from '../components/Sidenav'
 import DiceGame from '../components/DiceGame'
 import DiceTable from '../components/DiceTable'
 import Footer from '../components/Footer'
+import { isLoggedIn } from '../utils/auth';
 import './Dice.css'
 
 const Dice = () => {
@@ -14,6 +15,11 @@ const Dice = () => {
   const [bets, setBets] = useState([]);
   const [userBets, setUserBets] = useState([]);
   const accessToken = localStorage.getItem('accessToken');
+  const userIsLoggedIn = isLoggedIn();
+
+  if (!userIsLoggedIn) {
+    window.location.href('/')
+  }
 
 
   const fetchAllBets = async () => {

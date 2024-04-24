@@ -1,4 +1,12 @@
 export const isLoggedIn = () => {
     const token = localStorage.getItem('accessToken');
-    return token !== null;
+    const loginTime = localStorage.getItem('loginTime');
+
+    if (token && loginTime) {
+      const currentTime = new Date().getTime();
+      const expireTime = parseInt(loginTime) + 3600000;
+      return currentTime < expireTime;
+    } else {
+      return false;
+    }
   };
