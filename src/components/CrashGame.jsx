@@ -48,9 +48,6 @@ const CrashGame = ({ isNavOpen }) => {
   const accessToken = localStorage.getItem('accessToken');
   useEffect(() => {
     const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/crash-game/game-state', {
-      // headers: {
-      //   Authorization: `Bearer ${accessToken}`,
-      // },
     });
 
     eventSource.onmessage = (event) => {

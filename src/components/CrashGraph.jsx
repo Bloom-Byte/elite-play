@@ -40,23 +40,19 @@ const CrashGraph = ({ gameState }) => {
 
  // Check if game is crashed
  console.log(gameState)
-
-
- if (gameState.isGameRunning) {
+ if (gameState.isGameCrashed) {
+  setIsCrashed(true);
+  // Reset chart data
+  chartInstance.current.data.labels = [];
+  chartInstance.current.data.datasets[0].data = [];
+  // Update chart
+  chartInstance.current.update();
+} else {
   setIsCrashed(false);
   // Update chart data
   const newDataIndex = chartInstance.current.data.labels.length;
   chartInstance.current.data.labels.push(gameState.currentMultiplier);
   chartInstance.current.data.datasets[0].data.push(newDataIndex.toString());
-  // Update chart
-  chartInstance.current.update();
-
-  
-} else {
-  setIsCrashed(true);
-  // Reset chart data
-  chartInstance.current.data.labels = [];
-  chartInstance.current.data.datasets[0].data = [];
   // Update chart
   chartInstance.current.update();
 }
