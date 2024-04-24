@@ -26,11 +26,6 @@ const Dice = () => {
     try {
       const response = await axios.get(
         'https://be.eliteplay.bloombyte.dev/game/all-bets',
-        {
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        }
       );
       setBets(response.data);
       console.log('all bets', response.data)

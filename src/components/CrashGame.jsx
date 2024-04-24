@@ -45,20 +45,6 @@ const CrashGame = ({ isNavOpen }) => {
     };
   }, [tutorial]);
   
-  const chartData = {
-    labels: [],
-    datasets: [{
-      label: 'Multiplier',
-      data: [],
-      borderColor: 'blue',
-      backgroundColor: gameState.isGameCrashed ? 'red' : 'transparent',
-    }],
-  };
-
-
-  const state = {
-    crashData: [{ value: 1 }, { value: 1.5 }, { value: 2 }, { value: 2.2 }, { value: 2.5 }, { value: 2.6 }],
-  };
   const accessToken = localStorage.getItem('accessToken');
   useEffect(() => {
     const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/crash-game/game-state', {

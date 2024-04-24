@@ -1,9 +1,11 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Chart from 'chart.js/auto';
+import './CrashGame.css';
 
-const CrashGraph = ({ gameState }) => {
+const CrashGraph = ({ gameState }) => { 
   const chartRef = useRef(null);
   const chartInstance = useRef(null);
+  const [isCrashed, setIsCrashed] = useState(false);
 
 
   useEffect(() => {
@@ -29,31 +31,46 @@ const CrashGraph = ({ gameState }) => {
         options: {
           scales: {
             y: {
-              beginAtZero: true
+              beginAtZero: false
             }
           }
         }
       });
     }
 
-    // Update chart data
-    const newDataIndex = chartInstance.current.data.labels.length;
-    chartInstance.current.data.labels.push(newDataIndex.toString());
-    chartInstance.current.data.datasets[0].data.push(gameState.currentMultiplier);
+ // Check if game is crashed
+ console.log(gameState)
 
-    // Limit chart data length to prevent it from growing indefinitely
-    const maxDataLength = 10;
-    if (chartInstance.current.data.labels.length > maxDataLength) {
-      chartInstance.current.data.labels.shift();
-      chartInstance.current.data.datasets[0].data.shift();
-    }
 
-    // Update chart
-    chartInstance.current.update();
+ if (gameState.isGameRunning) {
+  setIsCrashed(false);
+  // Update chart data
+  const newDataIndex = chartInstance.current.data.labels.length;
+  chartInstance.current.data.labels.push(gameState.currentMultiplier);
+  chartInstance.current.data.datasets[0].data.push(newDataIndex.toString());
+  // Update chart
+  chartInstance.current.update();
 
-  }, [gameState]);
+  
+} else {
+  setIsCrashed(true);
+  // Reset chart data
+  chartInstance.current.data.labels = [];
+  chartInstance.current.data.datasets[0].data = [];
+  // Update chart
+  chartInstance.current.update();
+}
+}, [gameState]);
 
-  return <canvas ref={chartRef} />;
+return (
+  <div>
+    {isCrashed ? (
+      <p className='crashed-gamestate'>Game crashed. Waiting for the next game to start...</p>
+    ) : (
+      <canvas ref={chartRef} />
+    )}
+  </div>
+);
 };
 
 export default CrashGraph;
