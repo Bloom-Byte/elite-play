@@ -103,7 +103,7 @@ const ResetPassword = () => {
                 <input
                   type="password"
                   placeholder="Confirm New Password"
-                  value={password}
+                  value={confirmPassword}
                   onChange={ handleConfirmPasswordChange}
                   onFocus={() => setConfirmPasswordFocused(true)}
                   onBlur={() => setConfirmPasswordFocused(false)}
