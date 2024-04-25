@@ -43,7 +43,7 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post('https://be.eliteplay.bloombyte.dev/user/auth/reset-password', {
+      const response = await axios.post(`https://be.eliteplay.bloombyte.dev/user/auth/reset-password/${token}`, {
         password,
         token
       });
