@@ -184,7 +184,7 @@ const VIPPopup = ({ vipSupport, setVipSupport, timeLeft, setTimeLeft, lastClaimT
                   </div>
                   <div className="vippopuplevel_box-reward">
                     <span>Rewards</span>
-                    <span>250,000 eGold</span>
+                    <span>250,000</span>
                   </div>
                   <div className="vippopuplevel_box-reward">
                     <span>Faucet Rewards</span>
