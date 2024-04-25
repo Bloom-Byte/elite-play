@@ -59,7 +59,7 @@ const Crash = () => {
   return (
     <div>
       <Navbar isNavOpen={isNavOpen} user={userProfile} />
-      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} user={userProfile} />
       <CrashGame isNavOpen={isNavOpen} user={userProfile} />
       <CrashTable isNavOpen={isNavOpen} user={userProfile} />
       <Footer isNavOpen={isNavOpen} />

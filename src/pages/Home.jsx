@@ -64,7 +64,7 @@ const Home = () => {
       ) : (
         <>
           <Navbar isNavOpen={isNavOpen} user={userProfile} />
-          <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+          <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} user={userProfile}/>
           <Hero isNavOpen={isNavOpen} user={userProfile} />
           <Recentwins isNavOpen={isNavOpen} />
           <DepositCTA isNavOpen={isNavOpen} />

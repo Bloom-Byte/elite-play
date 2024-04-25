@@ -6,7 +6,7 @@ import VIPPopup from './VIPPopup';
 import LanguagePopup from './LanguagePopup';
 import './Sidenav.css';
 
-const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
+const Sidenav = ({ isNavOpen, setIsNavOpen, user }) => {
   const [clickedItems, setClickedItems] = useState(Array(7).fill(false));
   const [chatOpen, setChatOpen] = useState(false);
   const [liveSupport, setLiveSupport] = useState(false);
@@ -21,12 +21,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
   const isDicePage = location.pathname === '/dice'
   const isCrashPage = location.pathname == '/crash'
 
-  const handleClick = (index) => {
-    const updatedClickedItems = clickedItems.map((item, i) =>
-      i === index ? true : false
-    );
-    setClickedItems(updatedClickedItems);
-  };
+
 
   return (
     <>
@@ -211,7 +206,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
         />
       )}
       {vipSupport && (
-        <VIPPopup vipSupport={vipSupport} setVipSupport={setVipSupport} timeLeft={timeLeft} setTimeLeft={setTimeLeft} lastClaimTime={lastClaimTime} setLastClaimTime={setLastClaimTime} nextClaimTime={nextClaimTime} setNextClaimTime={setNextClaimTime} />
+        <VIPPopup vipSupport={vipSupport} user={user} setVipSupport={setVipSupport} timeLeft={timeLeft} setTimeLeft={setTimeLeft} lastClaimTime={lastClaimTime} setLastClaimTime={setLastClaimTime} nextClaimTime={nextClaimTime} setNextClaimTime={setNextClaimTime} />
       )}
       {languagePopup && (
         <LanguagePopup

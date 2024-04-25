@@ -55,7 +55,7 @@ const Wallet = () => {
   return (
     <div>
       <Navbar isNavOpen={isNavOpen} user={userProfile} />
-      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} user={userProfile} />
       <WalletComponent isNavOpen={isNavOpen} user={userProfile} />
       <Footer isNavOpen={isNavOpen} />
     </div>

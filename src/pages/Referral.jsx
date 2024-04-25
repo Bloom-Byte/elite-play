@@ -95,7 +95,7 @@ const Referral = () => {
   return (
     <div>
       <Navbar isNavOpen={isNavOpen} user={userProfile} />
-      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} user={userProfile} />
       <ReferralSection isNavOpen={isNavOpen} referralInfo={referralInfo} referralCount={referralCount} user={userProfile} />
       <Footer isNavOpen={isNavOpen} />
     </div>

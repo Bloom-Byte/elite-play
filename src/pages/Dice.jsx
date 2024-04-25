@@ -108,7 +108,7 @@ const Dice = () => {
   return (
     <div>
       <Navbar isNavOpen={isNavOpen} user={userProfile} />
-      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} user={userProfile}/>
       <DiceGame isNavOpen={isNavOpen} user={userProfile} userBets={userBets}  />
       <DiceTable isNavOpen={isNavOpen} bets={bets} userBets={userBets} />
       <Footer isNavOpen={isNavOpen} />

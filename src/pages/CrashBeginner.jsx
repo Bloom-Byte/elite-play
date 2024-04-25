@@ -10,7 +10,7 @@ const CrashBeginner = () => {
   return (
     <div>
       <Navbar isNavOpen={isNavOpen} />
-      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen}/>
       <CrashBeginnerComponent isNavOpen={isNavOpen} />
       <Footer isNavOpen={isNavOpen} />
     </div>

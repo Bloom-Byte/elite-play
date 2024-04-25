@@ -25,13 +25,31 @@ const CrashGraph = ({ gameState }) => {
             borderColor: '#88DF95',
             borderWidth: 4,
             pointRadius: 0,
-            backgroundColor: '#34B263'
+            backgroundColor: '#34B263',
+            title: {
+              display: false,
+              text: ''
+          },
           }],
         },
+        title: {
+          display: false,
+          text: ''
+      },
         options: {
           scales: {
             y: {
               beginAtZero: false
+            }
+          }
+        },
+        tooltip: {
+          callbacks: {
+            label: (context) => {
+              const label = context.dataset.label;
+              const value = context.parsed.y;
+              // Display the current multiplier with a label
+              return `${label}: ${value.toFixed(2)}x`;
             }
           }
         }
@@ -41,7 +59,7 @@ const CrashGraph = ({ gameState }) => {
  // Check if game is crashed
  console.log(gameState)
  if (gameState.isGameCrashed) {
-  setIsCrashed(true);
+  // setIsCrashed(true);
   // Reset chart data
   chartInstance.current.data.labels = [];
   chartInstance.current.data.datasets[0].data = [];

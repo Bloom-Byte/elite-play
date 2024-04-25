@@ -349,7 +349,7 @@ const CrashGame = ({ isNavOpen }) => {
           )}
         </div>
         <div className="dicegame-diceroll">
-          <div className="dicegame-diceroll__odds">
+          {/* <div className="dicegame-diceroll__odds">
             <span>88.59</span>
             <span>74.17</span>
             <span className="dicegame-diceroll__odds-active">37.56</span>
@@ -358,7 +358,7 @@ const CrashGame = ({ isNavOpen }) => {
             <span>92.81</span>
             <span>67.89</span>
             <span>51.73</span>
-          </div>
+          </div> */}
           <CrashGraph gameState={gameState} />
         </div>
       </div>

@@ -7,7 +7,7 @@ import './VIPPopup.css';
 
 register();
 
-const VIPPopup = ({ vipSupport, setVipSupport, timeLeft, setTimeLeft, lastClaimTime, setLastClaimTime, nextClaimTime, setNextClaimTime }) => {
+const VIPPopup = ({ vipSupport, setVipSupport, user, timeLeft, setTimeLeft, lastClaimTime, setLastClaimTime, nextClaimTime, setNextClaimTime }) => {
   
   const swiperElRef = useRef(null);
 
@@ -106,8 +106,8 @@ const VIPPopup = ({ vipSupport, setVipSupport, timeLeft, setTimeLeft, lastClaimT
             >
               <h3>Your VIP Progress</h3>
               <p className="xplevel">65 XP</p>
-              <input type="range" />
-              <p className="xplevel">135 XP until VIP 3</p>
+              <input type="range" max="20000000" value={user?.totalBetAmount} />
+              <p className="xplevel">{user?.amountToNextTier} XP until {user?.nextTier}</p>
             </div>
             <div className="vippopup-reward-box">
               <h3>Faucet Reward</h3>
@@ -117,10 +117,10 @@ const VIPPopup = ({ vipSupport, setVipSupport, timeLeft, setTimeLeft, lastClaimT
                   src="./twemoji_coin.svg"
                   alt="coin-icon"
                 />{' '}
-                <span className="coinlevel-rewards">0.0029</span>
+                <span className="coinlevel-rewards">0.0026</span>
               </h2>
               <p className="reward-details">
-                Total Reward Claimed <span className="coinamount">0.0029</span>{' '}
+                Total Reward Claimed <span className="coinamount">0.0026</span>{' '}
                 <span>
                   Next Reward in:{' '}
                   <span className="nextrewardtime">
