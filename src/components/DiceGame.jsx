@@ -96,8 +96,14 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
     }
   };
 
+  const updateBetAmount = (amount) => {
+    if (amount >= 1 && amount <= 1000000000) {
+        setBetAmount(amount)
+    }
+  }
+
   const handleBetAmount = (event) => {
-    if (event.target.value >= 1) {
+    if (event.target.value >= 1 && event.target.value <= 1000000000) {
       setBetAmount(event.target.value);
     }
   };
@@ -262,7 +268,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
                   <span
                     style={{ cursor: 'pointer' }}
                     onClick={() => {
-                      setBetAmount(betAmount / 2);
+                      updateBetAmount(betAmount / 2);
                     }}
                   >
                     /2
@@ -270,7 +276,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
                   <span
                     style={{ cursor: 'pointer' }}
                     onClick={() => {
-                      setBetAmount(betAmount * 2);
+                      updateBetAmount(betAmount * 2);
                     }}
                   >
                     2
@@ -279,7 +285,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
                     <img
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
-                        setBetAmount(betAmount + 1);
+                        updateBetAmount(betAmount + 1);
                       }}
                       src="./count_arrow-top.svg"
                       alt="arrow"
@@ -287,7 +293,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
                     <img
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
-                        setBetAmount(betAmount - 1);
+                        updateBetAmount(betAmount - 1);
                       }}
                       src="./count_arrow-down.svg"
                       alt="arrow"
@@ -405,7 +411,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
                     <span
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
-                        setBetAmount(betAmount / 2);
+                        updateBetAmount(betAmount / 2);
                       }}
                     >
                       /2
@@ -413,7 +419,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
                     <span
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
-                        setBetAmount(betAmount * 2);
+                        updateBetAmount(betAmount * 2);
                       }}
                     >
                       2
@@ -422,7 +428,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
                       <img
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                          setBetAmount(betAmount + 1);
+                          updateBetAmount(betAmount + 1);
                         }}
                         src="./count_arrow-top.svg"
                         alt="arrow"
@@ -430,7 +436,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
                       <img
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                          setBetAmount(betAmount - 1);
+                          updateBetAmount(betAmount - 1);
                         }}
                         src="./count_arrow-down.svg"
                         alt="arrow"

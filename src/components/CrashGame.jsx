@@ -146,7 +146,7 @@ const CrashGame = ({ isNavOpen }) => {
                   <span
                     style={{ cursor: 'pointer' }}
                     onClick={() => {
-                      setBetAmount(betAmount / 2);
+                      handleBetAmountCount(betAmount / 2);
                     }}
                   >
                     /2
@@ -154,7 +154,7 @@ const CrashGame = ({ isNavOpen }) => {
                   <span
                     style={{ cursor: 'pointer' }}
                     onClick={() => {
-                      setBetAmount(betAmount * 2);
+                      handleBetAmountCount(betAmount * 2);
                     }}
                   >
                     2
@@ -163,7 +163,7 @@ const CrashGame = ({ isNavOpen }) => {
                     <img
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
-                        setBetAmount(betAmount + 1);
+                        handleBetAmountCount(betAmount + 1);
                       }}
                       src="./count_arrow-top.svg"
                       alt="arrow"
@@ -171,7 +171,7 @@ const CrashGame = ({ isNavOpen }) => {
                     <img
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
-                        setBetAmount(betAmount - 1);
+                        handleBetAmountCount(betAmount - 1);
                       }}
                       src="./count_arrow-down.svg"
                       alt="arrow"
