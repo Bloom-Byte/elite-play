@@ -147,6 +147,7 @@
     font-family: 'Manrope', sans-serif;
     font-size: 14px;
     font-weight: 600;
+    cursor: pointer;
 }
 
 .alllevels {
@@ -169,6 +170,7 @@
     background-color: #00000080;
     padding: 16px;
     border-radius: 6px;
+    margin: 0 10px;
 }
 
 .vippopuplevel_box-reward {
@@ -213,4 +215,5 @@
     background-color: #050908;
     padding: 8px;
     border-radius: 6px;
+    cursor: pointer;
 }

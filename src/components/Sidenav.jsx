@@ -12,6 +12,9 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
   const [liveSupport, setLiveSupport] = useState(false);
   const [vipSupport, setVipSupport] = useState(false);
   const [languagePopup, setLanguagePopup] = useState(false);
+  const [timeLeft, setTimeLeft] = useState(0);
+  const [lastClaimTime, setLastClaimTime] = useState(null);
+  const [nextClaimTime, setNextClaimTime] = useState(null);
 
   const location = useLocation();
   const isReferralsPage = location.pathname === '/referrals';
@@ -208,7 +211,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen }) => {
         />
       )}
       {vipSupport && (
-        <VIPPopup vipSupport={vipSupport} setVipSupport={setVipSupport} />
+        <VIPPopup vipSupport={vipSupport} setVipSupport={setVipSupport} timeLeft={timeLeft} setTimeLeft={setTimeLeft} lastClaimTime={lastClaimTime} setLastClaimTime={setLastClaimTime} nextClaimTime={nextClaimTime} setNextClaimTime={setNextClaimTime} />
       )}
       {languagePopup && (
         <LanguagePopup
