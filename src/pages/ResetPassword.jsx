@@ -5,26 +5,22 @@ import axios from 'axios';
 import './Login.css';
 
 const ResetPassword = () => {
-  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [emailFocused, setEmailFocused] = useState(false);
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [passwordFocused, setPasswordFocused] = useState(false);
+  const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { token } = useParams();
 
-  const handleEmailChange = (event) => {
-    setEmail(event.target.value);
-  };
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
 
-  const validateEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
+  const handleConfirmPasswordChange = (event) => {
+    setConfirmPassword(event.target.value);
   };
 
   const validatePassword = (password) => {
@@ -42,10 +38,16 @@ const ResetPassword = () => {
       return;
     }
 
+    if (password !== confirmPassword) {
+      setError('Passwords do not match.');
+      setIsLoading(false);
+      return;
+    }
+
     try {
       const response = await axios.post(`https://be.eliteplay.bloombyte.dev/user/auth/reset-password/${token}`, {
-        password,
-        token
+        newPassword: password,
+        confirmPassword: confirmPassword
       });
 
       localStorage.setItem('accessToken', response.data.accessToken);
@@ -86,6 +88,25 @@ const ResetPassword = () => {
                   onChange={handlePasswordChange}
                   onFocus={() => setPasswordFocused(true)}
                   onBlur={() => setPasswordFocused(false)}
+                />
+              </div>
+              <div className="register-form__input-box">
+                <img
+                  className="input-icon"
+                  src={
+                    !confirmPasswordFocused && confirmPassword
+                      ? './lock-key-white.svg'
+                      : './lock-key.svg'
+                  }
+                  alt="password-icon"
+                />
+                <input
+                  type="password"
+                  placeholder="Confirm New Password"
+                  value={password}
+                  onChange={ handleConfirmPasswordChange}
+                  onFocus={() => setConfirmPasswordFocused(true)}
+                  onBlur={() => setConfirmPasswordFocused(false)}
                 />
               </div>
               <button className="register-form__submit-btn" type="submit">
