@@ -10,6 +10,7 @@ const ResetPassword = () => {
   const [passwordFocused, setPasswordFocused] = useState(false);
   const [confirmPasswordFocused, setConfirmPasswordFocused] = useState(false);
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { token } = useParams();
@@ -51,7 +52,10 @@ const ResetPassword = () => {
       });
 
       localStorage.setItem('accessToken', response.data.accessToken);
-      navigate('/login');
+      setSuccessMessage('Password reset successfully!');
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
     } catch (error) {
       setError(error.response.data.error);
     } finally {
@@ -113,6 +117,7 @@ const ResetPassword = () => {
               {isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Reset Password'}
               </button>
               {error && <p className='error-msg'>{error}</p>}
+              {successMessage && <p className="success-msg">{successMessage}</p>}
             </form>
           </div>
         </div>
