@@ -144,6 +144,8 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
       isRollOver: isAutoBet,
       targetValue: Number(diceRoll),
       payout: pay,
+      serverSeed: serverSeed,
+      clientSeed: userSeed
     };
     const headers = {
       Authorization: `Bearer ${accessToken}`,

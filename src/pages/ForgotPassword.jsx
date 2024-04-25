@@ -37,7 +37,7 @@ const ForgotPassword = () => {
 
       setMessage('Reset Email Sent successfully and token will expire in 10 MINS');
     } catch (error) {
-      setError(error.response.data.error);
+      setError(error.response.message);
     }  finally {
       setIsLoading(false);
     }
