@@ -494,7 +494,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
               <span className={bet.betStatus === 'win' ? 'dicegame-diceroll__odds-active' : ''}>{bet.payout}</span>
             })}
           </div>
-          <div style={{left: diceRoll-5+'%'}} className="dicegame-diceroll__die">
+          <div style={{marginLeft: diceRoll-5+'%'}} className="dicegame-diceroll__die">
             <img src="./dice-cube.png" alt="die" />
             <span className={`${diceGameResponse?.betStatus === 'win' ? 'green' : ''} ${diceGameResponse?.betStatus === 'loss' ? 'red' : ''}`}>{diceRoll}</span>
           </div>
