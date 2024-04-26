@@ -128,16 +128,6 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
           <p>Chatroom</p>
           <div className="chatroom-btn">
             <img
-              onClick={() => setMinimized(!minimized)}
-              className="arrow"
-              src={
-                minimized
-                  ? './arrow-expand-01-round.svg'
-                  : './arrow-shrink-01-round.svg'
-              }
-              alt="arrow"
-            />
-            <img
               onClick={() => setChatOpen(!chatOpen)}
               className="close"
               src="./cancel-x.svg"

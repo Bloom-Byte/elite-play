@@ -1,14 +1,12 @@
 import React, { useState } from 'react';
 import { useLocation } from 'react-router-dom';
-import ChatPopup from './ChatPopup';
 import LiveSupportPopup from './LiveSupportPopup';
 import VIPPopup from './VIPPopup';
 import LanguagePopup from './LanguagePopup';
 import './Sidenav.css';
 
-const Sidenav = ({ isNavOpen, setIsNavOpen, user }) => {
+const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
   const [clickedItems, setClickedItems] = useState(Array(7).fill(false));
-  const [chatOpen, setChatOpen] = useState(false);
   const [liveSupport, setLiveSupport] = useState(false);
   const [vipSupport, setVipSupport] = useState(false);
   const [languagePopup, setLanguagePopup] = useState(false);
@@ -198,7 +196,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user }) => {
           </div>
         </div>
       )}
-      {chatOpen && <ChatPopup chatOpen={chatOpen} setChatOpen={setChatOpen} />}
+      {/* {chatOpen && <ChatPopup chatOpen={chatOpen} setChatOpen={setChatOpen} />} */}
       {liveSupport && (
         <LiveSupportPopup
           liveSupport={liveSupport}

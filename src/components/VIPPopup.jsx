@@ -23,7 +23,17 @@ const VIPPopup = ({ vipSupport, setVipSupport, user, timeLeft, setTimeLeft, last
     return () => clearInterval(intervalId);
   }, [nextClaimTime]);
 
-  // Function to handle claiming the token
+
+  useEffect(() => {
+    const storedLastClaimTime = localStorage.getItem('lastClaimTime');
+    const storedNextClaimTime = localStorage.getItem('nextClaimTime');
+
+    if (storedLastClaimTime && storedNextClaimTime) {
+      setLastClaimTime(parseInt(storedLastClaimTime));
+      setNextClaimTime(parseInt(storedNextClaimTime));
+    }
+  }, []);
+  
   const handleClaimToken = async () => {
     try {
       const accessToken = localStorage.getItem('accessToken');
@@ -77,6 +87,11 @@ const VIPPopup = ({ vipSupport, setVipSupport, user, timeLeft, setTimeLeft, last
     const swiperContainer = swiperElRef.current.swiper;
     swiperContainer.slidePrev();
   };
+
+  useEffect(() => {
+    localStorage.setItem('lastClaimTime', lastClaimTime);
+    localStorage.setItem('nextClaimTime', nextClaimTime);
+  }, [lastClaimTime, nextClaimTime]);
 
   return (
     <div className="vippopup">

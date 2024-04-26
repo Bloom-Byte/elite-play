@@ -11,14 +11,14 @@ import VIPPopup from './VIPPopup';
 import LanguagePopup from './LanguagePopup';
 import './Navbar.css';
 
-const Navbar = ({ isNavOpen, user }) => {
+const Navbar = ({ isNavOpen, user, chatOpen, setChatOpen }) => {
   const userIsLoggedIn = isLoggedIn();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [notificationsPopupOpen, setNotificationsPopupOpen] = useState(false);
   const [depositPopupOpen, setDepositPopupOpen] = useState(false);
   const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false);
   const [isMobileNavOpen, setIsMobileNavOpen] = useState(false);
-  const [chatOpen, setChatOpen] = useState(false);
+  // const [chatOpen, setChatOpen] = useState(false);
   const [liveSupport, setLiveSupport] = useState(false);
   const [vipSupport, setVipSupport] = useState(false);
   const [languagePopup, setLanguagePopup] = useState(false);
@@ -27,11 +27,12 @@ const Navbar = ({ isNavOpen, user }) => {
   const isReferralsPage = location.pathname === '/referrals';
   const isDicePage = location.pathname === '/dice';
   const isCrashPage = location.pathname == '/crash';
+   console.log(user)
 
   return (
     <>
       <div className="nav">
-        <div className={`nav-games ${isNavOpen ? 'nav-expanded' : ''}`}>
+        <div className={`nav-games ${isNavOpen ? 'nav-expanded' : ''} ${chatOpen ? 'min-page-chat' : ''}`}>
           <div style={{ display: 'none' }} className="sidenav__icon">
             <img
               className="nav-icon"
@@ -200,7 +201,7 @@ const Navbar = ({ isNavOpen, user }) => {
                   className="nav-wallet_info"
                 >
                   <img src="./twemoji_coin.svg" alt="coin" />
-                  <span>{(user?.balance)?.toFixed(2)}</span>
+                  <span>{(user?.balance) ? Number(user?.balance).toFixed(2) : ''}</span>
                   <img src="./down-arrow.svg" alt="arrow" />
                 </div>
 

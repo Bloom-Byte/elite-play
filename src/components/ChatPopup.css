@@ -1,16 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
-
+ 
 .chatroom-popup {
-  position: absolute;
+  position: fixed;
   top: 0;
   right: 0;
-  width: 400px;
+  /* width: 400px; */
   height: 100%;
-  z-index: 1;
   background-color: rgba(0, 0, 0, 0.5);
   transition: transform 2s ease-in;
   transform: translateX(100%);
-}
+} 
 
 .chatroom-popup.open {
   transform: translateX(0);
@@ -82,7 +81,6 @@
   background-color: #070c0a;
   border-radius: 6px;
   padding: 20px;
-  width: 300px;
   /* max-height: 70vh; */
   /* overflow: scroll; */
 }
@@ -163,7 +161,6 @@
     padding: 14px;
     border: 1px solid  #88DF95;
     border-radius: 6px;
-    width: 280px;
     color: white;
 }
 

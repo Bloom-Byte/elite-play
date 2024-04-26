@@ -52,6 +52,7 @@
   background-color: #070c0a;
   margin-top: 2rem;
   border-radius: 6px;
+  overflow-x: scroll;
 }
 
 .livebets-table_table th,

@@ -11,9 +11,6 @@ body {
     align-items: center;
     justify-content: space-between;
     background-color: #0B1210;
-    top: 0;
-    width: 95vw;
-    /* height: 80px; */
     padding: 1rem;
 }
 
