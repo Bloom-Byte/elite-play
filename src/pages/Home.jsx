@@ -17,7 +17,7 @@ const Home = () => {
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [chatOpen, setChatOpen] = useState(false);
+  const [chatOpen, setChatOpen] = useState(true);
 
   const fetchUserProfile = async (accessToken) => {
     try {
