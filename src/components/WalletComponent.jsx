@@ -272,7 +272,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
                       <img src="./copy-01.svg" alt="" /> copy
                     </span>
                   </div>
-                  <p>Deposit Amount</p>
+                  {/* <p>Deposit Amount</p>
                   <div className="withdraw-address-box">
                     <input
                       className="withdraw-address_input"
@@ -280,7 +280,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
                       value={depositAmount}
                       onChange={handleDepositChange}
                     />
-                  </div>
+                  </div> */}
                   {/* <p>Account Id</p>
                   <div className="withdraw-address-box">
                     <input
@@ -290,18 +290,18 @@ const WalletComponent = ({ isNavOpen, user }) => {
                       onChange={handleDepositAccountId}
                     />
                   </div> */}
-                  {validatemessage && (
+                  {/* {validatemessage && (
                     <p style={{ color: '#E14453' }}>{validatemessage}</p>
                   )}
                   {successMessage && (
                     <p style={{ color: '#34B263' }}>{successMessage}</p>
-                  )}
+                  )} */}
                   <div className="deposit-crypto">
                     <img src="./alert-01.svg" alt="alert-icon" />
                     <span>Minimum Deposit: 1 eGold</span>
                   </div>
                   <div className="deposit_fiat-btn">
-                    <button onClick={depositToEliteplay}>
+                    {/* <button onClick={depositToEliteplay}>
                       {isLoading ? (
                         <div class="lds-ring">
                           <div></div>
@@ -312,14 +312,14 @@ const WalletComponent = ({ isNavOpen, user }) => {
                       ) : (
                         'Confirm Deposit'
                       )}
-                    </button>
+                    </button> */}
                   </div>
                   <div className="crypto-notice">
                       <span className="crypto-notice_notice-head">
                         NOTICE:{' '}
                       </span>
                       <span className="crypto-notice_notice-info">
-                      Make deposit to the account id and include your user id as description. 
+                      Please wait for your deposit to reflect 30 mins after transanction. 
                       </span>
                     </div>
                 </div>

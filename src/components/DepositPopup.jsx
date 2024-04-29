@@ -123,7 +123,7 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
                 <img src="./copy-01.svg" alt="" /> copy
               </span>
             </div>
-            <p>Deposit Amount</p>
+            {/* <p>Deposit Amount</p>
             <div className="withdraw-address-box">
               <input
                 className="withdraw-address_input"
@@ -131,7 +131,7 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
                 value={depositAmountpop}
                 onChange={handleDepositChange}
               />
-            </div>
+            </div> */}
             {/* <p>Account Id</p>
             <div className="withdraw-address-box">
               <input
@@ -142,7 +142,7 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
               />
             </div> */}
             <div className="deposit_fiat-btn">
-              <button onClick={depositToEliteplay}>
+              {/* <button onClick={depositToEliteplay}>
                 {isLoading ? (
                   <div class="lds-ring">
                     <div></div>
@@ -153,14 +153,14 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
                 ) : (
                   'Deposit'
                 )}
-              </button>
+              </button> */}
             </div>
-            {validatemessage && (
+            {/* {validatemessage && (
               <p style={{ color: '#E14453' }}>{validatemessage}</p>
             )}
             {successMessage && (
               <p style={{ color: '#34B263' }}>{successMessage}</p>
-            )}
+            )} */}
           </div>
           <div className="depositpopup-min">
             <img src="./alert-01.svg" alt="alert-icon" />
@@ -169,7 +169,7 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
           <div className="depositpopup-notice">
             <span className="notice-txt">NOTICE: </span>{' '}
             <span>
-            Make deposit to the account id and include your user id as description.
+            Please wait for your deposit to reflect 30 mins after transanction.
             </span>
           </div>
         </div>
