@@ -59,7 +59,7 @@ const CrashGraph = ({ gameState }) => {
  // Check if game is crashed
  console.log(gameState)
  if (gameState.isGameCrashed) {
-  // setIsCrashed(true);
+  setIsCrashed(true);
   // Reset chart data
   chartInstance.current.data.labels = [];
   chartInstance.current.data.datasets[0].data = [];

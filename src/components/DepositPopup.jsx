@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './DepositPopup.css';
 
-const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen }) => {
+const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
   const [depositAmountpop, setDepositAmountpop] = useState(0);
   const [depositAccountIdpop, setDepositAccountIdpop] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -95,7 +95,7 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen }) => {
               </select>
             </div>
           <div className="deposit-details">
-            <p>Deposit Address</p>
+            <p>Account Id</p>
             <div className="deposit-address">
               <span className="eg-address">
                 <span className="eAddress">8722767</span>
@@ -103,6 +103,20 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen }) => {
               <span
                 onClick={() => {
                   copyToClipboard('8722767');
+                }}
+                className="copy-bx"
+              >
+                <img src="./copy-01.svg" alt="" /> copy
+              </span>
+            </div>
+            <p>User Id</p>
+            <div className="deposit-address">
+              <span className="eg-address">
+                <span className="eAddress">{user?._id}</span>
+              </span>
+              <span
+                onClick={() => {
+                  copyToClipboard(user?._id);
                 }}
                 className="copy-bx"
               >
@@ -118,7 +132,7 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen }) => {
                 onChange={handleDepositChange}
               />
             </div>
-            <p>Account Id</p>
+            {/* <p>Account Id</p>
             <div className="withdraw-address-box">
               <input
                 className="withdraw-address_input"
@@ -126,7 +140,7 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen }) => {
                 value={depositAccountIdpop}
                 onChange={handleDepositAccountId}
               />
-            </div>
+            </div> */}
             <div className="deposit_fiat-btn">
               <button onClick={depositToEliteplay}>
                 {isLoading ? (
@@ -155,8 +169,7 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen }) => {
           <div className="depositpopup-notice">
             <span className="notice-txt">NOTICE: </span>{' '}
             <span>
-              If your eGold deposit has not been processed within 10 minutes,
-              please contact our support team!
+            Make deposit to the account id and include your user id as description.
             </span>
           </div>
         </div>

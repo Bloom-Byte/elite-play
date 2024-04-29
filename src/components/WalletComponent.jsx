@@ -59,7 +59,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
 
     const requestBody = {
       amount: depositAmount,
-      accountId: depositAccountId,
+      accountId: user._id,
     };
 
     const headers = {
@@ -244,7 +244,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
                       </select>
                     </div>
                   </div>
-                  <p>Deposit Address</p>
+                  <p>Account Id</p>
                   <div className="deposit-address">
                     <span className="eg-address">
                       <span className="eAddress">8722767</span>
@@ -252,6 +252,20 @@ const WalletComponent = ({ isNavOpen, user }) => {
                     <span
                       onClick={() => {
                         copyToClipboard('8722767');
+                      }}
+                      className="copy-bx"
+                    >
+                      <img src="./copy-01.svg" alt="" /> copy
+                    </span>
+                  </div>
+                  <p>User Id</p>
+                  <div className="deposit-address">
+                    <span className="eg-address">
+                      <span className="eAddress">{user?._id}</span>
+                    </span>
+                    <span
+                      onClick={() => {
+                        copyToClipboard(user?._id);
                       }}
                       className="copy-bx"
                     >
@@ -267,7 +281,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
                       onChange={handleDepositChange}
                     />
                   </div>
-                  <p>Account Id</p>
+                  {/* <p>Account Id</p>
                   <div className="withdraw-address-box">
                     <input
                       className="withdraw-address_input"
@@ -275,7 +289,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
                       value={depositAccountId}
                       onChange={handleDepositAccountId}
                     />
-                  </div>
+                  </div> */}
                   {validatemessage && (
                     <p style={{ color: '#E14453' }}>{validatemessage}</p>
                   )}
@@ -296,19 +310,18 @@ const WalletComponent = ({ isNavOpen, user }) => {
                           <div></div>
                         </div>
                       ) : (
-                        'Deposit'
+                        'Confirm Deposit'
                       )}
                     </button>
                   </div>
-                  {/* <div className="crypto-notice">
+                  <div className="crypto-notice">
                       <span className="crypto-notice_notice-head">
                         NOTICE:{' '}
                       </span>
                       <span className="crypto-notice_notice-info">
-                        Send only USDT to this deposit address. Coins will be
-                        deposited automatically after 20 network confirmations. 
+                      Make deposit to the account id and include your user id as description. 
                       </span>
-                    </div> */}
+                    </div>
                 </div>
               </div>
             </div>

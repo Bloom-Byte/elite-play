@@ -201,7 +201,7 @@ const Navbar = ({ isNavOpen, user, chatOpen, setChatOpen }) => {
                   className="nav-wallet_info"
                 >
                   <img src="./twemoji_coin.svg" alt="coin" />
-                  <span>{(user?.balance) ? Number(user?.balance).toFixed(2) : ''}</span>
+                  <span>{(user?.balance) ? Number(user?.balance).toFixed(5) : ''}</span>
                   <img src="./down-arrow.svg" alt="arrow" />
                 </div>
 
@@ -267,6 +267,7 @@ const Navbar = ({ isNavOpen, user, chatOpen, setChatOpen }) => {
         <DepositPopup
           depositPopupOpen={depositPopupOpen}
           setDepositPopupOpen={setDepositPopupOpen}
+          user={user}
         />
       )}
       {currencyDropdownOpen && <CurrencyDropdown isOpen={currencyDropdownOpen} setIsOpen={setCurrencyDropdownOpen} balance={user?.balance} />}
