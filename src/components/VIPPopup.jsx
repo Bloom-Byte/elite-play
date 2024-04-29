@@ -7,32 +7,20 @@ import './VIPPopup.css';
 
 register();
 
-const VIPPopup = ({ vipSupport, setVipSupport, user, timeLeft, setTimeLeft, lastClaimTime, setLastClaimTime, nextClaimTime, setNextClaimTime }) => {
+const VIPPopup = ({ vipSupport, setVipSupport, user, timeToNextClaim, facuetClaimableForCurrentTier, totalClaim, setTimeToNextClaim }) => {
   
   const swiperElRef = useRef(null);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
-      if (nextClaimTime) {
-        const currentTime = new Date().getTime();
-        const timeRemaining = Math.max(nextClaimTime - currentTime, 0);
-        setTimeLeft(timeRemaining);
+      if (timeToNextClaim > 0) {
+        setTimeToNextClaim(timeToNextClaim - 1);
       }
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [nextClaimTime]);
+  }, [timeToNextClaim,  setTimeToNextClaim]);
 
-
-  useEffect(() => {
-    const storedLastClaimTime = localStorage.getItem('lastClaimTime');
-    const storedNextClaimTime = localStorage.getItem('nextClaimTime');
-
-    if (storedLastClaimTime && storedNextClaimTime) {
-      setLastClaimTime(parseInt(storedLastClaimTime));
-      setNextClaimTime(parseInt(storedNextClaimTime));
-    }
-  }, []);
   
   const handleClaimToken = async () => {
     try {
@@ -45,25 +33,30 @@ const VIPPopup = ({ vipSupport, setVipSupport, user, timeLeft, setTimeLeft, last
             'Content-Type': 'application/json',
             Authorization: `Bearer ${accessToken}`,
           },
-          body: JSON.stringify({}), // Include an empty object as the body for POST request
+          body: JSON.stringify({}),
         }
       );
 
       if (response.ok) {
-        // Claim successful, update last claim time and calculate next claim time
-        setLastClaimTime(new Date().getTime());
-        setNextClaimTime(new Date().getTime() + 30 * 60 * 1000); // Set next claim time 30 minutes ahead
-        // Optionally, you can handle the response from the claim request
+
         const responseData = await response.json();
+        const response = await fetch(
+          'https://be.eliteplay.bloombyte.dev/faucet/total-faucet-claimed',
+          {
+            method: 'GET',
+            headers: {
+              Authorization: `Bearer ${accessToken}`,
+            },
+          }
+        );
+        const data = await response.json();
+        setTimeToNextClaim(data.timeToNextClaim);
         console.log('Claim successful:', responseData);
       } else {
-        // Handle non-successful response
         console.error('Error claiming token:', response.statusText);
-        // Optionally, you can handle errors from the claim request
       }
     } catch (error) {
       console.error('Error claiming token:', error);
-      // Optionally, you can handle errors from the claim request
     }
   };
 
@@ -87,11 +80,6 @@ const VIPPopup = ({ vipSupport, setVipSupport, user, timeLeft, setTimeLeft, last
     const swiperContainer = swiperElRef.current.swiper;
     swiperContainer.slidePrev();
   };
-
-  useEffect(() => {
-    localStorage.setItem('lastClaimTime', lastClaimTime);
-    localStorage.setItem('nextClaimTime', nextClaimTime);
-  }, [lastClaimTime, nextClaimTime]);
 
   return (
     <div className="vippopup">
@@ -132,22 +120,22 @@ const VIPPopup = ({ vipSupport, setVipSupport, user, timeLeft, setTimeLeft, last
                   src="./twemoji_coin.svg"
                   alt="coin-icon"
                 />{' '}
-                <span className="coinlevel-rewards">0.0026</span>
+                <span className="coinlevel-rewards">{facuetClaimableForCurrentTier}</span>
               </h2>
               <p className="reward-details">
-                Total Reward Claimed <span className="coinamount">0.0026</span>{' '}
+                Total Reward Claimed <span className="coinamount">{totalClaim}</span>{' '}
                 <span>
                   Next Reward in:{' '}
                   <span className="nextrewardtime">
-                    {Math.ceil(timeLeft / 1000)}s left
+                    {Math.ceil(timeToNextClaim / 1000)}s left
                   </span>
                 </span>
               </p>
               <button
                 onClick={handleClaimToken}
-                disabled={timeLeft > 0}
+                disabled={timeToNextClaim > 0}
                 className={`${
-                  timeLeft > 0 ? 'disabled ' : ''
+                  timeToNextClaim > 0 ? 'disabled ' : ''
                 }vippopup-claimreward-btn`}
               >
                 Claim Reward

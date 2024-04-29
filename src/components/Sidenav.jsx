@@ -9,14 +9,37 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
   const [liveSupport, setLiveSupport] = useState(false);
   const [vipSupport, setVipSupport] = useState(false);
   const [languagePopup, setLanguagePopup] = useState(false);
-  const [timeLeft, setTimeLeft] = useState(0);
-  const [lastClaimTime, setLastClaimTime] = useState(null);
-  const [nextClaimTime, setNextClaimTime] = useState(null);
+  const [totalClaim, setTotalClaim] = useState(null);
+  const [facuetClaimableForCurrentTier, setFaucetClaimableForCurrentTier] = useState(null);
+  const [timeToNextClaim, setTimeToNextClaim] = useState(null);
 
   const location = useLocation();
   const isReferralsPage = location.pathname === '/referrals';
   const isDicePage = location.pathname === '/dice'
   const isCrashPage = location.pathname == '/crash'
+
+  const accessToken = localStorage.getItem('accessToken');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch("https://be.eliteplay.bloombyte.dev/faucet/total-faucet-claimed", {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${accessToken}`
+          }
+        });
+        const data = await response.json();
+        setTotalClaim(data.totalClaim);
+        setFaucetClaimableForCurrentTier(data.facuetClaimableForCurrentTier);
+        setTimeToNextClaim(data.timeToNextClaim);
+      } catch (error) {
+        console.error("Error:", error);
+      }
+    };
+
+    fetchData();
+  }, []);
 
 
 
@@ -203,7 +226,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
         />
       )}
       {vipSupport && (
-        <VIPPopup vipSupport={vipSupport} user={user} setVipSupport={setVipSupport} timeLeft={timeLeft} setTimeLeft={setTimeLeft} lastClaimTime={lastClaimTime} setLastClaimTime={setLastClaimTime} nextClaimTime={nextClaimTime} setNextClaimTime={setNextClaimTime} />
+      <VIPPopup vipSupport={vipSupport} user={user} setVipSupport={setVipSupport} totalClaim={totalClaim} facuetClaimableForCurrentTier={facuetClaimableForCurrentTier} timeToNextClaim={timeToNextClaim} setTimeToNextClaim={setTimeToNextClaim} />
       )}
       {languagePopup && (
         <LanguagePopup
