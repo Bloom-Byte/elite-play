@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect  } from 'react';
 import axios from 'axios';
 import './DiceGame.css';
 
-const DiceGame = ({ isNavOpen, user, userBets }) => {
+const DiceGame = ({ isNavOpen, user, userBets, chatOpen }) => {
   const [auto, setAuto] = useState(false);
   const [fairness, setFairness] = useState(false);
   const [livebet, setLivebet] = useState(false);
@@ -496,7 +496,7 @@ const DiceGame = ({ isNavOpen, user, userBets }) => {
           </div>
           <div style={{marginLeft: diceRoll-5+'%'}} className="dicegame-diceroll__die">
             <img src="./dice-cube.png" alt="die" />
-            <span className={`${diceGameResponse?.betStatus === 'win' ? 'green' : ''} ${diceGameResponse?.betStatus === 'loss' ? 'red' : ''}`}>{diceRoll}</span>
+            <span className={`${diceGameResponse?.betStatus === 'win' ? 'green' : ''} ${diceGameResponse?.betStatus === 'loss' ? 'red' : ''} ${chatOpen ? 'center-cube' : ''}`} >{diceRoll}</span>
           </div>
           <div className="dicegame-diceroll__range">
             <input

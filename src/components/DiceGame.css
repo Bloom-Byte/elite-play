@@ -196,12 +196,16 @@
 
 .dicegame-diceroll__die span {
   top: 50%;
-  left: 7.5%;
+  left: 10%;
   position: absolute;
   color: #070C0A;
   font-size: 16px;
   font-weight: 800;
   font-family: 'Manrope', sans-serif;
+}
+
+.center-cube {
+  left: 16% !important;
 }
 
 .dicegame-diceroll__range {

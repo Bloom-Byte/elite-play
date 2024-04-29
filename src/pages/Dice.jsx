@@ -130,6 +130,7 @@ const Dice = () => {
                 isNavOpen={isNavOpen}
                 user={userProfile}
                 userBets={userBets}
+                chatOpen={chatOpen}
               />
               <DiceTable
                 isNavOpen={isNavOpen}
