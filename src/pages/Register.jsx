@@ -88,7 +88,8 @@ const Register = () => {
 
       setMessage(response.data.message);
     } catch (error) {
-      setError(error.response.data.message);
+      setError(error.message);
+      console.log(error.response)
     } finally {
       setIsLoading(false);
     }

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import LiveSupportPopup from './LiveSupportPopup';
 import VIPPopup from './VIPPopup';
@@ -6,7 +6,6 @@ import LanguagePopup from './LanguagePopup';
 import './Sidenav.css';
 
 const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
-  const [clickedItems, setClickedItems] = useState(Array(7).fill(false));
   const [liveSupport, setLiveSupport] = useState(false);
   const [vipSupport, setVipSupport] = useState(false);
   const [languagePopup, setLanguagePopup] = useState(false);

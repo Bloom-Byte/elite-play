@@ -1,34 +1,37 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import Navbar from '../components/Navbar'
-import Sidenav from '../components/Sidenav'
-import DiceGame from '../components/DiceGame'
-import DiceTable from '../components/DiceTable'
-import Footer from '../components/Footer'
+import Navbar from '../components/Navbar';
+import Sidenav from '../components/Sidenav';
+import DiceGame from '../components/DiceGame';
+import DiceTable from '../components/DiceTable';
+import Footer from '../components/Footer';
+import ChatPopup from '../components/ChatPopup';
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { isLoggedIn } from '../utils/auth';
-import './Dice.css'
+import './Dice.css';
 
 const Dice = () => {
-  const [isNavOpen, setIsNavOpen] = useState(true)
+  const [isNavOpen, setIsNavOpen] = useState(true);
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [chatOpen, setChatOpen] = useState(true);
   const [bets, setBets] = useState([]);
   const [userBets, setUserBets] = useState([]);
   const accessToken = localStorage.getItem('accessToken');
   const userIsLoggedIn = isLoggedIn();
 
   if (!userIsLoggedIn) {
-    window.location.href='/'
+    window.location.href = '/';
   }
-
 
   const fetchAllBets = async () => {
     try {
       const response = await axios.get(
-        'https://be.eliteplay.bloombyte.dev/game/all-bets',
+        'https://be.eliteplay.bloombyte.dev/game/all-bets'
       );
       setBets(response.data);
-      console.log('all bets', response.data)
+      console.log('all bets', response.data);
     } catch (error) {
       console.error('Error fetching all bets:', error);
     }
@@ -40,12 +43,12 @@ const Dice = () => {
         'https://be.eliteplay.bloombyte.dev/game/user-bets',
         {
           headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
+            Authorization: `Bearer ${accessToken}`,
+          },
         }
       );
       setUserBets(response.data);
-      console.log('user bets', response.data)
+      console.log('user bets', response.data);
     } catch (error) {
       console.error('Error fetching user bets:', error);
     }
@@ -73,7 +76,6 @@ const Dice = () => {
         setLoading(false);
       }
     } catch (error) {
-
       console.error('Error fetching user profile:', error.message);
       setLoading(false);
     }
@@ -102,18 +104,48 @@ const Dice = () => {
   //       return () => clearInterval(intervalId);
   // }, [])
 
-  
-
-
   return (
     <div>
-      <Navbar isNavOpen={isNavOpen} user={userProfile} />
-      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} user={userProfile}/>
-      <DiceGame isNavOpen={isNavOpen} user={userProfile} userBets={userBets}  />
-      <DiceTable isNavOpen={isNavOpen} bets={bets} userBets={userBets} />
-      <Footer isNavOpen={isNavOpen} />
+      {loading ? (
+        <>
+          <Skeleton
+            count={8}
+            baseColor="#0B1210"
+            highlightColor="#6E6E71"
+            height={100}
+          />
+        </>
+      ) : (
+        <>
+          <div className="home-container">
+            <div className={`${chatOpen ? 'min-page-chat' : ''}`}>
+              <Navbar isNavOpen={isNavOpen} user={userProfile} chatOpen={chatOpen} setChatOpen={setChatOpen} />
+              <Sidenav
+                isNavOpen={isNavOpen}
+                setIsNavOpen={setIsNavOpen}
+                user={userProfile}
+                chatOpen={chatOpen} setChatOpen={setChatOpen}
+              />
+              <DiceGame
+                isNavOpen={isNavOpen}
+                user={userProfile}
+                userBets={userBets}
+              />
+              <DiceTable
+                isNavOpen={isNavOpen}
+                bets={bets}
+                userBets={userBets}
+              />
+              <Footer isNavOpen={isNavOpen} />
+            </div>
+            {chatOpen && (
+              <ChatPopup chatOpen={chatOpen} setChatOpen={setChatOpen} />
+            )}
+          </div>
+        </>
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default Dice
+export default Dice;
