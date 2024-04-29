@@ -217,7 +217,7 @@
 
 .dicegame-diceroll__range_values {
   display: flex;
-  gap: 21%;
+  gap: 19%;
   margin-left: 10px;
   margin-top: 8px;
 }
@@ -249,7 +249,7 @@
 }
 
 .dicegame-diceroll__outer-box {
-  width: 250px;
+  width: 100%;
 }
 
 .dicegame-diceroll__box-info {
