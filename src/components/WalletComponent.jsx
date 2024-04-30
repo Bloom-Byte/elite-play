@@ -46,21 +46,20 @@ const WalletComponent = ({ isNavOpen, user }) => {
   const depositToEliteplay = async () => {
     const url = 'https://be.eliteplay.bloombyte.dev/transactions/deposit';
     const accessToken = localStorage.getItem('accessToken');
-    console.log(accessToken);
     setIsLoading(true);
 
-    if (depositAmount < 1) {
-      setValidateMessage('Minimum Deposit is 1 eGold');
-      setIsLoading(false);
-      return;
-    } else {
-      setValidateMessage('');
-    }
+      // if (depositAmount < 1) {
+      //   setValidateMessage('Minimum Deposit is 1 eGold');
+      //   setIsLoading(false);
+      //   return;
+      // } else {
+      //   setValidateMessage('');
+      // }
 
-    const requestBody = {
-      amount: depositAmount,
-      accountId: user._id,
-    };
+    // const requestBody = {
+    //   amount: depositAmount,
+    //   accountId: user._id,
+    // };
 
     const headers = {
       'Content-Type': 'application/json',
@@ -71,13 +70,15 @@ const WalletComponent = ({ isNavOpen, user }) => {
       const response = await fetch(url, {
         method: 'POST',
         headers: headers,
-        body: requestBody,
+        // body: requestBody,
       });
 
+      const responseData = await response.json();
       if (response.status === 201) {
         const responseData = await response.json();
         setSuccessMessage(responseData.data.message);
       } else {
+        setValidateMessage(responseData.message);
         throw new Error('Failed to deposit');
       }
     } catch (error) {
@@ -290,18 +291,22 @@ const WalletComponent = ({ isNavOpen, user }) => {
                       onChange={handleDepositAccountId}
                     />
                   </div> */}
-                  {/* {validatemessage && (
+                  {validatemessage && (
                     <p style={{ color: '#E14453' }}>{validatemessage}</p>
                   )}
                   {successMessage && (
                     <p style={{ color: '#34B263' }}>{successMessage}</p>
-                  )} */}
+                  )}
                   <div className="deposit-crypto">
                     <img src="./alert-01.svg" alt="alert-icon" />
                     <span>Minimum Deposit: 1 eGold</span>
                   </div>
+                  <div className="deposit-crypto">
+                    <img src="./alert-01.svg" alt="alert-icon" />
+                    <span>Please add your user id as description in the transaction</span>
+                  </div>
                   <div className="deposit_fiat-btn">
-                    {/* <button onClick={depositToEliteplay}>
+                    <button onClick={depositToEliteplay}>
                       {isLoading ? (
                         <div class="lds-ring">
                           <div></div>
@@ -312,7 +317,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
                       ) : (
                         'Confirm Deposit'
                       )}
-                    </button> */}
+                    </button>
                   </div>
                   <div className="crypto-notice">
                       <span className="crypto-notice_notice-head">

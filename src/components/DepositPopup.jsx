@@ -36,16 +36,16 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
     const accessToken = localStorage.getItem('accessToken');
     setIsLoading(true);
 
-    if (depositAmountpop < 1) {
-      setValidateMessage('Minimum Deposit is 1 eGold');
-      setIsLoading(false);
-      return;
-    }
+    // if (depositAmountpop < 1) {
+    //   setValidateMessage('Minimum Deposit is 1 eGold');
+    //   setIsLoading(false);
+    //   return;
+    // }
 
-    const requestBody = {
-      amount: depositAmountpop,
-      accountId: depositAccountIdpop,
-    };
+    // const requestBody = {
+    //   amount: depositAmountpop,
+    //   accountId: depositAccountIdpop,
+    // };
 
     const headers = {
       'Content-Type': 'application/json',
@@ -56,18 +56,20 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
       const response = await fetch(url, {
         method: 'POST',
         headers: headers,
-        body: requestBody,
+        // body: requestBody,
       });
+      console.log(response);
 
+      const responseData = await response.json();
       if (response.status === 201) {
-        const responseData = await response.json();
         setSuccessMessage(responseData.data.message);
       } else {
+        setValidateMessage(responseData.message);
         throw new Error('Failed to deposit');
       }
     } catch (error) {
       console.error('Error occurred during deposit:', error);
-      setValidateMessage(error.response.data.message);
+      setValidateMessage(error.response.message);
     } finally {
       setIsLoading(false);
     }
@@ -86,14 +88,14 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
             alt="cancel-close"
           />
         </div>
-        <div className='depositcontent-main-content'>
-            <div style={{paddingLeft: '20px'}} className="depositpopup-box">
-              <p>Deposit Currency</p>
-              <select name="" id="">
-                <img src="./twemoji_coin.svg" alt="coin" disabled={true} />
-                <option value="egold">eGold</option>
-              </select>
-            </div>
+        <div className="depositcontent-main-content">
+          <div style={{ paddingLeft: '20px' }} className="depositpopup-box">
+            <p>Deposit Currency</p>
+            <select name="" id="">
+              <img src="./twemoji_coin.svg" alt="coin" disabled={true} />
+              <option value="egold">eGold</option>
+            </select>
+          </div>
           <div className="deposit-details">
             <p>Account Id</p>
             <div className="deposit-address">
@@ -141,8 +143,18 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
                 onChange={handleDepositAccountId}
               />
             </div> */}
+            <div className="depositpopup-min">
+              <img src="./alert-01.svg" alt="alert-icon" />
+              <span>
+                Please add your user id as description in the transaction
+              </span>
+            </div>
+            <div className="depositpopup-min">
+              <img src="./alert-01.svg" alt="alert-icon" />
+              <span>Minimum Deposit: 1 eGold</span>
+            </div>
             <div className="deposit_fiat-btn">
-              {/* <button onClick={depositToEliteplay}>
+              <button onClick={depositToEliteplay}>
                 {isLoading ? (
                   <div class="lds-ring">
                     <div></div>
@@ -153,23 +165,20 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
                 ) : (
                   'Deposit'
                 )}
-              </button> */}
+              </button>
             </div>
-            {/* {validatemessage && (
+            {validatemessage && (
               <p style={{ color: '#E14453' }}>{validatemessage}</p>
             )}
             {successMessage && (
               <p style={{ color: '#34B263' }}>{successMessage}</p>
-            )} */}
-          </div>
-          <div className="depositpopup-min">
-            <img src="./alert-01.svg" alt="alert-icon" />
-            <span>Minimum Deposit: 1 eGold</span>
+            )}
           </div>
           <div className="depositpopup-notice">
             <span className="notice-txt">NOTICE: </span>{' '}
             <span>
-            Please wait for your deposit to reflect 30 mins after transanction.
+              Please wait for your deposit to reflect 30 mins after
+              transanction.
             </span>
           </div>
         </div>

@@ -40,7 +40,7 @@ const VIPPopup = ({ vipSupport, setVipSupport, user, timeToNextClaim, facuetClai
       if (response.ok) {
 
         const responseData = await response.json();
-        const response = await fetch(
+        const responseInfo = await fetch(
           'https://be.eliteplay.bloombyte.dev/faucet/total-faucet-claimed',
           {
             method: 'GET',
@@ -49,7 +49,7 @@ const VIPPopup = ({ vipSupport, setVipSupport, user, timeToNextClaim, facuetClai
             },
           }
         );
-        const data = await response.json();
+        const data = await responseInfo.json();
         setTimeToNextClaim(data.timeToNextClaim);
         console.log('Claim successful:', responseData);
       } else {
