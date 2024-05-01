@@ -1,7 +1,9 @@
-import React from 'react'
+import React, { useState} from 'react'
 import './Livebets.css'
 
 const Livebets = ({isNavOpen}) => {
+  const [liveBets, setLiveBets] = useState([])
+  const [bigBets, setBigBets] = useState([])
   return (
     <div className={`livebets ${isNavOpen ? 'livebets-extended' : ''}`}>
       <h5>Live Bets</h5>

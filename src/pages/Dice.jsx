@@ -25,17 +25,44 @@ const Dice = () => {
     window.location.href = '/';
   }
 
-  const fetchAllBets = async () => {
-    try {
-      const response = await axios.get(
-        'https://be.eliteplay.bloombyte.dev/game/all-bets'
-      );
-      setBets(response.data);
-      console.log('all bets', response.data);
-    } catch (error) {
-      console.error('Error fetching all bets:', error);
+  // const fetchAllBets = async () => {
+  //   try {
+  //     const response = await axios.get(
+  //       'https://be.eliteplay.bloombyte.dev/game/all-bets'
+  //     );
+  //     setBets(response.data);
+  //     console.log('all bets', response.data);
+  //   } catch (error) {
+  //     console.error('Error fetching all bets:', error);
+  //   }
+  // };
+
+  const fetchAllBets = () => {
+    const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/game/all-bets');
+  
+    eventSource.onopen = () => {
+      console.log('Connection established');
+    };
+  
+    eventSource.onerror = (error) => {
+      console.error('Error with EventSource:', error);
+      eventSource.close();
+    };
+  
+    eventSource.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        setBets(data);
+        console.log('All bets:', data)
+      } catch (error) {
+        console.error('Error parsing message:', error)
+      }
     }
+    
+  return () => {
+    eventSource.close();
   };
+};
 
   const fetchUserBets = async () => {
     try {
@@ -83,7 +110,7 @@ const Dice = () => {
 
   useEffect(() => {
     const fetchBetsData = async () => {
-      await fetchAllBets();
+     fetchAllBets();
       await fetchUserBets();
     };
 
