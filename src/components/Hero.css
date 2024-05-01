@@ -141,9 +141,12 @@
     width: 100vw;
   }
 
+  .vip-progress-head {
+    margin-top: 50px !important;
+  }
+
   .home-hero__txt-section {
     max-width: 200px;
-    /* margin-left: 0; */
   }
 
   .home-hero__txt-section h4 {
@@ -155,7 +158,7 @@
   }
 
   .home-hero__user-info {
-    /* margin-left: 0; */
+    padding-bottom: 1rem;
   }
 
   .home-hero__user-info-box {

@@ -155,14 +155,11 @@ body {
 
     .nav-games {
         margin-left: 0;
+        gap: 0;
     }
 
     .nav-games__dice {
         display: none;
-    }
-
-    .nav-loggedin {
-        margin-left: 50px;
     }
 
     .sidenav__icon {
@@ -187,5 +184,6 @@ body {
     .nav-loggedin {
         margin-left: 0;
         gap: 10px;
+        margin-top: -1rem;
     }
 }
