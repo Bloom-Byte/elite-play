@@ -65,6 +65,7 @@ body {
     width: 320px;
     height: 48px;
     color: white;
+    transition: all 0.7s var(--ease-in-out);
 }   
 
 .register-form__input-box input:focus {

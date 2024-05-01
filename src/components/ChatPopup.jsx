@@ -18,7 +18,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
   //   const [hasFetchedSavedMessages, setHasFetchedSavedMessages] = useState(false);
   const [isLoadingSavedMessages, setIsLoadingSavedMessages] = useState(false);
   const hasFetchedSavedMessages = useRef(false);
-  const [loadMessagesError, setLoadMessagesError] = useState('null');
+  const [loadMessagesError, setLoadMessagesError] = useState('');
   const [inputMessage, setInputMessage] = useState('');
   const [isMobile, setIsMobile] = useState(false);
 
@@ -95,6 +95,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
       if (!hasFetchedSavedMessages.current) {
         setIsLoadingSavedMessages(true);
         socket.emit('getAllMessages');
+        setIsLoadingSavedMessages(false);
       }
     }
     return () => {
