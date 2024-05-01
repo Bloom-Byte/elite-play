@@ -47,6 +47,8 @@ const Login = () => {
       const data = await response.json();
       console.log(data);
       localStorage.setItem("accessToken", data);
+      const loginTime = new Date().getTime();
+      localStorage.setItem('loginTime', loginTime);
       window.location.href = "/";
     } catch (error) {
       console.error("Error signing in with Google:", error.message);
