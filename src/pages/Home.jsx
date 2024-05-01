@@ -71,7 +71,7 @@ const Home = () => {
         <>
           <div className="home-container">
             <div className={`${chatOpen ? 'min-page-chat' : ''}`}>
-              <Navbar isNavOpen={isNavOpen} user={userProfile} chatOpen={chatOpen} setChatOpen={setChatOpen} />
+              <Navbar isNavOpen={isNavOpen} user={userProfile} chatOpen={chatOpen} setChatOpen={setChatOpen} setIsNavOpen={setIsNavOpen} />
               <Sidenav
                 isNavOpen={isNavOpen}
                 setIsNavOpen={setIsNavOpen}

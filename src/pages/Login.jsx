@@ -46,6 +46,8 @@ const Login = () => {
       // Handle response from backend
       const data = await response.json();
       console.log(data);
+      localStorage.setItem("accessToken", data);
+      window.location.href = "/";
     } catch (error) {
       console.error("Error signing in with Google:", error.message);
     }

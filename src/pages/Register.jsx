@@ -20,14 +20,23 @@ const Register = () => {
   const [referralCode, setReferralCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
+  // const firebaseConfig = {
+  //   apiKey: import.meta.env.VITE_API_KEY,
+  //   authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+  //   projectId: import.meta.env.VITE_PROJECT_ID,
+  //   storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+  //   messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+  //   appId: import.meta.env.VITE_APP_ID,
+  // };
   const firebaseConfig = {
-    apiKey: import.meta.env.VITE_API_KEY,
-    authDomain: import.meta.env.VITE_AUTH_DOMAIN,
-    projectId: import.meta.env.VITE_PROJECT_ID,
-    storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
-    messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
-    appId: import.meta.env.VITE_APP_ID,
+    apiKey: "AIzaSyDhnTKB-oidp0KEX8Nb9o06vhDX_rbEV0M",
+    authDomain: "bloomtest-2996c.firebaseapp.com",
+    projectId: "bloomtest-2996c",
+    storageBucket: "bloomtest-2996c.appspot.com",
+    messagingSenderId: "998308923768",
+    appId: "1:998308923768:web:a68bd745423423ca1b608d",
   };
+  
   
   const app = initializeApp(firebaseConfig);
 
@@ -51,6 +60,8 @@ const Register = () => {
       // Handle response from backend
       const data = await response.json();
       console.log(data);
+      localStorage.setItem("accessToken", data);
+      window.location.href = "/";
     } catch (error) {
       console.error("Error signing in with Google:", error.message);
     }

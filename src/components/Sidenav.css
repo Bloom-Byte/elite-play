@@ -108,6 +108,10 @@ body {
     border-radius: 6px;
 }
 
+.mobile-chat {
+    display: none;
+}
+
 
 /* --------- MOBILE RESPONSIVENESS --------- */
 @media screen and (max-width: 768px) {
@@ -120,6 +124,10 @@ body {
     }
 
     .sidenav__icon {
-        margin-bottom: 0;
+        margin-bottom: 20px;
+    }
+
+    .mobile-chat {
+        display: flex;
     }
 }
