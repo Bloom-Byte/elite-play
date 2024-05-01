@@ -146,7 +146,7 @@
   margin-top: 20px;
   width: 100%;
   background:  rgb(11, 40, 31);
-  border: 1px transparent;
+  border: 2px solid #88DF95;
   border-radius: 6px;
   padding: 12px;
   font-family: 'Manrope', sans-serif;
@@ -155,6 +155,10 @@
   color: #ffffff;
   cursor: pointer;
   transition: all 0.7s var(--ease-in-out);
+}
+
+.dicegame-rollnow:hover {
+  background: #88DF95;
 }
 
 .dicegame-diceroll {

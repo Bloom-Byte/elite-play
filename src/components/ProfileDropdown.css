@@ -3,7 +3,7 @@
 .profile-dropdown {
   position: absolute;
   top: 80px;
-  right: 0;
+  right: 280px;
   z-index: 1000;
 }
 
