@@ -105,7 +105,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
                 </div>
               </a>
             </div>
-            <div
+            {/* <div
               style={{
                 backgroundColor: chatOpen ? '#0B281F' : 'transparent',
                 padding: chatOpen ? '10px' : '0',
@@ -120,7 +120,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
                 <img src="./message-01.svg" alt="chat-icon" />
                 <span>Chatroom</span>
               </div>
-            </div>
+            </div> */}
             <div
               style={{
                 backgroundColor: vipSupport ? '#0B281F' : 'transparent',

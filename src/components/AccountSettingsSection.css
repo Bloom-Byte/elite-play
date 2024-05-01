@@ -234,7 +234,7 @@
 }
 
 .active-btn {
-  background: #24e3a1;
+  background: rgb(11, 40, 31);
   border: 1px transparent;
   border-radius: 6px;
   width: 100%;
@@ -245,6 +245,7 @@
   font-weight: 600;
   color: #ffffff;
   cursor: pointer;
+  transition: all 0.7s var(--ease-in-out);
 }
 
 .session-frame {
@@ -504,12 +505,13 @@ input:checked + .slider:before {
 .edit-username-popup_btn {
     margin-top: 40px;
     width: 100%;
-    background: #24E3A1 50%;
+    background: rgb(11, 40, 31);
     border: 1px transparent;
     border-radius: 6px;
     color: #fff; 
     padding: 10px 20px;
     cursor: pointer;
+    transition: all 0.7s var(--ease-in-out);
 }
 
 .email-popup_header {
@@ -660,7 +662,7 @@ input:checked + .slider:before {
 }
 
 .self-exclusion_next {
-    background:  #24E3A1;
+    background:  rgb(11, 40, 31);
     border: 2px transparent;
     border-radius: 6px;
     padding: 8px 16px;
@@ -669,6 +671,8 @@ input:checked + .slider:before {
     font-weight: 600;
     color: #ffffff;
     width: 114px;
+    cursor: pointer;
+    transition: all 0.7s var(--ease-in-out);
 }
 
 .period-options {
@@ -772,7 +776,7 @@ input:checked + .slider:before {
 }
 
 .auth-security button {
-  background:  #24E3A1;
+  background:  rgb(11, 40, 31);
   border: 1px transparent;
   border-radius: 6px;
   color: #fff; 
@@ -780,6 +784,8 @@ input:checked + .slider:before {
   font-family: "Manrope", sans-serif;
   font-weight: 600;
   font-size: 16px;
+  transition: all 0.7s var(--ease-in-out);
+  cursor: pointer;
 }
 
 
@@ -792,12 +798,13 @@ input:checked + .slider:before {
 
   .accountsettings-mobile_nav {
     display: block;
-    background: #24E3A1;
+    background: rgb(11, 40, 31);
     border: 1px transparent;
     border-radius: 6px;
     padding: 8px;
     height: 30px;
     cursor: pointer;
+    transition: all 0.7s var(--ease-in-out);
   }
 
   .accountsettings-mobile_nav img {

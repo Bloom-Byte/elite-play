@@ -379,7 +379,7 @@
 }
 
 .deposit_fiat-btn button {
-    background: #24E3A1;
+  background: rgb(11, 40, 31);
     border: 1px transparent;
     border-radius: 6px;
     color: #fff; 
@@ -388,6 +388,7 @@
     font-weight: 600;
     font-size: 16px;
     cursor: pointer;
+    transition: all 0.7s var(--ease-in-out);
 }
 
 .fiat-deposit_info {

@@ -47,6 +47,7 @@ body {
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    transition: all 0.7s var(--ease-in-out);
 }
 
 .sidenav__link {
@@ -57,6 +58,7 @@ body {
     align-items: center;
     gap: 10px;
     cursor: pointer;
+    transition: all 0.7s var(--ease-in-out);
 }
 
 .sidenav__link:hover {

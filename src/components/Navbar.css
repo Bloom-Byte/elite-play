@@ -54,8 +54,10 @@ body {
     font-size: 14px;
     font-family: "Manrope", sans-serif;
     font-weight: 600;
-    padding: 10px 20px;
+    padding: 10px 0;
+    width: 100px;
     cursor: pointer;
+    transition: all 0.7s var(--ease-in-out);
 }
 
 .nav-auth__signin:hover {
@@ -64,7 +66,8 @@ body {
 
 .nav-auth__signup {
     background-color:#077E551A;
-    padding: 10px 20px;
+    padding: 10px 0;
+    width: 100px;
     border: 2px solid #077E551A;
     border-radius: 6px;
     color: #88df95;
@@ -72,6 +75,7 @@ body {
     font-family: "Manrope", sans-serif;
     font-weight: 600;
     cursor: pointer;
+    margin-right: 10px;
 }
 
 .nav-auth__signup:hover {
@@ -116,12 +120,20 @@ body {
 }
 
 .nav-wallet_deposit {
-    background:  #24E3A1;
+    background: rgb(11, 40, 31);
+    border: 2px transparent;
     display: flex;
     gap: 10px;
     align-items: center;
     border-radius: 6px;
     padding: 8px 12px;
+    cursor: pointer;
+    transition: all 0.7s var(--ease-in-out);
+}
+
+.nav-wallet_deposit:hover {
+    background: transparent;
+    border-radius: 2px solid #24E3A1;
 }
 
 .nav-wallet_deposit span {

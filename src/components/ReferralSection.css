@@ -109,12 +109,14 @@
 }
 
 .referral-btn button {
-    background:  #24E3A1;
+    background: rgb(11, 40, 31);
     border: 1px transparent;
     border-radius: 6px;
     color: #fff;
     padding: 8px 24px;
     width: 159px;
+    cursor: pointer;
+    transition: all 0.7s var(--ease-in-out);
 }
 
 .refer-dashboard {

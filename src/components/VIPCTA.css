@@ -54,6 +54,7 @@
   border-radius: 8px;
   cursor: pointer;
   margin-top: 2rem;
+  transition: all 0.7s var(--ease-in-out);
 }
 
 .vip-cta_text button:hover {

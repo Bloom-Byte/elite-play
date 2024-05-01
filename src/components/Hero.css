@@ -43,7 +43,7 @@
 }
 
 .home-hero__txt-section button {
-  background: #24e3a1;
+  background: rgb(11, 40, 31);
   color: #ffffff;
   font-size: 16px;
   font-family: 'Manrope', sans-serif;
@@ -52,6 +52,7 @@
   border: 2px transparent;
   border-radius: 8px;
   cursor: pointer;
+  transition: all 0.7s var(--ease-in-out);
 }
 
 .home-hero__txt-section button:hover {

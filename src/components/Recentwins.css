@@ -21,10 +21,11 @@
 
 .active-wins {
     border-radius: 50%;
-    background: #34B263;
+    background: rgb(11, 40, 31);
     width: 8px;
     height: 8px;
     margin-left: 1rem;
+    transition: all 0.7s var(--ease-in-out);
 }
 
 .recent-wins__title h4 {

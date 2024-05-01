@@ -49,6 +49,7 @@
     font-weight: 600;
     color: #ffffff;
     cursor: pointer;
+    transition: all 0.7s var(--ease-in-out);
 }
 
 .deposit-cta button:hover {
