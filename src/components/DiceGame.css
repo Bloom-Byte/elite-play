@@ -469,4 +469,13 @@
   .dicegame-diceroll__odds {
     overflow-x: scroll;
   }
+
+  .dicegame-placebet {
+    width: 100vw;
+  }
+
+  .dicegame-diceroll{
+    width: 100vw;
+  }
+  
 }

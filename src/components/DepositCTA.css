@@ -62,8 +62,8 @@
 @media screen and (max-width: 768px) {
     .deposit-cta  {
         align-self: center;
-        width: 100%;
         margin-left: 8px;
+        width: 100vw;
     }
     
     .deposit-cta__txt h4 {

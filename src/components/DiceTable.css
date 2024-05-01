@@ -153,5 +153,6 @@ tr {
   .dicetable {
     margin-left: 8px;
     overflow-x: scroll;
+    width: 100vw;
   }
 }

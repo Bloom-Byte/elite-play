@@ -794,6 +794,7 @@ input:checked + .slider:before {
 @media screen and (max-width: 768px) {
   .account-settings {
     margin-left: 8px;
+    max-width: 100vw;
   }
 
   .accountsettings-mobile_nav {

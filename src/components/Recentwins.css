@@ -66,7 +66,7 @@
 /* --------- MOBILE RESPONSIVENESS --------- */
 @media screen and (max-width: 768px) {
     .recent-wins {
-        width: 100%;
+        width: 100vw;
         margin-left: 8px;
     }
 }
