@@ -203,9 +203,17 @@ body {
     width: 332px;
     height: 48px;
     background-color: #070C0A;
+    border: 2px transparent;
     align-items: center;
     justify-content: center;
     border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.7s var(--ease-in-out);
+}
+
+.register-form__google-signin:hover {
+    background: transparent;
+    border: 2px solid #24E3A1 ;
 }
 
 .register-form__google-signin span {
