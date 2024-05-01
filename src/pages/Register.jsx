@@ -1,6 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import './Register.css';
+
+
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -14,6 +19,43 @@ const Register = () => {
   const [error, setError] = useState('');
   const [referralCode, setReferralCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const firebaseConfig = {
+    apiKey: import.meta.env.VITE_API_KEY,
+    authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_APP_ID,
+  };
+  
+  const app = initializeApp(firebaseConfig);
+
+  const signInWithGoogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth(app);
+      const result = await signInWithPopup(auth, provider);
+
+      //    Send ID token to backend
+      const idToken = await result.user.getIdToken();
+      console.log(idToken);
+      const response = await fetch("https://be.eliteplay.bloombyte.dev/user/google-login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idToken }),
+      });
+
+      // Handle response from backend
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error signing in with Google:", error.message);
+    }
+  };
+
 
   const handleUsernameChange = (event) => {
     setUsername(event.target.value);
@@ -36,23 +78,6 @@ const Register = () => {
     const re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
     return re.test(password);
   };
-
-  async function handleGoogleSignIn() {
-    try {
-      const response = await fetch('https://be.eliteplay.bloombyte.dev/user/google-login', {
-        method: 'POST',
-      });
-  
-      if (!response.ok) {
-        throw new Error('Failed to sign in with Google');
-      }
-  
-      const data = await response.json();
-      console.log('Google sign-in successful:', data);
-    } catch (error) {
-      console.error('Error signing in with Google:', error.message);
-    }
-  }
   
 
   const handleSubmit = async (event) => {
@@ -224,7 +249,7 @@ const Register = () => {
               <p className="register-form__option">or</p>
             </div>
 
-            <div onClick={handleGoogleSignIn} className="register-form__google-signin">
+            <div onClick={signInWithGoogle} className="register-form__google-signin">
               <img src="./google.svg" alt="google-icon" />
               <span>Sign Up with google</span>
             </div>

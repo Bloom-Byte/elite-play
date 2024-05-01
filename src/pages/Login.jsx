@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import "firebase/auth";
+import { initializeApp } from "firebase/app";
+import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import './Login.css';
 
 const Login = () => {
@@ -11,6 +14,44 @@ const Login = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  const firebaseConfig = {
+    apiKey: import.meta.env.VITE_API_KEY,
+    authDomain: import.meta.env.VITE_AUTH_DOMAIN,
+    projectId: import.meta.env.VITE_PROJECT_ID,
+    storageBucket: import.meta.env.VITE_STORAGE_BUCKET,
+    messagingSenderId: import.meta.env.VITE_MESSAGING_SENDER_ID,
+    appId: import.meta.env.VITE_APP_ID,
+  };
+  
+  const app = initializeApp(firebaseConfig);
+
+  const signInWithGoogle = async () => {
+    try {
+      const provider = new GoogleAuthProvider();
+      const auth = getAuth(app);
+      const result = await signInWithPopup(auth, provider);
+
+      //    Send ID token to backend
+      const idToken = await result.user.getIdToken();
+      console.log(idToken);
+      const response = await fetch("https://be.eliteplay.bloombyte.dev/user/google-login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ idToken }),
+      });
+
+      // Handle response from backend
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.error("Error signing in with Google:", error.message);
+    }
+  };
+
+
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
@@ -130,7 +171,7 @@ const Login = () => {
               <p className="register-form__option">or</p>
             </div>
 
-            <div className="register-form__google-signin">
+            <div onClick={signInWithGoogle}  className="register-form__google-signin">
               <img src="./google.svg" alt="google-icon" />
               <span>Sign In with google</span>
             </div>
