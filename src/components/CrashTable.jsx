@@ -3,6 +3,7 @@ import './CrashTable.css'
 
 const CrashTable = ({ isNavOpen }) => {
     const [toggle, setToggle] = useState(false)
+    const [userBetsOpen, setUserBetsOpen] = useState(false)
   return (
     <div className={`dicetable ${isNavOpen ? 'dicetable-extended' : ''}`}>
       <div className="dicebets-toggle">
@@ -174,8 +175,8 @@ const CrashTable = ({ isNavOpen }) => {
         <>
           <div className="dicetable-section">
             <div className="dicetable-betstitle">
-              <div className="dicetable-betstitle_all-bets">All Bets</div>
-              <div className="dicetable-betstitle_my-bets">My Bets</div>
+            <div onClick={() => {setUserBetsOpen(!userBetsOpen)}} className={userBetsOpen? 'dicetable-betstitle_all-bets' : 'dicetable-betstitle_my-bets'}>All Bets</div>
+              <div onClick={() => {setUserBetsOpen(!userBetsOpen)}} className={userBetsOpen? 'dicetable-betstitle_my-bets' : 'dicetable-betstitle_all-bets'}>My Bets</div>
             </div>
             <div>
               <table className="livebets-table_table">

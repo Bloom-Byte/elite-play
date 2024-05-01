@@ -44,3 +44,11 @@
     display: flex;
     gap: 8px;
   }
+
+  .current-multiplier {
+    color: #FFFFFF;
+    font-family: 'Manrope', sans-serif;
+    font-size: 10px;
+    font-weight: 400;
+    text-align: center;
+  }

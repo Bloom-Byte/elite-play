@@ -15,11 +15,69 @@ const Crash = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [chatOpen, setChatOpen] = useState(true);
   const [loading, setLoading] = useState(false);
+  const [bets, setBets] = useState([]);
+  const [userBets, setUserBets] = useState([]);
   const userIsLoggedIn = isLoggedIn();
 
   if (!userIsLoggedIn) {
     window.location.href = '/';
   }
+
+  const fetchAllBets = () => {
+    const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/game/crash-game/leaderboard');
+  
+    eventSource.onopen = () => {
+      console.log('Connection established');
+    };
+  
+    eventSource.onerror = (error) => {
+      console.error('Error with EventSource:', error);
+      eventSource.close();
+    };
+  
+    eventSource.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        setBets(data);
+        console.log('All bets:', data)
+      } catch (error) {
+        console.error('Error parsing message:', error)
+      }
+    }
+    
+  return () => {
+    eventSource.close();
+  };
+};
+
+
+const fetchUserBets = () => {
+  const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/crash-game/bets-resolved');
+
+  eventSource.onopen = () => {
+    console.log('Connection established');
+  };
+
+  eventSource.onerror = (error) => {
+    console.error('Error with EventSource:', error);
+    eventSource.close();
+  };
+
+  eventSource.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      setUserBets(data);
+      console.log('User bets:', data)
+    } catch (error) {
+      console.error('Error parsing message:', error)
+    }
+  }
+  
+return () => {
+  eventSource.close();
+};
+};
+
 
   const fetchUserProfile = async (accessToken) => {
     try {
@@ -49,10 +107,16 @@ const Crash = () => {
   };
 
   useEffect(() => {
+    const fetchBetsData = async () => {
+      fetchAllBets();
+      fetchUserBets();
+     };
+
     const accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);
     if (accessToken) {
       fetchUserProfile(accessToken);
+      fetchBetsData();
     } else {
       setLoading(false);
     }
@@ -81,7 +145,8 @@ const Crash = () => {
                 chatOpen={chatOpen} setChatOpen={setChatOpen}
               />
               <CrashGame isNavOpen={isNavOpen} user={userProfile} />
-              <CrashTable isNavOpen={isNavOpen} user={userProfile} />
+              <CrashTable isNavOpen={isNavOpen} user={userProfile} bets={bets}
+                userBets={userBets} />
               <Footer isNavOpen={isNavOpen} />
             </div>
             {chatOpen && (

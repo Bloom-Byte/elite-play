@@ -59,7 +59,7 @@ const CrashGraph = ({ gameState }) => {
  // Check if game is crashed
  console.log(gameState)
  if (gameState.isGameCrashed) {
-  // setIsCrashed(true);
+  setIsCrashed(true);
   // Reset chart data
   chartInstance.current.data.labels = [];
   chartInstance.current.data.datasets[0].data = [];
@@ -69,20 +69,24 @@ const CrashGraph = ({ gameState }) => {
   setIsCrashed(false);
   // Update chart data
   const newDataIndex = chartInstance.current.data.labels.length;
-  chartInstance.current.data.labels.push(gameState.currentMultiplier);
-  chartInstance.current.data.datasets[0].data.push(newDataIndex.toString());
+    chartInstance.current.data.labels.push(gameState.currentMultiplier);
+    chartInstance.current.data.datasets[0].data.push(newDataIndex.toString());
   // Update chart
   chartInstance.current.update();
 }
 }, [gameState]);
 
 return (
-  <div>
+  <div style={{ position: 'relative', marginTop: '20%' }}>
     {isCrashed ? (
       <p className='crashed-gamestate'>Game crashed. Waiting for the next game to start...</p>
-    ) : (
-      <canvas ref={chartRef} />
-    )}
+    ) : null}
+    <canvas ref={chartRef} />
+    {isCrashed ? null : (
+        <div className="current-multiplier">
+          Current Multiplier: {gameState.currentMultiplier}x
+        </div>
+      )}
   </div>
 );
 };
