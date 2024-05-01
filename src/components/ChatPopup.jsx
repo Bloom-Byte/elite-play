@@ -125,7 +125,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
   //   }
   // };
 
-  const   sendMessage = (event) => {
+  const sendMessage = (event) => {
     event.preventDefault();
     const trimmedMessage = inputMessage.trim();
     if (trimmedMessage !== '') {

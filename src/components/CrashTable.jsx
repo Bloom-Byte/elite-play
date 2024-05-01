@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import './CrashTable.css'
 
-const CrashTable = ({ isNavOpen }) => {
+const CrashTable = ({ isNavOpen, bets, userBets }) => {
     const [toggle, setToggle] = useState(false)
     const [userBetsOpen, setUserBetsOpen] = useState(false)
   return (
@@ -190,196 +190,60 @@ const CrashTable = ({ isNavOpen }) => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span className="red">-100</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span className="red">-100</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span className="red">-100</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span className="red">-100</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td className="game-icon">tkfsyaudyubnlkxblk</td>
-                    <td>2s</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span>100</span>
-                    </td>
-                    <td>3.56x</td>
-                    <td>
-                      <img
-                        className="coin"
-                        src="./cryptocurrency-color_usd.svg"
-                      />{' '}
-                      <span className="green">+33600</span>
-                    </td>
-                  </tr>
+                {userBetsOpen ? (
+                    userBets.map((bet, index) => (
+                      <tr>
+                        <td className="game-icon">{bet._id}</td>
+                        <td>
+                          <img
+                            className="coin"
+                            src="./twemoji_coin.svg"
+                            alt="coin"
+                          />
+                          {bet.amount}
+                        </td>
+                        <td>{bet.payout}x</td>
+                        <td
+                          className={bet.betStatus === 'loss' ? 'red' : 'green'}
+                        >
+                          {' '}
+                          <img
+                            className="coin"
+                            src="./twemoji_coin.svg"
+                            alt="coin"
+                          />
+                          {bet.winAmount}x
+                        </td>
+                      </tr>
+                    ))
+                  ) : (
+                    bets.map((bet, index) => (
+                      <tr>
+                        <td className="game-icon">{bet._id}</td>
+                        <td>
+                          <img
+                            className="coin"
+                            src="./twemoji_coin.svg"
+                            alt="coin"
+                          />
+                          {bet.amount}
+                        </td>
+                        <td>{bet.payout}x</td>
+                        <td
+                          className={bet.betStatus === 'loss' ? 'red' : 'green'}
+                        >
+                          {' '}
+                          <img
+                            className="coin"
+                            src="./twemoji_coin.svg"
+                            alt="coin"
+                          />
+                          {bet.winAmount}x
+                        </td>
+                      </tr>
+                    ))
+                  )}
+                 
                 </tbody>
               </table>
             </div>
