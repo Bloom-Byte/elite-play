@@ -97,6 +97,7 @@ const Register = () => {
       setIsLoading(false);
       return;
     } else {
+      setEmail(email.toLowerCase())
       setError('');
     }
 
