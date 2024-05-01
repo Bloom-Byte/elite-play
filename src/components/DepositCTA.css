@@ -64,6 +64,7 @@
         align-self: center;
         margin-left: 8px;
         width: 100vw;
+        margin-right: 5px;
     }
     
     .deposit-cta__txt h4 {
