@@ -269,8 +269,8 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                   alt="profile-img"
                 />
                       <div className="username_details">
-                        <h2>{user ? user.name : 'Yuxeer'}</h2>
-                        <p>User ID: {user ? user._id : '12357308'}</p>
+                        <h2>{user?.name}</h2>
+                        <p>User ID: {user?._id }</p>
                       </div>
                     </div>
                     <button

@@ -114,7 +114,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
               }}
             >
               <div
-                onClick={() => setChatOpen(!chatOpen)}
+                onClick={() => {setChatOpen(!chatOpen), setIsNavOpen(false)}}
                 className="sidenav__link mobile-chat"
               >
                 <img src="./message-01.svg" alt="chat-icon" />

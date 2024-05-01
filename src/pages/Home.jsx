@@ -33,6 +33,11 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [chatOpen, setChatOpen] = useState(width > 768);
 
+  console.log(width)
+  console.log(chatOpen)
+
+  useEffect
+
   const fetchUserProfile = async (accessToken) => {
     try {
       setLoading(true);
@@ -68,6 +73,7 @@ const Home = () => {
     } else {
       setLoading(false);
     }
+    setChatOpen(width > 768)
   }, []);
 
   return (

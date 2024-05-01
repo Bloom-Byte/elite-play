@@ -10,10 +10,24 @@ import 'react-loading-skeleton/dist/skeleton.css';
 import { isLoggedIn } from '../utils/auth';
 import './Crash.css';
 
+function useWindowSize() {
+  const [size, setSize] = useState([0, 0]);
+  useEffect(() => {
+      function updateSize() {
+          setSize([window.innerWidth, window.innerHeight]);
+      }
+      window.addEventListener('resize', updateSize);
+      updateSize();
+      return () => window.removeEventListener('resize', updateSize);
+  }, []);
+  return size;
+}
+
 const Crash = () => {
+  const [width, height] = useWindowSize();
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [userProfile, setUserProfile] = useState(null);
-  const [chatOpen, setChatOpen] = useState(true);
+  const [chatOpen, setChatOpen] = useState(width > 768);
   const [loading, setLoading] = useState(false);
   const [bets, setBets] = useState([]);
   const [userBets, setUserBets] = useState([]);
@@ -120,6 +134,7 @@ return () => {
     } else {
       setLoading(false);
     }
+    setChatOpen(width > 768)
   }, []);
 
   return (
@@ -137,7 +152,7 @@ return () => {
         <>
           <div className="home-container">
             <div className={`${chatOpen ? 'min-page-chat' : ''}`}>
-              <Navbar isNavOpen={isNavOpen} user={userProfile} chatOpen={chatOpen} setChatOpen={setChatOpen} />
+              <Navbar isNavOpen={isNavOpen} user={userProfile} chatOpen={chatOpen} setChatOpen={setChatOpen} setIsNavOpen={setIsNavOpen} />
               <Sidenav
                 isNavOpen={isNavOpen}
                 setIsNavOpen={setIsNavOpen}
