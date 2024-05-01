@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import SocketIO from 'socket.io-client';
 
 const accessToken = localStorage.getItem('accessToken');
-const socket = SocketIO('https://be.eliteplay.bloombyte.dev', {
+const socket = SocketIO('https://be.eliteplay.bloombyte.dev/chat', {
   transports: ['websocket'],
   autoConnect: true,
   query: {
@@ -19,8 +19,21 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
   const [isLoadingSavedMessages, setIsLoadingSavedMessages] = useState(false);
   const hasFetchedSavedMessages = useRef(false);
   const [loadMessagesError, setLoadMessagesError] = useState('null');
-
   const [inputMessage, setInputMessage] = useState('');
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+    
+    window.addEventListener('resize', handleResize);
+    handleResize();
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     {
@@ -109,7 +122,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
   //   }
   // };
 
-  const sendMessage = (event) => {
+  const   sendMessage = (event) => {
     event.preventDefault();
     const trimmedMessage = inputMessage.trim();
     if (trimmedMessage !== '') {
@@ -126,7 +139,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
       <div className="chatroom-popup-popup_container">
         <div className="chatroom-popup_header">
           <p>Chatroom</p>
-          <div className="chatroom-btn">
+          <div className={`chatroom-btn ${isMobile ? '' : 'hide-cancel-button'}`}>
             <img
               onClick={() => setChatOpen(!chatOpen)}
               className="close"

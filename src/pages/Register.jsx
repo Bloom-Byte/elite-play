@@ -37,6 +37,24 @@ const Register = () => {
     return re.test(password);
   };
 
+  async function handleGoogleSignIn() {
+    try {
+      const response = await fetch('https://be.eliteplay.bloombyte.dev/user/google-login', {
+        method: 'POST',
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to sign in with Google');
+      }
+  
+      const data = await response.json();
+      console.log('Google sign-in successful:', data);
+    } catch (error) {
+      console.error('Error signing in with Google:', error.message);
+    }
+  }
+  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
@@ -206,7 +224,7 @@ const Register = () => {
               <p className="register-form__option">or</p>
             </div>
 
-            <div className="register-form__google-signin">
+            <div onClick={handleGoogleSignIn} className="register-form__google-signin">
               <img src="./google.svg" alt="google-icon" />
               <span>Sign Up with google</span>
             </div>

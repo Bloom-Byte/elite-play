@@ -186,3 +186,7 @@
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
 }
+
+.hide-cancel-button {
+  display: none;
+}
