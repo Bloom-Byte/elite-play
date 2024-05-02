@@ -33,9 +33,6 @@ const Home = () => {
   const [loading, setLoading] = useState(false);
   const [chatOpen, setChatOpen] = useState(width > 768);
 
-  console.log(width)
-  console.log(chatOpen)
-
   useEffect
 
   const fetchUserProfile = async (accessToken) => {

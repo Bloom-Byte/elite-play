@@ -159,7 +159,8 @@ return () => {
                 user={userProfile}
                 chatOpen={chatOpen} setChatOpen={setChatOpen}
               />
-              <CrashGame isNavOpen={isNavOpen} user={userProfile} />
+              <CrashGame isNavOpen={isNavOpen} user={userProfile} bets={bets}
+                userBets={userBets} />
               <CrashTable isNavOpen={isNavOpen} user={userProfile} bets={bets}
                 userBets={userBets} />
               <Footer isNavOpen={isNavOpen} />

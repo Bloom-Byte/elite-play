@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect  } from 'react';
 import axios from 'axios';
 import './DiceGame.css';
 
-const DiceGame = ({ isNavOpen, user, userBets, chatOpen }) => {
+const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
   const [auto, setAuto] = useState(false);
   const [fairness, setFairness] = useState(false);
   const [livebet, setLivebet] = useState(false);

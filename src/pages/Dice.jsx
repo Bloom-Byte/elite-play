@@ -173,6 +173,7 @@ return () => {
                 isNavOpen={isNavOpen}
                 user={userProfile}
                 userBets={userBets}
+                bets={bets}
                 chatOpen={chatOpen}
               />
               <DiceTable

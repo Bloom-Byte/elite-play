@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect  } from 'react';
 import CrashGraph from './CrashGraph';
 import './CrashGame.css';
 
-const CrashGame = ({ isNavOpen }) => {
+const CrashGame = ({ isNavOpen, userBets, bets }) => {
   const [auto, setAuto] = useState(false);
   const [livebet, setLivebet] = useState(false);
   const [tutorial, setTutorial] = useState(false);
