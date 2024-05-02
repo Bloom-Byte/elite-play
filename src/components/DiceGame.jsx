@@ -15,6 +15,7 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
   const [isInfinity, setIsInfinity] = useState(true);
   const [stopOnLoss, setStopOnLoss] = useState('');
   const [diceGameResponse, setDiceGameResponse] = useState()
+  const [rollover, setRollover] = useState(false)
   const [stopConditions, setStopConditions] = useState({
     resetWin: 100,
     resetLose: 50,
@@ -147,7 +148,7 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
 
     const data = {
       amount: betAmount,
-      isRollOver: isAutoBet,
+      isRollOver: rollover,
       targetValue: Number(diceRoll),
       payout: pay,
       serverSeed: serverSeed,
@@ -523,10 +524,10 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
               </div>
             </div>
             <div className="dicegame-diceroll__outer-box">
-              <p>Roll Under</p>
+              <p>{rollover? 'Roll Over' : 'Roll Under'}</p>
               <div className="dicegame-diceroll__box-info dicegame-diceroll-rollover">
                 <span>{diceRoll}</span>
-                <img src="./rollover.svg" alt="rollover" />
+                <img onClick={() => setRollover(!rollover)} style={{cursor: 'pointer'}} src="./rollover.svg" alt="rollover" />
               </div>
             </div>
             <div className="dicegame-diceroll__outer-box">
