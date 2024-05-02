@@ -33,9 +33,9 @@ const Crash = () => {
   const [userBets, setUserBets] = useState([]);
   const userIsLoggedIn = isLoggedIn();
 
-  if (!userIsLoggedIn) {
-    window.location.href = '/';
-  }
+  // if (!userIsLoggedIn) {
+  //   window.location.href = '/';
+  // }
 
   const fetchAllBets = () => {
     const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/game/crash-game/leaderboard');

@@ -36,9 +36,9 @@ const Dice = () => {
   const accessToken = localStorage.getItem('accessToken');
   const userIsLoggedIn = isLoggedIn();
 
-  if (!userIsLoggedIn) {
-    window.location.href = '/';
-  }
+  // if (!userIsLoggedIn) {
+  //   window.location.href = '/';
+  // }
 
   const fetchAllBets = () => {
     const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/game/all-bets');
