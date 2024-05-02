@@ -69,7 +69,8 @@ const Dice = () => {
 
 
 const fetchUserBets = () => {
-  const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/game/user-bets');
+  const accessToken = localStorage.getItem('accessToken');
+  const eventSource = new EventSource(`https://be.eliteplay.bloombyte.dev/game/user-bets?access_token=${accessToken}`);
 
   eventSource.onopen = () => {
     console.log('Connection established');
