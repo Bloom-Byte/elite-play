@@ -191,7 +191,7 @@ const CrashTable = ({ isNavOpen, bets, userBets }) => {
                 </thead>
                 <tbody>
                 {userBetsOpen ? (
-                    userBets.map((bet, index) => (
+                    userBets?.map((bet, index) => (
                       <tr>
                         <td className="game-icon">{bet._id}</td>
                         <td>
@@ -217,31 +217,36 @@ const CrashTable = ({ isNavOpen, bets, userBets }) => {
                       </tr>
                     ))
                   ) : (
-                    bets.map((bet, index) => (
+                    bets.length > 0 ? (
+                      bets.map((bet, index) => (
+                        <tr key={index}>
+                          <td className="game-icon">{bet._id}</td>
+                          <td>
+                            <img
+                              className="coin"
+                              src="./twemoji_coin.svg"
+                              alt="coin"
+                            />
+                            {bet.amount}
+                          </td>
+                          <td>{bet.payout}x</td>
+                          <td
+                            className={bet.betStatus === 'loss' ? 'red' : 'green'}
+                          >
+                            <img
+                              className="coin"
+                              src="./twemoji_coin.svg"
+                              alt="coin"
+                            />
+                            {bet.winAmount}x
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
                       <tr>
-                        <td className="game-icon">{bet._id}</td>
-                        <td>
-                          <img
-                            className="coin"
-                            src="./twemoji_coin.svg"
-                            alt="coin"
-                          />
-                          {bet.amount}
-                        </td>
-                        <td>{bet.payout}x</td>
-                        <td
-                          className={bet.betStatus === 'loss' ? 'red' : 'green'}
-                        >
-                          {' '}
-                          <img
-                            className="coin"
-                            src="./twemoji_coin.svg"
-                            alt="coin"
-                          />
-                          {bet.winAmount}x
-                        </td>
+                        <td colSpan="4">No bets available</td>
                       </tr>
-                    ))
+                    )
                   )}
                  
                 </tbody>
