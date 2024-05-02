@@ -1,7 +1,7 @@
 import React, { useState} from 'react'
 import './Livebets.css'
 
-const Livebets = ({isNavOpen}) => {
+const Livebets = ({ isNavOpen, diceAllBets, diceUserBets, crashAllBets , crashUserBets}) => {
   const [liveBets, setLiveBets] = useState([])
   const [bigBets, setBigBets] = useState([])
   return (

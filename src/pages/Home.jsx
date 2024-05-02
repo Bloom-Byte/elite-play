@@ -32,8 +32,122 @@ const Home = () => {
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [chatOpen, setChatOpen] = useState(width > 768);
+  const [crashAllBets, setCrashAllBets] = useState([]);
+  const [crashUserBets, setCrashUserBets] = useState([]);
+  const [diceAllBets, setDiceAllBets] = useState([]);
+  const [diceUserBets, setDiceUserBets] = useState([]);
 
-  useEffect
+  
+  const fetchDiceAllBets = () => {
+    const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/game/all-bets');
+  
+    eventSource.onopen = () => {
+      console.log('Connection established');
+    };
+  
+    eventSource.onerror = (error) => {
+      console.error('Error with EventSource:', error);
+      eventSource.close();
+    };
+  
+    eventSource.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        setDiceAllBets(data);
+        console.log('Dice All bets:', data)
+      } catch (error) {
+        console.error('Error parsing message:', error)
+      }
+    }
+    
+  return () => {
+    eventSource.close();
+  };
+};
+
+
+const fetchDiceUserBets = () => {
+  const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/game/user-bets');
+
+  eventSource.onopen = () => {
+    console.log('Connection established');
+  };
+
+  eventSource.onerror = (error) => {
+    console.error('Error with EventSource:', error);
+    eventSource.close();
+  };
+
+  eventSource.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      setDiceUserBets(data);
+      console.log('Dice User bets:', data)
+    } catch (error) {
+      console.error('Error parsing message:', error)
+    }
+  }
+  
+return () => {
+  eventSource.close();
+};
+};
+
+
+  const fetchCrashAllBets = () => {
+    const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/game/crash-game/leaderboard');
+  
+    eventSource.onopen = () => {
+      console.log('Connection established');
+    };
+  
+    eventSource.onerror = (error) => {
+      console.error('Error with EventSource:', error);
+      eventSource.close();
+    };
+  
+    eventSource.onmessage = (event) => {
+      try {
+        const data = JSON.parse(event.data);
+        setCrashAllBets(data);
+        console.log('Crash All bets:', data)
+      } catch (error) {
+        console.error('Error parsing message:', error)
+      }
+    }
+    
+  return () => {
+    eventSource.close();
+  };
+};
+
+
+const fetchCrashUserBets = () => {
+  const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/crash-game/bets-resolved');
+
+  eventSource.onopen = () => {
+    console.log('Connection established');
+  };
+
+  eventSource.onerror = (error) => {
+    console.error('Error with EventSource:', error);
+    eventSource.close();
+  };
+
+  eventSource.onmessage = (event) => {
+    try {
+      const data = JSON.parse(event.data);
+      setCrashUserBets(data);
+      console.log('Crash User bets:', data)
+    } catch (error) {
+      console.error('Error parsing message:', error)
+    }
+  }
+  
+return () => {
+  eventSource.close();
+};
+};
 
   const fetchUserProfile = async (accessToken) => {
     try {
@@ -98,7 +212,7 @@ const Home = () => {
               <Hero chatOpen={chatOpen} isNavOpen={isNavOpen} user={userProfile} />
               <Recentwins chatOpen={chatOpen} isNavOpen={isNavOpen} />
               <DepositCTA chatOpen={chatOpen} isNavOpen={isNavOpen} />
-              <Livebets chatOpen={chatOpen} isNavOpen={isNavOpen} />
+              <Livebets chatOpen={chatOpen} isNavOpen={isNavOpen} diceAllBets={diceAllBets} diceUserBets={diceUserBets} crashAllBets={crashAllBets} crashUserBets={crashUserBets} />
               <VIPCTA chatOpen={chatOpen} isNavOpen={isNavOpen} />
               <Description chatOpen={chatOpen} isNavOpen={isNavOpen} />
               <Footer chatOpen={chatOpen} isNavOpen={isNavOpen} />
