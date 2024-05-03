@@ -53,7 +53,7 @@ const Home = () => {
     eventSource.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        setDiceAllBets(data);
+        setDiceAllBets(...diceAllBets, data);
         console.log('Dice All bets:', data)
       } catch (error) {
         console.error('Error parsing message:', error)
@@ -82,7 +82,7 @@ const fetchDiceUserBets = () => {
   eventSource.onmessage = (event) => {
     try {
       const data = JSON.parse(event.data);
-      setDiceUserBets(data);
+      setDiceUserBets(...diceUserBets, data);
       console.log('Dice User bets:', data)
     } catch (error) {
       console.error('Error parsing message:', error)
@@ -110,7 +110,7 @@ return () => {
     eventSource.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        setCrashAllBets(data);
+        setCrashAllBets(...crashAllBets, data);
         console.log('Crash All bets:', data)
       } catch (error) {
         console.error('Error parsing message:', error)
@@ -138,7 +138,7 @@ const fetchCrashUserBets = () => {
   eventSource.onmessage = (event) => {
     try {
       const data = JSON.parse(event.data);
-      setCrashUserBets(data);
+      setCrashUserBets(...crashUserBets, data);
       console.log('Crash User bets:', data)
     } catch (error) {
       console.error('Error parsing message:', error)
@@ -178,10 +178,18 @@ return () => {
   };
 
   useEffect(() => {
+    const fetchBetsData = async () => {
+      fetchCrashUserBets();
+      fetchCrashAllBets();
+      fetchDiceAllBets();
+      fetchDiceUserBets();
+     };
+
     const accessToken = localStorage.getItem('accessToken');
     console.log(accessToken);
     if (accessToken) {
       fetchUserProfile(accessToken);
+      fetchBetsData();
     } else {
       setLoading(false);
     }
