@@ -7,21 +7,9 @@ import ChatPopup from '../components/ChatPopup';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 
-function useWindowSize() {
-  const [size, setSize] = useState([0, 0]);
-  useEffect(() => {
-      function updateSize() {
-          setSize([window.innerWidth, window.innerHeight]);
-      }
-      window.addEventListener('resize', updateSize);
-      updateSize();
-      return () => window.removeEventListener('resize', updateSize);
-  }, []);
-  return size;
-}
 
 const Referral = () => {
-  const [width, height] = useWindowSize();
+  const [width, setWidth] = useState(window.innerWidth);
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [referralInfo, setReferralInfo] = useState(null);
   const [referralCount, setReferralCount] = useState(null);

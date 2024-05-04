@@ -9,21 +9,9 @@ import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import './Wallet.css';
 
-function useWindowSize() {
-  const [size, setSize] = useState([0, 0]);
-  useEffect(() => {
-      function updateSize() {
-          setSize([window.innerWidth, window.innerHeight]);
-      }
-      window.addEventListener('resize', updateSize);
-      updateSize();
-      return () => window.removeEventListener('resize', updateSize);
-  }, []);
-  return size;
-}
 
 const Wallet = () => {
-  const [width, height] = useWindowSize();
+  const [width, setWidth] = useState(window.innerWidth);
   const [isNavOpen, setIsNavOpen] = useState(true);
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(false);

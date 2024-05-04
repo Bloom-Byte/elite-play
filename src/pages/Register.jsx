@@ -54,7 +54,7 @@ const Register = () => {
       localStorage.setItem("accessToken", data);
       const loginTime = new Date().getTime();
       localStorage.setItem('loginTime', loginTime);
-      window.location.href = "/";
+      // window.location.href = "/";
     } catch (error) {
       console.error("Error signing in with Google:", error.message);
     }

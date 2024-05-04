@@ -6,21 +6,9 @@ import Footer from '../components/Footer'
 import { isLoggedIn } from '../utils/auth';
 import './AccountSettings.css'
 
-function useWindowSize() {
-  const [size, setSize] = useState([0, 0]);
-  useEffect(() => {
-      function updateSize() {
-          setSize([window.innerWidth, window.innerHeight]);
-      }
-      window.addEventListener('resize', updateSize);
-      updateSize();
-      return () => window.removeEventListener('resize', updateSize);
-  }, []);
-  return size;
-}
 
 const AccountSettings = () => {
-  const [width, height] = useWindowSize();
+  const [width, setWidth] = useState(window.innerWidth);
   const [chatOpen, setChatOpen] = useState(width > 768);
     const [isNavOpen, setIsNavOpen] = useState(true)
     const [userProfile, setUserProfile] = useState(null);
