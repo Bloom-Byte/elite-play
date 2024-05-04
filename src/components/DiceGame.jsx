@@ -519,7 +519,7 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
             <div className="dicegame-diceroll__outer-box">
               <p>Payout</p>
               <div className="dicegame-diceroll__box-info">
-                <span>{(100 / diceRoll).toFixed(4)}</span>
+                <span>{rollover ? (100 / (100 - diceRoll)).toFixed(4) : (100 / diceRoll).toFixed(4)}</span>
                 <span>x</span>
               </div>
             </div>
@@ -533,7 +533,7 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
             <div className="dicegame-diceroll__outer-box">
               <p>Win Chance</p>
               <div className="dicegame-diceroll__box-info">
-                <span>{diceRoll - 1}</span>
+                <span>{rollover ? 100 - (diceRoll - 1) : diceRoll - 1}</span>
                 <span>%</span>
               </div>
             </div>
