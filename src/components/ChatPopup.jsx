@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import SocketIO from 'socket.io-client';
+import { isLoggedIn } from '../utils/auth';
 
 const accessToken = localStorage.getItem('accessToken');
 const socket = SocketIO('https://be.eliteplay.bloombyte.dev/chat', {
@@ -21,12 +22,13 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
   const [loadMessagesError, setLoadMessagesError] = useState('');
   const [inputMessage, setInputMessage] = useState('');
   const [isMobile, setIsMobile] = useState(false);
+  const userIsLoggedIn = isLoggedIn();
 
   useEffect(() => {
     const handleResize = () => {
       setIsMobile(window.innerWidth < 768);
     };
-    
+
     window.addEventListener('resize', handleResize);
     handleResize();
 
@@ -138,11 +140,13 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
   };
 
   return (
-    <div  className={`chatroom-popup ${chatOpen ? 'open' : ''}`}>
+    <div className={`chatroom-popup ${chatOpen ? 'open' : ''}`}>
       <div className="chatroom-popup-popup_container">
         <div className="chatroom-popup_header">
           <p>Chatroom</p>
-          <div className={`chatroom-btn ${isMobile ? '' : 'hide-cancel-button'}`}>
+          <div
+            className={`chatroom-btn ${isMobile ? '' : 'hide-cancel-button'}`}
+          >
             <img
               onClick={() => setChatOpen(!chatOpen)}
               className="close"
@@ -173,21 +177,34 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
                 </h3>
               )}
 
-              {messages.map((msg, index) => (
-                <div key={index} className="chatroom-chatbox">
-                  <div className="chatroom-user-profile">
-                    <span>{msg.username}</span>
-                    <img src={msg.profilePictureUrl || './placeholder-profile-img.jpg'} alt="profile-img" />
+              {userIsLoggedIn ? (
+                messages.map((msg, index) => (
+                  <div key={index} className="chatroom-chatbox">
+                    <div className="chatroom-user-profile">
+                      <span>{msg.username}</span>
+                      <img
+                        src={
+                          msg.profilePictureUrl ||
+                          './placeholder-profile-img.jpg'
+                        }
+                        alt="profile-img"
+                      />
+                    </div>
+                    <div className="chatroom-chat-txt">
+                      <span>{msg.message}</span>
+                    </div>
                   </div>
-                  <div className="chatroom-chat-txt">
-                    <span>{msg.message}</span>
-                  </div>
+                ))
+              ) : (
+                <div>
+                  {' '}
+                  <p className='login-chat'>You need to login to use chat</p>{' '}
                 </div>
-              ))}
+              )}
             </div>
             <div>
               <form className="chatroom-input" onSubmit={sendMessage}>
-                <div style={{width: '100%'}}>
+                <div style={{ width: '100%' }}>
                   <input
                     placeholder="Type here..."
                     type="text"
@@ -196,7 +213,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
                     onKeyDown={handleSendMessage}
                   />
                 </div>
-                <button type='submit'>
+                <button type="submit">
                   <img src="./Send.svg" alt="send-icon" />
                 </button>
               </form>

@@ -187,6 +187,13 @@
   font-weight: 600;
 }
 
+.login-chat {
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+}
+
 .hide-cancel-button {
   display: none;
 }
