@@ -41,7 +41,11 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
     fetchData();
   }, []);
 
-
+  const handleClick = () => {
+    if (window.innerWidth < 752) {
+      setIsNavOpen(false);
+    }
+  };
 
   return (
     <>
@@ -68,7 +72,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <a style={{ textDecoration: 'none' }}  href="/referrals">
+              <a style={{ textDecoration: 'none' }} onClick={handleClick}  href="/referrals">
                 <div className="sidenav__link">
                   <img src="./gift.svg" alt="reward-icon" />
                   <span>Refer and Earn</span>
@@ -83,7 +87,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <a style={{ textDecoration: 'none' }} href="/dice">
+              <a style={{ textDecoration: 'none' }} onClick={handleClick} href="/dice">
                 <div className="sidenav__link">
                   <img src="./dice.svg" alt="dice-icon" />
                   <span>Dice</span>
@@ -98,7 +102,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
             >
-              <a style={{ textDecoration: 'none' }} href="/crash">
+              <a style={{ textDecoration: 'none' }} onClick={handleClick} href="/crash">
                 <div className="sidenav__link">
                   <img src="./chart-increase.svg" alt="crash-icon" />
                   <span>Crash</span>
@@ -112,10 +116,11 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
                 borderRadius: chatOpen ? '9px' : '0',
                 transition: 'background-color 0.3s, padding 0.3s',
               }}
+              className="mobile-chat"
             >
               <div
                 onClick={() => {setChatOpen(!chatOpen), setIsNavOpen(false)}}
-                className="sidenav__link mobile-chat"
+                className="sidenav__link"
               >
                 <img src="./message-01.svg" alt="chat-icon" />
                 <span>Chatroom</span>
@@ -130,7 +135,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
               }}
             >
               <div
-                onClick={() => setVipSupport(!vipSupport)}
+                onClick={() => {setVipSupport(!vipSupport), handleClick}}
                 className="sidenav__link"
               >
                 <img src="./VIP.svg" alt="vip-icon" />
@@ -148,7 +153,7 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
               }}
             >
               <div
-                onClick={() => setLiveSupport(!liveSupport)}
+                onClick={() => {setLiveSupport(!liveSupport), handleClick}}
                 className="sidenav__link"
               >
                 <img src="./customer-support.svg" alt="support-icon" />

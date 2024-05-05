@@ -202,7 +202,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
                 </div>
               )}
             </div>
-            <div>
+            {userIsLoggedIn ? (<div>
               <form className="chatroom-input" onSubmit={sendMessage}>
                 <div style={{ width: '100%' }}>
                   <input
@@ -217,7 +217,8 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
                   <img src="./Send.svg" alt="send-icon" />
                 </button>
               </form>
-            </div>
+            </div>) : ''}
+            
           </div>
         </div>
       </div>
