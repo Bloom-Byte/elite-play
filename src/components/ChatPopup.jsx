@@ -177,48 +177,43 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
                 </h3>
               )}
 
-              {userIsLoggedIn ? (
-                messages.map((msg, index) => (
-                  <div key={index} className="chatroom-chatbox">
-                    <div className="chatroom-user-profile">
-                      <span>{msg.username}</span>
-                      <img
-                        src={
-                          msg.profilePictureUrl ||
-                          './placeholder-profile-img.jpg'
-                        }
-                        alt="profile-img"
-                      />
-                    </div>
-                    <div className="chatroom-chat-txt">
-                      <span>{msg.message}</span>
-                    </div>
+              {messages.map((msg, index) => (
+                <div key={index} className="chatroom-chatbox">
+                  <div className="chatroom-user-profile">
+                    <span>{msg.username}</span>
+                    <img
+                      src={
+                        msg.profilePictureUrl || './placeholder-profile-img.jpg'
+                      }
+                      alt="profile-img"
+                    />
                   </div>
-                ))
-              ) : (
-                <div>
-                  {' '}
-                  <p className='login-chat'>You need to login to use chat</p>{' '}
+                  <div className="chatroom-chat-txt">
+                    <span>{msg.message}</span>
+                  </div>
                 </div>
-              )}
+              ))}
             </div>
-            {userIsLoggedIn ? (<div>
-              <form className="chatroom-input" onSubmit={sendMessage}>
-                <div style={{ width: '100%' }}>
-                  <input
-                    placeholder="Type here..."
-                    type="text"
-                    value={inputMessage}
-                    onChange={(e) => setInputMessage(e.target.value)}
-                    onKeyDown={handleSendMessage}
-                  />
-                </div>
-                <button type="submit">
-                  <img src="./Send.svg" alt="send-icon" />
-                </button>
-              </form>
-            </div>) : ''}
-            
+            {userIsLoggedIn ? (
+              <div>
+                <form className="chatroom-input" onSubmit={sendMessage}>
+                  <div style={{ width: '100%' }}>
+                    <input
+                      placeholder="Type here..."
+                      type="text"
+                      value={inputMessage}
+                      onChange={(e) => setInputMessage(e.target.value)}
+                      onKeyDown={handleSendMessage}
+                    />
+                  </div>
+                  <button type="submit">
+                    <img src="./Send.svg" alt="send-icon" />
+                  </button>
+                </form>
+              </div>
+            ) : (
+              ''
+            )}
           </div>
         </div>
       </div>
