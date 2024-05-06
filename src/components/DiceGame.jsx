@@ -140,6 +140,7 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
     const pay = Number((100 / diceRoll).toFixed(4));
 
     if (!user | user?.balance < betAmount) {
+      setAutoBet(false);
       alert("Balance low, Deposit Please")
       return
     }
