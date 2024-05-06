@@ -106,8 +106,16 @@
     font-size: 14px;
     font-weight: 600;
     color: #ffffff;
+    cursor: pointer;
+    margin: 20px;
+    padding: 10px;
 }
 
 .down-icon {
     margin-bottom: -7px;
+}
+
+.notification-boxes{
+    height: 80vh;
+    overflow-y: scroll;
 }
