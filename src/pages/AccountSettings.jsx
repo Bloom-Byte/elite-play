@@ -10,7 +10,7 @@ import './AccountSettings.css'
 const AccountSettings = () => {
   const [width, setWidth] = useState(window.innerWidth);
   const [chatOpen, setChatOpen] = useState(width > 768);
-    const [isNavOpen, setIsNavOpen] = useState(true)
+    const [isNavOpen, setIsNavOpen] = useState(width > 768)
     const [userProfile, setUserProfile] = useState(null);
     const [loading, setLoading] = useState(false);
     const userIsLoggedIn = isLoggedIn();

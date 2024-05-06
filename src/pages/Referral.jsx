@@ -10,7 +10,7 @@ import 'react-loading-skeleton/dist/skeleton.css';
 
 const Referral = () => {
   const [width, setWidth] = useState(window.innerWidth);
-  const [isNavOpen, setIsNavOpen] = useState(true);
+  const [isNavOpen, setIsNavOpen] = useState(width > 768);
   const [referralInfo, setReferralInfo] = useState(null);
   const [referralCount, setReferralCount] = useState(null);
   const [userProfile, setUserProfile] = useState(null);

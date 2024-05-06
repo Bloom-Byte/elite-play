@@ -13,7 +13,7 @@ import './Crash.css';
 
 const Crash = () => {
   const [width, setWidth] = useState(window.innerWidth);
-  const [isNavOpen, setIsNavOpen] = useState(true);
+  const [isNavOpen, setIsNavOpen] = useState(width > 768);
   const [userProfile, setUserProfile] = useState(null);
   const [chatOpen, setChatOpen] = useState(width > 768);
   const [loading, setLoading] = useState(false);

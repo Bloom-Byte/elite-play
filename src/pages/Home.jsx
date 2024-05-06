@@ -16,7 +16,7 @@ import './Home.css';
 
 const Home = () => {
   const [width, setWidth] = useState(window.innerWidth);
-  const [isNavOpen, setIsNavOpen] = useState(true);
+  const [isNavOpen, setIsNavOpen] = useState(width > 768);
   const [userProfile, setUserProfile] = useState(null);
   const [loading, setLoading] = useState(false);
   const [chatOpen, setChatOpen] = useState(width > 768);
