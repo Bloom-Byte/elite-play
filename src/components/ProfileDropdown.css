@@ -55,3 +55,9 @@
 .profile-dropdown-cta .vip {
     color: #F29100;
 }
+
+@media screen and (max-width: 768px) {
+    .profile-dropdown {
+        right: 10px;
+      }
+}
