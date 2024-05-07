@@ -212,7 +212,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
                 </form>
               </div>
             ) : (
-              ''
+              <p className='login-chat'>Please login to chat</p>
             )}
           </div>
         </div>
