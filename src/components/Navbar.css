@@ -9,7 +9,7 @@ body {
 .nav {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     background-color: #0B1210;
     padding: 1rem;
 }
@@ -151,6 +151,8 @@ body {
 @media screen and (max-width: 768px) {
     .nav {
         width: 100vw;
+        justify-content: start;
+        align-items: normal;
     }
 
     .nav-games {
@@ -185,5 +187,17 @@ body {
         margin-left: 0;
         gap: 10px;
         margin-top: -1rem;
+    }
+
+    .nav-auth {
+        gap: 10px;
+    }
+
+    .nav-auth__signup {
+        padding: 6px;
+        margin-right: 0px;
+    }
+    .nav-auth__signin {
+        padding: 6px;
     }
 }

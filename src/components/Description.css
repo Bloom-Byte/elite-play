@@ -55,7 +55,7 @@
 /* --------- MOBILE RESPONSIVENESS --------- */
 @media screen and (max-width: 768px) {
   .desc {
-    width: 100%;
+    width: 95vw;
     padding-left: 8px;
     padding-right: 5px;
   }

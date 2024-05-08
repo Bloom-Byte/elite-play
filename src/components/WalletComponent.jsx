@@ -489,9 +489,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
               <span>Withdraw</span>
             </div>
             <div
-              onClick={() => {
-                setCurrentSection('Withdraw');
-              }}
+              onClick={() => setCurrentSection('Earnings')}
               className="profile-dropdown-cta"
             >
               <img src="./coins-01.svg" alt="wallet" />
