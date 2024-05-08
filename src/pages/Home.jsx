@@ -41,7 +41,7 @@ const Home = () => {
     eventSource.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        setDiceAllBets(data, ...diceAllBets);
+        setDiceAllBets(prevBets => [data, ...prevBets]);
         console.log('Dice All bets:', data)
       } catch (error) {
         console.error('Error parsing message:', error)
@@ -70,7 +70,7 @@ const fetchDiceUserBets = () => {
   eventSource.onmessage = (event) => {
     try {
       const data = JSON.parse(event.data);
-      setDiceUserBets(data, ...diceUserBets);
+      setDiceUserBets(prevBets => [data, ...prevBets]);
       console.log('Dice User bets:', data)
     } catch (error) {
       console.error('Error parsing message:', error)
@@ -98,7 +98,7 @@ return () => {
     eventSource.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        setCrashAllBets(data, ...crashAllBets);
+        setCrashAllBets(prevBets => [data, ...prevBets]);
         console.log('Crash All bets:', data)
       } catch (error) {
         console.error('Error parsing message:', error)
@@ -126,7 +126,7 @@ const fetchCrashUserBets = () => {
   eventSource.onmessage = (event) => {
     try {
       const data = JSON.parse(event.data);
-      setCrashUserBets(data, ...crashUserBets);
+      setCrashUserBets(prevBets => [data, ...prevBets]);
       console.log('Crash User bets:', data)
     } catch (error) {
       console.error('Error parsing message:', error)

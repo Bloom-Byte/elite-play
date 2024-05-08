@@ -1,13 +1,14 @@
-import React, { useState, useRef, useEffect  } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import CrashGraph from './CrashGraph';
 import './CrashGame.css';
+import { set } from 'date-fns';
 
 const CrashGame = ({ isNavOpen, userBets, bets }) => {
   const [auto, setAuto] = useState(false);
   const [livebet, setLivebet] = useState(false);
   const [tutorial, setTutorial] = useState(false);
   const [betAmount, setBetAmount] = useState(10);
-  const [multiplier, setMultiplier] = useState(2.00)
+  const [multiplier, setMultiplier] = useState(2.0);
   const [autoBet, setAutoBet] = useState(false);
   const [gameState, setGameState] = useState({
     isGameRunning: false,
@@ -17,7 +18,8 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
     currentCrashPoint: 0,
   });
 
-  const [isGameStarting, setIsGameStarting] = useState(false);
+  const [isGameCrashed, setIsGameCrashed] = useState(false);
+  const [recentMultipliers, setRecentMultipliers] = useState([]);
 
   const dropdownRef = useRef(null);
 
@@ -44,15 +46,22 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
       }
     };
   }, [tutorial]);
-  
+
   const accessToken = localStorage.getItem('accessToken');
   useEffect(() => {
-    const eventSource = new EventSource('https://be.eliteplay.bloombyte.dev/crash-game/game-state', {
-    });
+    const eventSource = new EventSource(
+      'https://be.eliteplay.bloombyte.dev/crash-game/game-state',
+      {}
+    );
 
     eventSource.onmessage = (event) => {
       const eventData = JSON.parse(event.data);
       setGameState(eventData);
+      setIsGameCrashed(eventData.isGameCrashed);
+      setRecentMultipliers((prevMultipliers) => [
+        eventData.currentMultiplier,
+        ...prevMultipliers,
+      ]);
     };
 
     return () => {
@@ -80,9 +89,9 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
 
   const handleCashUpdate = (cash) => {
     if (cash >= 2) {
-      setMultiplier(cash)
+      setMultiplier(cash);
     }
-  }
+  };
 
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
@@ -243,7 +252,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                     <span
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
-                        handleBetAmountCount(betAmount / 2)
+                        handleBetAmountCount(betAmount / 2);
                       }}
                     >
                       /2
@@ -251,7 +260,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                     <span
                       style={{ cursor: 'pointer' }}
                       onClick={() => {
-                        handleBetAmountCount(betAmount * 2)
+                        handleBetAmountCount(betAmount * 2);
                       }}
                     >
                       2
@@ -260,7 +269,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                       <img
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                          handleBetAmountCount(betAmount + 1)
+                          handleBetAmountCount(betAmount + 1);
                         }}
                         src="./count_arrow-top.svg"
                         alt="arrow"
@@ -268,7 +277,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                       <img
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                          handleBetAmountCount(betAmount - 1)
+                          handleBetAmountCount(betAmount - 1);
                         }}
                         src="./count_arrow-down.svg"
                         alt="arrow"
@@ -313,21 +322,19 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                 <p>Win Amount</p>
                 <div className="dicegame-placebet__amount">
                   <div className="dicegame-placebet__amount-display">
-                    
                     <input
                       type="text"
                       value={multiplier}
                       onChange={handleCashAmount}
                     />
-                    <span style={{marginLeft:'5px'}}>x</span>
+                    <span style={{ marginLeft: '5px' }}>x</span>
                   </div>
                   <div className="dicegame-placebet__amount-toggle">
-                   
                     <div className="crash-arrows">
                       <img
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                          handleCashUpdate(multiplier + 1)
+                          handleCashUpdate(multiplier + 1);
                         }}
                         src="./crash-l.svg"
                         alt="arrow"
@@ -335,7 +342,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                       <img
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                          handleCashUpdate(multiplier - 1)
+                          handleCashUpdate(multiplier - 1);
                         }}
                         src="./crash-r.svg"
                         alt="arrow"
@@ -349,16 +356,14 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
           )}
         </div>
         <div className="dicegame-diceroll">
-          {/* <div className="dicegame-diceroll__odds">
-            <span>88.59</span>
-            <span>74.17</span>
-            <span className="dicegame-diceroll__odds-active">37.56</span>
-            <span className="dicegame-diceroll__odds-active">32.95</span>
-            <span>55.34</span>
-            <span>92.81</span>
-            <span>67.89</span>
-            <span>51.73</span>
-          </div> */}
+          <div className="dicegame-diceroll__odds">
+            {recentMultipliers > 0 &&
+              recentMultipliers.slice(0, 8).map((multiplier, index) => (
+                <span key={index}>{multiplier}</span>
+              ))}
+            {/* <span className="dicegame-diceroll__odds-active">37.56</span>
+            <span className="dicegame-diceroll__odds-active">32.95</span> */}
+          </div>
           <CrashGraph gameState={gameState} />
         </div>
       </div>
@@ -473,7 +478,8 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
         <div
           className={`tutorial-dropdown-crash ${
             isNavOpen ? 'tutorial-dropdown-crash-open' : ''
-          }`}  ref={dropdownRef}
+          }`}
+          ref={dropdownRef}
         >
           <div className="tutorial-dropdown-crash-content">
             <a href="/crashbeginner">Beginners Guide</a>
