@@ -41,7 +41,7 @@ const Home = () => {
     eventSource.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        setDiceAllBets(...diceAllBets, data);
+        setDiceAllBets(data, ...diceAllBets);
         console.log('Dice All bets:', data)
       } catch (error) {
         console.error('Error parsing message:', error)
@@ -70,7 +70,7 @@ const fetchDiceUserBets = () => {
   eventSource.onmessage = (event) => {
     try {
       const data = JSON.parse(event.data);
-      setDiceUserBets(...diceUserBets, data);
+      setDiceUserBets(data, ...diceUserBets);
       console.log('Dice User bets:', data)
     } catch (error) {
       console.error('Error parsing message:', error)
@@ -98,7 +98,7 @@ return () => {
     eventSource.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        setCrashAllBets(...crashAllBets, data);
+        setCrashAllBets(data, ...crashAllBets);
         console.log('Crash All bets:', data)
       } catch (error) {
         console.error('Error parsing message:', error)
@@ -126,7 +126,7 @@ const fetchCrashUserBets = () => {
   eventSource.onmessage = (event) => {
     try {
       const data = JSON.parse(event.data);
-      setCrashUserBets(...crashUserBets, data);
+      setCrashUserBets(data, ...crashUserBets);
       console.log('Crash User bets:', data)
     } catch (error) {
       console.error('Error parsing message:', error)
@@ -206,7 +206,7 @@ return () => {
                 chatOpen={chatOpen} setChatOpen={setChatOpen}
               />
               <Hero chatOpen={chatOpen} isNavOpen={isNavOpen} user={userProfile} />
-              <Recentwins chatOpen={chatOpen} isNavOpen={isNavOpen} />
+              <Recentwins chatOpen={chatOpen} isNavOpen={isNavOpen} diceAllBets={diceAllBets} crashAllBets={crashAllBets} />
               <DepositCTA chatOpen={chatOpen} isNavOpen={isNavOpen} />
               <Livebets chatOpen={chatOpen} isNavOpen={isNavOpen} diceAllBets={diceAllBets} diceUserBets={diceUserBets} crashAllBets={crashAllBets} crashUserBets={crashUserBets} />
               <VIPCTA chatOpen={chatOpen} isNavOpen={isNavOpen} />
