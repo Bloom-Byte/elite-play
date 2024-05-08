@@ -3,11 +3,11 @@ import './Recentwins.css';
 
 const Recentwins = ({ isNavOpen, diceAllBets, crashAllBets }) => {
     const diceRecentwins = diceAllBets.length > 0 ? diceAllBets.filter(
-        (bet) => bet.data.betStatus === 'win'
+        (bet) => bet.betStatus === 'win'
       ) : [];
       
       const crashRecentwins = crashAllBets.length > 0 ? crashAllBets.filter(
-        (bet) => bet.data.betStatus === 'win'
+        (bet) => bet.betStatus === 'win'
       ) : [];
   return (
     <div className={`recent-wins ${isNavOpen ? 'recent-wins__extended' : ''}`}>
