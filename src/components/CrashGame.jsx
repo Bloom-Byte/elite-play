@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import CrashGraph from './CrashGraph';
 import './CrashGame.css';
-import { set } from 'date-fns';
 
 const CrashGame = ({ isNavOpen, userBets, bets }) => {
   const [auto, setAuto] = useState(false);
