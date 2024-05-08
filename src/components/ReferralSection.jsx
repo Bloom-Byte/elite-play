@@ -80,20 +80,10 @@ const ReferralSection = ({ isNavOpen, referralInfo, referralCount }) => {
               <p>Referral Link</p>
               <div className="referral-cta_box-info">
                 <img src="./link-02.svg" alt="link-icon" />
-                <span>
-                  {referralInfo
-                    ? referralInfo.fullReferralUrl
-                    : 'https://eliteplay.com/yuxeer/'}
-                </span>
+                <span>{referralInfo?.fullReferralUrl}</span>
                 <img
                   onClick={() => {
-                    copyToClipboard(
-                      `${
-                        referralInfo
-                          ? referralInfo.fullReferralUrl
-                          : 'https://eliteplay.com/yuxeer/'
-                      }`
-                    );
+                    copyToClipboard(referralInfo?.fullReferralUrl);
                   }}
                   style={{ cursor: 'pointer', marginLeft: '30px' }}
                   src="./copy-01.svg"

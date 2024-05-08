@@ -54,7 +54,7 @@ const Referral = () => {
         );
         if (response.ok) {
           const data = await response.json();
-          setReferralInfo(data);
+          setReferralCount(data);
         } else {
           throw new Error('Failed to fetch referral count');
         }
