@@ -59,15 +59,6 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
       setGameState(eventData);
       setIsGameCrashed(eventData.isGameCrashed);
       setCurrentCrashPoint(eventData.currentCrashPoint);
-      // const lastCrashPoint = recentMultipliers[0];
-      // if (eventData.currentCrashPoint !== lastCrashPoint) {
-      //   console.log('first array', lastCrashPoint)
-      //   setRecentMultipliers((prevMultipliers) => [
-      //     eventData.currentCrashPoint,
-      //     ...prevMultipliers,
-      //   ]);
-      //   console.log(eventData.currentCrashPoint)
-      // }
     };
 
     return () => {
@@ -107,6 +98,35 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
       setMultiplier(cash);
     }
   };
+
+  const handlePlaceBet = () => {
+    fetch('https://be.eliteplay.bloombyte.dev/crash-game/bet', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${accessToken}`,
+      },
+      body: JSON.stringify({
+        amount: betAmount,
+        cashOutPoint: multiplier,
+      }),
+    })
+      .then((response) => {
+        if (response.ok) {
+          return response.json();
+        }
+        throw new Error('Failed to place bet');
+      })
+      .then((data) => {
+        // Handle successful bet placement
+        console.log('Bet placed:', data);
+      })
+      .catch((error) => {
+        // Handle error
+        console.error('Error placing bet:', error.message);
+      });
+  };
+
 
   return (
     <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
@@ -334,7 +354,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                     10000
                   </span>
                 </div>
-                <p>Win Amount</p>
+                <p>Multiplier</p>
                 <div className="dicegame-placebet__amount">
                   <div className="dicegame-placebet__amount-display">
                     <input
@@ -365,7 +385,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                     </div>
                   </div>
                 </div>
-                <button className="dicegame-rollnow">Bet</button>
+                <button onClick={handlePlaceBet} disabled={!isGameCrashed} className={`dicegame-rollnow ${isGameCrashed ? '' : 'disabled'}`}>Bet</button>
               </div>
             </>
           )}
