@@ -41,7 +41,9 @@ const Home = () => {
     eventSource.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
-        setDiceAllBets(prevBets => [data, ...prevBets]);
+        if (data.message !== 'No recent bets') {
+          setDiceAllBets(prevBets => [data, ...prevBets]);
+        }
         console.log('Dice All bets:', data)
       } catch (error) {
         console.error('Error parsing message:', error)

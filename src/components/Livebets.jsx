@@ -87,7 +87,7 @@ const Livebets = ({
             ) : (
               <>
                 {Array.isArray(diceAllBets) && diceAllBets.slice(0, 5).map((dice, index) => (
-                  <tr id={index}>
+                  <tr key={index} id={index}>
                     <td className="game-icon">
                       <img src="./dice-color.svg" />{' '}
                       <span className="dice">Dice</span>
