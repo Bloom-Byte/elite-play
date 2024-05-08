@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './ReferralSection.css';
 
-const ReferralSection = ({ isNavOpen, referralInfo, referralCount }) => {
+const ReferralSection = ({ user, isNavOpen, referralInfo, referralCount }) => {
   const [terms, setTerms] = useState(false);
 
   const copyToClipboard = (text) => {
