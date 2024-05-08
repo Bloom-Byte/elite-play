@@ -298,11 +298,12 @@
     }
 
     .referralpot {
-        width: 100%;
+        width: 90vw;
     }
 
     .referralvalue {
-        width: 100%;
+        width: 90vw;
+        gap: 0;
     }
 
     
@@ -320,5 +321,10 @@
 
 .referralpotb span:nth-child(2) {
     font-size: 16px;
+}
+
+.refer-invite {
+    width: 80vw;
+    margin: 0;
 }
 }

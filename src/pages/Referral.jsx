@@ -31,10 +31,12 @@ const Referral = () => {
         );
         if (response.ok) {
           const data = await response.json();
+          console.log(data)
           setReferralInfo(data);
         } else {
           throw new Error('Failed to fetch referral information');
         }
+        console.log(response)
       } catch (error) {
         console.error(error);
       }
