@@ -190,6 +190,7 @@
 
 .dicegame-diceroll__die {
   position: relative;
+  display: inline-block;
 }
 
 .dicegame-diceroll__die img {
@@ -201,7 +202,7 @@
 .dicegame-diceroll__die span {
   top: 50%;
   left: 50%;
-  text-align: center;
+  transform: translate(-50%, -50%);
   position: absolute;
   color: #070C0A;
   font-size: 16px;
