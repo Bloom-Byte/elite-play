@@ -20,7 +20,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
 
   const [isGameCrashed, setIsGameCrashed] = useState(false);
   const [recentMultipliers, setRecentMultipliers] = useState([]);
-
+  const [currentCrashPoint, setCurrentCrashPoint] = useState(null);
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -58,16 +58,31 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
       const eventData = JSON.parse(event.data);
       setGameState(eventData);
       setIsGameCrashed(eventData.isGameCrashed);
-      setRecentMultipliers((prevMultipliers) => [
-        eventData.currentMultiplier,
-        ...prevMultipliers,
-      ]);
+      setCurrentCrashPoint(eventData.currentCrashPoint);
+      // const lastCrashPoint = recentMultipliers[0];
+      // if (eventData.currentCrashPoint !== lastCrashPoint) {
+      //   console.log('first array', lastCrashPoint)
+      //   setRecentMultipliers((prevMultipliers) => [
+      //     eventData.currentCrashPoint,
+      //     ...prevMultipliers,
+      //   ]);
+      //   console.log(eventData.currentCrashPoint)
+      // }
     };
 
     return () => {
       eventSource.close();
     };
   }, []);
+
+  useEffect(() => {
+    if (currentCrashPoint !== null) {
+      setRecentMultipliers((prevMultipliers) => [
+        currentCrashPoint,
+        ...prevMultipliers,
+      ])
+    }
+  }, [currentCrashPoint])
 
   const handleBetAmount = (event) => {
     if (event.target.value >= 1) {
@@ -357,7 +372,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
         </div>
         <div className="dicegame-diceroll">
           <div className="dicegame-diceroll__odds">
-            {recentMultipliers > 0 &&
+            {recentMultipliers.length > 0 &&
               recentMultipliers.slice(0, 8).map((multiplier, index) => (
                 <span key={index}>{multiplier}</span>
               ))}

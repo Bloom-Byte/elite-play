@@ -3,7 +3,7 @@
 .currencydropdown {
   position: absolute;
   top: 80px;
-  right: 20vw;
+  right: 500px;
 }
 
 .currencydropdown-content {
@@ -168,3 +168,11 @@
     border-radius: 50%;
   }
   
+
+  
+/* --------- MOBILE RESPONSIVENESS --------- */
+@media screen and (max-width: 768px) {
+  .currencydropdown {
+    right: 20vw;
+  }
+}

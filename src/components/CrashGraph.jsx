@@ -57,7 +57,6 @@ const CrashGraph = ({ gameState }) => {
     }
 
  // Check if game is crashed
- console.log(gameState)
  if (gameState.isGameCrashed) {
   setIsCrashed(true);
   // Reset chart data
@@ -77,7 +76,7 @@ const CrashGraph = ({ gameState }) => {
 }, [gameState]);
 
 return (
-  <div style={{ position: 'relative', marginTop: '20%' }}>
+  <div style={{ position: 'relative'}}>
     {isCrashed ? (
       <p className='crashed-gamestate'>Game crashed. Waiting for the next game to start...</p>
     ) : null}
