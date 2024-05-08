@@ -7,7 +7,7 @@ const CurrencyDropdown = ({balance, isOpen, setIsOpen}) => {
   const exchangeRate = 40;
   const dropdownRef = useRef(null);
 
-  const displayBalance = balance ? (viewInFiat ? (balance / exchangeRate).toFixed(2) : balance.toFixed(2)) : '0';
+  const displayBalance = balance ? (viewInFiat ? (Number(balance) / exchangeRate).toFixed(4) : Number(balance).toFixed(4)) : '0';
 
   const handleToggle = () => {
     setViewInFiat(!viewInFiat);
