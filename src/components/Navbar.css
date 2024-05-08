@@ -153,6 +153,7 @@ body {
         width: 100vw;
         justify-content: start;
         align-items: normal;
+        padding: 10px;
     }
 
     .nav-games {
@@ -186,10 +187,11 @@ body {
     .nav-loggedin {
         margin-left: 0;
         gap: 10px;
-        margin-top: -1rem;
+        margin-top: 5px;
     }
 
     .nav-auth {
+        margin-top: 10px;
         gap: 10px;
     }
 
