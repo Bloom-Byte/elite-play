@@ -1,15 +1,18 @@
-import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
+import React, { useEffect, useRef } from 'react';
 import { register } from 'swiper/element/bundle';
-import Swiper from 'swiper';
 import 'swiper/swiper-bundle.css';
 import './VIPPopup.css';
+import instance from '../utils/api';
+import { useAppContext } from '../hooks/useAppContext';
+import { useUpdateUser } from '../hooks/useUpdateUser';
 
 register();
 
-const VIPPopup = ({ vipSupport, setVipSupport, user, timeToNextClaim, facuetClaimableForCurrentTier, totalClaim, setTimeToNextClaim }) => {
-  
+const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, totalClaim, setTimeToNextClaim }) => {
+
   const swiperElRef = useRef(null);
+
+  const { state } = useAppContext();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -19,39 +22,22 @@ const VIPPopup = ({ vipSupport, setVipSupport, user, timeToNextClaim, facuetClai
     }, 1000);
 
     return () => clearInterval(intervalId);
-  }, [timeToNextClaim,  setTimeToNextClaim]);
+  }, [timeToNextClaim, setTimeToNextClaim]);
 
-  
+  const updateUser = useUpdateUser();
+
   const handleClaimToken = async () => {
     try {
-      const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch(
-        'https://be.eliteplay.bloombyte.dev/faucet/claim',
-        {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${accessToken}`,
-          },
-          body: JSON.stringify({}),
-        }
-      );
+      const response = await instance.post('/faucet/claim', {});
 
-      if (response.ok) {
-
-        const responseData = await response.json();
-        const responseInfo = await fetch(
-          'https://be.eliteplay.bloombyte.dev/faucet/total-faucet-claimed',
-          {
-            method: 'GET',
-            headers: {
-              Authorization: `Bearer ${accessToken}`,
-            },
-          }
+      if ((response.status === 200 || response.status === 201)) {
+        const responseData = response.data;
+        const responseInfo = await instance.get(
+          '/faucet/total-faucet-claimed',
         );
-        const data = await responseInfo.json();
+        const data = responseInfo.data;
         setTimeToNextClaim(data.timeToNextClaim);
-        console.log('Claim successful:', responseData);
+        updateUser();
       } else {
         console.error('Error claiming token:', response.statusText);
       }
@@ -87,7 +73,7 @@ const VIPPopup = ({ vipSupport, setVipSupport, user, timeToNextClaim, facuetClai
         <div className="vippopup-header">
           <img className="vipribbon" src="./vip-ribbon.svg" alt="vip-icon" />
           <img
-            onClick={() => setVipSupport(!vipSupport)}
+            onClick={() => onCloseVIP()}
             className="vipclose"
             src="./cancel-x.svg"
             alt="cancel-icon"
@@ -109,8 +95,8 @@ const VIPPopup = ({ vipSupport, setVipSupport, user, timeToNextClaim, facuetClai
             >
               <h3>Your VIP Progress</h3>
               <p className="xplevel">65 XP</p>
-              <input type="range" max="20000000" value={user?.totalBetAmount} />
-              <p className="xplevel">{user?.amountToNextTier} XP until {user?.nextTier}</p>
+              <input type="range" max="20000000" value={state.user?.totalBetAmount} />
+              <p className="xplevel">{state.user?.amountToNextTier} XP until {state.user?.nextTier}</p>
             </div>
             <div className="vippopup-reward-box">
               <h3>Faucet Reward</h3>
@@ -134,9 +120,8 @@ const VIPPopup = ({ vipSupport, setVipSupport, user, timeToNextClaim, facuetClai
               <button
                 onClick={handleClaimToken}
                 disabled={timeToNextClaim > 0}
-                className={`${
-                  timeToNextClaim > 0 ? 'disabled ' : ''
-                }vippopup-claimreward-btn`}
+                className={`${timeToNextClaim > 0 ? 'disabled ' : ''
+                  }vippopup-claimreward-btn`}
               >
                 Claim Reward
               </button>

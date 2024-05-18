@@ -1,9 +1,9 @@
 import React from 'react';
 import './CrashStrategyComponent.css'
 
-const CrashStrategyComponent = ({ isNavOpen }) => {
+const CrashStrategyComponent = () => {
   return (
-    <div className={`dicetutorial ${isNavOpen ? 'dicetutorial-extended' : ''}`}>
+    <div className={`dicetutorial`}>
       <div className="dicetutorial-hero">
         <h1>
           Crash Gambling Strategy Guide: How to Win at Crash Gambling Game |

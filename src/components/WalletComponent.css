@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 .wallet-comp {
-  margin-left: 8rem;
+  
   margin-top: 2rem;
-  margin-right: 5vw;
+  
   margin-bottom: 10rem;
 }
 
@@ -28,13 +28,17 @@
   padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 40px;
+  gap: 10px;
+  width: 20%;
 }
 
 .wallet-option {
   display: flex;
   gap: 10px;
   cursor: pointer;
+  align-items: center;
+  padding: 8px 16px;
+  border-radius: 6px;
 }
 
 .wallet-option span {
@@ -50,7 +54,7 @@
 }
 
 .wallet-comp_wallet-info {
-  width: 100%;
+  width: 80%;
 }
 
 .wallet-comp_wallet-balance {
@@ -58,7 +62,6 @@
   padding: 20px;
   display: flex;
   gap: 24px;
-  width: 100%;
 }
 
 .pot-info {
@@ -101,7 +104,6 @@
 }
 
 .mainBalance-section {
-  width: 100%;
   margin-top: 20px;
   background-color: #0b1210;
   padding: 20px;
@@ -388,7 +390,7 @@
     font-weight: 600;
     font-size: 16px;
     cursor: pointer;
-    transition: all 0.7s var(--ease-in-out);
+    transition: 0.3s;
 }
 
 .fiat-deposit_info {
@@ -474,8 +476,6 @@
 
 .wallet-option_active {
   background-color: #0B281F;
-  padding: 8px 16px;
-  border-radius: 6px;
 }
 
 .wallet-option_active span {

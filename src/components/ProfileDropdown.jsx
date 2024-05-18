@@ -1,7 +1,11 @@
 import React, { useState, useRef, useEffect  } from 'react';
 import UserInformationPopup from './UserInformationPopup';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './ProfileDropdown.css';
+import { ACCESS_TOKEN } from '../utils/constants';
+import { isElementClassOrChildOf } from '../utils/dom';
+import { useAppContext } from '../hooks/useAppContext';
+import { LOGOUT } from '../contexts/AppContext';
 
 const ProfileDropdown = ({user, isOpen, setIsOpen}) => {
   const [isUserInformationPopupOpen, setIsUserInformationPopupOpen] =
@@ -9,46 +13,39 @@ const ProfileDropdown = ({user, isOpen, setIsOpen}) => {
   const [isStatPopupOpen, setIsStatPopupOpen] = useState(false);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
-
+  const { dispatch } = useAppContext();
 
   const handleLogout = () => {
-    localStorage.removeItem('accessToken');
+    localStorage.removeItem(ACCESS_TOKEN);
+    dispatch({ type: LOGOUT });
     navigate('/');
   };
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        isOpen &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
+        !isElementClassOrChildOf(event.target, 'nav-profile-button')
       ) {
         setIsOpen(false);
       }
     };
 
-    if (isOpen) {
-      // Only attach the listener if the dropdown is open
-      window.addEventListener('mousedown', handleClickOutside);
-    }
+    window.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      if (isOpen) {
-        // Only remove the listener if it was previously added
-        window.removeEventListener('mousedown', handleClickOutside);
-      }
+      window.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen]);
+  }, [isOpen, setIsOpen]);
 
   return (
     <>
       <div className="profile-dropdown" ref={dropdownRef}>
         <div className="profile-dropdown-content">
           <div className="profile-dropdown-cta">
-            <a href="/wallet">
+            <Link to="/wallet">
               <img src="./wallet-grey.svg" alt="wallet-icon" />
               <span>Wallet</span>
-            </a>
+            </Link>
           </div>
           <div
             onClick={() => {
@@ -60,10 +57,10 @@ const ProfileDropdown = ({user, isOpen, setIsOpen}) => {
             <span>User Information</span>
           </div>
           <div className="profile-dropdown-cta">
-            <a href="/accountsettings">
+            <Link to="/accountsettings">
               <img src="./Settings.svg" alt="setting-icon" />
               <span>Account Settings</span>
-            </a>
+            </Link>
           </div>
           <hr />
           <div onClick={handleLogout} className="profile-dropdown-cta">

@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './AccountSettingsSection.css';
+import instance from '../utils/api';
+import { ACCESS_TOKEN } from '../utils/constants';
+import { useAppContext } from '../hooks/useAppContext';
 
-const AccountSettingsSection = ({ isNavOpen, user }) => {
+const AccountSettingsSection = () => {
   const [currentSection, setCurrentSection] = useState('account-info');
   const [edituserName, setEditUsername] = useState(false);
   const [verifyEmail, setVerifyEmail] = useState(false);
@@ -22,6 +25,8 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
 
   const [profileImage, setProfileImage] = useState(null);
 
+  const { state } = useAppContext();
+
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     setProfileImage(file);
@@ -29,26 +34,16 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
 
   const handleUploadProfile = async () => {
     setIsLoading(true);
-    const url =
-      'https://be.eliteplay.bloombyte.dev/user/me/update/upload-profile';
-    const accessToken = localStorage.getItem('accessToken');
+    const url = `/user/me/update/upload-profile`;
 
     const formData = new FormData();
     formData.append('profile', profileImage);
 
-    const headers = {
-      Authorization: `Bearer ${accessToken}`,
-    };
-
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: headers,
-        body: formData,
-      });
+      const response = await instance.post(url, formData);
 
       if (response.status === 201) {
-        const responseData = await response.json();
+        const responseData = response.data;
         console.log('Profile picture updated:', responseData.message);
         setEditUsername(!edituserName);
       } else {
@@ -86,25 +81,17 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
   const handleSelfExclusionPeriod = async () => {
     try {
       setIsLoading(true);
-      const accessToken = localStorage.getItem('accessToken');
-      const response = await fetch('https://be.eliteplay.bloombyte.dev/user/self-exclude', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify({
-          days: parseInt(selectedPeriod),
-        }),
+      const response = await instance.post(`/user/self-exclude`, {
+        days: parseInt(selectedPeriod),
       });
 
-      if (response.ok) {
-        const responseData = await response.json();
+      if ((response.status === 200 || response.status === 201)) {
+        const responseData = response.data;
         console.log(responseData.message);
         setMessage(responseData.message);
 
         setTimeout(() => {
-          localStorage.removeItem('accessToken');
+          localStorage.removeItem(ACCESS_TOKEN);
           window.location.href = '/';
         }, 2000);
       } else {
@@ -112,7 +99,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
       }
     } catch (error) {
       console.error('Error:', error);
-    }  finally {
+    } finally {
       setIsLoading(false);
     }
   };
@@ -137,15 +124,14 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
     setError('');
 
     try {
-      const response = await axios.post(
-        'https://be.eliteplay.bloombyte.dev/user/auth/login',
+      const response = await axios.post(`/user/auth/login`,
         {
-          email: user?.email,
+          email: state.user?.email,
           password: confirmOldPassword,
         }
       );
 
-      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
       setConfirmPassword(!confirmPassword);
       setChangePassword(!changePassword);
     } catch (error) {
@@ -155,27 +141,17 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
 
   const updatePassword = async () => {
     setError('');
-    const url = 'https://be.eliteplay.bloombyte.dev/user/update/password';
-    const accessToken = localStorage.getItem('accessToken');
+    const url = '/user/update/password';
 
     const requestBody = {
       oldPassword: confirmOldPassword,
       newPassword: newPassword,
     };
 
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    };
-
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: headers,
-        body: JSON.stringify(requestBody),
-      });
+      const response = await instance.post(url, requestBody);
 
-      const responseData = await response.json();
+      const responseData = response.data;
 
       if (response.status === 201) {
         window.location.href = '/login';
@@ -190,9 +166,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
 
   return (
     <div
-      className={`account-settings ${
-        isNavOpen ? 'account-settings-extended' : ''
-      }`}
+      className={`account-settings`}
     >
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div className="account-setting-header">
@@ -214,11 +188,10 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
             onClick={() => {
               setCurrentSection('account-info');
             }}
-            className={`account-settings__nav ${
-              currentSection === 'account-info'
-                ? 'account-settings__nav-active'
-                : ''
-            }`}
+            className={`account-settings__nav ${currentSection === 'account-info'
+              ? 'account-settings__nav-active'
+              : ''
+              }`}
           >
             <img src="./user.svg" alt="user-icon" />
             <span>Account Info</span>
@@ -227,11 +200,10 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
             onClick={() => {
               setCurrentSection('security');
             }}
-            className={`account-settings__nav ${
-              currentSection === 'security'
-                ? 'account-settings__nav-active'
-                : ''
-            }`}
+            className={`account-settings__nav ${currentSection === 'security'
+              ? 'account-settings__nav-active'
+              : ''
+              }`}
           >
             <img src="./lock-key.svg" alt="lock-key" />
             <span>Security</span>
@@ -240,11 +212,10 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
             onClick={() => {
               setCurrentSection('preferences');
             }}
-            className={`account-settings__nav ${
-              currentSection === 'preferences'
-                ? 'account-settings__nav-active'
-                : ''
-            }`}
+            className={`account-settings__nav ${currentSection === 'preferences'
+              ? 'account-settings__nav-active'
+              : ''
+              }`}
           >
             <img src="./list-setting.svg" alt="list-icon" />
             <span>Preferences</span>
@@ -259,18 +230,17 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                 <div>
                   <div className="main-profile-info-box">
                     <div className="main-profile-info">
-                    <img
-                  style={{ borderRadius: '50%', width: '40px', height: '40px' }}
-                  src={`${
-                    user?.profilePictureUrl
-                      ? user.profilePictureUrl
-                      : './placeholder-profile-img.jpg'
-                  }`}
-                  alt="profile-img"
-                />
+                      <img
+                        style={{ borderRadius: '50%', width: '40px', height: '40px' }}
+                        src={`${state.user?.profilePictureUrl
+                          ? state.user.profilePictureUrl
+                          : './placeholder-profile-img.jpg'
+                          }`}
+                        alt="profile-img"
+                      />
                       <div className="username_details">
-                        <h2>{user?.name}</h2>
-                        <p>User ID: {user?._id }</p>
+                        <h2>{state.user?.name}</h2>
+                        <p>User ID: {state.user?._id}</p>
                       </div>
                     </div>
                     <button
@@ -289,7 +259,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                 <p className="email-verify-txt">Email Verification</p>
                 <div className="email-verify_container">
                   <div className="email-txt">
-                    <span>{user?.email}</span>
+                    <span>{state.user?.email}</span>
                     <span className="email-txt-verified">
                       Verified <img src="./verfied-green.svg" />
                     </span>
@@ -410,16 +380,16 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                 <hr />
                 <div className="preference-one">
                   <p>Hide my gaming data on profile</p>
-                  <label class="switch">
+                  <label className="switch">
                     <input type="checkbox" />
-                    <span class="slider round"></span>
+                    <span className="slider round"></span>
                   </label>
                 </div>
                 <div className="preference-one">
                   <p>Hide my username from public lists</p>
-                  <label class="switch">
+                  <label className="switch">
                     <input type="checkbox" />
-                    <span class="slider round"></span>
+                    <span className="slider round"></span>
                   </label>
                 </div>
               </div>
@@ -549,7 +519,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                 />
                 <label htmlFor="getFile">
                   {isLoading ? (
-                    <div class="lds-ring">
+                    <div className="lds-ring">
                       <div></div>
                       <div></div>
                       <div></div>
@@ -592,7 +562,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
               </div>
               <p className="verify-text-sent">
                 We’ve sent a verification code to{' '}
-                <span className="email-bold"> yuxer@example.com</span>, please
+                <span className="email-bold">yuxer@example.com</span>, please
                 enter the 6-digit code below:
               </p>
               <input
@@ -809,7 +779,7 @@ const AccountSettingsSection = ({ isNavOpen, user }) => {
                     Cancel
                   </button>
                   <button onClick={handleSelfExclusionPeriod} className="self-exclusion_next"> {isLoading ? (
-                    <div class="lds-ring">
+                    <div className="lds-ring">
                       <div></div>
                       <div></div>
                       <div></div>

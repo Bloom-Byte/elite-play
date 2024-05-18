@@ -1,9 +1,9 @@
 import React from 'react';
 import './DiceBeginnerComponent.css';
 
-const DiceBeginnerComponent = ({ isNavOpen }) => {
+const DiceBeginnerComponent = () => {
   return (
-    <div className={`dicetutorial ${isNavOpen ? 'dicetutorial-extended' : ''}`}>
+    <div className={`dicetutorial`}>
       <div className="dicetutorial-hero">
         <h1>Bitcoin Dice Roll Game Guide</h1>
         <img src="./die.png" alt="dice-image" />

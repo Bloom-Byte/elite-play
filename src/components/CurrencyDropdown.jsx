@@ -51,9 +51,9 @@ const CurrencyDropdown = ({balance, isOpen, setIsOpen}) => {
           </div>
         </div>
         <div className='togglecurrencyview'>
-          <label class="switch2">
+          <label className="switch2">
             <input type="checkbox" checked={viewInFiat} onChange={handleToggle} />
-            <span class="slider2 round2"></span>
+            <span className="slider2 round2"></span>
           </label>
           <span>View in fiat</span>
         </div>

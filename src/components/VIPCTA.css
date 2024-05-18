@@ -5,8 +5,8 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  margin-left: 8rem;
-  margin-right: 5vw;
+  
+  
   margin-top: 3rem;
   background-size: cover;
   max-width: 100%;
@@ -50,11 +50,11 @@
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
   padding: 10px 20px;
-  border: 2px transparent;
+  border: 2px solid transparent;
   border-radius: 8px;
   cursor: pointer;
   margin-top: 2rem;
-  transition: all 0.7s var(--ease-in-out);
+  transition: 0.3s;
 }
 
 .vip-cta_text button:hover {

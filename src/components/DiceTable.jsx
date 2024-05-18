@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './DiceTable.css';
+import { useAppContext } from '../hooks/useAppContext';
 
-const DiceTable = ({ isNavOpen, bets, userBets }) => {
+const DiceTable = ({ bets, userBets }) => {
   const [toggle, setToggle] = useState(false);
   const [userBetsOpen, setUserBetsOpen] = useState(false)
+  const { state } = useAppContext();
   return (
-    <div className={`dicetable ${isNavOpen ? 'dicetable-extended' : ''}`}>
+    <div className={`dicetable`}>
       <div className="dicebets-toggle">
         <button
           className={`${toggle ? 'desc-info' : 'dice-bets'}`}
@@ -34,11 +36,11 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
             probability and involves calculating blockchain hash values and
             algorithms.
           </p>
-          <p>Here's how the game generally works:</p>
+            <p>Here&apos;s how the game generally works:</p>
           <p>
             1. Blockchain Technology: Blockchain is a decentralized and secure
             technology that ensures transparency and fairness in the game. The
-            blockchain's hash values determine the game's outcomes, making it
+            blockchain&apos;s hash values determine the game&apos;s outcomes, making it
             impossible for the platform to manipulate or tamper with the results
           </p>
           <p>
@@ -50,17 +52,17 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
           <p>
             3. Randomly Generated Number: When the player rolls the dice, the
             system generates a random number. This number is determined by the
-            blockchain's hash value calculation and algorithm, ensuring a truly
+            blockchain&apos;s hash value calculation and algorithm, ensuring a truly
             random outcome.
           </p>
           <p>
-            4. Probability of Winning: The player's probability of winning is
+            4. Probability of Winning: The player&apos;s probability of winning is
             determined by how close their predicted number is to the randomly
             generated number. Generally, the closer the prediction is to the
             actual outcome, the higher the probability of winning
           </p>
           <p>
-            5. Winning and Payouts: If the player's prediction is accurate, they
+            5. Winning and Payouts: If the player&apos;s prediction is accurate, they
             win the game and receive their payout based on the odds and the
             amount of their bet.
           </p>
@@ -73,7 +75,7 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
           </p>
           <p>
             To determine the results, a series of steps are followed. First, the
-            combination's hash value is calculated using HMAC_SHA256, which
+            combination&apos;s hash value is calculated using HMAC_SHA256, which
             involves mixing the client seed and nonce with the server seed. This
             cryptographic process produces a 64-character hexadecimal string
             that is the basis for the random outcome: hash = HMAC_SHA256
@@ -82,7 +84,7 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
           <p>
             From this hash, 8 characters are taken, and then they are converted
             into an int32 value. The conversion is crucial to ensure a number
-            conforms to the dice range's constraints. This value is then divided
+            conforms to the dice range&apos;s constraints. This value is then divided
             by 0x100000000 and multiplied by 10001, and finally, divided by 100.
             This calculation ensures that the resulting number falls within the
             appropriate range for the dice game.
@@ -96,7 +98,7 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
             BC.GAME takes pride in providing complete transparency and precision
             in their fair game of chance. These technical details might only be
             necessary for some players, but they are available for those who
-            seek to understand the inner workings and ensure the game's
+            seek to understand the inner workings and ensure the game&apos;s
             fairness.
           </p>
           <p>
@@ -109,7 +111,7 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
           <p>
             Dice at ELITEPLAY has several features designed to enhance the
             gaming experience and provide players with various options for
-            gameplay and betting strategies. Let's take a closer look at the key
+            gameplay and betting strategies. Let&apos;s take a closer look at the key
             features:
           </p>
           <p>
@@ -127,7 +129,7 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
           <p>
             3. Optional Script Usage: ELITEPLAY allows players to use scripts
             for auto-betting, which automates the betting process based on
-            predefined rules. However, it's important to note that using scripts
+            predefined rules. However, it&apos;s important to note that using scripts
             is optional, and players must take full responsibility for any
             associated risks. The platform will not be held liable for any
             consequences related to script usage.
@@ -137,9 +139,9 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
             <h5>- ON WIN: </h5>{' '}
             <p>
               Players can choose how the next bet amount will be determined when
-              they win. It can either "Increase by _(your set)_," meaning the
+              they win. It can either &quot;Increase by _(your set)_,&quot; meaning the
               bet amount will increase by a specific value after each win, or
-              "Reset to initial amount," indicating that the bet amount will go
+              &quot;Reset to initial amount,&quot; indicating that the bet amount will go
               back to its starting value after a win.
             </p>
           </div>
@@ -147,9 +149,9 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
             <h5>- ON LOSE: </h5>{' '}
             <p>
               When players lose a bet, they can decide how the next bet amount
-              will be adjusted. It can either "Increase by _(your set)_,"
+              will be adjusted. It can either &quot;Increase by _(your set)_,&quot;
               meaning the bet amount increases by a set value after each loss,
-              or "Reset to the initial amount," signifying that the bet amount
+              or &quot;Reset to the initial amount,&quot; signifying that the bet amount
               returns to its original value after a loss.
             </p>
           </div>
@@ -183,7 +185,6 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
                 <thead>
                   <tr>
                     <th>Bet ID</th>
-                    <th>Time</th>
                     <th>Wager</th>
                     <th>Multiplier</th>
                     <th>Payout</th>
@@ -192,7 +193,7 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
                 <tbody>
                   {userBetsOpen ? (
                     userBets?.map((bet, index) => (
-                      <tr>
+                      <tr key={index}>
                         <td className="game-icon">{bet._id}</td>
                         <td>
                           <img
@@ -206,13 +207,12 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
                         <td
                           className={bet.betStatus === 'loss' ? 'red' : 'green'}
                         >
-                          {' '}
                           <img
                             className="coin"
                             src="./twemoji_coin.svg"
                             alt="coin"
                           />
-                          {bet.winAmount}x
+                          {bet.winAmount.toFixed(2)}x
                         </td>
                       </tr>
                     ))
@@ -231,6 +231,11 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
                           </td>
                           <td>{bet.payout}x</td>
                           <td
+                            style={{
+                              display: 'flex',
+                              justifyContent: 'center',
+                              alignItems: 'center',
+                            }}
                             className={bet.betStatus === 'loss' ? 'red' : 'green'}
                           >
                             <img
@@ -238,7 +243,7 @@ const DiceTable = ({ isNavOpen, bets, userBets }) => {
                               src="./twemoji_coin.svg"
                               alt="coin"
                             />
-                            {bet.winAmount}x
+                            {bet.winAmount.toFixed(2)}
                           </td>
                         </tr>
                       ))

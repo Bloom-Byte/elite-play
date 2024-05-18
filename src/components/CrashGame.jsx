@@ -1,6 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import CrashGraph from './CrashGraph';
 import './CrashGame.css';
+import instance from '../utils/api';
+import { ACCESS_TOKEN } from '../utils/constants';
+import { useDisclosure } from '../hooks/useDisclosure';
+import { isElementClassOrChildOf } from '../utils/dom';
+import { Link } from 'react-router-dom';
 
 const CrashGame = ({ isNavOpen, userBets, bets }) => {
   const [auto, setAuto] = useState(false);
@@ -22,34 +27,28 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
   const [currentCrashPoint, setCurrentCrashPoint] = useState(null);
   const dropdownRef = useRef(null);
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        tutorial &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
+        event.target.id !== 'tutorialButton' &&
+        !isElementClassOrChildOf(event.target, 'tutorial-dropdown-crash')
       ) {
         setTutorial(false);
       }
     };
 
-    if (tutorial) {
-      // Only attach the listener if the dropdown is open
-      window.addEventListener('mousedown', handleClickOutside);
-    }
+    window.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      if (tutorial) {
-        // Only remove the listener if it was previously added
-        window.removeEventListener('mousedown', handleClickOutside);
-      }
+      window.removeEventListener('mousedown', handleClickOutside);
     };
   }, [tutorial]);
 
-  const accessToken = localStorage.getItem('accessToken');
   useEffect(() => {
     const eventSource = new EventSource(
-      'https://be.eliteplay.bloombyte.dev/crash-game/game-state',
+      `${import.meta.env.VITE_BASE_API_URL}/crash-game/game-state`,
       {}
     );
 
@@ -99,20 +98,13 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
   };
 
   const handlePlaceBet = () => {
-    fetch('https://be.eliteplay.bloombyte.dev/crash-game/bet', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-      body: JSON.stringify({
-        amount: betAmount,
-        cashOutPoint: multiplier,
-      }),
+    instance.post('/crash-game/bet', {
+      amount: betAmount,
+      cashOutPoint: multiplier,
     })
       .then((response) => {
-        if (response.ok) {
-          return response.json();
+        if ((response.status === 200 || response.status === 201)) {
+          return response.data;
         }
         throw new Error('Failed to place bet');
       })
@@ -126,32 +118,61 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
       });
   };
 
-
   return (
-    <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
+    <div className={`dicegame`}>
       <div className="dicegame-buttons">
         <button className="dicegame-dice-title">Crash</button>
         <button
           onClick={() => {
-            setLivebet(!livebet);
+            onOpen();
           }}
         >
           {' '}
           <img src="./Exclude.svg" alt="" /> Live Games
         </button>
-        <button
-          onClick={() => {
-            setTutorial(!tutorial);
-          }}
-        >
-          {' '}
-          <img
-            className="dicegame-fairnesslogo"
-            src="./book-open-01.svg"
-            alt="fairness"
-          />{' '}
-          Tutorial
-        </button>
+        <div
+          style={{
+            position: 'relative',
+          }}>
+          <button
+            id="tutorialButton"
+            onClick={() => {
+              setTutorial(!tutorial);
+            }}
+          >
+            <img
+              className="dicegame-fairnesslogo"
+              src="./book-open-01.svg"
+              alt="fairness"
+            />{' '}
+            Tutorial
+          </button>
+
+          {tutorial && (
+            <div
+              className={`tutorial-dropdown-crash`}
+              ref={dropdownRef}
+            >
+              <div className="tutorial-dropdown-crash-content">
+                <Link to="/crashbeginner">Beginners Guide</Link>
+                <p>
+                  Learn the basics here. <br />
+                  What is crash gambling, and how to play crash gambling games?
+                </p>
+                <Link to="/crashstrategy">Strategies</Link>
+                <p>
+                  Some popular winning strategies for crash gambling can be found
+                  here.
+                </p>
+                <Link to="/crashautomation">Automation Scripts</Link>
+                <p>
+                  Running scripts is an advanced way to play crash that presumably
+                  offers easier wins.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <div className="dicegame-gamesection">
         <div className="dicegame-placebet">
@@ -353,13 +374,18 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                     10000
                   </span>
                 </div>
-                <p>Multiplier</p>
+                <p>Auto Cash Out</p>
                 <div className="dicegame-placebet__amount">
                   <div className="dicegame-placebet__amount-display">
                     <input
                       type="text"
                       value={multiplier}
                       onChange={handleCashAmount}
+                      style={{
+                        width: '40px',
+                        outline: 'none',
+                      }}
+                      step={0.1}
                     />
                     <span style={{ marginLeft: '5px' }}>x</span>
                   </div>
@@ -368,7 +394,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                       <img
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                          handleCashUpdate(multiplier + 1);
+                          handleCashUpdate(multiplier + 0.1);
                         }}
                         src="./crash-l.svg"
                         alt="arrow"
@@ -376,7 +402,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                       <img
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                          handleCashUpdate(multiplier - 1);
+                          handleCashUpdate(multiplier - 0.1);
                         }}
                         src="./crash-r.svg"
                         alt="arrow"
@@ -401,14 +427,14 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
           <CrashGraph gameState={gameState} />
         </div>
       </div>
-      {livebet && (
+      {isOpen && (
         <div className="editusername-popup">
           <div className="editusername-popup_container">
             <div className="editusername-popup_header">
               <p>Live Bet</p>
               <span
                 onClick={() => {
-                  setLivebet(!livebet);
+                  onClose();
                 }}
                 className="close email-close"
               >
@@ -505,32 +531,6 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-      )}
-      {tutorial && (
-        <div
-          className={`tutorial-dropdown-crash ${
-            isNavOpen ? 'tutorial-dropdown-crash-open' : ''
-          }`}
-          ref={dropdownRef}
-        >
-          <div className="tutorial-dropdown-crash-content">
-            <a href="/crashbeginner">Beginners Guide</a>
-            <p>
-              Learn the basics here. <br />
-              What is crash gambling, and how to play crash gambling games?
-            </p>
-            <a href="/crashstrategy">Strategies</a>
-            <p>
-              Some popular winning strategies for crash gambling can be found
-              here.
-            </p>
-            <a href="/crashautomation">Automation Scripts</a>
-            <p>
-              Running scripts is an advanced way to play crash that presumably
-              offers easier wins.
-            </p>
           </div>
         </div>
       )}

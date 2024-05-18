@@ -16,38 +16,38 @@ import CrashAutomation from './pages/CrashAutomation'
 import CrashStrategy from './pages/CrashStrategy'
 import ForgotPassword from './pages/ForgotPassword'
 import ResetPassword from './pages/ResetPassword'
-import PrivateRoutes from './utils/PrivateRoutes'
 import './App.css'
+import Layout from './components/layout'
+import { AppProvider } from './contexts/AppContext'
 
 function App() {
 
   return (
-    <Router> 
-      <Routes>
-      <Route path="/login" element={<Login/>}/>
-      <Route path="/register" element={<Register/>}/>
-      <Route path="/" element={<Home/>}/>
-      <Route path="/dice" element={<Dice/>}/>
-      <Route path="/crash" element={<Crash/>}/>
-      <Route path="/wallet" element={<Wallet/>}/>
-      <Route path="/helpcenter" element={<HelpCenter/>}/>
-      <Route path="/accountsettings" element={<AccountSettings/>}/>
-      <Route path="/referrals" element={<Referral />} />
-      <Route path="/dicebeginner" element={<DiceBeginner />} />
-      <Route path="/dicestrategy" element={<DiceStrategy />} />
-      <Route path="/diceautomation" element={<DiceAutomation />} />
-      <Route path="/crashbeginner" element={<CrashBeginner />} />
-      <Route path="/crashstrategy" element={<CrashStrategy />} />
-      <Route path="/crashautomation" element={<CrashAutomation />} />
-      <Route path="/forgot-password" element={<ForgotPassword />} />
-      <Route path="/reset-password/:token" element={<ResetPassword />} />
-
-      {/* <Route element={<PrivateRoutes />}>
-        <Route path="/" element={<Home/>}/>
-      </Route> */}
-
-      </Routes>
-    </Router>
+    <AppProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="/dice" element={<Dice />} />
+            <Route path="/crash" element={<Crash />} />
+            <Route path="/wallet" element={<Wallet />} />
+            <Route path="/helpcenter" element={<HelpCenter />} />
+            <Route path="/accountsettings" element={<AccountSettings />} />
+            <Route path="/referrals" element={<Referral />} />
+            <Route path="/dicebeginner" element={<DiceBeginner />} />
+            <Route path="/dicestrategy" element={<DiceStrategy />} />
+            <Route path="/diceautomation" element={<DiceAutomation />} />
+            <Route path="/crashbeginner" element={<CrashBeginner />} />
+            <Route path="/crashstrategy" element={<CrashStrategy />} />
+            <Route path="/crashautomation" element={<CrashAutomation />} />
+          </Route>
+          <Route path="/forgot-password" element={<ForgotPassword />} />
+          <Route path="/reset-password/:token" element={<ResetPassword />} />
+        </Routes>
+      </Router>
+    </AppProvider>
   )
 }
 

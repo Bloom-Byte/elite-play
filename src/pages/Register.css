@@ -1,253 +1,260 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 body {
-    padding: 0;
-    margin: 0;
-    background-color: #0B1210;
+  padding: 0;
+  margin: 0;
+  background-color: #0B1210;
 }
 
 .register {
-    display: flex;
+  display: flex;
 }
 
 .register-logo {
-    width: 40%; 
-    height: auto; 
+  width: 45%;
+  height: 100vh;
 }
 
 .register-logo img {
-    width: 100%;
-    object-fit: cover;
+  width: 100%;
+  object-fit: cover;
+  height: 100vh;
 }
 
 .register-form {
-    width: 60%;
-    padding: 0 4rem;
+  width: 55%;
+  padding: 0 4rem;
 }
 
 .register-form__form {
-    display: flex;
-    flex-direction: column;
-    padding: 6rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+  max-width: 400px;
+  margin: 0 auto;
 }
 
 .register-form__heading h4 {
-    font-size: 16px;
-    font-weight: 800;
-    margin-bottom: 2rem;
-    color: white;
-    font-family: "Manrope", sans-serif;
+  font-size: 2rem;
+  font-weight: 800;
+  margin-bottom: 2rem;
+  color: white;
+  font-family: "Manrope", sans-serif;
+  text-align: center;
+  margin-top: 3rem;
 }
 
 .register-form__form-input {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  width: 100%;
 }
 
 
 .input-icon {
-    position: absolute; 
-    left: 10px; 
-    top: 50%; 
-    transform: translateY(-50%);
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
 }
 
 .register-form__input-box {
-    position: relative;
+  position: relative;
 }
 
 .register-form__input-box input {
-    padding-left: 50px;
-    background-color: #070C0A;
-    border: 2px #44537126;
-    border-radius: 4px;
-    width: 320px;
-    height: 48px;
-    color: white;
-    transition: all 0.7s var(--ease-in-out);
-}   
+  padding-left: 50px;
+  background-color: #070C0A;
+  border: 2px solid transparent;
+  border-radius: 4px;
+  width: calc(100% - 50px);
+  height: 48px;
+  color: white;
+  transition: 0.3s;
+}
 
 .register-form__input-box input:focus {
-    outline: none;
-    border: 2px solid #24E3A1;
+  outline: none;
+  border: 2px solid #24E3A1;
 }
 
 .register-form__check-box {
-    display: flex;
-    gap: 1rem;
+  display: flex;
+  gap: 1rem;
 }
 
 .container {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* Hide the browser's default checkbox */
-  .container input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 16px;
-    width: 16px;
-    background-color: black;
-    border: 2px solid #44537140;
-    border-radius: 4px;
-  }
-  
-  /* When the checkbox is checked, add a green background */
-  .container input:checked ~ .checkmark {
-    background-color: #24E3A1;
-  }
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  /* Show the checkmark when checked */
-  .container input:checked ~ .checkmark:after {
-    display: block;
-  }
-  
-  /* Style the checkmark/indicator */
-  .container .checkmark:after {
-    left: 5px;
-    top: 3px;
-    width: 4px;
-    height: 7px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: black;
+  border: 2px solid #44537140;
+  border-radius: 4px;
+}
+
+/* When the checkbox is checked, add a green background */
+.container input:checked~.checkmark {
+  background-color: #24E3A1;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked~.checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+  left: 5px;
+  top: 3px;
+  width: 4px;
+  height: 7px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .register-form__check-box label {
-    font-size: 12px;
-    color: white;
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
-    max-width: 320px;
+  font-size: 12px;
+  color: white;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  max-width: 320px;
 }
 
 .register-form__submit-btn {
-    background: rgb(11, 40, 31);
-    border: 2px transparent;
-    border-radius: 6px;
-    color: #fff; 
-    padding: 10px 20px;
-    width: 372px;
-    height: 48px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: all 0.7s var(--ease-in-out);
+  background: rgb(11, 40, 31);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  color: #fff;
+  padding: 10px 20px;
+  width: 100%;
+  height: 48px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .register-form__submit-btn:hover {
-    background: transparent;
-    border: 2px solid #24E3A1 ;
+  background: transparent;
+  border: 2px solid #24E3A1;
 }
 
 .register-form__signin p {
-    font-size: 12px;
-    color: white;
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
+  font-size: 14px;
+  color: white;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
 }
 
 .register-form__signin p a {
-    margin-left: 1rem;
-    color: #24E3A1;
-    text-decoration: none;
+  margin-left: 1rem;
+  color: #24E3A1;
+  text-decoration: none;
 }
 
 .register-form__option-box {
-    width: 372px;
+  width: 372px;
 }
 
 .register-form__option {
-    margin-top: 2rem;
-    text-align: center;
-    font-size: 12px;
-    color: #6E6E71;
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
+  margin-top: 2rem;
+  text-align: center;
+  font-size: 12px;
+  color: #6E6E71;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
 }
 
 .register-form__google-signin {
-    display: flex;
-    gap: 20px;
-    padding: 10px 20px;
-    width: 332px;
-    height: 48px;
-    background-color: #070C0A;
-    border: 2px transparent;
-    align-items: center;
-    justify-content: center;
-    border-radius: 6px;
-    cursor: pointer;
-    transition: all 0.7s var(--ease-in-out);
+  display: flex;
+  gap: 20px;
+  padding: 10px 20px;
+  height: 48px;
+  background-color: #070C0A;
+  border: 2px solid transparent;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .register-form__google-signin:hover {
-    background: transparent;
-    border: 2px solid #24E3A1 ;
+  background: transparent;
+  border: 2px solid #24E3A1;
 }
 
 .register-form__google-signin span {
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    color: white;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  color: white;
 }
 
 .error-msg {
-    font-family: "Manrope", sans-serif;
-    color: #E14453;
+  font-family: "Manrope", sans-serif;
+  color: #E14453;
 }
 
 .success-msg {
-    font-family: "Manrope", sans-serif;
-    color: #34B263;
+  font-family: "Manrope", sans-serif;
+  color: #34B263;
 }
 
 
 .lds-ring {
-    color: #ffffff
-  }
+  color: #ffffff
+}
 
 .lds-ring,
 .lds-ring div {
   box-sizing: border-box;
 }
+
 .lds-ring {
   display: inline-block;
   position: relative;
   width: 20px;
   height: 20px;
 }
+
 .lds-ring div {
   box-sizing: border-box;
   display: block;
@@ -259,19 +266,24 @@ body {
   animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
   border-color: currentColor transparent transparent transparent;
 }
+
 .lds-ring div:nth-child(1) {
   animation-delay: -0.45s;
 }
+
 .lds-ring div:nth-child(2) {
   animation-delay: -0.3s;
 }
+
 .lds-ring div:nth-child(3) {
   animation-delay: -0.15s;
 }
+
 @keyframes lds-ring {
   0% {
     transform: rotate(0deg);
   }
+
   100% {
     transform: rotate(360deg);
   }
@@ -281,55 +293,39 @@ body {
 
 /* --------- MOBILE RESPONSIVENESS --------- */
 @media screen and (max-width: 768px) {
-    .mobile-auth {
-        background-image: url('/auth-img.png') !important;
-        background-repeat: no-repeat !important;
-        background-size: cover !important;
-        background-position: center !important;
-        height: 100% !important;
-        object-fit: cover;
-    }
+  .mobile-auth {
+    background-image: url('/auth-img.png') !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+    background-position: center !important;
+    min-height: 100vh;
+    object-fit: cover;
+  }
 
-    .register-logo {
-        display: none;
-    }
+  .register-logo {
+    display: none;
+  }
 
-    .register-form {
-        background-color: #0B1210;
-        justify-self: center;
-        align-self: center;
-        margin: 50px 0;
-        padding: 2rem;
-        border-radius: 6px;
-    }
+  .register-form {
+    background-color: #0B1210;
+    justify-self: center;
+    align-self: center;
+    padding: 1rem;
+    border-radius: 6px;
+    width: 65%;
+  }
 
-    .register {
-       display: grid;
-    }
+  .register {
+    display: grid;
+  }
 
-    .mobile-auth {
-        display: grid;
-    }
+  .mobile-auth {
+    display: grid;
+  }
 
-    .register-form__input-box input {
-        width: 200px;
-    }
-
-    .register-form__submit-btn {
-        width: 252px;
-    }
-
-    .register-form__google-signin {
-        width: 212px;
-    }
-
-    .register-form__option-box {
-        width: 252px;
-    }
-
-    .register-form__form {
-        padding: 4rem;
-        align-items: center;
-        justify-content: center;
-    }
+  .register-form__form {
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+  }
 }

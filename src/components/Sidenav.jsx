@@ -1,11 +1,15 @@
-import React, { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import LiveSupportPopup from './LiveSupportPopup';
 import VIPPopup from './VIPPopup';
 import LanguagePopup from './LanguagePopup';
 import './Sidenav.css';
+import instance from '../utils/api';
+import { useAppContext } from '../hooks/useAppContext';
+import { useNav } from '../hooks/useUtils';
+import { useDisclosure } from '../hooks/useDisclosure';
 
-const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
+const Sidenav = () => {
   const [liveSupport, setLiveSupport] = useState(false);
   const [vipSupport, setVipSupport] = useState(false);
   const [languagePopup, setLanguagePopup] = useState(false);
@@ -18,18 +22,14 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
   const isDicePage = location.pathname === '/dice'
   const isCrashPage = location.pathname == '/crash'
 
-  const accessToken = localStorage.getItem('accessToken');
+  const { state } = useAppContext();
+  const { toggleNav } = useNav();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch("https://be.eliteplay.bloombyte.dev/faucet/total-faucet-claimed", {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${accessToken}`
-          }
-        });
-        const data = await response.json();
+        const response = await instance.get("/faucet/total-faucet-claimed");
+        const data = response.data;
         setTotalClaim(data.totalClaim);
         setFaucetClaimableForCurrentTier(data.facuetClaimableForCurrentTier);
         setTimeToNextClaim(data.timeToNextClaim);
@@ -41,197 +41,84 @@ const Sidenav = ({ isNavOpen, setIsNavOpen, user, chatOpen, setChatOpen }) => {
     fetchData();
   }, []);
 
-  const handleClick = () => {
-    if (window.innerWidth < 752) {
-      setIsNavOpen(false);
-    }
-  };
+  const { isOpen: isOpenVIP, onOpen: onOpenVIP, onClose: onCloseVIP } = useDisclosure();
+  const { isOpen: isOpenLive, onOpen: onOpenLive, onClose: onCloseLive } = useDisclosure();
+
 
   return (
     <>
-      {isNavOpen ? (
-        <div className={`sidenav-expanded ${isNavOpen ? 'open' : ''}`}>
-          <div className="sidenav__icon">
-            <img
-              className="nav-icon"
-              onClick={() => setIsNavOpen(false)}
-              src="./menu-01.svg"
-              alt="close-icon"
-            />
-            <a href="/">
-              {' '}
-              <img src="./eliteplay.svg" alt="logo" />
-            </a>
+      <div className={`sidenav-expanded ${state.isNavOpen ? 'open' : ''}`}>
+        <div style={{ display: 'none' }} className="sidenav__icon">
+          <img
+            className="nav-icon"
+            onClick={() => toggleNav()}
+            src="./menu-01.svg"
+            alt="close-icon"
+          />
+          <Link to="/">
+            {' '}
+            <img src="./eliteplay.svg" alt="logo" />
+          </Link>
+        </div>
+        <div className="sidenav__links">
+          <div>
+            <Link to="/referrals" style={{ textDecoration: 'none' }}>
+              <div className={`sidenav__link ${isReferralsPage ? 'active' : ''}`}>
+                <img src="./gift.svg" alt="reward-icon" />
+                <span>Refer and Earn</span>
+              </div>
+            </Link>
           </div>
-          <div className="sidenav__links">
-            <div
-              style={{
-                backgroundColor: isReferralsPage ? '#0B281F' : 'transparent',
-                padding: isReferralsPage ? '10px' : '0',
-                borderRadius: isReferralsPage ? '9px' : '0',
-                transition: 'background-color 0.3s, padding 0.3s',
-              }}
-            >
-              <a style={{ textDecoration: 'none' }} onClick={handleClick}  href="/referrals">
-                <div className="sidenav__link">
-                  <img src="./gift.svg" alt="reward-icon" />
-                  <span>Refer and Earn</span>
-                </div>
-              </a>
-            </div>
-            <div
-              style={{
-                backgroundColor: isDicePage ? '#0B281F' : 'transparent',
-                padding:isDicePage ? '10px' : '0',
-                borderRadius: isDicePage ? '9px' : '0',
-                transition: 'background-color 0.3s, padding 0.3s',
-              }}
-            >
-              <a style={{ textDecoration: 'none' }} onClick={handleClick} href="/dice">
-                <div className="sidenav__link">
-                  <img src="./dice.svg" alt="dice-icon" />
-                  <span>Dice</span>
-                </div>
-              </a>
-            </div>
-            <div
-              style={{
-                backgroundColor: isCrashPage ? '#0B281F' : 'transparent',
-                padding: isCrashPage ? '10px' : '0',
-                borderRadius: isCrashPage ? '9px' : '0',
-                transition: 'background-color 0.3s, padding 0.3s',
-              }}
-            >
-              <a style={{ textDecoration: 'none' }} onClick={handleClick} href="/crash">
-                <div className="sidenav__link">
-                  <img src="./chart-increase.svg" alt="crash-icon" />
-                  <span>Crash</span>
-                </div>
-              </a>
-            </div>
-            <div
-              style={{
-                backgroundColor: chatOpen ? '#0B281F' : 'transparent',
-                padding: chatOpen ? '10px' : '0',
-                borderRadius: chatOpen ? '9px' : '0',
-                transition: 'background-color 0.3s, padding 0.3s',
-              }}
-              className="mobile-chat"
-            >
-              <div
-                onClick={() => {setChatOpen(!chatOpen), setIsNavOpen(false)}}
-                className="sidenav__link"
-              >
-                <img src="./message-01.svg" alt="chat-icon" />
-                <span>Chatroom</span>
+          <div>
+            <Link to="/dice" style={{ textDecoration: 'none' }}>
+              <div className={`sidenav__link ${isDicePage ? 'active' : ''}`}>
+                <img src="./dice.svg" alt="dice-icon" />
+                <span>Dice</span>
               </div>
-            </div>
-            <div
-              style={{
-                backgroundColor: vipSupport ? '#0B281F' : 'transparent',
-                padding: vipSupport ? '10px' : '0',
-                borderRadius: vipSupport ? '9px' : '0',
-                transition: 'background-color 0.3s, padding 0.3s',
-              }}
-            >
-              <div
-                onClick={() => {setVipSupport(!vipSupport), handleClick}}
-                className="sidenav__link"
-              >
-                <img src="./VIP.svg" alt="vip-icon" />
-                <span>
-                  <span className="sidenav-vip">VIP</span> Club
-                </span>
+            </Link>
+          </div>
+          <div>
+            <Link to="/crash" style={{ textDecoration: 'none' }}>
+              <div className={`sidenav__link ${isCrashPage ? 'active' : ''}`}>
+                <img src="./chart-increase.svg" alt="crash-icon" />
+                <span>Crash</span>
               </div>
-            </div>
+            </Link>
+          </div>
+          <div>
             <div
-              style={{
-                backgroundColor: liveSupport ? '#0B281F' : 'transparent',
-                padding: liveSupport ? '10px' : '0',
-                borderRadius: liveSupport ? '9px' : '0',
-                transition: 'background-color 0.3s, padding 0.3s',
-              }}
+              onClick={() => { onOpenVIP() }}
+              className={`sidenav__link ${vipSupport ? 'active' : ''}`}
             >
+              <img src="./VIP.svg" alt="vip-icon" />
+              <span>
+                <span className="sidenav-vip">VIP</span> Club
+              </span>
+            </div>
+          </div>
+          <div>
+            <Link to="/dice" style={{ textDecoration: 'none' }}>
               <div
-                onClick={() => {setLiveSupport(!liveSupport), handleClick}}
-                className="sidenav__link"
+                onClick={() => {
+                  onOpenLive();
+                }}
+                className={`sidenav__link ${liveSupport ? 'active' : ''}`}
               >
                 <img src="./customer-support.svg" alt="support-icon" />
                 <span>Live Support</span>
               </div>
-            </div>
-            <div
-              style={{
-                backgroundColor: languagePopup ? '#0B281F' : 'transparent',
-                padding: languagePopup ? '10px' : '0',
-                borderRadius: languagePopup ? '9px' : '0',
-                transition: 'background-color 0.3s, padding 0.3s',
-              }}
-            >
-              {/* <div
-                onClick={() => {
-                  setLanguagePopup(!languagePopup);
-                }}
-                className="sidenav__link"
-              >
-                <img src="./translate.svg" alt="translate-icon" />
-                <span>Language: English</span>
-              </div> */}
-            </div>
+            </Link>
           </div>
         </div>
-      ) : (
-        <div className="sidenav-mini">
-          <div className="sidenav__icon">
-            <img
-              className="nav-icon"
-              src="./menu-01.svg"
-              alt="menu-icon"
-              onClick={() => setIsNavOpen(true)}
-            />
-          </div>
-          <div className="sidenav__links">
-            <a href="/referrals">
-            <div className="sidenav__link-mini">
-              <img src="./gift.svg" alt="reward-icon" />
-            </div>
-            </a>
-            <a href="/dice">
-            <div className="sidenav__link-mini">
-              <img src="./dice.svg" alt="dice-icon" />
-            </div>
-            </a>
-            <a href="/crash">
-            <div className="sidenav__link-mini">
-              <img src="./chart-increase.svg" alt="crash-icon" />
-            </div>
-            </a>
-            <div onClick={() => setChatOpen(!chatOpen)} className="sidenav__link-mini">
-              <img src="./message-01.svg" alt="chat-icon" />
-            </div>
-            <div onClick={() => setVipSupport(!vipSupport)} className="sidenav__link-mini">
-              <img src="./VIP.svg" alt="vip-icon" />
-            </div>
-            <div onClick={() => setLiveSupport(!liveSupport)} className="sidenav__link-mini">
-              <img src="./customer-support.svg" alt="support-icon" />
-            </div>
-            {/* <div onClick={() => {
-                  setLanguagePopup(!languagePopup);
-                }} className="sidenav__link-mini">
-              <img src="./translate.svg" alt="translate-icon" />
-            </div> */}
-          </div>
-        </div>
-      )}
+      </div>
       {/* {chatOpen && <ChatPopup chatOpen={chatOpen} setChatOpen={setChatOpen} />} */}
-      {liveSupport && (
+      {isOpenLive && (
         <LiveSupportPopup
-          liveSupport={liveSupport}
-          setLiveSupport={setLiveSupport}
+          onCloseLive={onCloseLive}
         />
       )}
-      {vipSupport && (
-      <VIPPopup vipSupport={vipSupport} user={user} setVipSupport={setVipSupport} totalClaim={totalClaim} facuetClaimableForCurrentTier={facuetClaimableForCurrentTier} timeToNextClaim={timeToNextClaim} setTimeToNextClaim={setTimeToNextClaim} />
+      {isOpenVIP && (
+        <VIPPopup onCloseVIP={onCloseVIP} totalClaim={totalClaim} facuetClaimableForCurrentTier={facuetClaimableForCurrentTier} timeToNextClaim={timeToNextClaim} setTimeToNextClaim={setTimeToNextClaim} />
       )}
       {languagePopup && (
         <LanguagePopup

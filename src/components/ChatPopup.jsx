@@ -1,9 +1,14 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import SocketIO from 'socket.io-client';
 import { isLoggedIn } from '../utils/auth';
 
-const accessToken = localStorage.getItem('accessToken');
-const socket = SocketIO('https://be.eliteplay.bloombyte.dev/chat', {
+import './ChatPopup.css';
+import { ACCESS_TOKEN } from '../utils/constants';
+import { useAppContext } from '../hooks/useAppContext';
+import { useChat } from '../hooks/useUtils';
+
+const accessToken = localStorage.getItem(ACCESS_TOKEN);
+const socket = SocketIO(`${import.meta.env.VITE_BASE_API_URL}/chat`, {
   transports: ['websocket'],
   autoConnect: true,
   query: {
@@ -11,18 +16,17 @@ const socket = SocketIO('https://be.eliteplay.bloombyte.dev/chat', {
   },
 });
 
-import './ChatPopup.css';
-
-const ChatPopup = ({ setChatOpen, chatOpen }) => {
-  const [minimized, setMinimized] = useState(false);
+const ChatPopup = () => {
+  const minimized = useMemo(() => false, []);
   const [messages, setMessages] = useState([]);
-  //   const [hasFetchedSavedMessages, setHasFetchedSavedMessages] = useState(false);
   const [isLoadingSavedMessages, setIsLoadingSavedMessages] = useState(false);
   const hasFetchedSavedMessages = useRef(false);
-  const [loadMessagesError, setLoadMessagesError] = useState('');
+  const loadMessagesError = useMemo(() => '', []);
   const [inputMessage, setInputMessage] = useState('');
   const [isMobile, setIsMobile] = useState(false);
   const userIsLoggedIn = isLoggedIn();
+
+  const { state } = useAppContext();
 
   useEffect(() => {
     const handleResize = () => {
@@ -139,8 +143,10 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
     }
   };
 
+  const { toggleChat } = useChat();
+
   return (
-    <div className={`chatroom-popup ${chatOpen ? 'open' : ''}`}>
+    <div className={`chatroom-popup ${state.chatOpen ? 'open' : ''}`}>
       <div className="chatroom-popup-popup_container">
         <div className="chatroom-popup_header">
           <p>Chatroom</p>
@@ -148,7 +154,7 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
             className={`chatroom-btn ${isMobile ? '' : 'hide-cancel-button'}`}
           >
             <img
-              onClick={() => setChatOpen(!chatOpen)}
+              onClick={() => toggleChat()}
               className="close"
               src="./cancel-x.svg"
               alt="cancel-x.svg"
@@ -156,17 +162,10 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
           </div>
         </div>
         <div className="chatroom-maincontent">
-          {/* <div className="chatroom_languages">
-            <div className="chatroom_language chatroom_language-active">
-              <span>Global</span>
-              <img src="./Exclude.svg" alt="live-icon" />
-            </div>
-          </div> */}
           <div>
             <div
-              className={`chatroom-chatbox__container ${
-                minimized ? 'minimized' : ''
-              }`}
+              className={`chatroom-chatbox__container ${minimized ? 'minimized' : ''
+                }`}
             >
               {isLoadingSavedMessages && (
                 <h3 className="chatmsg-error">Loading saved messages...</h3>
@@ -193,11 +192,19 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
                   </div>
                 </div>
               ))}
+
+              {
+                messages.length === 0 && (
+                  <h3 className="chatmsg-error">
+                    No messages available.
+                  </h3>
+                )
+              }
             </div>
-            {userIsLoggedIn ? (
+            {userIsLoggedIn && (
               <div>
                 <form className="chatroom-input" onSubmit={sendMessage}>
-                  <div style={{ width: '100%' }}>
+                  <div>
                     <input
                       placeholder="Type here..."
                       type="text"
@@ -211,8 +218,6 @@ const ChatPopup = ({ setChatOpen, chatOpen }) => {
                   </button>
                 </form>
               </div>
-            ) : (
-              <p className='login-chat'>Please login to chat</p>
             )}
           </div>
         </div>

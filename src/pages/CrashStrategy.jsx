@@ -5,14 +5,12 @@ import CrashStrategyComponent from '../components/CrashStrategyComponent';
 import Footer from '../components/Footer';
 
 const CrashStrategy = () => {
-  const [isNavOpen, setIsNavOpen] = useState(true)
 
   return (
-    <div>
-      <Navbar isNavOpen={isNavOpen} />
-      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
-      <CrashStrategyComponent isNavOpen={isNavOpen} />
-      <Footer isNavOpen={isNavOpen} />
+    <div style={{
+      padding: '0 20px',
+    }}>
+      <CrashStrategyComponent />
     </div>
   );
 };

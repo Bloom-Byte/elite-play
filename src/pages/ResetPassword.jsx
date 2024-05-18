@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import './Login.css';
+import instance from '../utils/api';
+import { ACCESS_TOKEN } from '../utils/constants';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
@@ -46,12 +48,12 @@ const ResetPassword = () => {
     }
 
     try {
-      const response = await axios.post(`https://be.eliteplay.bloombyte.dev/user/auth/reset-password/${token}`, {
+      const response = await instance.post(`/user/auth/reset-password/${token}`, {
         newPassword: password,
         confirmPassword: confirmPassword
       });
 
-      localStorage.setItem('accessToken', response.data.accessToken);
+      localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
       setSuccessMessage('Password reset successfully!');
       setTimeout(() => {
         navigate('/login');
@@ -114,7 +116,7 @@ const ResetPassword = () => {
                 />
               </div>
               <button className="register-form__submit-btn" type="submit">
-              {isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Reset Password'}
+              {isLoading ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Reset Password'}
               </button>
               {error && <p className='error-msg'>{error}</p>}
               {successMessage && <p className="success-msg">{successMessage}</p>}

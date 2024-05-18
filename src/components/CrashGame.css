@@ -1,54 +1,66 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 .tutorial-dropdown-crash {
-    position: absolute;
-    top: 150px;
-    right: 60vw;
-  }
-  
-  .tutorial-dropdown-crash-open {
-    right: 50vw;
-  }
-  
-  .tutorial-dropdown-crash-content {
-    position: relative;
-    background-color: #0B281F;
-    border-radius: 16px;
-    padding: 20px;
-    max-width: 150px;
-  }
-  
-  .tutorial-dropdown-crash-content a {
-    color: #88DF95;
-    font-family: 'Manrope', sans-serif;
-    font-size: 10px;
-    font-weight: 600;
-  }
-  
-  .tutorial-dropdown-crash-content p {
-    color: #FFFFFF;
-    font-family: 'Manrope', sans-serif;
-    font-size: 10px;
-    font-weight: 400;
-  }
+  position: absolute;
+  top: 2.8rem;
+  left: 0;
+  z-index: 10;
+  width: 210px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  width: 300px;
+  max-width: 250px;
+}
 
-  .crashed-gamestate{
-    color: #FFFFFF;
-    font-family: 'Manrope', sans-serif;
-    font-size: 10px;
-    font-weight: 400;
-    text-align: center;
-  }
+.tutorial-dropdown-crash-content {
+  background-color: #0B281F;
+  border-radius: 16px;
+  padding: 15px;
+  text-align: left;
+}
 
-  .crash-arrows {
-    display: flex;
-    gap: 8px;
-  }
+.tutorial-dropdown-crash-content a {
+  color: #88DF95;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+}
 
-  .current-multiplier {
-    color: #FFFFFF;
-    font-family: 'Manrope', sans-serif;
-    font-size: 10px;
-    font-weight: 400;
-    text-align: center;
-  }
+.tutorial-dropdown-crash-content p {
+  color: #FFFFFF;
+  font-family: 'Manrope', sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+}
+
+.crashed-gamestate {
+  color: #FFFFFF;
+  font-family: 'Manrope', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 500;
+  text-align: center;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.crashed-gamestate span {
+  color: #ff0000;
+  font-size: 7rem;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.crash-arrows {
+  display: flex;
+  gap: 8px;
+}
+
+.current-multiplier {
+  color: #FFFFFF;
+  font-size: 7rem;
+  font-weight: 900;
+  position: absolute;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

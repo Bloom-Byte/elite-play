@@ -1,205 +1,216 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 body {
-    padding: 0;
-    margin: 0;
-    background: #0B1210;
+  padding: 0;
+  margin: 0;
+  background: #0B1210;
 }
 
 .nav {
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
-    background-color: #0B1210;
-    padding: 1rem;
+  display: flex;
+  align-items: center;
+  background-color: #0B1210;
+  height: 5rem;
+  position: fixed;
+  width: calc(100% - 40px);
+  padding: 0 20px;
+  z-index: 10000;
+  top: 0;
 }
 
 .nav-games {
-    margin-left: 8rem;
-    display: flex;
-    gap: 2.5rem;
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
 }
 
-.nav-expanded {
-    margin-left: 18rem;
+.navItems {
+  display: flex;
+  gap: 2.5rem;
+  align-items: center;
+  margin-left: 3rem;
 }
+
+.nav-expanded {}
 
 .nav-games__dice {
-    display: flex;
-    gap: 10px;
-    cursor: pointer;
+  display: flex;
+  gap: 10px;
+  cursor: pointer;
 }
 
 .nav-games__dice span:hover {
-    color: #88df95;
+  color: #88df95;
 }
 
 .nav-games__dice span {
-    color: #6E6E71;
-    font-size: 14px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
-    text-decoration: none;
+  color: #6E6E71;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  text-decoration: none;
 }
 
 .nav-auth {
-    display: flex;
-    gap: 16px;
+  display: flex;
+  gap: 16px;
+  margin-left: auto;
 }
 
 .nav-auth__signin {
-    background: transparent;
-    border: 2px transparent;
-    color: #6E6E71;
-    font-size: 14px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
-    padding: 10px 0;
-    width: 100px;
-    cursor: pointer;
-    transition: all 0.7s var(--ease-in-out);
+  background: transparent;
+  border: 2px solid transparent;
+  color: #6E6E71;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  padding: 10px 0;
+  width: 100px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .nav-auth__signin:hover {
-    color: #88df95;
+  color: #88df95;
 }
 
 .nav-auth__signup {
-    background-color:#077E551A;
-    padding: 10px 0;
-    width: 100px;
-    border: 2px solid #077E551A;
-    border-radius: 6px;
-    color: #88df95;
-    font-size: 14px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
-    cursor: pointer;
-    margin-right: 10px;
+  background-color: #077E551A;
+  padding: 10px 0;
+  width: 100px;
+  border: 2px solid #077E551A;
+  border-radius: 6px;
+  color: #88df95;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s;
 }
 
 .nav-auth__signup:hover {
-    background-color: transparent;
-    border: 2px solid #24e3a1;
+  background-color: transparent;
+  border: 2px solid #24e3a1;
 }
 
 .nav-loggedin {
-    display: flex;
-    gap: 30px;
-    margin-left: -200px;
+  display: flex;
+  gap: 30px;
+  margin-left: -200px;
 }
 
 .nav-profile {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  cursor: pointer;
 }
 
 .nav-wallet {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .nav-wallet_info {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    background-color: black;
-    border: 1px solid black;
-    border-radius: 6px;
-    padding: 8px;
-    cursor: pointer;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  background-color: black;
+  border: 1px solid black;
+  border-radius: 6px;
+  padding: 8px;
+  cursor: pointer;
 }
 
 .nav-wallet_info span {
-    color: #6E6E71;
-    font-size: 14px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
+  color: #6E6E71;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
 }
 
 .nav-wallet_deposit {
-    background: rgb(11, 40, 31);
-    border: 2px transparent;
-    display: flex;
-    gap: 10px;
-    align-items: center;
-    border-radius: 6px;
-    padding: 8px 12px;
-    cursor: pointer;
-    transition: all 0.7s var(--ease-in-out);
+  background: rgb(11, 40, 31);
+  border: 2px solid transparent;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  border-radius: 6px;
+  padding: 8px 12px;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .nav-wallet_deposit:hover {
-    background: transparent;
-    border-radius: 2px solid #24E3A1;
+  background: transparent;
+  border-radius: 2px solid #24E3A1;
 }
 
 .nav-wallet_deposit span {
-    color: white;
-    font-size: 14px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
+  color: white;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
 }
 
 .wallet-nav {
-    text-decoration: none;
+  text-decoration: none;
 }
 
 /* --------- MOBILE RESPONSIVENESS --------- */
 @media screen and (max-width: 768px) {
-    .nav {
-        width: 100vw;
-        justify-content: start;
-        align-items: normal;
-        padding: 10px;
-    }
+  .nav {
+    width: 100vw;
+    justify-content: start;
+    align-items: normal;
+    padding: 10px;
+  }
 
-    .nav-games {
-        margin-left: 0;
-        gap: 0;
-    }
+  .nav-games {
+    margin-left: 0;
+    gap: 0;
+  }
 
-    .nav-games__dice {
-        display: none;
-    }
+  .nav-games__dice {
+    display: none;
+  }
 
-    .sidenav__icon {
-        display: flex !important;
-    }
+  .sidenav__icon {
+    display: flex !important;
+  }
 
-    .nav-icon {
-        width: 30px !important;
-        height: 30px !important;
-        padding: 5px !important;
-    }
+  .nav-icon {
+    width: 30px !important;
+    height: 30px !important;
+    padding: 5px !important;
+  }
 
-    .nav-logo {
-        width: 80px !important;
-        height: 50px;
-    }
+  .nav-logo {
+    width: 80px !important;
+    height: 50px;
+  }
 
-    .nav-wallet_deposit{
-        display: none !important;
-    }
+  .nav-wallet_deposit {
+    display: none !important;
+  }
 
-    .nav-loggedin {
-        margin-left: 0;
-        gap: 10px;
-        margin-top: 5px;
-    }
+  .nav-loggedin {
+    margin-left: 0;
+    gap: 10px;
+    margin-top: 5px;
+  }
 
-    .nav-auth {
-        margin-top: 10px;
-        gap: 10px;
-    }
+  .nav-auth {
+    margin-top: 10px;
+    gap: 10px;
+  }
 
-    .nav-auth__signup {
-        padding: 6px;
-        margin-right: 0px;
-    }
-    .nav-auth__signin {
-        padding: 6px;
-    }
+  .nav-auth__signup {
+    padding: 6px;
+    margin-right: 0px;
+  }
+
+  .nav-auth__signin {
+    padding: 6px;
+  }
 }

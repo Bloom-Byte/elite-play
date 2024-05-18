@@ -1,9 +1,10 @@
 import React from 'react'
 import './Footer.css'
+import { Link } from 'react-router-dom'
 
-const Footer = ({ isNavOpen }) => {
+const Footer = () => {
   return (
-    <div className={`footer ${isNavOpen ? 'footer-extended' : ''}`}>
+    <div className={`footer`}>
       <h4>Sponsorship and Gaming Responsibilities</h4>
       <div className="footer-sponsor">
         <img src="./sponsor-1.png" alt="" />
@@ -17,10 +18,10 @@ const Footer = ({ isNavOpen }) => {
       </div>
       <div className="footer-cta">
         <div className="footer-cta__left">
-          <a href="/">
+          <Link to="/">
             {' '}
             <img src="./eliteplay.svg" alt="logo" />
-          </a>
+          </Link>
           <p>
             Eliteplay beckons you into a world of thrilling dice games and
             pulse-pounding crash experiences, where every roll and every tick of
@@ -32,20 +33,20 @@ const Footer = ({ isNavOpen }) => {
         <div className="footer-cta__right">
             <div className='footer-cta-items'>
                 <p>Games</p>
-                <a href='/dice'>Dice</a>
-                <a href='/crash'>Crash</a>
+                <Link to='/dice'>Dice</Link>
+                <Link to='/crash'>Crash</Link>
             </div>
             <div className='footer-cta-items'>
                 <p>Promo</p>
-                <a href=''>VIP Club</a>
+                <Link to=''>VIP Club</Link>
             </div>
             <div className='footer-cta-items'>
                 <p>Support/Legal</p>
-                <a href='/helpcenter'>Help Center</a>
-                <a href='/helpcenter'>FAQ</a>
-                <a href='/helpcenter'>Privacy Policy</a>
-                <a href='/helpcenter'>Terms of Service</a>
-                <a href=''>Live Support</a>
+                <Link to='/helpcenter'>Help Center</Link>
+                <Link to='/helpcenter'>FAQ</Link>
+                <Link to='/helpcenter'>Privacy Policy</Link>
+                <Link to='/helpcenter'>Terms of Service</Link>
+                <Link to=''>Live Support</Link>
             </div>
             <div>
                 <p>Community</p>

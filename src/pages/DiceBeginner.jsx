@@ -5,14 +5,11 @@ import Footer from '../components/Footer';
 import DiceBeginnerComponent from '../components/DiceBeginnerComponent';
 
 const DiceBeginner = () => {
-  const [isNavOpen, setIsNavOpen] = useState(true);
-
   return (
-    <div>
-      <Navbar isNavOpen={isNavOpen} />
-      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
-        <DiceBeginnerComponent isNavOpen={isNavOpen} />
-        <Footer isNavOpen={isNavOpen} />
+    <div style={{
+      padding: '0 20px',
+    }}>
+      <DiceBeginnerComponent />
     </div>
   );
 };

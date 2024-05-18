@@ -1,39 +1,22 @@
-import React, { useState } from 'react';
 import { isLoggedIn } from '../utils/auth';
 import './Hero.css';
+import { useAppContext } from '../hooks/useAppContext';
+import { Link } from 'react-router-dom';
 
-const Hero = ({ isNavOpen, user }) => {
-  const [level, setLevel] = useState(0);
+const Hero = () => {
   const userIsLoggedIn = isLoggedIn();
+
+  const { state } = useAppContext();
 
   return (
     <>
-      <div className="mobile__page-navigation">
-        <div className="mobile-nav-box"></div>
-        <div className="mobile-nav-box">
-          <div className="nav-games__dice">
-            <img src="./dice.svg" alt="dice-logo" />
-            <span>
-              <a href="/dice">Dice</a>
-            </span>
-          </div>
-        </div>
-        <div className="mobile-nav-box">
-          <div className="nav-games__dice">
-            <img src="./chart-increase.svg" alt="chart-logo" />
-            <span>
-              <a href="/crash">Crash</a>
-            </span>
-          </div>
-        </div>
-      </div>
       <div
         style={{ backgroundImage: 'url("/elite-bg.svg")' }}
-        className={`home-hero ${isNavOpen ? 'home-hero-extended' : ''}`}
+        className={`home-hero`}
       >
         {userIsLoggedIn ? (
           <div className="home-hero__user-info">
-            <h4 className="vip-progress-head">Welcome Back, {user?.name}</h4>
+            <h4 className="vip-progress-head">Welcome Back, {state.user?.name}</h4>
             <div className="home-hero__user-info-box">
               <h4>VIP Progress</h4>
               <input
@@ -41,18 +24,18 @@ const Hero = ({ isNavOpen, user }) => {
                 type="range"
                 min="0"
                 max="20000000"
-                value={user?.totalBetAmount}
+                value={state.user?.totalBetAmount}
                 // onChange={(event) => setLevel(event.target.value)}
               />
               <div className="home-hero__user-info-box__level">
                 <div className="hero__rank-info">
                   <span>Rank:</span>
-                  <span className="bronze">{user?.currentTier}</span>
+                  <span className="bronze">{state.user?.currentTier}</span>
                 </div>
                 <div className="hero__rank-info">
                   <span>Next:</span>
-                  <span className="silver"> {user?.nextTier}</span>
-                  <span className="xp">{user?.amountToNextTier}XP</span>
+                  <span className="silver"> {state.user?.nextTier}</span>
+                  <span className="xp">{state.user?.amountToNextTier}XP</span>
                 </div>
               </div>
             </div>
@@ -61,7 +44,7 @@ const Hero = ({ isNavOpen, user }) => {
           <div className="home-hero__txt-section">
             <h4>Turn Playtime to Paytime</h4>
             <p>Dive into a world of incredible rewards.</p>
-            <a style={{ textDecoration: 'none' }} href="/register"> <button>Sign Up Now</button></a>
+            <Link style={{ textDecoration: 'none', transition: '.3s' }} to="/register"> <button>Sign Up Now</button></Link>
           </div>
         )}
       </div>

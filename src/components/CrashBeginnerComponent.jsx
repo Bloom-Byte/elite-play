@@ -1,9 +1,9 @@
 import React from 'react';
 import './CrashBeginnerComponent.css'
 
-const CrashBeginnerComponent = ({ isNavOpen }) => {
+const CrashBeginnerComponent = () => {
   return (
-    <div className={`dicetutorial ${isNavOpen ? 'dicetutorial-extended' : ''}`}>
+    <div className={`dicetutorial`}>
       <div className="dicetutorial-hero">
         <h1>Bitcoin Crash Gambling Guide</h1>
         <img src="./crash-img.png" alt="" />

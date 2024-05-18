@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import './WalletComponent.css';
+import instance from '../utils/api';
+import { useAppContext } from '../hooks/useAppContext';
 
-const WalletComponent = ({ isNavOpen, user }) => {
+const WalletComponent = () => {
   const [currentSection, setCurrentSection] = useState('Balance');
   const [mobileNav, setMobileNav] = useState(false);
   const [withdrawalAmount, setWithdrawalAmount] = useState(0);
@@ -11,6 +13,8 @@ const WalletComponent = ({ isNavOpen, user }) => {
   const [depositAccountId, setDepositAccountId] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const { state } = useAppContext();
 
   const handleWithdrawalChange = (event) => {
     setWithdrawalAmount(event.target.value);
@@ -44,41 +48,15 @@ const WalletComponent = ({ isNavOpen, user }) => {
   };
 
   const depositToEliteplay = async () => {
-    const url = 'https://be.eliteplay.bloombyte.dev/transactions/deposit';
-    const accessToken = localStorage.getItem('accessToken');
+    const url = '/transactions/deposit';
     setIsLoading(true);
 
-      // if (depositAmount < 1) {
-      //   setValidateMessage('Minimum Deposit is 1 eGold');
-      //   setIsLoading(false);
-      //   return;
-      // } else {
-      //   setValidateMessage('');
-      // }
-
-    // const requestBody = {
-    //   amount: depositAmount,
-    //   accountId: user._id,
-    // };
-
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    };
-
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: headers,
-        // body: requestBody,
-      });
-
-      const responseData = await response.json();
+      const response = await instance.post(url);
       if (response.status === 201) {
-        const responseData = await response.json();
-        setSuccessMessage(responseData.data.message);
+        setSuccessMessage(response.data.data.message);
       } else {
-        setValidateMessage(responseData.message);
+        setValidateMessage(response.data.message);
         throw new Error('Failed to deposit');
       }
     } catch (error) {
@@ -90,8 +68,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
   };
 
   async function initiateWithdrawal() {
-    const url = 'https://be.eliteplay.bloombyte.dev/transactions/withdraw';
-    const accessToken = localStorage.getItem('accessToken');
+    const url = '/transactions/withdraw';
 
     if (withdrawalAmount < 50) {
       setValidateMessage('Minimum Withdrawal is 50 eGold');
@@ -105,18 +82,10 @@ const WalletComponent = ({ isNavOpen, user }) => {
     };
 
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify(requestBody),
-      });
+      const response = await instance.post(url, requestBody);
 
       if (response.status === 201) {
-        const responseData = await response.json();
-        setSuccessMessage(responseData.data.message);
+        setSuccessMessage(response.data.data.message);
       } else {
         console.error('Failed to initiate transaction:', response.statusText);
       }
@@ -127,7 +96,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
   }
 
   return (
-    <div className={`wallet-comp ${isNavOpen ? 'wallet-comp-extended' : ''}`}>
+    <div className={`wallet-comp`}>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <div className="wallet-setting-header">
           <span>Wallet</span>
@@ -146,27 +115,24 @@ const WalletComponent = ({ isNavOpen, user }) => {
         <div className="wallet-comp_wallet-options">
           <div
             onClick={() => setCurrentSection('Balance')}
-            className={`wallet-option ${
-              currentSection === 'Balance' ? 'wallet-option_active' : ''
-            }`}
+            className={`wallet-option ${currentSection === 'Balance' ? 'wallet-option_active' : ''
+              }`}
           >
             <img src="./wallet-02.svg" alt="wallet" />
             <span>Balance</span>
           </div>
           <div
             onClick={() => setCurrentSection('Deposit')}
-            className={`wallet-option ${
-              currentSection === 'Deposit' ? 'wallet-option_active' : ''
-            }`}
+            className={`wallet-option ${currentSection === 'Deposit' ? 'wallet-option_active' : ''
+              }`}
           >
             <img src="./money-receive-01.svg" alt="wallet" />
             <span>Deposit</span>
           </div>
           <div
             onClick={() => setCurrentSection('Withdraw')}
-            className={`wallet-option ${
-              currentSection === 'Withdraw' ? 'wallet-option_active' : ''
-            }`}
+            className={`wallet-option ${currentSection === 'Withdraw' ? 'wallet-option_active' : ''
+              }`}
           >
             <img src="./bitcoin-withdraw.svg" alt="wallet" />
             <span>Withdraw</span>
@@ -177,9 +143,8 @@ const WalletComponent = ({ isNavOpen, user }) => {
           </div>
           <div
             onClick={() => setCurrentSection('Transaction')}
-            className={`wallet-option ${
-              currentSection === 'Transaction' ? 'wallet-option_active' : ''
-            }`}
+            className={`wallet-option ${currentSection === 'Transaction' ? 'wallet-option_active' : ''
+              }`}
           >
             <img src="./bitcoin-transaction.svg" alt="wallet" />
             <span>Transaction</span>
@@ -194,18 +159,18 @@ const WalletComponent = ({ isNavOpen, user }) => {
                   <div className="pot-balance">
                     <span className="real-balance">Total Balance</span>
                     <span className="real-balance_amount">
-                      eGold {user?.balance}
+                      eGold {state.user?.balance}
                     </span>
                   </div>
                 </div>
                 <hr className="potline" />
                 <div className="pot-balance">
                   <span>Real Balance</span>
-                  <span>eGold {user?.balance}</span>
+                  <span>eGold {state.user?.balance}</span>
                 </div>
                 <div className="pot-balance">
                   <span>Bonus Balance</span>
-                  <span>eGold {user?.balance}</span>
+                  <span>eGold {state.user?.balance}</span>
                 </div>
               </div>
               <div className="mainBalance-section">
@@ -215,7 +180,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
                     <span>eGold</span>
                   </div>
                   <div className="mainBalance-amount">
-                    <span>{user?.balance}</span>
+                    <span>{state.user?.balance}</span>
                     <span
                       style={{ cursor: 'pointer' }}
                       onClick={() => setCurrentSection('Deposit')}
@@ -262,11 +227,11 @@ const WalletComponent = ({ isNavOpen, user }) => {
                   <p>User Id</p>
                   <div className="deposit-address">
                     <span className="eg-address">
-                      <span className="eAddress">{user?._id}</span>
+                      <span className="eAddress">{state.user?._id}</span>
                     </span>
                     <span
                       onClick={() => {
-                        copyToClipboard(user?._id);
+                        copyToClipboard(state.user?._id);
                       }}
                       className="copy-bx"
                     >
@@ -299,7 +264,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
                   )}
                   <div className="deposit-crypto">
                     <img src="./alert-01.svg" alt="alert-icon" />
-                    <span>Minimum Deposit: 1 eGold</span>
+                    <span>Minimum Deposit: 1 eGold</span>
                   </div>
                   <div className="deposit-crypto">
                     <img src="./alert-01.svg" alt="alert-icon" />
@@ -308,7 +273,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
                   <div className="deposit_fiat-btn">
                     <button onClick={depositToEliteplay}>
                       {isLoading ? (
-                        <div class="lds-ring">
+                        <div className="lds-ring">
                           <div></div>
                           <div></div>
                           <div></div>
@@ -320,13 +285,13 @@ const WalletComponent = ({ isNavOpen, user }) => {
                     </button>
                   </div>
                   <div className="crypto-notice">
-                      <span className="crypto-notice_notice-head">
-                        NOTICE:{' '}
-                      </span>
-                      <span className="crypto-notice_notice-info">
-                      Please wait for your deposit to reflect 30 mins after transanction. 
-                      </span>
-                    </div>
+                    <span className="crypto-notice_notice-head">
+                      NOTICE:{' '}
+                    </span>
+                    <span className="crypto-notice_notice-info">
+                      Please wait for your deposit to reflect 30 mins after transanction.
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -407,7 +372,7 @@ const WalletComponent = ({ isNavOpen, user }) => {
                     <span className="crypto-notice_notice-info">
                       For security purposes, large or suspicious withdrawal may
                       take 1-3 hours for audit process. We appreciate your
-                      patience! 
+                      patience!
                     </span>
                   </div>
                   <div className="deposit_fiat-btn">
@@ -449,12 +414,12 @@ const WalletComponent = ({ isNavOpen, user }) => {
               </div>
             </div>
           )}
-           {currentSection === 'Earnings' && (
-              <div>
-                <div className="earnings-img_container">
-                  <img src="./game.png" alt="earnings_image" />
-                </div>
+          {currentSection === 'Earnings' && (
+            <div>
+              <div className="earnings-img_container">
+                <img src="./game.png" alt="earnings_image" />
               </div>
+            </div>
           )}
         </div>
       </div>

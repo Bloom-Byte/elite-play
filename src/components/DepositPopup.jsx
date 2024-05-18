@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import './DepositPopup.css';
+import instance from '../utils/api';
 
-const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
+const DepositPopup = ({ onCloseDeposit, user }) => {
   const [depositAmountpop, setDepositAmountpop] = useState(0);
   const [depositAccountIdpop, setDepositAccountIdpop] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -32,35 +33,14 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
   };
 
   const depositToEliteplay = async () => {
-    const url = 'https://be.eliteplay.bloombyte.dev/transactions/deposit';
-    const accessToken = localStorage.getItem('accessToken');
+    const url = '/transactions/deposit';
     setIsLoading(true);
 
-    // if (depositAmountpop < 1) {
-    //   setValidateMessage('Minimum Deposit is 1 eGold');
-    //   setIsLoading(false);
-    //   return;
-    // }
-
-    // const requestBody = {
-    //   amount: depositAmountpop,
-    //   accountId: depositAccountIdpop,
-    // };
-
-    const headers = {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${accessToken}`,
-    };
-
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: headers,
-        // body: requestBody,
-      });
+      const response = await instance.post(url, {});
       console.log(response);
 
-      const responseData = await response.json();
+      const responseData = response.data;
       if (response.status === 201) {
         setSuccessMessage(responseData.data.message);
       } else {
@@ -82,7 +62,7 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
           <h3>Deposit</h3>
           <img
             onClick={() => {
-              setDepositPopupOpen(!depositPopupOpen);
+              onCloseDeposit();
             }}
             src="./cancel-x.svg"
             alt="cancel-close"
@@ -151,12 +131,12 @@ const DepositPopup = ({ depositPopupOpen, setDepositPopupOpen, user }) => {
             </div>
             <div className="depositpopup-min">
               <img src="./alert-01.svg" alt="alert-icon" />
-              <span>Minimum Deposit: 1 eGold</span>
+              <span>Minimum Deposit: 1 eGold</span>
             </div>
             <div className="deposit_fiat-btn">
               <button onClick={depositToEliteplay}>
                 {isLoading ? (
-                  <div class="lds-ring">
+                  <div className="lds-ring">
                     <div></div>
                     <div></div>
                     <div></div>

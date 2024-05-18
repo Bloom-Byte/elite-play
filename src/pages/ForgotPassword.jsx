@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './Login.css';
+import instance from '../utils/api';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
@@ -31,14 +32,14 @@ const ForgotPassword = () => {
     }
 
     try {
-      const response = await axios.post('https://be.eliteplay.bloombyte.dev/user/auth/forgot-password', {
+      await instance.post('/user/auth/forgot-password', {
         email,
       });
 
       setMessage('Reset Email Sent successfully and token will expire in 10 MINS');
     } catch (error) {
       setError(error.response.message);
-    }  finally {
+    } finally {
       setIsLoading(false);
     }
   };
@@ -76,9 +77,9 @@ const ForgotPassword = () => {
               </div>
               {error && <p className='error-msg'>{error}</p>}
               {message && <p className='success-msg'>{message}</p>}
-              
+
               <button className="register-form__submit-btn" type="submit">
-              {isLoading ? <div class="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Reset Password'}
+                {isLoading ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Reset Password'}
               </button>
             </form>
           </div>

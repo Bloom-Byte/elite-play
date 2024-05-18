@@ -1,8 +1,11 @@
 import React, { useState } from 'react';
 import './ReferralSection.css';
+import { useAppContext } from '../hooks/useAppContext';
 
-const ReferralSection = ({ user, isNavOpen, referralInfo, referralCount }) => {
+const ReferralSection = ({ referralInfo, referralCount }) => {
   const [terms, setTerms] = useState(false);
+
+  const { state } = useAppContext();
 
   const copyToClipboard = (text) => {
     const tempInput = document.createElement('input');
@@ -22,9 +25,7 @@ const ReferralSection = ({ user, isNavOpen, referralInfo, referralCount }) => {
   return (
     <>
       <div
-        className={`referral-section ${
-          isNavOpen ? 'referral-section-extended' : ''
-        }`}
+        className={`referral-section`}
       >
         <p className="refer-dashboard">Referral Dashboard</p>
         <div className="referral-details">
@@ -33,7 +34,7 @@ const ReferralSection = ({ user, isNavOpen, referralInfo, referralCount }) => {
               <img src="./pot-coin.svg" alt="coin-icon" />
               <div className="referralpota-txt">
                 <span>Total Rewards</span>
-                <span>eGold 0.00</span>
+                <span>eGold {state.user.totalReferralEarnings}</span>
               </div>
             </div>
             <div className="referralpotb">

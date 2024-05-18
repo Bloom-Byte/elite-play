@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 .dicetable {
-  margin-left: 8rem;
+  
   margin-top: 2rem;
-  margin-right: 5vw;
+  
   margin-bottom: 100px;
 }
 
@@ -138,7 +138,7 @@ tr {
   color: #fff;
   padding: 16px;
   cursor: pointer;
-  transition: all 0.7s var(--ease-in-out);
+  transition: 0.3s;
 }
 
 .randomize-seed button:hover {

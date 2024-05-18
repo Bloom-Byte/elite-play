@@ -1,17 +1,15 @@
 import React, { useState } from 'react';
 import './Livebets.css';
+import { useAppContext } from '../hooks/useAppContext';
 
 const Livebets = ({
-  isNavOpen,
   diceAllBets,
-  diceUserBets,
   crashAllBets,
-  crashUserBets,
 }) => {
-  const [liveBets, setLiveBets] = useState([]);
+  const { state } = useAppContext();
   const [bigBets, setBigBets] = useState(false);
   return (
-    <div className={`livebets ${isNavOpen ? 'livebets-extended' : ''}`}>
+    <div className={`livebets`}>
       <h5>Live Bets</h5>
       <div className="livebets-toggle">
         <button onClick={() => setBigBets(!bigBets)} className={`${bigBets ? 'big-bets' : 'all-bets'}`} >All Bets</button>
@@ -32,7 +30,7 @@ const Livebets = ({
             {bigBets ? (
               <>
                 {Array.isArray(diceAllBets) && diceAllBets.slice(0, 5).map((dice, index) => (
-                  <tr id={index}>
+                  <tr id={index} key={index}>
                     <td className="game-icon">
                       <img src="./dice-color.svg" />{' '}
                       <span className="dice">Dice</span>
@@ -58,7 +56,7 @@ const Livebets = ({
                   </tr>
                 ))}
                 {Array.isArray(crashAllBets) && crashAllBets.slice(0, 5).map((dice, index) => (
-                  <tr id={index}>
+                  <tr id={index} key={index}>
                     <td className="game-icon">
                       <img src="./chart-increase-color.svg" />{' '}
                       <span className="crash">Crash</span>
@@ -113,7 +111,7 @@ const Livebets = ({
                   </tr>
                 ))}
                 {Array.isArray(crashAllBets) &&   crashAllBets.slice(0, 5).map((dice, index) => (
-                  <tr id={index}>
+                  <tr id={index} key={index}>
                     <td className="game-icon">
                       <img src="./chart-increase-color.svg" />{' '}
                       <span className="crash">Crash</span>
@@ -140,206 +138,6 @@ const Livebets = ({
                 ))}
               </>
             )}
-            {/* <tr>
-              <td className="game-icon">
-                <img src="./dice-color.svg" />{' '}
-                <span className="dice">Dice</span>
-              </td>
-              <td>
-                <img src="./twemoji_coin.svg" />{' '}
-                <span className="name">Yuxeer</span>
-              </td>
-              <td>2s</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span>100</span>
-              </td>
-              <td>3.56x</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span className="green">+33600</span>
-              </td>
-            </tr>
-            <tr>
-              <td className="game-icon">
-                <img src="./chart-increase-color.svg" />{' '}
-                <span className="crash">Crash</span>
-              </td>
-              <td>
-                <img src="./twemoji_coin.svg" />{' '}
-                <span className="name">Yuxeer</span>
-              </td>
-              <td>2s</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span>100</span>
-              </td>
-              <td>3.56x</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span className="green">+33600</span>
-              </td>
-            </tr>
-            <tr>
-              <td className="game-icon">
-                <img src="./dice-color.svg" />{' '}
-                <span className="dice">Dice</span>
-              </td>
-              <td>
-                <img src="./twemoji_coin.svg" />{' '}
-                <span className="name">Yuxeer</span>
-              </td>
-              <td>2s</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span>100</span>
-              </td>
-              <td>3.56x</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span className="red">-100</span>
-              </td>
-            </tr>
-            <tr>
-              <td className="game-icon">
-                <img src="./chart-increase-color.svg" />{' '}
-                <span className="crash">Crash</span>
-              </td>
-              <td>
-                <img src="./twemoji_coin.svg" />{' '}
-                <span className="name">Yuxeer</span>
-              </td>
-              <td>2s</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span>100</span>
-              </td>
-              <td>3.56x</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span className="green">+33600</span>
-              </td>
-            </tr>
-            <tr>
-              <td className="game-icon">
-                <img src="./dice-color.svg" />{' '}
-                <span className="dice">Dice</span>
-              </td>
-              <td>
-                <img src="./twemoji_coin.svg" />{' '}
-                <span className="name">Yuxeer</span>
-              </td>
-              <td>2s</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span>100</span>
-              </td>
-              <td>3.56x</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span className="green">+33600</span>
-              </td>
-            </tr>
-            <tr>
-              <td className="game-icon">
-                <img src="./chart-increase-color.svg" />{' '}
-                <span className="crash">Crash</span>
-              </td>
-              <td>
-                <img src="./twemoji_coin.svg" />{' '}
-                <span className="name">Yuxeer</span>
-              </td>
-              <td>2s</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span>100</span>
-              </td>
-              <td>3.56x</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span className="red">-100</span>
-              </td>
-            </tr>
-            <tr>
-              <td className="game-icon">
-                <img src="./chart-increase-color.svg" />{' '}
-                <span className="crash">Crash</span>
-              </td>
-              <td>
-                <img src="./twemoji_coin.svg" />{' '}
-                <span className="name">Yuxeer</span>
-              </td>
-              <td>2s</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span>100</span>
-              </td>
-              <td>3.56x</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span className="red">-100</span>
-              </td>
-            </tr>
-            <tr>
-              <td className="game-icon">
-                <img src="./dice-color.svg" />{' '}
-                <span className="dice">Dice</span>
-              </td>
-              <td>
-                <img src="./twemoji_coin.svg" />{' '}
-                <span className="name">Yuxeer</span>
-              </td>
-              <td>2s</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span>100</span>
-              </td>
-              <td>3.56x</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span className="red">-100</span>
-              </td>
-            </tr>
-            <tr>
-              <td className="game-icon">
-                <img src="./dice-color.svg" />{' '}
-                <span className="dice">Dice</span>
-              </td>
-              <td>
-                <img src="./twemoji_coin.svg" />{' '}
-                <span className="name">Yuxeer</span>
-              </td>
-              <td>2s</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span>100</span>
-              </td>
-              <td>3.56x</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span className="green">+33600</span>
-              </td>
-            </tr>
-            <tr>
-              <td className="game-icon">
-                <img src="./dice-color.svg" />{' '}
-                <span className="dice">Dice</span>
-              </td>
-              <td>
-                <img src="./twemoji_coin.svg" />{' '}
-                <span className="name">Yuxeer</span>
-              </td>
-              <td>2s</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span>100</span>
-              </td>
-              <td>3.56x</td>
-              <td>
-                <img className="coin" src="./cryptocurrency-color_usd.svg" />{' '}
-                <span className="green">+33600</span>
-              </td>
-            </tr> */}
           </tbody>
         </table>
       </div>

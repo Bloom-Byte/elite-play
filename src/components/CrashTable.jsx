@@ -1,11 +1,11 @@
 import React, { useState } from 'react'
 import './CrashTable.css'
 
-const CrashTable = ({ isNavOpen, bets, userBets }) => {
+const CrashTable = ({ bets, userBets }) => {
     const [toggle, setToggle] = useState(false)
     const [userBetsOpen, setUserBetsOpen] = useState(false)
   return (
-    <div className={`dicetable ${isNavOpen ? 'dicetable-extended' : ''}`}>
+    <div className={`dicetable`}>
       <div className="dicebets-toggle">
         <button
           className={`${toggle ? 'desc-info' : 'dice-bets'}`}

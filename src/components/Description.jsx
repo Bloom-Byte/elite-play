@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import './Description.css';
+import { useAppContext } from '../hooks/useAppContext';
 
-const Description = ({ isNavOpen }) => {
+const Description = () => {
+  const { state } = useAppContext();
   const [vipDetails, setVipDetails] = useState(false);
 
   return (
-    <div className={`desc ${isNavOpen ? 'desc-extended' : ''}`}>
+    <div className={`desc`}>
       <h5>Eliteplay- Dice and Crash</h5>
       <p>
         Eliteplay beckons you into a world of thrilling dice games and

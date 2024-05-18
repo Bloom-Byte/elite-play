@@ -1,8 +1,13 @@
-import React, { useState, useRef, useEffect  } from 'react';
-import axios from 'axios';
+import React, { useState, useRef, useEffect } from 'react';
 import './DiceGame.css';
+import instance from '../utils/api';
+import { useAppContext } from '../hooks/useAppContext';
+import { useDisclosure } from '../hooks/useDisclosure';
+import { isElementClassOrChildOf } from '../utils/dom';
+import { Link } from 'react-router-dom';
+import { useUpdateUser } from '../hooks/useUpdateUser';
 
-const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
+const DiceGame = ({ userBets, bets }) => {
   const [auto, setAuto] = useState(false);
   const [fairness, setFairness] = useState(false);
   const [livebet, setLivebet] = useState(false);
@@ -21,9 +26,14 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
     resetLose: 50,
   });
   const dropdownRef = useRef(null);
+  const openTutorialRef = useRef(null);
   const [userSeed, setUserSeed] = useState('');
   const [serverSeed, setServerSeed] = useState('')
-  const accessToken = localStorage.getItem('accessToken');
+
+  const { isOpen: isOpenLiveGames, onOpen: onOpenLiveGames, onClose: onCloseLiveGames } = useDisclosure();
+  const { isOpen: isOpenFair, onOpen: onOpenFair, onClose: onCloseFair } = useDisclosure();
+
+  const { state } = useAppContext();
 
   function generateRandomToken(length) {
     const charset = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -37,21 +47,13 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
   }
 
   function getserverToken() {
-    const url = `https://be.eliteplay.bloombyte.dev/game/randomize-server-seed`;
-    const headers = {
-      Authorization: `Bearer ${accessToken}`,
-      'Content-Type': 'application/json', // Make sure to set the Content-Type header
-    };
-  
-    fetch(url, {
-      method: 'POST',
-      headers: headers,
-    })
+    const url = `/game/randomize-server-seed`;
+    instance.post(url)
       .then((response) => {
-        if (!response.ok) {
+        if (!(response.status === 200 || response.status === 201)) {
           throw new Error('Failed to randomize server seed');
         }
-        return response.json();
+        return response.data;
       })
       .then((data) => {
         setServerSeed(data.message);
@@ -70,24 +72,17 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        tutorial &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
+        event.target.id !== 'tutorialButton' &&
+        !isElementClassOrChildOf(event.target, 'tutorial-dropdown-crash')
       ) {
         setTutorial(false);
       }
     };
 
-    if (tutorial) {
-      // Only attach the listener if the dropdown is open
-      window.addEventListener('mousedown', handleClickOutside);
-    }
+    window.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      if (tutorial) {
-        // Only remove the listener if it was previously added
-        window.removeEventListener('mousedown', handleClickOutside);
-      }
+      window.removeEventListener('mousedown', handleClickOutside);
     };
   }, [tutorial]);
 
@@ -99,7 +94,7 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
 
   const updateBetAmount = (amount) => {
     if (amount >= 1 && amount <= 1000000000) {
-        setBetAmount(amount)
+      setBetAmount(amount)
     }
   }
 
@@ -108,6 +103,12 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
       setBetAmount(event.target.value);
     }
   };
+
+  const handleNumBets = (event) => {
+    if (event.target.value >= 1 && event.target.value <= 1000000000) {
+      setNumBets(parseInt(event.target.value));
+    }
+  }
 
   const handleToggleInfinity = () => {
     setIsInfinity(!isInfinity);
@@ -135,11 +136,14 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
     sound.play();
   }
 
+  const updateUser = useUpdateUser();
+
   function placeBet(isAutoBet) {
-    const url = `https://be.eliteplay.bloombyte.dev/game/place-bet`;
+    const token = generateRandomToken(36);
+    const url = `/game/place-bet`;
     const pay = Number((100 / diceRoll).toFixed(4));
 
-    if (!user | user?.balance < betAmount) {
+    if (!state.user | state.user?.balance < betAmount) {
       setAutoBet(false);
       alert("Balance low, Deposit Please")
       return
@@ -153,18 +157,15 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
       targetValue: Number(diceRoll),
       payout: pay,
       serverSeed: serverSeed,
-      clientSeed: userSeed
-    };
-    const headers = {
-      Authorization: `Bearer ${accessToken}`,
+      clientSeed: token,
     };
 
-    axios
-      .post(url, data, { headers })
+    instance.post(url, data)
       .then((response) => {
         if (response.status === 201) {
           setDiceGameResponse(response.data)
           setDiceRoll(response.data.roll)
+          updateUser();
         } else {
           throw new Error('Failed to place bet');
         }
@@ -196,23 +197,21 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
   }, [autoBet]);
 
   return (
-    <div className={`dicegame ${isNavOpen ? 'dicegame-extended' : ''}`}>
+    <div className={`dicegame`}>
       <div className="dicegame-buttons">
         <button className="dicegame-dice-title">Dice</button>
         <button
           onClick={() => {
-            setLivebet(!livebet);
+            onOpenLiveGames();
           }}
         >
-          {' '}
           <img src="./Exclude.svg" alt="icon" /> Live Games
         </button>
         <button
           onClick={() => {
-            setFairness(!fairness);
+            onOpenFair();
           }}
         >
-          {' '}
           <img
             className="dicegame-fairnesslogo"
             src="./fairness.svg"
@@ -220,19 +219,50 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
           />{' '}
           Fairness Checker
         </button>
-        <button
-          onClick={() => {
-            setTutorial(!tutorial);
-          }}
-        >
-          {' '}
-          <img
-            className="dicegame-fairnesslogo"
-            src="./book-open-01.svg"
-            alt="fairness"
-          />{' '}
-          Tutorial
-        </button>
+        <div
+          style={{
+            position: 'relative',
+          }}>
+          <button
+            id="tutorialButton"
+            ref={openTutorialRef}
+            onClick={() => {
+              setTutorial(!tutorial);
+            }}
+          >
+            {' '}
+            <img
+              className="dicegame-fairnesslogo"
+              src="./book-open-01.svg"
+              alt="fairness"
+            />{' '}
+            Tutorial
+          </button>
+
+          {tutorial && (
+            <div
+              className={`tutorial-dropdown-crash`} ref={dropdownRef}
+            >
+              <div className="tutorial-dropdown-content">
+                <Link to="/dicebeginner">Beginners Guide</Link>
+                <p>
+                  Learn the basics here. <br /> How to play dice gambling, and how
+                  to roll dice?
+                </p>
+                <Link to="/dicestrategy">Strategies</Link>
+                <p>
+                  Some popular winning strategies for bitcoin dice can be found
+                  here.
+                </p>
+                <Link to="/diceautomation">Automation Scripts</Link>
+                <p>
+                  Running scripts is an advanced way to play bitcoin dice that
+                  presumably offers easier wins.
+                </p>
+              </div>
+            </div>
+          )}
+        </div>
       </div>
       <div className="dicegame-gamesection">
         <div className="dicegame-placebet">
@@ -309,7 +339,7 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
                   <input
                     type="text"
                     value={isInfinity ? '∞' : numBets}
-                    // onChange={handleBetAmount}
+                    onChange={handleNumBets}
                   />
                 </div>
                 <div className="dicegame-placebet__amount-toggle">
@@ -483,7 +513,9 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
                     {(betAmount * (100 / diceRoll)).toFixed(2)}
                   </span>
                 </div>
-                <button onClick={() => placeBet(false)} className="dicegame-rollnow">
+                <button onClick={() => {
+                  placeBet(false);
+                }} className="dicegame-rollnow">
                   Roll Now
                 </button>
               </div>
@@ -493,12 +525,12 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
         <div className="dicegame-diceroll">
           <div className="dicegame-diceroll__odds">
             {userBets.map((bet, index) => {
-              <span className={bet.betStatus === 'win' ? 'dicegame-diceroll__odds-active' : ''}>{bet.payout}</span>
+              <span key={index} className={bet.betStatus === 'win' ? 'dicegame-diceroll__odds-active' : ''}>{bet.payout}</span>
             })}
           </div>
-          <div style={{marginLeft: diceRoll-5+'%'}} className="dicegame-diceroll__die">
+          <div style={{ marginLeft: diceRoll - 5 + '%' }} className="dicegame-diceroll__die">
             <img src="./dice-cube.png" alt="die" />
-            <span className={`${diceGameResponse?.betStatus === 'win' ? 'green' : ''} ${diceGameResponse?.betStatus === 'loss' ? 'red' : ''} ${chatOpen ? 'center-cube' : ''}`} >{diceRoll}</span>
+            <span className={`${diceGameResponse?.betStatus === 'win' ? 'green' : ''} ${diceGameResponse?.betStatus === 'loss' ? 'red' : ''} ${state.chatOpen ? 'center-cube' : ''}`} >{diceRoll}</span>
           </div>
           <div className="dicegame-diceroll__range">
             <input
@@ -525,10 +557,10 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
               </div>
             </div>
             <div className="dicegame-diceroll__outer-box">
-              <p>{rollover? 'Roll Over' : 'Roll Under'}</p>
+              <p>{rollover ? 'Roll Over' : 'Roll Under'}</p>
               <div className="dicegame-diceroll__box-info dicegame-diceroll-rollover">
                 <span>{diceRoll}</span>
-                <img onClick={() => setRollover(!rollover)} style={{cursor: 'pointer'}} src="./rollover.svg" alt="rollover" />
+                <img onClick={() => setRollover(!rollover)} style={{ cursor: 'pointer' }} src="./rollover.svg" alt="rollover" />
               </div>
             </div>
             <div className="dicegame-diceroll__outer-box">
@@ -541,14 +573,14 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
           </div>
         </div>
       </div>
-      {fairness && (
+      {isOpenFair && (
         <div className="editusername-popup">
           <div className="editusername-popup_container">
             <div className="editusername-popup_header">
               <p>Fairness</p>
               <span
                 onClick={() => {
-                  setFairness(!fairness);
+                  onCloseFair();
                 }}
                 className="close email-close"
               >
@@ -569,42 +601,42 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
                   <div className="randomize-seedbox">
                     <p>{userSeed}</p>
                   </div>
-                  <button style={{cursor: 'pointer'}} onClick={() => {generateRandomToken(36)}}>Randomize</button>
+                  <button style={{ cursor: 'pointer' }} onClick={() => { generateRandomToken(36) }}>Randomize</button>
                 </div>
                 <p>Server Seed (Hashed)</p>
                 <div className="randomize-seed">
                   <div className="randomize-seedbox">
                     <p>
-                     {serverSeed}
+                      {serverSeed}
                     </p>
                   </div>
-                  <button style={{cursor: 'pointer'}} onClick={getserverToken}>Randomize</button>
+                  <button style={{ cursor: 'pointer' }} onClick={getserverToken}>Randomize</button>
                 </div>
 
                 <p style={{ textAlign: 'center', marginTop: '20px' }}>
                   To learn more information about our provably fair system,
-                  please check our 
-                  <a
-                    href="/helpcenter"
+                  please check our
+                  <Link
+                    to="/helpcenter"
                     style={{ color: '#88DF95', textDecoration: 'none' }}
                   >
                     Help Center
-                  </a>
-                   Page.
+                  </Link>
+                  Page.
                 </p>
               </div>
             </div>
           </div>
         </div>
       )}
-      {livebet && (
+      {isOpenLiveGames && (
         <div className="editusername-popup">
           <div className="editusername-popup_container">
             <div className="editusername-popup_header">
               <p>Live Bet</p>
               <span
                 onClick={() => {
-                  setLivebet(!livebet);
+                  onCloseLiveGames();
                 }}
                 className="close email-close"
               >
@@ -701,31 +733,6 @@ const DiceGame = ({ isNavOpen, user, userBets, chatOpen, bets }) => {
                 </tbody>
               </table>
             </div>
-          </div>
-        </div>
-      )}
-      {tutorial && (
-        <div
-          className={`tutorial-dropdown ${
-            isNavOpen ? 'tutorial-dropdown-open' : ''
-          }`} ref={dropdownRef}
-        >
-          <div className="tutorial-dropdown-content">
-            <a href="/dicebeginner">Beginners Guide</a>
-            <p>
-              Learn the basics here. <br /> How to play dice gambling, and how
-              to roll dice?
-            </p>
-            <a href="/dicestrategy">Strategies</a>
-            <p>
-              Some popular winning strategies for bitcoin dice can be found
-              here.
-            </p>
-            <a href="/diceautomation">Automation Scripts</a>
-            <p>
-              Running scripts is an advanced way to play bitcoin dice that
-              presumably offers easier wins.
-            </p>
           </div>
         </div>
       )}

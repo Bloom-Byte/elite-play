@@ -1,0 +1,29 @@
+body {
+  font-family: 'Manrope', sans-serif;
+  overflow-x: hidden;
+  box-sizing: border-box !important;
+}
+
+:root {
+  box-sizing: border-box !important;
+}
+
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+ 
+::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(253, 244, 244, 0.36);
+}
+ 
+::-webkit-scrollbar-thumb {
+  background-color: gray;
+  outline: 1px solid transparent;
+  border-radius: 10px;
+}
+
+.chatroom-popup::-webkit-scrollbar {
+  width: 0px;
+  height: 0px;
+}

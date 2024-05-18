@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import './HelpCenterSection.css';
 
-const HelpCenterSection = ({ isNavOpen }) => {
+const HelpCenterSection = () => {
   const [currentSection, setCurrentSection] = useState('provably fair');
   const [gameType, setGameType] = useState('dice');
 
@@ -10,7 +10,7 @@ const HelpCenterSection = ({ isNavOpen }) => {
   };
 
   return (
-    <div className={`help-center ${isNavOpen ? 'help-center-extended' : ''}`}>
+    <div className={`help-center`}>
       <div className="help-center-header">
         <span>Help Center</span>
       </div>

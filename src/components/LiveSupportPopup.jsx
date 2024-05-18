@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import './LiveSupportPopup.css';
+import instance from '../utils/api';
 
-const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
+const LiveSupportPopup = ({ onCloseLive }) => {
   const [currentTab, setCurrentTab] = useState(0);
   const [details, setDetails] = useState('');
   const [error, setError] = useState('');
   const [tickets, setTickets] = useState('');
   const [userSupportInfo, setUserSupportInfo] = useState(null);
-  const accessToken = localStorage.getItem('accessToken');
 
   const handleDetailsChange = (event) => {
     setDetails(event.target.value);
@@ -19,27 +19,20 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
       return;
     }
 
-    const url = 'https://be.eliteplay.bloombyte.dev/support';
+    const url = '/support';
 
     const payload = {
       details: details,
     };
 
     try {
-      const response = await fetch(url, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${accessToken}`,
-        },
-        body: JSON.stringify(payload),
-      });
+      const response = await instance.post(url, payload);
 
-      if (!response.ok) {
+      if (response.status !== 201) {
         throw new Error('Failed to create support ticket');
       }
 
-      const responseData = await response.json();
+      const responseData = response.data;
       console.log('New support ticket created:', responseData);
     } catch (error) {
       console.error('Error:', error);
@@ -50,18 +43,13 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
   useEffect(() => {
     const fetchUserSupportInfo = async () => {
       try {
-        const response = await fetch('https://be.eliteplay.bloombyte.dev/support/user/all', {
-          method: 'GET',
-          headers: {
-            Authorization: `Bearer ${accessToken}`,
-          },
-        });
+        const response = await instance.get('/support/user/all');
 
-        if (!response.ok) {
+        if (response.status === 200) {
           throw new Error('Failed to fetch user support information');
         }
 
-        const data = await response.json();
+        const data = response.data;
         console.log(data)
         setUserSupportInfo(data);
       } catch (error) {
@@ -88,7 +76,7 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                   <img
                     className="livesupport-cancel"
                     onClick={() => {
-                      setLiveSupport(!liveSupport);
+                      onCloseLive();
                     }}
                     src="./cancel-x.svg"
                     alt="cancel"
@@ -194,7 +182,7 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                   <img
                     className="livesupport-cancel"
                     onClick={() => {
-                      setLiveSupport(!liveSupport);
+                      onCloseLive();
                     }}
                     src="./cancel-x.svg"
                     alt="cancel"
@@ -279,7 +267,7 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                   <img
                     className="livesupport-cancel"
                     onClick={() => {
-                      setLiveSupport(!liveSupport);
+                      onCloseLive();
                     }}
                     src="./cancel-x.svg"
                     alt="cancel"
@@ -428,7 +416,7 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                     <img
                       className="livesupport-cancel"
                       onClick={() => {
-                        setLiveSupport(!liveSupport);
+                        onCloseLive();
                       }}
                       src="./cancel-black.svg"
                       alt="cancel"
@@ -518,7 +506,7 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                   <img
                     className="livesupport-cancel"
                     onClick={() => {
-                      setLiveSupport(!liveSupport);
+                      onCloseLive();
                     }}
                     src="./cancel-x.svg"
                     alt="cancel"
@@ -569,7 +557,7 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                   <img
                     className="livesupport-cancel"
                     onClick={() => {
-                      setLiveSupport(!liveSupport);
+                      onCloseLive();
                     }}
                     src="./cancel-x.svg"
                     alt="cancel"
@@ -725,7 +713,7 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                     <img
                       className="livesupport-cancel"
                       onClick={() => {
-                        setLiveSupport(!liveSupport);
+                        onCloseLive();
                       }}
                       src="./cancel-black.svg"
                       alt="cancel"
@@ -734,7 +722,7 @@ const LiveSupportPopup = ({ liveSupport, setLiveSupport }) => {
                 </div>
                 <div className="help-center_blog-info">
                   <h1>ETH Deposit</h1>
-                  <p>Made a ETH deposit, but it didn't credit</p>
+                  <p>Made a ETH deposit, but it didn&apos;t credit</p>
                   <div className="writer-info">
                     <img src="./writer.png" alt="writer-icon" />
                     <div className="writer-info-txt">

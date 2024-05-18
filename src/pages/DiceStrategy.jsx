@@ -5,14 +5,12 @@ import Footer from '../components/Footer';
 import DiceStrategyComponent from '../components/DiceStrategyComponent';
 
 const DiceStrategy = () => {
-  const [isNavOpen, setIsNavOpen] = useState(true);
 
   return (
-    <div>
-      <Navbar isNavOpen={isNavOpen} />
-      <Sidenav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
-      <DiceStrategyComponent isNavOpen={isNavOpen} />
-      <Footer isNavOpen={isNavOpen} />
+    <div style={{
+      padding: '0 20px',
+    }}>
+      <DiceStrategyComponent />
     </div>
   );
 };

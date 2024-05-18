@@ -1,9 +1,9 @@
 import React from 'react';
 import './DiceAutomationComponent.css';
 
-const DiceAutomationComponent = ({ isNavOpen }) => {
+const DiceAutomationComponent = () => {
   return (
-    <div className={`dicetutorial ${isNavOpen ? 'dicetutorial-extended' : ''}`}>
+    <div className={`dicetutorial`}>
       <div className="dicetutorial-hero">
         <h1>
           Guide: BGuide: Bitcoin Dice Script & Bots | Enhancing Your Gambling

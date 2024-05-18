@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import { isLoggedIn } from '../utils/auth';
 import ProfileDropdown from './ProfileDropdown';
 import NotificationsPopup from './NotificationsPopup';
@@ -10,83 +9,94 @@ import LiveSupportPopup from './LiveSupportPopup';
 import VIPPopup from './VIPPopup';
 import LanguagePopup from './LanguagePopup';
 import './Navbar.css';
+import { useAppContext } from '../hooks/useAppContext';
+import { useNav } from '../hooks/useUtils';
+import { Link } from 'react-router-dom';
+import { useDisclosure } from '../hooks/useDisclosure';
 
-const Navbar = ({ isNavOpen, user, chatOpen, setChatOpen, setIsNavOpen }) => {
+const Navbar = () => {
   const userIsLoggedIn = isLoggedIn();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [notificationsPopupOpen, setNotificationsPopupOpen] = useState(false);
-  const [depositPopupOpen, setDepositPopupOpen] = useState(false);
+
   const [currencyDropdownOpen, setCurrencyDropdownOpen] = useState(false);
   const [liveSupport, setLiveSupport] = useState(false);
   const [vipSupport, setVipSupport] = useState(false);
   const [languagePopup, setLanguagePopup] = useState(false);
 
+  const { state } = useAppContext();
+  const { toggleNav } = useNav();
+
+  const { isOpen: isOpenDeposit, onClose: onCloseDeposit, onOpen: onOpenDeposit } = useDisclosure();
 
   return (
     <>
       <div className="nav">
-        <div className={`nav-games ${isNavOpen ? 'nav-expanded' : ''} ${chatOpen ? 'min-page-chat' : ''}`}>
-          <div style={{ display: 'none' }} className="sidenav__icon">
+        <div className={`nav-games ${state.isNavOpen ? 'nav-expanded' : ''} ${state.chatOpen ? 'min-page-chat' : ''}`}>
+          <div className="nav__icon">
             <img
               className="nav-icon"
-              onClick={() => setIsNavOpen(!isNavOpen)}
+              onClick={() => toggleNav()}
               src="./menu-01.svg"
               alt="close-icon"
             />
-            <a href="/">
-              {' '}
+            <Link to="/">
               <img className="nav-logo" src="./eliteplay.svg" alt="logo" />
-            </a>
+            </Link>
           </div>
-          <a style={{ textDecoration: 'none' }} href="/dice">
+        </div>
+
+        <div className='navItems'>
+          <Link to="/dice" style={{ textDecoration: 'none' }}>
             <div className="nav-games__dice">
               <img src="./dice.svg" alt="dice-logo" />
               <span>Dice</span>
             </div>
-          </a>
-
-          <a style={{ textDecoration: 'none' }} href="/crash">
+          </Link>
+          <Link to="/crash" style={{ textDecoration: 'none' }}>
             <div className="nav-games__dice">
               <img src="./chart-increase.svg" alt="chart-logo" />
               <span>Crash</span>
             </div>
-          </a>
+          </Link>
         </div>
 
         {userIsLoggedIn ? (
-          <div>
-            <div className="nav-loggedin">
-              <div className="nav-wallet">
-                <div
-                  onClick={() => {
-                    setCurrencyDropdownOpen(!currencyDropdownOpen);
-                  }}
-                  className="nav-wallet_info"
-                >
-                  <img src="./twemoji_coin.svg" alt="coin" />
-                  <span>{(user?.balance) ? Number(user?.balance).toFixed(5) : ''}</span>
-                  <img src="./down-arrow.svg" alt="arrow" />
-                </div>
-
-                <div
-                  onClick={() => {
-                    setDepositPopupOpen(!depositPopupOpen);
-                  }}
-                  style={{ cursor: 'pointer' }}
-                  className="nav-wallet_deposit"
-                >
-                  <img src="./wallet-02.svg" alt="deposit" />
-                  <span>Deposit</span>
-                </div>
-              </div>
+          <div className="nav-loggedin" style={{
+            marginLeft: 'auto',
+          }}>
+            <div className="nav-wallet">
               <div
-                style={{ cursor: 'pointer' }}
                 onClick={() => {
-                  setNotificationsPopupOpen(!notificationsPopupOpen);
+                  setCurrencyDropdownOpen(!currencyDropdownOpen);
                 }}
+                className="nav-wallet_info"
               >
-                <img src="./not-bell.svg" alt="notification icon" />
+                <img src="./twemoji_coin.svg" alt="coin" />
+                <span>{(state.user?.balance) ? Number(state.user?.balance).toFixed(5) : ''}</span>
+                <img src="./down-arrow.svg" alt="arrow" />
               </div>
+
+              <div
+                onClick={() => {
+                  onOpenDeposit();
+                }}
+                style={{ cursor: 'pointer' }}
+                className="nav-wallet_deposit"
+              >
+                <img src="./wallet-02.svg" alt="deposit" />
+                <span>Deposit</span>
+              </div>
+            </div>
+            <div
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                setNotificationsPopupOpen(!notificationsPopupOpen);
+              }}
+            >
+              <img src="./not-bell.svg" alt="notification icon" />
+            </div>
+            <div className='nav-profile-button' style={{ position: 'relative' }}>
               <div
                 onClick={() => {
                   setIsProfileDropdownOpen(!isProfileDropdownOpen);
@@ -95,46 +105,44 @@ const Navbar = ({ isNavOpen, user, chatOpen, setChatOpen, setIsNavOpen }) => {
               >
                 <img
                   style={{ borderRadius: '50%', width: '40px', height: '40px' }}
-                  src={`${
-                    user?.profilePictureUrl
-                      ? user.profilePictureUrl
-                      : './placeholder-profile-img.jpg'
-                  }`}
+                  src={`${state.user?.profilePictureUrl
+                    ? state.user.profilePictureUrl
+                    : './placeholder-profile-img.jpg'
+                    }`}
                   alt="profile-img"
                 />
                 <img src="./down-arrow.svg" alt="arrow" />
               </div>
+              {isProfileDropdownOpen && <ProfileDropdown isOpen={isProfileDropdownOpen} setIsOpen={setIsProfileDropdownOpen} user={state.user} />}
             </div>
           </div>
         ) : (
           <>
             <div className="nav-auth">
-              <a style={{ textDecoration: 'none'}} href="/login">
+              <Link to="/login" style={{ textDecoration: 'none' }}>
                 <button className="nav-auth__signin">Sign In</button>
-              </a>
-              <a style={{ textDecoration: 'none'}} href="/register">
+              </Link>
+              <Link to="/register" style={{ textDecoration: 'none' }}>
                 <button className="nav-auth__signup">Sign Up</button>
-              </a>
+              </Link>
             </div>
           </>
         )}
       </div>
-      {isProfileDropdownOpen && <ProfileDropdown isOpen={isProfileDropdownOpen} setIsOpen={setIsProfileDropdownOpen} user={user} />}
       {notificationsPopupOpen && (
         <NotificationsPopup
           notificationsPopupOpen={notificationsPopupOpen}
           setNotificationsPopupOpen={setNotificationsPopupOpen}
         />
       )}
-      {depositPopupOpen && (
+      {isOpenDeposit && (
         <DepositPopup
-          depositPopupOpen={depositPopupOpen}
-          setDepositPopupOpen={setDepositPopupOpen}
-          user={user}
+          onCloseDeposit={onCloseDeposit}
+          user={state.user}
         />
       )}
-      {currencyDropdownOpen && <CurrencyDropdown isOpen={currencyDropdownOpen} setIsOpen={setCurrencyDropdownOpen} balance={user?.balance} />}
-      {chatOpen && <ChatPopup chatOpen={chatOpen} setChatOpen={setChatOpen} />}
+      {currencyDropdownOpen && <CurrencyDropdown isOpen={currencyDropdownOpen} setIsOpen={setCurrencyDropdownOpen} balance={state.user?.balance} />}
+      {state.chatOpen && <ChatPopup />}
       {liveSupport && (
         <LiveSupportPopup
           liveSupport={liveSupport}
