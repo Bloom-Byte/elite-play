@@ -1,5 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
- 
+
 .chatroom-popup {
   position: fixed;
   top: 0;
@@ -10,15 +10,15 @@
   height: calc(100vh - 5rem);
   margin-top: 5rem;
   width: 300px;
-} 
+}
 
 .chatroom-popup.open {
   transform: translateX(0);
 }
 
-.chatroom-popup-popup_container { 
+.chatroom-popup-popup_container {
   height: 100%;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 
 .chatroom-popup_header {
@@ -39,25 +39,27 @@
 }
 
 .chatroom-btn {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .arrow {
-    cursor: pointer;
-    background-color: #070c0a;
-    border-radius: 6px;
-    padding: 9px;
-    color: white;
-    height: 30px;
-    width: 30px;
+  cursor: pointer;
+  background-color: #070c0a;
+  border-radius: 6px;
+  padding: 9px;
+  color: white;
+  height: 30px;
+  width: 30px;
 }
 
 .chatroom-maincontent {
   display: flex;
   gap: 10px;
   padding: 20px;
-  width: 230px;
+  justify-content: space-between;
+  max-height: calc(100vh - 5rem - 56px - 72px - .5rem);
+  overflow-y: scroll;
 }
 
 .chatroom_languages {
@@ -72,11 +74,14 @@
 .chatroom-chatbox__container {
   background-color: #070c0a;
   border-radius: 6px;
-  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
 .minimized {
-    max-height: 40vh;
+  max-height: 40vh;
 }
 
 .chatroom_language {
@@ -84,7 +89,7 @@
 }
 
 .chatroom_language img {
-    margin-left: 8px;
+  margin-left: 8px;
 }
 
 .chatroom_language-active {
@@ -100,43 +105,55 @@
 }
 
 .chatroom-chatbox {
-    display: flex;
-    gap: 20px;
-    margin: 40px 0px;
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  gap: 3px;
 }
 
-.chatroom-chat-txt {
-    background-color: #0B281F;
-    padding: 14px;
-    border-radius: 8px;
-    max-width: 396px;
+.chatroom-message-content {
+  display: flex;
+  gap: 10px;
 }
 
-.chatroom-chat-txt span {
-    color: #ffffff;
-    font-size: 14px;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 400;
-}
-
-.chatroom-user-profile {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.chatroom-user-profile span {
-    color: #ffffff;
-    font-size: 14px;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 600;
-    margin-top: -10px;
-}
-
-.chatroom-user-profile img {
+.chatroom-message-content img {
   border-radius: 50%;
   width: 40px;
   height: 40px;
+}
+
+.chatroom-chat-txt {
+  background-color: #0B281F;
+  padding: 14px;
+  border-radius: 8px;
+  flex: 1;
+  border-top-left-radius: 0;
+}
+
+.chatroom-chat-txt span {
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+}
+
+.chatroom-user-profile {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatroom-user-profile span {
+  color: #ffffff;
+  font-size: 14px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+}
+.chatroom-user-profile span:last-child {
+  color: #9E9EA2;
+  font-size: 12px;
+  font-weight: 400;
 }
 
 .chatroom-input {
@@ -148,33 +165,40 @@
   width: 100%;
   justify-content: center;
   padding: 8px;
+  background: #0B281F;
 }
 
 .chatroom-input input {
-    background-color: #070C0A;
-    padding: 14px;
-    border: 2px solid #88DF95;
-    border-radius: 6px;
-    color: white;
+  background-color: #070C0A;
+  padding: 14px;
+  border: 2px solid #88DF95;
+  border-radius: 6px;
+  color: white;
+  flex: 1;
 }
 
 .chatroom-input input:focus {
-    outline: none;
-    border: 2px solid #24E3A1;
+  outline: none;
+  border: 2px solid #24E3A1;
 }
 
 .chatroom-input button {
-    background:  rgb(11, 40, 31);
-    border: 1px transparent;
-    border-radius: 6px;
-    color: #fff;
-    /* padding: 8px 16px; */
-    cursor: pointer;
-    transition: 0.3s;
+  background: rgb(11, 40, 31);
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+  border-radius: var(--button-xl-border-radius, 6px);
+  background: conic-gradient(from 0deg at 50% 50%, #88DF95 0deg, #01252C 360deg);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.00) inset;
+  flex: 1;
+  max-width: 50px;
+  display: grid;
+  place-items: center;
 }
 
 .user-tag {
-    color: #88DF95 !important;
+  color: #88DF95 !important;
 }
 
 .chatmsg-error {

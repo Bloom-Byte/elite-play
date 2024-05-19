@@ -1,10 +1,8 @@
-import { isLoggedIn } from '../utils/auth';
 import './Hero.css';
 import { useAppContext } from '../hooks/useAppContext';
 import { Link } from 'react-router-dom';
 
 const Hero = () => {
-  const userIsLoggedIn = isLoggedIn();
 
   const { state } = useAppContext();
 
@@ -14,7 +12,7 @@ const Hero = () => {
         style={{ backgroundImage: 'url("/elite-bg.svg")' }}
         className={`home-hero`}
       >
-        {userIsLoggedIn ? (
+        {state.user ? (
           <div className="home-hero__user-info">
             <h4 className="vip-progress-head">Welcome Back, {state.user?.name}</h4>
             <div className="home-hero__user-info-box">

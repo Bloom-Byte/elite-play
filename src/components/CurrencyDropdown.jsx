@@ -1,7 +1,8 @@
-import React, { useState, useRef, useEffect  } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import './CurrencyDropdown.css';
+import { isElementClassOrChildOf } from '../utils/dom';
 
-const CurrencyDropdown = ({balance, isOpen, setIsOpen}) => {
+const CurrencyDropdown = ({ balance, isOpen, setIsOpen }) => {
 
   const [viewInFiat, setViewInFiat] = useState(false);
   const exchangeRate = 40;
@@ -16,38 +17,31 @@ const CurrencyDropdown = ({balance, isOpen, setIsOpen}) => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        isOpen &&
-        dropdownRef.current &&
-        !dropdownRef.current.contains(event.target)
+        !isElementClassOrChildOf(event.target, 'nav-wallet_info') &&
+        !isElementClassOrChildOf(event.target, 'currencydropdown')
       ) {
         setIsOpen(false);
       }
     };
 
-    if (isOpen) {
-      // Only attach the listener if the dropdown is open
-      window.addEventListener('mousedown', handleClickOutside);
-    }
+    window.addEventListener('mousedown', handleClickOutside);
 
     return () => {
-      if (isOpen) {
-        // Only remove the listener if it was previously added
-        window.removeEventListener('mousedown', handleClickOutside);
-      }
+      window.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen]);
-  
+  }, [setIsOpen]);
+
   return (
-    <div className="currencydropdown" ref={dropdownRef}>
+    <div className={`currencydropdown ${isOpen ? 'active' : ''}`} ref={dropdownRef}>
       <div className="currencydropdown-content">
-        <p className="currencytitle">Currencys</p>
+        <p className="currencytitle">Currency</p>
         <div className="currencydropdown-details">
           <div className="currencydropdown-coin">
             <img src="./twemoji_coin.svg" alt="coin" />
             <span>eGold</span>
           </div>
           <div className="currencydropdown-amount">
-          <span>{viewInFiat ? `USD ${displayBalance}` : `${displayBalance}`}</span>
+            <span>{viewInFiat ? `USD ${displayBalance}` : `${displayBalance}`}</span>
           </div>
         </div>
         <div className='togglecurrencyview'>

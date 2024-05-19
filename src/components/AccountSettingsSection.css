@@ -30,39 +30,36 @@
 }
 
 .account-settings__main-sections {
-  flex: 2;
+  flex: 3;
 }
 
 .account-settings__section {
   background-color: #0b1210;
   padding: 20px;
   margin-bottom: 25px;
+  border-radius: 6px;
 }
 
 .account-settings__nav {
-  padding: 8px;
+  padding: 12px;
   cursor: pointer;
-}
-
-.account-settings__nav img {
-  margin-right: 10px;
-  margin-bottom: -5px;
+  display: flex;
+  gap: 10px;
+  transition: .3s;
+  color: #6e6e71;
 }
 
 .account-settings__nav span {
   font-family: 'Manrope', sans-serif;
   font-size: 14px;
   font-weight: 600;
-  color: #6e6e71;
 }
 
-.account-settings__nav-active {
+.account-settings__nav-active,
+.account-settings__nav:hover {
   background-color: #0b281f;
   border-radius: 6px;
-}
-
-.account-settings__nav-active span {
-  color: white !important;
+  color: white;
 }
 
 .main-profile-info-box button {
@@ -77,11 +74,13 @@
   color: #ffffff;
   align-self: center;
   cursor: pointer;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .main-profile-info-box button img {
-  margin-left: 5px;
-  margin-bottom: -2px;
 }
 
 .email-verify_container button img {
@@ -98,7 +97,7 @@
 
 .account-setting-header {
   background-color: #070c0a;
-  width: 116px;
+  width: fit-content;
   padding: 8px 20px;
   margin-bottom: 24px;
   border-radius: 6px;
@@ -126,6 +125,7 @@
   display: flex;
   padding: 8px;
   gap: 20px;
+  align-items: center;
 }
 
 .username_details h2 {
@@ -166,7 +166,7 @@
   font-size: 16px;
   font-weight: 400;
   color: #c5c5c7;
-  margin-top: 3rem;
+  margin-top: 2rem;
 }
 
 .email-txt {
@@ -178,8 +178,6 @@
 }
 
 .email-txt img {
-  margin-left: 1rem;
-  margin-bottom: -4px;
 }
 
 .email-txt span {
@@ -205,6 +203,13 @@
   background-color: #070c0a;
   padding: 16px;
   border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.security_one-box img {
+  width: 32px;
 }
 
 .security_one-box h4 {
@@ -212,6 +217,7 @@
   font-size: 14px;
   font-weight: 600;
   color: #ffffff;
+  margin-bottom: 10px;
 }
 
 .security_one-box p {
@@ -226,7 +232,6 @@
   border: 1px solid #0b1210;
   border-radius: 6px;
   width: 100%;
-  margin-top: 1rem;
   padding: 8px 16px;
   font-family: 'Manrope', sans-serif;
   font-size: 14px;
@@ -240,7 +245,6 @@
   border: 1px transparent;
   border-radius: 6px;
   width: 100%;
-  margin-top: 1rem;
   padding: 8px 16px;
   font-family: 'Manrope', sans-serif;
   font-size: 14px;
@@ -406,7 +410,7 @@ input:checked+.slider:before {
   top: 0;
   left: 0;
   width: 100%;
-  height: 100%;
+  height: 100vh;
   background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
@@ -452,11 +456,11 @@ input:checked+.slider:before {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-bottom: 2rem;
 }
 
 .editusername-popup_edit-avatar img {
-  width: 120px;
-  height: 120px;
+  width: 50px;
   border-radius: 50%;
 }
 
@@ -470,23 +474,25 @@ input:checked+.slider:before {
   font-weight: 600;
   color: #ffffff;
   cursor: pointer;
+  transform: translateY(-10px);
 }
 
 .editusername-popup_edit-username {
-  margin-top: 24px;
   font-family: 'Manrope', sans-serif;
   font-size: 14px;
   font-weight: 600;
   color: #C5C5C7;
+  margin-bottom: 10px;
 }
 
 .editusername-popup_edit-username-box {
   background-color: #070C0A;
-  border: 1px solid #070C0A;
-  width: 90%;
+  border: 2px solid transparent;
+  width: 100%;
   padding: 16px;
   border-radius: 6px;
   color: white;
+  transition: .3s;
 }
 
 .editusername-popup_edit-username-box:focus {
@@ -522,11 +528,10 @@ input:checked+.slider:before {
 
 .verify-text-sent {
   font-family: 'Manrope', sans-serif;
-  font-size: 14px;
+  font-size: 12px;
   font-weight: 400;
   color: #ffffff;
   max-width: 360px;
-  text-align: center;
   margin-bottom: 2rem;
 }
 
@@ -708,7 +713,6 @@ input:checked+.slider:before {
 }
 
 .currency-table td img {
-  margin-bottom: -4px;
   margin-right: 5px;
 }
 
@@ -721,6 +725,9 @@ input:checked+.slider:before {
   color: #34B263 !important;
   font-size: 11.01px !important;
   font-family: 'Manrope', sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .auth-security-p {
@@ -750,7 +757,6 @@ input:checked+.slider:before {
 }
 
 .auth-secret-key img {
-  margin-bottom: -4px;
 }
 
 .auth-security input,
@@ -875,7 +881,5 @@ button {
   }
 
   .email-txt img {
-    margin-left: 0.5rem;
-    margin-bottom: -4px;
   }
 }

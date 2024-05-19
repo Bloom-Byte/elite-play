@@ -1,13 +1,13 @@
-import React from 'react';
+import { useMemo } from 'react';
 import StatPopup from './StatPopup';
 import './UserInformationPopup.css';
+import Modal from './Modal';
+import { useDisclosure } from '../hooks/useDisclosure';
 
 const UserInformationPopup = ({
-  setIsUserInformationPopupOpen,
-  isUserInformationPopupOpen,
-    isStatPopupOpen,
-    setIsStatPopupOpen,
-    user
+  isOpenUser,
+  onCloseUser,
+  user
 }) => {
 
   const formatDate = (isoDateString) => {
@@ -18,81 +18,85 @@ const UserInformationPopup = ({
     return `Joined on ${month}/${day}/${year}`;
   };
 
+  const totalWins = useMemo(() => {
+    return (user?.totalDiceGameWon || 0) + (user?.totalCrashGamesWon || 0);
+  }, [user]);
+
+  const totalBets = useMemo(() => {
+    return (user?.totalDiceGamePlayed || 0) + (user?.totalCrashGamesPlayed || 0);
+  }, [user]);
+
   const formattedDate = formatDate(user?.dateUserJoined);
+  const { isOpen, onClose, onOpen } = useDisclosure();
 
   return (
     <>
-      <div className="userinfopopup">
-        <div className="userinfopopup-content">
-          <div className="userinfopopup-header">
-            <p>User Information</p>
+      <Modal title={"User Information"} isOpen={isOpenUser} close={onCloseUser}>
+        <div className="userinfopopup-profile_info">
+          <div className="userinfopopup-profile_info-edit">
             <img
-              onClick={() => {
-                setIsUserInformationPopupOpen(!isUserInformationPopupOpen);
-              }}
-              src="./cancel-x.svg"
-              alt="cancel-icon"
+              className="userinfo-pimg"
+              src={user?.profilePictureUrl || './placeholder-profile-img.jpg'}
+              alt="image"
             />
+            <p>{user.name}</p>
+            <p>USER ID: {user ? user._id : '12357308'}</p>
           </div>
-          <div className="userinfopopup-profile_info">
-            <div className="userinfopopup-profile_info-edit">
-              <img
-                className="userinfo-pimg"
-                src={user?.profilePictureUrl || './placeholder-profile-img.jpg'}
-                alt="image"
-              />
-              <p>{user? user.name : 'Yuxeer'}</p>
-              <p>USER ID: {user? user._id : '12357308'}</p>
-            </div>
-            {/* <img className="edit-icon" src="./Edit.svg" alt="edit-icon" /> */}
-          </div>
-          <div className="statcards-container">
-            <div className="statcards-nav">
-              <span className="stat-stat-icon">
-                <img src="./Statistics.svg" alt="statistics" /> Statistics
-              </span>
-              <span
-                onClick={() => {
-                  setIsStatPopupOpen(!isStatPopupOpen);
-                }}
-                className="stat-next-icon"
-              >
-                Details <img src="./Union-green.svg" alt="union-icon" />
-              </span>
-            </div>
-            <div className="statcards">
-              <div className="statcard">
-                <p>Total Wins</p>
-                <h5>{user?.totalWins}</h5>
-              </div>
-              <div className="statcard">
-                <p>Total Bets</p>
-                <h5>{user?.totalBets}</h5>
-              </div>
-              <div className="statcard">
-                <p>Total Wagered</p>
-                <h5>{user?.totalBetAmount}</h5>
-              </div>
-            </div>
-          </div>
-          <div className="fav-game">
-            <p className="game-head-txt">Favorite Game</p>
-            <hr />
-            <div className="fav-info">
-              <div className="fav-game-type">
-                <img src="./dice-win.svg" alt="dice" />
-                <span>DICE</span>
-              </div>
-              <div className="fav-game-amount">
-                <p>Wagered</p>
-                <p>USD 18,149.23</p>
-              </div>
-            </div>
-          </div>
-          <p className="join-txt">{formattedDate}</p>
         </div>
-      </div>
-      {isStatPopupOpen && <StatPopup isStatPopupOpen={isStatPopupOpen} setIsStatPopupOpen={setIsStatPopupOpen} />}
+        <div className="statcards-container">
+          <div className="statcards-nav">
+            <span className="stat-stat-icon">
+              <img src="./Statistics.svg" alt="statistics" /> Statistics
+            </span>
+            <span
+              onClick={() => {
+                onOpen();
+              }}
+              className="stat-next-icon"
+            >
+              Details <img src="./Union-green.svg" alt="union-icon" />
+            </span>
+          </div>
+          <div className="statcards">
+            <div className="statcard">
+              <p>Total Wins</p>
+              <h5>{totalWins}</h5>
+            </div>
+            <div className="statcard">
+              <p>Total Bets</p>
+              <h5>{totalBets}</h5>
+            </div>
+            <div className="statcard">
+              <p>Total Wagered</p>
+              <h5>{user?.totalBetAmount}</h5>
+            </div>
+          </div>
+        </div>
+        <div className="fav-game">
+          <p className="game-head-txt">Favorite Game</p>
+          <hr />
+          <div className="fav-info">
+            <div className="fav-game-type">
+              {
+                user?.favoriteGame && user?.favoriteGame.toLowerCase().indexOf('dice') !== -1 ? <img src="./dice-win.svg" alt="dice" /> : <img src="./crash-win.svg" alt="crash" />
+              }
+              <span>{user?.favoriteGame || '-'}</span>
+            </div>
+            <div className="fav-game-amount">
+              <p>Wagered</p>
+              <p>USD 18,149.23</p>
+            </div>
+          </div>
+        </div>
+        <p className="join-txt">{formattedDate}</p>
+      </Modal>
+      <StatPopup
+        isOpen={isOpen}
+        close={onClose}
+        totalWins={totalWins}
+        totalBets={totalBets}
+        totalWagered={user?.totalBetAmount}
+      />
     </>
   );
 };

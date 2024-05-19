@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import { isLoggedIn } from '../utils/auth';
+import { useState } from 'react';
 import ProfileDropdown from './ProfileDropdown';
 import NotificationsPopup from './NotificationsPopup';
 import DepositPopup from './DepositPopup';
@@ -15,7 +14,6 @@ import { Link } from 'react-router-dom';
 import { useDisclosure } from '../hooks/useDisclosure';
 
 const Navbar = () => {
-  const userIsLoggedIn = isLoggedIn();
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
   const [notificationsPopupOpen, setNotificationsPopupOpen] = useState(false);
 
@@ -61,20 +59,25 @@ const Navbar = () => {
           </Link>
         </div>
 
-        {userIsLoggedIn ? (
+        {state.user ? (
           <div className="nav-loggedin" style={{
             marginLeft: 'auto',
           }}>
             <div className="nav-wallet">
-              <div
-                onClick={() => {
-                  setCurrencyDropdownOpen(!currencyDropdownOpen);
-                }}
-                className="nav-wallet_info"
-              >
-                <img src="./twemoji_coin.svg" alt="coin" />
-                <span>{(state.user?.balance) ? Number(state.user?.balance).toFixed(5) : ''}</span>
-                <img src="./down-arrow.svg" alt="arrow" />
+              <div style={{
+                position: 'relative',
+              }}>
+                <div
+                  onClick={() => {
+                    setCurrencyDropdownOpen(!currencyDropdownOpen);
+                  }}
+                  className="nav-wallet_info"
+                >
+                  <img src="./twemoji_coin.svg" alt="coin" />
+                  <span>{(state.user?.balance) ? Number(state.user?.balance).toFixed(5) : ''}</span>
+                  <img src="./down-arrow.svg" alt="arrow" />
+                </div>
+                <CurrencyDropdown isOpen={currencyDropdownOpen} setIsOpen={setCurrencyDropdownOpen} balance={state.user?.balance} />
               </div>
 
               <div
@@ -113,7 +116,7 @@ const Navbar = () => {
                 />
                 <img src="./down-arrow.svg" alt="arrow" />
               </div>
-              {isProfileDropdownOpen && <ProfileDropdown isOpen={isProfileDropdownOpen} setIsOpen={setIsProfileDropdownOpen} user={state.user} />}
+              <ProfileDropdown isOpen={isProfileDropdownOpen} setIsOpen={setIsProfileDropdownOpen} user={state.user} />
             </div>
           </div>
         ) : (
@@ -135,13 +138,11 @@ const Navbar = () => {
           setNotificationsPopupOpen={setNotificationsPopupOpen}
         />
       )}
-      {isOpenDeposit && (
-        <DepositPopup
-          onCloseDeposit={onCloseDeposit}
-          user={state.user}
-        />
-      )}
-      {currencyDropdownOpen && <CurrencyDropdown isOpen={currencyDropdownOpen} setIsOpen={setCurrencyDropdownOpen} balance={state.user?.balance} />}
+      <DepositPopup
+        isOpenDeposit={isOpenDeposit}
+        onCloseDeposit={onCloseDeposit}
+        user={state.user}
+      />
       {state.chatOpen && <ChatPopup />}
       {liveSupport && (
         <LiveSupportPopup

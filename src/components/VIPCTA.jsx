@@ -1,19 +1,16 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import './VIPCTA.css'
-import { isLoggedIn } from '../utils/auth'
 import { useAppContext } from '../hooks/useAppContext';
 
 const VIPCTA = () => {
   const { state } = useAppContext();
-  const userIsLoggedIn = isLoggedIn()
   const navigate = useNavigate();
 
   const handleVIPClick = () => {
-    if (userIsLoggedIn) {
+    if (state.user) {
       navigate('/');
     } else {
-      navigate('/register');
+      navigate('/login');
     }
   };
 
@@ -22,7 +19,7 @@ const VIPCTA = () => {
       <div className='vip-cta_text'>
         <h4>Join & Unlock VIP Rewards at Eliteplay</h4>
         <p>Only available in the VIP Club</p>
-        <button onClick={handleVIPClick}>{userIsLoggedIn ? 'Learn More' : 'Sign Up Now'}</button>
+        <button onClick={handleVIPClick}>{state.user ? 'Learn More' : 'Sign Up Now'}</button>
       </div>
     </div>
   )

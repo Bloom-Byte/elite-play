@@ -5,6 +5,7 @@ import './VIPPopup.css';
 import instance from '../utils/api';
 import { useAppContext } from '../hooks/useAppContext';
 import { useUpdateUser } from '../hooks/useUpdateUser';
+import { useToast } from '@chakra-ui/react';
 
 register();
 
@@ -15,16 +16,15 @@ const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, 
   const { state } = useAppContext();
 
   useEffect(() => {
-    const intervalId = setInterval(() => {
-      if (timeToNextClaim > 0) {
-        setTimeToNextClaim(timeToNextClaim - 1);
-      }
+    const timeout = setTimeout(() => {
+      setTimeToNextClaim(timeToNextClaim - 1000);
     }, 1000);
 
-    return () => clearInterval(intervalId);
+    return () => clearTimeout(timeout);
   }, [timeToNextClaim, setTimeToNextClaim]);
 
   const updateUser = useUpdateUser();
+  const toast = useToast();
 
   const handleClaimToken = async () => {
     try {
@@ -37,8 +37,24 @@ const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, 
         const data = responseInfo.data;
         setTimeToNextClaim(data.timeToNextClaim);
         updateUser();
+        toast({
+          title: 'Success',
+          description: 'Token claimed successfully',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        });
       } else {
         console.error('Error claiming token:', response.statusText);
+        toast({
+          title: 'Error',
+          description: 'Error claiming token',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+          position: 'top',
+        });
       }
     } catch (error) {
       console.error('Error claiming token:', error);
@@ -99,12 +115,16 @@ const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, 
             </div>
             <div className="vippopup-reward-box">
               <h3>Faucet Reward</h3>
-              <h2>
+              <h2 style={{
+                display: 'flex',
+                alignItems: 'center',
+                gap: '2px',
+              }}>
                 <img
                   className="levelcoin"
                   src="./twemoji_coin.svg"
                   alt="coin-icon"
-                />{' '}
+                />
                 <span className="coinlevel-rewards">{facuetClaimableForCurrentTier}</span>
               </h2>
               <p className="reward-details">

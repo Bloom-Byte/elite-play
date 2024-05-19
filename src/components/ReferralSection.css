@@ -233,6 +233,20 @@
   align-items: center;
 }
 
+.refer-social-icons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.refer-social-icons a {
+  background-color: #0B281F;
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+}
+
 .share-refer-link span {
   color: #fff;
   font-size: 14px;

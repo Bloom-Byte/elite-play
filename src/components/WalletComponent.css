@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 .wallet-comp {
-  
+
   margin-top: 2rem;
-  
+
   margin-bottom: 10rem;
 }
 
@@ -166,7 +166,7 @@
 }
 
 .deposit-wallet_main {
-    padding: 20px;
+  padding: 20px;
 }
 
 .crypto-amount-balance {
@@ -248,230 +248,240 @@
 }
 
 .cryptoAddress {
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: #34B263;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #34B263;
 }
 
 .middleAddress {
-    color: white;
+  color: white;
 }
 
 .copy-box {
-    background-color: #0B281F;
-    border-radius: 6px;
-    padding: 2px 8px;
-    display: flex;
-    gap: 5px;
-    align-items: center;
+  background-color: #0B281F;
+  border-radius: 6px;
+  padding: 2px 8px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
 }
 
 .copy-box span {
-    font-family: 'Manrope', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .deposit-crypto {
-    margin-top: 1rem;
-    padding: 8px 16px;
-    background-color: #070C0A;
-    display: flex;
-    gap: 10px;
-    align-items: center;
+  margin-top: 1rem;
+  padding: 8px 16px;
+  background-color: #070C0A;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .deposit-crypto span {
-    font-family: 'Manrope', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .crypto-notice {
-    margin-top: 2rem;
-    padding: 8px 16px;
-    background-color: #0B281F;
-    border-radius: 6px;
+  margin-top: 2rem;
+  padding: 8px 16px;
+  background-color: #0B281F;
+  border-radius: 6px;
 }
 
 .crypto-notice_notice-head {
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #34B263;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #34B263;
 }
 
 .crypto-notice_notice-info {
-    font-family: 'Manrope', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #ffffff;
 }
 
-.crypto-deposit-method_type{
-    display: flex;
-    gap: 10px;
-    width: 100%;
+.crypto-deposit-method_type {
+  display: flex;
+  gap: 10px;
+  width: 100%;
 }
 
 .crypto-deposit-method_type div {
-    width: 100%;
+  width: 100%;
 }
 
 .options-list {
-    width: 100%;
-    background-color:  #070C0A;
-    padding: 16px;
-    color: white;
-    border: 1px solid #070C0A;
+  width: 100%;
+  background-color: #070C0A;
+  padding: 16px;
+  color: white;
+  border: 1px solid #070C0A;
 }
 
-.deposit-currency{
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #6E6E71;
+.deposit-currency {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #6E6E71;
 }
 
 .fiat-deposit_amount {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .fial-deposit_range {
-    color: #6E6E71 !important;
+  color: #6E6E71 !important;
 }
 
 .fiat-deposit_options {
-    margin-top: 1.5rem;
-    display: flex;
-    gap: 10px;
+  margin-top: 1.5rem;
+  display: flex;
+  gap: 10px;
 }
 
 .fiat-deposit_option {
-    padding: 8px;
-    background-color: #070C0A;
-    border: 1px solid #6E6E71;
-    border-radius: 6px;
-    display: flex;
-    gap: 5px;
-    align-items: center;
-    cursor: pointer;
+  padding: 8px;
+  background-color: #070C0A;
+  border: 1px solid #6E6E71;
+  border-radius: 6px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  cursor: pointer;
 }
 
 .fiat-deposit_option span {
-    font-family: 'Manrope', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
 .fiat-deposit_option_active {
-    border: 1px solid #1FC88E;
+  border: 1px solid #1FC88E;
 }
 
 .deposit_fiat-btn {
-    margin-top: 2rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .deposit_fiat-btn button {
+  width: 100%;
   background: rgb(11, 40, 31);
-    border: 1px transparent;
-    border-radius: 6px;
-    color: #fff; 
-    padding: 10px 30px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
-    font-size: 16px;
-    cursor: pointer;
-    transition: 0.3s;
+  border: 1px transparent;
+  border-radius: 6px;
+  color: #fff;
+  padding: 10px 30px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: cubic-bezier(0.215, 0.61, 0.355, 1) 0.5s;
+  border-radius: var(--button-l-border-radius, 6px);
+  background: conic-gradient(from 0deg at 50% 50%, #88DF95 0deg, #01252C 360deg);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.00) inset;
+  background-size: 200% 200%;
+}
+
+.deposit_fiat-btn button:hover {
+  background-position: 20% 100%;
 }
 
 .fiat-deposit_info {
-    margin-top: 1rem;
-    padding: 8px 16px;
-    background-color: #0B281F;
-    border-radius: 6px;
+  margin-top: 1rem;
+  padding: 8px 16px;
+  background-color: #0B281F;
+  border-radius: 6px;
 }
 
 .fiat-deposit_info span {
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #88DF95;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #88DF95;
 }
 
 .withdraw-address_input {
-    width: 99%;
-    padding: 16px 0px;
-    padding-left: 10px;
-    background-color: #070C0A;
-    border: 1px solid #070C0A;
-    border-radius: 6px;
-    color: white;
+  width: 99%;
+  padding: 16px 0px;
+  padding-left: 10px;
+  background-color: #070C0A;
+  border: 1px solid #070C0A;
+  border-radius: 6px;
+  color: white;
 }
 
 .withdraw-address_input:focus {
-    outline: none;
-    border: 2px solid #24E3A1;
+  outline: none;
+  border: 2px solid #24E3A1;
 }
 
 .withdraw-amount_title {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .withdraw-amount_title p:nth-child(2) {
-    color: #6E6E71;
+  color: #6E6E71;
 }
 
 .withdraw_amounts {
-    margin-top: 1rem;
-    background-color: #0D1513;
-    padding: 8px 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
+  margin-top: 1rem;
+  background-color: #0D1513;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 .withdraw_amounts div {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
-.withdraw_amount-details span:nth-child(1){
-    font-family: 'Manrope', sans-serif;
-    font-size: 12px;
-    font-weight: 400;
-    color: #9E9EA2;
+.withdraw_amount-details span:nth-child(1) {
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #9E9EA2;
 }
 
-.withdraw_amount-details span:nth-child(2){
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
+.withdraw_amount-details span:nth-child(2) {
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
 }
 
-.more-info_icon{
-    margin-bottom: -4px;
-    margin-left: 4px;
+.more-info_icon {
+  margin-bottom: -4px;
+  margin-left: 4px;
 }
 
 .accountnumber-input {
-    width: 99%;
-    padding: 16px 0px;
-    padding-left: 10px;
-    background-color: #070C0A;
-    border: 1px solid #070C0A;
-    border-radius: 6px;
-    color: white;
+  width: 99%;
+  padding: 16px 0px;
+  padding-left: 10px;
+  background-color: #070C0A;
+  border: 1px solid #070C0A;
+  border-radius: 6px;
+  color: white;
 }
 
 .wallet-option_active {
@@ -482,7 +492,7 @@
   color: white !important;
 }
 
-.transaction-filters{
+.transaction-filters {
   display: flex;
   gap: 16px;
 }
@@ -511,7 +521,7 @@
   width: 100%;
 }
 
-.no-transanction-img_container{
+.no-transanction-img_container {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -554,11 +564,11 @@
 
   .wallet-comp_wallet-balance {
     display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    grid-gap: 10px; 
+    grid-template-columns: repeat(2, 1fr);
+    grid-gap: 10px;
   }
 
-  .potline{
+  .potline {
     display: none;
   }
 
@@ -569,7 +579,8 @@
     margin-bottom: 24px;
   }
 
-  .cryptoAddress, .middleAddress {
+  .cryptoAddress,
+  .middleAddress {
     display: block;
     max-width: 200px;
   }

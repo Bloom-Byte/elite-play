@@ -1,8 +1,11 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 import './ReferralSection.css';
 import { useAppContext } from '../hooks/useAppContext';
 import { useCopyToClipboard } from '../hooks/useCopy';
 import { Divider } from '@chakra-ui/react';
+import { IoMailOutline } from "react-icons/io5";
+import { FaLinkedinIn, FaXTwitter, FaFacebook } from "react-icons/fa6";
+import { FaTelegramPlane, FaWhatsapp, FaRedditAlien } from "react-icons/fa";
 
 const ReferralSection = ({ referralInfo, referralCount }) => {
   const [terms, setTerms] = useState(false);
@@ -10,6 +13,14 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
   const { state } = useAppContext();
 
   const copyToClipboard = useCopyToClipboard();
+
+  const message = useMemo(() => {
+    return encodeURIComponent(`
+Join Eliteplay and get VIP faucet, daily rewards, and more. Sign up now. ${referralInfo?.fullReferralUrl}
+    `)
+  }, [referralInfo?.fullReferralUrl]);
+  const title = encodeURIComponent('Join Eliteplay');
+
 
   return (
     <>
@@ -111,13 +122,29 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
           </div>
           <div className="share-refer-link">
             <span>Share via social media</span>
-            <img src="./share-tw.svg" alt="twitter-icon" />
-            <img src="./share-ig.svg" alt="ig-icon" />
-            <a href={`whatsapp://send?text=${referralInfo?.fullReferralUrl}`}>
-              <img src="./share-wa.svg" alt="whatsapp-icon" />
-            </a>
-            <img src="./share-te.svg" alt="telegram-icon" />
-            <img src="./share-ds.svg" alt="discord-icon" />
+            <div className="refer-social-icons">
+              <a target='_blank' href={`https://twitter.com/intent/tweet?text=${message}`}>
+                <FaXTwitter />
+              </a>
+              <a target='_blank' href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(referralInfo?.fullReferralUrl)}`}>
+                <FaFacebook />
+              </a>
+              <a target='_blank' href={`https://api.whatsapp.com/send?text=${message}`}>
+                <FaWhatsapp />
+              </a>
+              <a target='_blank' href={`https://telegram.me/share/url?url=${encodeURIComponent(referralInfo?.fullReferralUrl)}&text=${message}`}>
+                <FaTelegramPlane />
+              </a>
+              <a target='_blank' href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(referralInfo?.fullReferralUrl)}`}>
+                <FaLinkedinIn />
+              </a>
+              <a target='_blank' href={`mailto:?subject=${title}&body=${message}`}>
+                <IoMailOutline />
+              </a>
+              <a target='_blank' href={`https://www.reddit.com/submit?url=${encodeURIComponent(referralInfo?.fullReferralUrl)}&title=${title}`}>
+                <FaRedditAlien />
+              </a>
+            </div>
           </div>
         </div>
       </div>

@@ -4,15 +4,19 @@ import './AccountSettingsSection.css';
 import instance from '../utils/api';
 import { ACCESS_TOKEN } from '../utils/constants';
 import { useAppContext } from '../hooks/useAppContext';
-import { useToast } from '@chakra-ui/react';
+import { Divider, useToast } from '@chakra-ui/react';
 import { useCopyToClipboard } from '../hooks/useCopy';
+import { FiUser } from "react-icons/fi";
+import { MdOutlineSecurity } from "react-icons/md";
+import { MdRoomPreferences } from "react-icons/md";
+import Modal from './Modal';
+import { useDisclosure } from '../hooks/useDisclosure';
+import { useUpdateUser } from '../hooks/useUpdateUser';
+import { validatePassword } from '../utils/auth';
 
 const AccountSettingsSection = () => {
   const [currentSection, setCurrentSection] = useState('account-info');
-  const [edituserName, setEditUsername] = useState(false);
   const [verifyEmail, setVerifyEmail] = useState(false);
-  const [confirmPassword, setConfirmPassword] = useState(false);
-  const [changePassword, setChangePassword] = useState(false);
   const [selfExclusion, setSelfExclusion] = useState(false);
   const [periodExclusion, setPeriodExclusion] = useState(false);
   const [editLanguage, setEditLanguage] = useState(false);
@@ -20,14 +24,18 @@ const AccountSettingsSection = () => {
   const [mobileNav, setMobileNav] = useState(false);
   const [confirmOldPassword, setConfirmOldPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
-  const [error, setError] = useState('');
+  const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
-  const [message, setMessage] = useState('');
   const [selectedPeriod, setSelectedPeriod] = useState('7');
 
   const [profileImage, setProfileImage] = useState(null);
 
   const { state } = useAppContext();
+  const { isOpen: isOpenEditProfile, onClose: onCloseEditProfile, onOpen: onOpenEditProfile } = useDisclosure();
+  const { isOpen: isOpenChangePassword, onClose: onCloseChangePassword, onOpen: onOpenChangePassword } = useDisclosure();
+
+  const toast = useToast();
+  const updateUser = useUpdateUser();
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -47,20 +55,28 @@ const AccountSettingsSection = () => {
       if (response.status === 201) {
         const responseData = response.data;
         console.log('Profile picture updated:', responseData.message);
-        setEditUsername(!edituserName);
+        toast({
+          position: 'top',
+          status: 'success',
+          title: 'Success',
+          description: responseData.message,
+        });
+        updateUser();
       } else {
-        setError(response.message);
         throw new Error('Failed to update profile picture');
       }
     } catch (error) {
-      setError(error.response.message);
+      toast({
+        position: 'top',
+        status: 'error',
+        title: 'Error',
+        description: 'Failed to update profile picture',
+      });
       console.error('Error updating profile picture:', error);
     } finally {
       setIsLoading(false);
     }
   };
-
-  const toast = useToast();
 
   const handleSelfExclusion = () => {
     const checkboxes = document.querySelectorAll(
@@ -96,8 +112,14 @@ const AccountSettingsSection = () => {
 
       if ((response.status === 200 || response.status === 201)) {
         const responseData = response.data;
-        console.log(responseData.message);
-        setMessage(responseData.message);
+        console.log(responseData.data);
+        toast({
+          position: 'top',
+          status: 'success',
+          title: 'Success',
+          description: responseData.data.message,
+          isClosable: true,
+        });
 
         setTimeout(() => {
           localStorage.removeItem(ACCESS_TOKEN);
@@ -115,29 +137,31 @@ const AccountSettingsSection = () => {
 
   const copyToClipboard = useCopyToClipboard();
 
-  const handleConfirmPassword = async (event) => {
-    event.preventDefault();
-    setError('');
-
-    try {
-      const response = await axios.post(`/user/auth/login`,
-        {
-          email: state.user?.email,
-          password: confirmOldPassword,
-        }
-      );
-
-      localStorage.setItem(ACCESS_TOKEN, response.data.accessToken);
-      setConfirmPassword(!confirmPassword);
-      setChangePassword(!changePassword);
-    } catch (error) {
-      setError(error.response.data.error);
-    }
-  };
-
   const updatePassword = async () => {
-    setError('');
     const url = '/user/update/password';
+
+    if (!validatePassword(newPassword)) {
+      const error = 'Password must be at least 8 characters long and include at least one number and one special character.'
+      setIsLoading(false);
+      toast({
+        position: 'top',
+        status: 'error',
+        title: 'Error',
+        description: error,
+      });
+      return;
+    }
+
+    // Validate new password and confirm password
+    if (newPassword !== confirmNewPassword) {
+      toast({
+        position: 'top',
+        status: 'error',
+        title: 'Error',
+        description: 'New and confirm passwords do not match',
+      });
+      return;
+    }
 
     const requestBody = {
       oldPassword: confirmOldPassword,
@@ -150,13 +174,26 @@ const AccountSettingsSection = () => {
       const responseData = response.data;
 
       if (response.status === 201) {
-        window.location.href = '/login';
+        // window.location.href = '/login';
+        toast({
+          position: 'top',
+          status: 'success',
+          title: 'Password Updated',
+          description: responseData.data.message,
+          isClosable: true,
+        });
       } else {
-        throw new Error(responseData.message || 'Failed to update password');
+        throw new Error(responseData.data || 'Failed to update password');
       }
     } catch (error) {
       console.error('Error occurred during password update:', error.message);
-      setError(error.message || error.response.message);
+      // setError(error.message || error.response.message);
+      toast({
+        position: 'top',
+        status: 'error',
+        title: 'Error',
+        description: error.message || error.response.data.message,
+      });
     }
   };
 
@@ -189,7 +226,7 @@ const AccountSettingsSection = () => {
               : ''
               }`}
           >
-            <img src="./user.svg" alt="user-icon" />
+            <FiUser size={'1.5rem'} />
             <span>Account Info</span>
           </div>
           <div
@@ -201,7 +238,7 @@ const AccountSettingsSection = () => {
               : ''
               }`}
           >
-            <img src="./lock-key.svg" alt="lock-key" />
+            <MdOutlineSecurity size={'1.5rem'} />
             <span>Security</span>
           </div>
           <div
@@ -213,7 +250,7 @@ const AccountSettingsSection = () => {
               : ''
               }`}
           >
-            <img src="./list-setting.svg" alt="list-icon" />
+            <MdRoomPreferences size={'1.5rem'} />
             <span>Preferences</span>
           </div>
         </div>
@@ -222,12 +259,12 @@ const AccountSettingsSection = () => {
             <>
               <div className="account-settings__section">
                 <p className="setting-section__header">Profile Info</p>
-                <hr />
+                <Divider mt={2} />
                 <div>
                   <div className="main-profile-info-box">
                     <div className="main-profile-info">
                       <img
-                        style={{ borderRadius: '50%', width: '40px', height: '40px' }}
+                        style={{ borderRadius: '50%', width: '80px', height: '80px' }}
                         src={`${state.user?.profilePictureUrl
                           ? state.user.profilePictureUrl
                           : './placeholder-profile-img.jpg'
@@ -241,7 +278,7 @@ const AccountSettingsSection = () => {
                     </div>
                     <button
                       onClick={() => {
-                        setEditUsername(true);
+                        onOpenEditProfile();
                       }}
                     >
                       Edit <img src="./Edit.svg" alt="edit-icon" />
@@ -251,7 +288,7 @@ const AccountSettingsSection = () => {
               </div>
               <div className="account-settings__section">
                 <p className="setting-section__header">Contact Info</p>
-                <hr />
+                <Divider mt={2} />
                 <p className="email-verify-txt">Email Verification</p>
                 <div className="email-verify_container">
                   <div className="email-txt">
@@ -277,36 +314,41 @@ const AccountSettingsSection = () => {
               <div>
                 <div className="security_one">
                   <p className="setting-section__header">Security Setup</p>
-                  <hr />
+                  <Divider mt={2} />
                   <div className="security_one-container">
                     <div className="security_one-box">
                       <img src="./mdi_password.svg" alt="lock-icon" />
-                      <h4>Change Password</h4>
-                      <p>
-                        Change your password regularly to keep it unique and
-                        secure.
-                      </p>
+                      <div className="text-content">
+                        <h4>Change Password</h4>
+                        <p>
+                          Change your password regularly to keep it unique and
+                          secure.
+                        </p>
+                      </div>
                       <button
                         onClick={() => {
-                          setConfirmPassword(true);
+                          onOpenChangePassword()
                         }}
-                        className="black-btn"
+                        className="active-btn"
                       >
                         Change Password
                       </button>
                     </div>
                     <div className="security_one-box">
                       <img src="./tabler_auth-2fa.svg" alt="2fa-icon" />
-                      <h4>Two-factor authentication</h4>
-                      <p>
-                        Enable Two-factor to protect your account from
-                        unauthorized access.
-                      </p>
+                      <div className="text-content">
+                        <h4>Two-factor authentication (Coming Soon)</h4>
+                        <p>
+                          Enable Two-factor to protect your account from
+                          unauthorized access.
+                        </p>
+                      </div>
                       <button
                         onClick={() => {
                           setCurrentSection('auth');
                         }}
-                        className="active-btn"
+                        className="black-btn"
+                        disabled
                       >
                         Enable 2FA
                       </button>
@@ -343,7 +385,7 @@ const AccountSettingsSection = () => {
             <>
               <div className="preference-box">
                 <p className="setting-section__header">Account Preferences</p>
-                <hr />
+                <Divider mt={2} />
                 <div className="preference-one">
                   <p>View in fiat</p>
                   <div className="choice-box">
@@ -373,7 +415,7 @@ const AccountSettingsSection = () => {
               </div>
               <div className="preference-box">
                 <p className="setting-section__header">Privacy Preferences</p>
-                <hr />
+                <Divider mt={2} />
                 <div className="preference-one">
                   <p>Hide my gaming data on profile</p>
                   <label className="switch">
@@ -391,7 +433,7 @@ const AccountSettingsSection = () => {
               </div>
               <div className="preference-box">
                 <p className="setting-section__header">Self-Exclusion</p>
-                <hr />
+                <Divider mt={2} />
                 <div className="preference-one">
                   <p>
                     This function allows you to close your account for a period
@@ -414,7 +456,7 @@ const AccountSettingsSection = () => {
             <>
               <div className="auth-security">
                 <p className="setting-section__header">Security Setup</p>
-                <hr />
+                <Divider mt={2} />
                 <p className="setting-section__header">
                   Google Authenticator(2FA)
                 </p>
@@ -479,65 +521,45 @@ const AccountSettingsSection = () => {
           )}
         </div>
       </div>
-      {edituserName && (
-        <div className="editusername-popup">
-          <div className="editusername-popup_container">
-            <div className="editusername-popup_header">
-              <p>My Profile</p>
-              <span
-                onClick={() => {
-                  setEditUsername(!edituserName);
-                }}
-                className="close"
-              >
-                X
-              </span>
-            </div>
-            <div
-              style={{ width: '200px' }}
-              className="editusername-popup_main-content"
-            >
-              <div className="editusername-popup_edit-avatar">
-                {profileImage ? (
-                  <img
-                    src={URL.createObjectURL(profileImage)}
-                    alt="selected-profile"
-                  />
-                ) : (
-                  <img src={state.user?.profilePictureUrl} alt="selected-profile" />
-                )}
-                <input
-                  style={{ display: 'none' }}
-                  id="getFile"
-                  type="file"
-                  accept="image/*"
-                  onChange={handleImageChange}
-                />
-                <label htmlFor="getFile">
-                  {isLoading ? (
-                    <div className="lds-ring">
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                      <div></div>
-                    </div>
-                  ) : (
-                    'Edit Your Avatar'
-                  )}
-                </label>
+      <Modal width={'400px'} title={"My Profile"} isOpen={isOpenEditProfile} close={onCloseEditProfile}>
+        <div className="editusername-popup_edit-avatar">
+          {profileImage ? (
+            <img
+              src={URL.createObjectURL(profileImage)}
+              alt="selected-profile"
+            />
+          ) : (
+            <img src={state.user?.profilePictureUrl
+              ? state.user.profilePictureUrl
+              : './placeholder-profile-img.jpg'} alt="current-profile" />
+          )}
+          <input
+            style={{ display: 'none' }}
+            id="getFile"
+            type="file"
+            accept="image/*"
+            onChange={handleImageChange}
+          />
+          <label htmlFor="getFile">
+            {isLoading ? (
+              <div className="lds-ring">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
               </div>
-              <button
-                className="edit-username-popup_btn"
-                onClick={handleUploadProfile}
-              >
-                Modify
-              </button>
-              {message && <p className="success-msg">{message}</p>}
-              {error && <p className="error-msg">{error}</p>}
-            </div>
-          </div>
+            ) : (
+              'Edit Your Avatar'
+            )}
+          </label>
         </div>
-      )}
+        <button
+          className="edit-username-popup_btn"
+          onClick={handleUploadProfile}
+        >
+          Modify Avatar
+        </button>
+      </Modal>
       {verifyEmail && (
         <div className="editusername-popup">
           <div className="editusername-popup_container">
@@ -570,106 +592,66 @@ const AccountSettingsSection = () => {
           </div>
         </div>
       )}
-      {confirmPassword && (
-        <div className="editusername-popup">
-          <div className="editusername-popup_container">
-            <div className="editusername-popup_header">
-              <span
-                onClick={() => {
-                  setConfirmPassword(!confirmPassword);
-                }}
-                className="close email-close"
-              >
-                X
-              </span>
-            </div>
-            <div className="editusername-popup_main-content">
-              <div className="editusername-popup_edit-avatar">
-                <img src="./mdi_password.svg" alt="lock-icon" />
-                <p className="email-popup_header">Change Password</p>
-              </div>
-              <p className="verify-text-sent">
-                For your safety, we need to verify your old password first.
-              </p>
-              <p className="editusername-popup_edit-username">Old Password</p>
-              <input
-                className="editusername-popup_edit-username-box"
-                type="password"
-                placeholder="Set Password"
-                value={confirmOldPassword}
-                onChange={(event) => {
-                  setConfirmOldPassword(event.target.value);
-                }}
-              />
-              {error && <p style={{ color: '#E14453' }}>{error}</p>}
-              <button
-                onClick={handleConfirmPassword}
-                className="edit-username-popup_btn"
-              >
-                Confirm
-              </button>
-            </div>
+      <Modal width={'400px'} title={""} isOpen={isOpenChangePassword} close={onCloseChangePassword}>
+        <div className="editusername-popup_edit-avatar">
+          <img src="./mdi_password.svg" alt="lock-icon" />
+          <p className="email-popup_header">Change Password</p>
+        </div>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          gap: '1.5rem',
+          marginBottom: '1rem',
+        }}>
+          <div>
+            <p className="editusername-popup_edit-username">Old Password</p>
+            <input
+              className="editusername-popup_edit-username-box"
+              type="password"
+              placeholder="********"
+              value={confirmOldPassword}
+              onChange={(event) => {
+                setConfirmOldPassword(event.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <p className="editusername-popup_edit-username">New Password</p>
+            <input
+              className="editusername-popup_edit-username-box"
+              type="password"
+              placeholder="Set Password"
+              value={newPassword}
+              onChange={(event) => {
+                setNewPassword(event.target.value);
+              }}
+            />
+          </div>
+          <div>
+            <p className="editusername-popup_edit-username">
+              Confirm Password
+            </p>
+            <input
+              className="editusername-popup_edit-username-box"
+              type="password"
+              placeholder="Confirm Password"
+              value={confirmNewPassword}
+              onChange={(event) => {
+                setConfirmNewPassword(event.target.value);
+              }}
+            />
           </div>
         </div>
-      )}
-      {changePassword && (
-        <div className="editusername-popup">
-          <div className="editusername-popup_container">
-            <div className="editusername-popup_header">
-              <span> </span>
-              <span
-                onClick={() => {
-                  setChangePassword(!changePassword);
-                }}
-                className="close email-close"
-              >
-                X
-              </span>
-            </div>
-            <div className="editusername-popup_main-content">
-              <div className="editusername-popup_edit-avatar">
-                <img src="./mdi_password.svg" alt="lock-icon" />
-                <p className="email-popup_header">Set Password</p>
-              </div>
-              <p className="editusername-popup_edit-username">Old Password</p>
-              <input
-                className="editusername-popup_edit-username-box"
-                type="password"
-                placeholder="Set Password"
-                value={confirmOldPassword}
-                onChange={(event) => {
-                  setConfirmOldPassword(event.target.value);
-                }}
-              />
-              <p className="editusername-popup_edit-username">
-                Confirm Password
-              </p>
-              <input
-                className="editusername-popup_edit-username-box"
-                type="password"
-                placeholder="Confirm Password"
-                value={newPassword}
-                onChange={(event) => {
-                  setNewPassword(event.target.value);
-                }}
-              />
-              <p
-                style={{ marginTop: '2rem', marginBottom: '0px' }}
-                className="verify-text-sent"
-              >
-                Re-login will be required after changing the password.
-              </p>
-              {error && <p style={{ color: '#E14453' }}>{error}</p>}
-              <button
-                onClick={updatePassword}
-                className="edit-username-popup_btn"
-              >
-                Confirm
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+        <p className="verify-text-sent">
+          Re-login will be required after changing the password.
+        </p>
+        <button
+          onClick={updatePassword}
+          className="edit-username-popup_btn"
+        >
+          Confirm
+        </button>
+      </Modal>
 
       {selfExclusion && (
         <div className="editusername-popup">

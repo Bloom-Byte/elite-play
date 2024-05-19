@@ -1,19 +1,16 @@
-import React from 'react'
 import { useNavigate } from 'react-router-dom';
-import { isLoggedIn } from '../utils/auth';
 import './DepositCTA.css'
 import { useAppContext } from '../hooks/useAppContext';
 
 const DepositCTA = () => {
-  const userIsLoggedIn = isLoggedIn();
   const navigate = useNavigate();
   const { state } = useAppContext();
 
   const handleDepositClick = () => {
-    if (userIsLoggedIn) {
+    if (state.user) {
       navigate('/wallet');
     } else {
-      navigate('/register');
+      navigate('/login');
     }
   };
 

@@ -5,8 +5,7 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import './Register.css';
 import instance from '../utils/api';
 import { Link } from 'react-router-dom';
-
-
+import { validatePassword } from '../utils/auth';
 
 const Register = () => {
   const [username, setUsername] = useState('');
@@ -73,12 +72,6 @@ const Register = () => {
     const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return re.test(email);
   };
-
-  const validatePassword = (password) => {
-    const re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    return re.test(password);
-  };
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();

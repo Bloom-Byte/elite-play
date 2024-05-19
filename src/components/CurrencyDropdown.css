@@ -2,15 +2,27 @@
 
 .currencydropdown {
   position: absolute;
-  top: 80px;
-  right: 500px;
+  top: 0;
+  right: 0;
+  transform: translateY(0rem);
+  width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+.currencydropdown.active {
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(3rem);
 }
 
 .currencydropdown-content {
   position: relative;
   background-color: #0b281f;
   border-radius: 16px;
-  padding: 20px;
+  padding: 13px;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.05), 0px 15px 30px 0px rgba(0, 0, 0, 0.15), 0px 20px 40px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
 }
 
 .currency__box {
@@ -45,131 +57,132 @@
 }
 
 .currencytitle {
-    font-size: 14px;
-    color: #9E9EA2;
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
+  font-size: 14px;
+  color: #9E9EA2;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
 }
 
 .currencydropdown-details {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.currencydropdown-amount{
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+.currencydropdown-amount {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 
 .currencydropdown-amount span:nth-child(1) {
-    font-size: 16px;
-    color: #ffffff;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
 }
 
 .currencydropdown-amount span:nth-child(2) {
-    font-size: 12px;
-    color: #ffffff;
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
-    text-align: right;
+  font-size: 12px;
+  color: #ffffff;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  text-align: right;
 }
 
 .currencydropdown-coin {
-    display: flex;
-    gap: 10px;
+  display: flex;
+  gap: 10px;
 }
 
 .currencydropdown-coin span {
-    font-size: 16px;
-    color: #ffffff;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
+  font-size: 16px;
+  color: #ffffff;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
 }
 
 .togglecurrencyview {
-    background-color: #070C0A;
-    padding: 8px;
-    border-radius: 6px;
-    margin: 20px 0;
+  background-color: #070C0A;
+  padding: 8px;
+  border-radius: 6px;
+  margin-top: 20px;
 }
 
 .togglecurrencyview span {
-    margin-left: 20px;
-    font-size: 16px;
-    color: #ffffff;
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
+  font-size: 16px;
+  color: #ffffff;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
 }
 
 /* The switch - the box around the slider */
 .switch2 {
-    position: relative;
-    display: inline-block;
-    width: 60px;
-    height: 24px;
-  }
-  
-  /* Hide default HTML checkbox */
-  .switch2 input {
-    opacity: 0;
-    width: 0;
-    height: 0;
-  }
-  
-  /* The slider */
-  .slider2 {
-    position: absolute;
-    cursor: pointer;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #44537140;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-  
-  .slider2:before {
-    position: absolute;
-    content: '';
-    height: 20px;
-    width: 20px;
-    left: 4px;
-    bottom: 3px;
-    background-color: white;
-    -webkit-transition: 0.4s;
-    transition: 0.4s;
-  }
-  
-  input:checked + .slider2 {
-    background-color: #24e3a1;
-  }
-  
-  input:focus + .slider2 {
-    box-shadow: 0 0 1px #24e3a1;
-  }
-  
-  input:checked + .slider2:before {
-    -webkit-transform: translateX(16px);
-    -ms-transform: translateX(16px);
-    transform: translateX(16px);
-  }
-  
-  /* Rounded sliders */
-  .slider2.round2 {
-    border-radius: 34px;
-  }
-  
-  .slider2.round2:before {
-    border-radius: 50%;
-  }
-  
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 24px;
+}
 
-  
+/* Hide default HTML checkbox */
+.switch2 input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider2 {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #44537140;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  width: 40px;
+  height: 20px;
+}
+
+.slider2:before {
+  position: absolute;
+  content: '';
+  height: 20px;
+  width: 20px;
+  left: 4px;
+  background-color: white;
+  -webkit-transition: 0.4s;
+  transition: 0.4s;
+  left: 0;
+}
+
+input:checked+.slider2 {
+  background-color: #24e3a1;
+}
+
+input:focus+.slider2 {
+  box-shadow: 0 0 1px #24e3a1;
+}
+
+input:checked+.slider2:before {
+  -webkit-transform: translateX(20px);
+  -ms-transform: translateX(20px);
+  transform: translateX(20px);
+}
+
+/* Rounded sliders */
+.slider2.round2 {
+  border-radius: 34px;
+}
+
+.slider2.round2:before {
+  border-radius: 50%;
+}
+
+
+
 /* --------- MOBILE RESPONSIVENESS --------- */
 @media screen and (max-width: 768px) {
   .currencydropdown {

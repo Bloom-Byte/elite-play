@@ -1,32 +1,46 @@
-import React, { useState, useRef, useEffect  } from 'react';
+import { useState, useRef, useEffect, useCallback } from 'react';
 import UserInformationPopup from './UserInformationPopup';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './ProfileDropdown.css';
 import { ACCESS_TOKEN } from '../utils/constants';
 import { isElementClassOrChildOf } from '../utils/dom';
 import { useAppContext } from '../hooks/useAppContext';
 import { LOGOUT } from '../contexts/AppContext';
+import { useToast } from '@chakra-ui/react';
+import { useDisclosure } from '../hooks/useDisclosure';
 
-const ProfileDropdown = ({user, isOpen, setIsOpen}) => {
-  const [isUserInformationPopupOpen, setIsUserInformationPopupOpen] =
-    useState(false);
+const ProfileDropdown = ({ user, isOpen, setIsOpen }) => {
   const [isStatPopupOpen, setIsStatPopupOpen] = useState(false);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
   const { dispatch } = useAppContext();
+  const { isOpen: isOpenUser, onClose: onCloseUser, onOpen: onOpenUser } = useDisclosure();
+
+  const toast = useToast();
 
   const handleLogout = () => {
     localStorage.removeItem(ACCESS_TOKEN);
     dispatch({ type: LOGOUT });
     navigate('/');
+    toast({
+      title: 'Logged out successfully',
+      status: 'success',
+      duration: 3000,
+      isClosable: true,
+    });
   };
+
+  const close = useCallback(() => {
+    setIsOpen(false);
+  }, [setIsOpen]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        !isElementClassOrChildOf(event.target, 'nav-profile-button')
+        !isElementClassOrChildOf(event.target, 'nav-profile') &&
+        !isElementClassOrChildOf(event.target, 'profile-dropdown')
       ) {
-        setIsOpen(false);
+        close();
       }
     };
 
@@ -35,32 +49,35 @@ const ProfileDropdown = ({user, isOpen, setIsOpen}) => {
     return () => {
       window.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [isOpen, setIsOpen]);
+  }, [close]);
 
   return (
     <>
-      <div className="profile-dropdown" ref={dropdownRef}>
+      <div className={`profile-dropdown ${isOpen ? 'active' : ''}`} ref={dropdownRef}>
         <div className="profile-dropdown-content">
-          <div className="profile-dropdown-cta">
-            <Link to="/wallet">
-              <img src="./wallet-grey.svg" alt="wallet-icon" />
-              <span>Wallet</span>
-            </Link>
+          <div className="profile-dropdown-cta" onClick={() => {
+            navigate('/wallet');
+            close();
+          }}>
+            <img src="./wallet-grey.svg" alt="wallet-icon" />
+            <span>Wallet</span>
           </div>
           <div
             onClick={() => {
-              setIsUserInformationPopupOpen(!isUserInformationPopupOpen);
+              onOpenUser();
+              close();
             }}
             className="profile-dropdown-cta"
           >
             <img src="./user.svg" alt="user-icon" />
             <span>User Information</span>
           </div>
-          <div className="profile-dropdown-cta">
-            <Link to="/accountsettings">
-              <img src="./Settings.svg" alt="setting-icon" />
-              <span>Account Settings</span>
-            </Link>
+          <div className="profile-dropdown-cta" onClick={() => {
+            navigate('/accountsettings');
+            close();
+          }}>
+            <img src="./Settings.svg" alt="setting-icon" />
+            <span>Account Settings</span>
           </div>
           <hr />
           <div onClick={handleLogout} className="profile-dropdown-cta">
@@ -69,15 +86,13 @@ const ProfileDropdown = ({user, isOpen, setIsOpen}) => {
           </div>
         </div>
       </div>
-      {isUserInformationPopupOpen && (
-        <UserInformationPopup
-          user={user}
-          isUserInformationPopupOpen={isUserInformationPopupOpen}
-          setIsUserInformationPopupOpen={setIsUserInformationPopupOpen}
-          isStatPopupOpen={isStatPopupOpen}
-          setIsStatPopupOpen={setIsStatPopupOpen}
-        />
-      )}
+      <UserInformationPopup
+        user={user}
+        isOpenUser={isOpenUser}
+        onCloseUser={onCloseUser}
+        isStatPopupOpen={isStatPopupOpen}
+        setIsStatPopupOpen={setIsStatPopupOpen}
+      />
     </>
   );
 };

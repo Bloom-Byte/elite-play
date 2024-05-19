@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { useState, useEffect, useRef, useMemo } from 'react';
 import SocketIO from 'socket.io-client';
-import { isLoggedIn } from '../utils/auth';
 
 import './ChatPopup.css';
 import { ACCESS_TOKEN } from '../utils/constants';
@@ -24,7 +23,6 @@ const ChatPopup = () => {
   const loadMessagesError = useMemo(() => '', []);
   const [inputMessage, setInputMessage] = useState('');
   const [isMobile, setIsMobile] = useState(false);
-  const userIsLoggedIn = isLoggedIn();
 
   const { state } = useAppContext();
 
@@ -82,22 +80,6 @@ const ChatPopup = () => {
       socket.on('newMessage', (newMessage) => {
         setMessages((prevMessages) => [...prevMessages, newMessage]);
       });
-
-      // fetch saved messages
-      //   if (!hasFetchedSavedMessages.current) {
-      //     setIsLoadingSavedMessages(true);
-      //     socket.emit(
-      //       "allMessages",
-      //       (error: string, savedMessages: Message[]) => {
-      //         if (error) {
-      //           setLoadMessagesError("error loading messages: ${error}");
-      //         } else {
-      //           setMessages(savedMessages);
-      //           hasFetchedSavedMessages.current = true;
-      //         }
-      //         setIsLoadingSavedMessages(false);
-      //       }
-      //     );
       if (!hasFetchedSavedMessages.current) {
         setIsLoadingSavedMessages(true);
         socket.emit('getAllMessages');
@@ -109,10 +91,18 @@ const ChatPopup = () => {
       socket.off('disconnect');
       socket.off('chat');
       socket.off('newMessage');
+      socket.close();
     };
   }, []);
 
+  const scrollToBottom = () => {
+    setTimeout(() => {
+      mainContent.current.scrollTop = mainContent.current.scrollHeight;
+    }, 100);
+  };
+
   const handleSendMessage = (e) => {
+    const trimmedMessage = inputMessage.trim();
     if (e.key !== 'Enter' || inputMessage.trim().length === 0) return;
     const message = {
       message: trimmedMessage,
@@ -120,16 +110,9 @@ const ChatPopup = () => {
     // send a message to the server
     socket.emit('chat', message);
     setInputMessage('');
+
+    scrollToBottom()
   };
-  // const sendMessage = () => {
-  //   if (inputMessage.trim() !== '') {
-  //     const message = {
-  //       message: inputMessage.trim(),
-  //     };
-  //     socket.emit('chat', message);
-  //     setInputMessage('');
-  //   }
-  // };
 
   const sendMessage = (event) => {
     event.preventDefault();
@@ -139,9 +122,12 @@ const ChatPopup = () => {
         message: trimmedMessage,
       };
       socket.emit('chat', message);
+      scrollToBottom()
       setInputMessage('');
     }
   };
+
+  const mainContent = useRef(null);
 
   const { toggleChat } = useChat();
 
@@ -161,66 +147,71 @@ const ChatPopup = () => {
             />
           </div>
         </div>
-        <div className="chatroom-maincontent">
-          <div>
-            <div
-              className={`chatroom-chatbox__container ${minimized ? 'minimized' : ''
-                }`}
-            >
-              {isLoadingSavedMessages && (
-                <h3 className="chatmsg-error">Loading saved messages...</h3>
-              )}
-              {loadMessagesError && (
-                <h3 className="chatmsg-error">
-                  Error loading messages: {loadMessagesError}
-                </h3>
-              )}
+        <div className="chatroom-maincontent" ref={mainContent}>
+          <div
+            className={`chatroom-chatbox__container ${minimized ? 'minimized' : ''
+              }`}
+          >
+            {isLoadingSavedMessages && (
+              <h3 className="chatmsg-error">Loading saved messages...</h3>
+            )}
+            {loadMessagesError && (
+              <h3 className="chatmsg-error">
+                Error loading messages: {loadMessagesError}
+              </h3>
+            )}
 
-              {messages.map((msg, index) => (
-                <div key={index} className="chatroom-chatbox">
-                  <div className="chatroom-user-profile">
-                    <span>{msg.username}</span>
-                    <img
-                      src={
-                        msg.profilePictureUrl || './placeholder-profile-img.jpg'
-                      }
-                      alt="profile-img"
-                    />
-                  </div>
+            {messages.map((msg, index) => (
+              <div key={index} className="chatroom-chatbox">
+                <div className="chatroom-user-profile">
+                  <span>{msg.username}</span>
+                  <span>
+                    {new Date(msg.createdAt).toLocaleString('en-US', {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                      hour12: true,
+                    })}
+                  </span>
+                </div>
+                <div className="chatroom-message-content">
+                  <img
+                    src={
+                      msg.profilePictureUrl || './placeholder-profile-img.jpg'
+                    }
+                    alt="profile-img"
+                  />
                   <div className="chatroom-chat-txt">
                     <span>{msg.message}</span>
                   </div>
                 </div>
-              ))}
-
-              {
-                messages.length === 0 && (
-                  <h3 className="chatmsg-error">
-                    No messages available.
-                  </h3>
-                )
-              }
-            </div>
-            {userIsLoggedIn && (
-              <div>
-                <form className="chatroom-input" onSubmit={sendMessage}>
-                  <div>
-                    <input
-                      placeholder="Type here..."
-                      type="text"
-                      value={inputMessage}
-                      onChange={(e) => setInputMessage(e.target.value)}
-                      onKeyDown={handleSendMessage}
-                    />
-                  </div>
-                  <button type="submit">
-                    <img src="./Send.svg" alt="send-icon" />
-                  </button>
-                </form>
               </div>
-            )}
+            ))}
+
+            {
+              messages.length === 0 && (
+                <h3 className="chatmsg-error">
+                  No messages available.
+                </h3>
+              )
+            }
           </div>
         </div>
+        {state.user && (
+          <div>
+            <form className="chatroom-input" onSubmit={sendMessage}>
+              <input
+                placeholder="Type here..."
+                type="text"
+                value={inputMessage}
+                onChange={(e) => setInputMessage(e.target.value)}
+                onKeyDown={handleSendMessage}
+              />
+              <button type="submit">
+                <img src="./Send.svg" alt="send-icon" />
+              </button>
+            </form>
+          </div>
+        )}
       </div>
     </div>
   );
