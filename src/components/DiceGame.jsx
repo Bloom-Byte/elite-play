@@ -1,30 +1,29 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import './DiceGame.css';
 import instance from '../utils/api';
 import { useAppContext } from '../hooks/useAppContext';
 import { useDisclosure } from '../hooks/useDisclosure';
+import { useNotifyAuth } from '../hooks/useNotifyAuthorized';
 import { isElementClassOrChildOf } from '../utils/dom';
 import { Link } from 'react-router-dom';
 import { useUpdateUser } from '../hooks/useUpdateUser';
+import { useToast } from '@chakra-ui/react';
 
-const DiceGame = ({ userBets, bets }) => {
+const DiceGame = ({ userBets }) => {
   const [auto, setAuto] = useState(false);
-  const [fairness, setFairness] = useState(false);
-  const [livebet, setLivebet] = useState(false);
   const [tutorial, setTutorial] = useState(false);
   const [diceRoll, setDiceRoll] = useState(50);
   const [betAmount, setBetAmount] = useState(10);
   const [autoBet, setAutoBet] = useState(false);
   const [numBets, setNumBets] = useState(0);
-  const [stopOnWin, setStopOnWin] = useState('');
-  const [isInfinity, setIsInfinity] = useState(true);
-  const [stopOnLoss, setStopOnLoss] = useState('');
+  const [stopOnWin, setStopOnWin] = useState(10);
+  const [stopOnLoss, setStopOnLoss] = useState(10);
+  const [winIncreaseBy, setWinIncreaseBy] = useState(0);
+  const [lossIncreaseBy, setLossIncreaseBy] = useState(0);
+  const [onWinOption, setOnWinOption] = useState(0);
+  const [onLossOption, setOnLossOption] = useState(0);
   const [diceGameResponse, setDiceGameResponse] = useState()
   const [rollover, setRollover] = useState(false)
-  const [stopConditions, setStopConditions] = useState({
-    resetWin: 100,
-    resetLose: 50,
-  });
   const dropdownRef = useRef(null);
   const openTutorialRef = useRef(null);
   const [userSeed, setUserSeed] = useState('');
@@ -111,8 +110,7 @@ const DiceGame = ({ userBets, bets }) => {
   }
 
   const handleToggleInfinity = () => {
-    setIsInfinity(!isInfinity);
-    setNumBets(isInfinity ? 0 : Infinity);
+    setNumBets(Infinity);
   };
 
   const handleChangeStopOnWin = (event) => {
@@ -138,15 +136,23 @@ const DiceGame = ({ userBets, bets }) => {
 
   const updateUser = useUpdateUser();
 
-  function placeBet(isAutoBet) {
+  const toast = useToast();
+  const notifyAuthorized = useNotifyAuth();
+
+  function placeBet() {
     const token = generateRandomToken(36);
     const url = `/game/place-bet`;
     const pay = Number((100 / diceRoll).toFixed(4));
 
     if (!state.user | state.user?.balance < betAmount) {
       setAutoBet(false);
-      alert("Balance low, Deposit Please")
-      return
+      toast({
+        position: 'bottom',
+        status: 'error',
+        title: 'Insufficient funds',
+        description: "Balance low, Deposit Please",
+      });
+      throw new Error('Insufficient funds');
     }
 
     playSound();
@@ -176,6 +182,7 @@ const DiceGame = ({ userBets, bets }) => {
   }
 
   const startAutoBet = () => {
+    notifyAuthorized();
     setAutoBet(true);
   };
 
@@ -187,7 +194,7 @@ const DiceGame = ({ userBets, bets }) => {
     let interval;
     if (autoBet) {
       interval = setInterval(() => {
-        placeBet(true);
+        placeBet();
       }, 1000);
     } else {
       clearInterval(interval);
@@ -333,12 +340,12 @@ const DiceGame = ({ userBets, bets }) => {
                   </div>
                 </div>
               </div>
-              <p style={{ marginTop: '1rem' }}>Number of Bets</p>
+              <p>Number of Bets</p>
               <div className="dicegame-placebet__amount">
                 <div className="dicegame-placebet__amount-display">
                   <input
                     type="text"
-                    value={isInfinity ? '∞' : numBets}
+                    value={numBets === Infinity ? '∞' : numBets}
                     onChange={handleNumBets}
                   />
                 </div>
@@ -367,25 +374,39 @@ const DiceGame = ({ userBets, bets }) => {
                   </span>
                 </div>
               </div>
-              <p style={{ marginTop: '1rem' }}>On win</p>
+              <p>On win</p>
               <div className="dicegame-onwin">
                 <div className="gamedice-reset_btn">
-                  <span className="dicegame-reset-bx">Reset</span>
-                  <span className="dicegame-increase">Increase by</span>
+                  <span className={`dicegame-reset-bx ${onWinOption == 0 && "active"}`} onClick={() => setOnWinOption(0)}>Reset</span>
+                  <span className={`dicegame-increase ${onWinOption == 1 && "active"}`} onClick={() => setOnWinOption(1)}>Increase by</span>
                 </div>
                 <div className="dicegame-pecent-bx">
-                  <input type="text" />
+                  <input type="number"
+                    value={winIncreaseBy}
+                    onChange={(event) => {
+                      const value = parseFloat(event.target.value);
+                      setWinIncreaseBy(isNaN(value) ? 0 : value);
+                    }}
+                    disabled={!onWinOption}
+                  />
                   <span>%</span>
                 </div>
               </div>
               <p>On lose</p>
               <div className="dicegame-onwin">
                 <div className="gamedice-reset_btn">
-                  <span className="dicegame-reset-bx">Reset</span>
-                  <span className="dicegame-increase">Increase by</span>
+                  <span className={`dicegame-reset-bx ${onLossOption == 0 && "active"}`} onClick={() => setOnLossOption(0)}>Reset</span>
+                  <span className={`dicegame-increase ${onLossOption == 1 && "active"}`} onClick={() => setOnLossOption(1)}>Increase by</span>
                 </div>
                 <div className="dicegame-pecent-bx">
-                  <input type="text" />
+                  <input type="number"
+                    value={lossIncreaseBy}
+                    onChange={(event) => {
+                      const value = parseFloat(event.target.value);
+                      setLossIncreaseBy(isNaN(value) ? 0 : value)
+                    }}
+                    disabled={!onLossOption}
+                  />
                   <span>%</span>
                 </div>
               </div>
@@ -394,37 +415,41 @@ const DiceGame = ({ userBets, bets }) => {
                 <div className="dicegame-placebet__amount-display">
                   <img src="./twemoji_coin.svg" alt="coin" />
                   <input
-                    type="text"
+                    type="number"
                     value={stopOnWin}
                     onChange={handleChangeStopOnWin}
                   />
                 </div>
               </div>
-              <p style={{ marginTop: '1rem' }}>Stop on lose</p>
+              <p>Stop on lose</p>
               <div className="dicegame-placebet__amount">
                 <div className="dicegame-placebet__amount-display">
                   <img src="./twemoji_coin.svg" alt="coin" />
                   <input
-                    type="text"
+                    type="number"
                     value={stopOnLoss}
                     onChange={handleChangeStopOnLoss}
                   />
                 </div>
               </div>
-              <button
-                className={`dicegame-rollnow ${autoBet ? 'disabled' : ''}`}
-                onClick={startAutoBet}
-                disabled={autoBet}
-              >
-                Start Auto Bet
-              </button>
-              <button
-                className={`dicegame-rollnow ${autoBet ? '' : 'disabled'}`}
-                onClick={stopAutoBet}
-                disabled={!autoBet}
-              >
-                Stop Auto Bet
-              </button>
+              {!autoBet && (
+                <button
+                  className={`dicegame-rollnow ${autoBet ? 'disabled' : ''}`}
+                  onClick={startAutoBet}
+                  disabled={autoBet}
+                >
+                  Start Auto Bet
+                </button>
+              )}
+              {autoBet && (
+                <button
+                  className={`dicegame-rollnow ${autoBet ? '' : 'disabled'}`}
+                  onClick={stopAutoBet}
+                  disabled={!autoBet}
+                >
+                  Stop Auto Bet
+                </button>
+              )}
             </div>
           ) : (
             <>
@@ -514,7 +539,8 @@ const DiceGame = ({ userBets, bets }) => {
                   </span>
                 </div>
                 <button onClick={() => {
-                  placeBet(false);
+                  notifyAuthorized();
+                  placeBet();
                 }} className="dicegame-rollnow">
                   Roll Now
                 </button>
@@ -575,7 +601,9 @@ const DiceGame = ({ userBets, bets }) => {
       </div>
       {isOpenFair && (
         <div className="editusername-popup">
-          <div className="editusername-popup_container">
+          <div className="editusername-popup_container" style={{
+            maxWidth: '560px'
+          }}>
             <div className="editusername-popup_header">
               <p>Fairness</p>
               <span
@@ -589,21 +617,23 @@ const DiceGame = ({ userBets, bets }) => {
             </div>
             <div className="editusername-popup_main-content">
               <div className="self-exclusion_container">
-                <p style={{ textAlign: 'center' }}>
+                <p style={{ textAlign: 'center', marginBottom: '2rem' }}>
                   Eliteplay uses a provably fair cryptographic system. Each roll
                   is cryptographically fair and can be verified to be
                   manipulation free. A pair of server and client seeds calculate
                   roll numbers. Eliteplay players can make randomization of the
                   pair of seeds before one bet:
                 </p>
-                <p>User Seed</p>
+                <div style={{ marginBottom: '1rem' }}>
+                <p style={{ marginBottom: '10px' }}>User Seed</p>
                 <div className="randomize-seed">
                   <div className="randomize-seedbox">
                     <p>{userSeed}</p>
                   </div>
                   <button style={{ cursor: 'pointer' }} onClick={() => { generateRandomToken(36) }}>Randomize</button>
                 </div>
-                <p>Server Seed (Hashed)</p>
+                </div>
+                <p style={{ marginBottom: '10px' }}>Server Seed (Hashed)</p>
                 <div className="randomize-seed">
                   <div className="randomize-seedbox">
                     <p>
@@ -613,15 +643,15 @@ const DiceGame = ({ userBets, bets }) => {
                   <button style={{ cursor: 'pointer' }} onClick={getserverToken}>Randomize</button>
                 </div>
 
-                <p style={{ textAlign: 'center', marginTop: '20px' }}>
+                <p style={{ textAlign: 'center', marginTop: '20px', fontSize: '16px' }}>
                   To learn more information about our provably fair system,
-                  please check our
+                  please check our 
                   <Link
                     to="/helpcenter"
-                    style={{ color: '#88DF95', textDecoration: 'none' }}
+                    style={{ color: '#88DF95', textDecoration: 'underline' }}
                   >
-                    Help Center
-                  </Link>
+                    {' '}Help Center
+                  </Link>{' '}
                   Page.
                 </p>
               </div>

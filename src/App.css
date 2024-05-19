@@ -1,7 +1,11 @@
 body {
-  font-family: 'Manrope', sans-serif;
+  font-family: 'Manrope', sans-serif !important;
   overflow-x: hidden;
   box-sizing: border-box !important;
+}
+
+input, button, select, textarea, span {
+  font-family: 'Manrope', sans-serif;
 }
 
 :root {
@@ -26,4 +30,17 @@ body {
 .chatroom-popup::-webkit-scrollbar {
   width: 0px;
   height: 0px;
+}
+  
+.close {
+  cursor: pointer;
+  background-color: #070C0A;
+  border-radius: 6px;
+  height: 40px;
+  width: 40px;
+  font-size: 1rem;
+  display: grid;
+  place-items: center;
+  color: white;
+  font-family: 'Manrope', sans-serif;
 }

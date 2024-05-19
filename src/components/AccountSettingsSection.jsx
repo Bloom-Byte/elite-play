@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import './AccountSettingsSection.css';
 import instance from '../utils/api';
 import { ACCESS_TOKEN } from '../utils/constants';
 import { useAppContext } from '../hooks/useAppContext';
+import { useToast } from '@chakra-ui/react';
+import { useCopyToClipboard } from '../hooks/useCopy';
 
 const AccountSettingsSection = () => {
   const [currentSection, setCurrentSection] = useState('account-info');
@@ -58,6 +60,8 @@ const AccountSettingsSection = () => {
     }
   };
 
+  const toast = useToast();
+
   const handleSelfExclusion = () => {
     const checkboxes = document.querySelectorAll(
       '.container-exclude input[type="checkbox"]'
@@ -74,7 +78,12 @@ const AccountSettingsSection = () => {
       setSelfExclusion(!selfExclusion);
       setPeriodExclusion(!periodExclusion);
     } else {
-      alert('Please select at least one option before proceeding.');
+      toast({
+        position: 'bottom',
+        status: 'error',
+        title: 'Required',
+        description: 'Please select at least one option before proceeding.',
+      });
     }
   };
 
@@ -104,20 +113,7 @@ const AccountSettingsSection = () => {
     }
   };
 
-  const copyToClipboard = (text) => {
-    const tempInput = document.createElement('input');
-    tempInput.value = text;
-
-    document.body.appendChild(tempInput);
-
-    tempInput.select();
-
-    document.execCommand('copy');
-
-    document.body.removeChild(tempInput);
-
-    alert('Copied to clipboard: ' + text);
-  };
+  const copyToClipboard = useCopyToClipboard();
 
   const handleConfirmPassword = async (event) => {
     event.preventDefault();
@@ -508,7 +504,7 @@ const AccountSettingsSection = () => {
                     alt="selected-profile"
                   />
                 ) : (
-                  <img src={user?.profilePictureUrl} alt="selected-profile" />
+                  <img src={state.user?.profilePictureUrl} alt="selected-profile" />
                 )}
                 <input
                   style={{ display: 'none' }}

@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 .referral-section {
-  
+
   margin-top: 2rem;
-  
+
   margin-bottom: 10rem;
 }
 
@@ -12,324 +12,329 @@
 }
 
 .referral-details {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 1rem;
 }
 
 .referralpot {
-    background-color: #0B1210;
-    padding: 20px;
-    border-radius: 6px;
-    display: flex;
-    gap: 50px;
-    width: 40%;
+  background-color: #0B1210;
+  padding: 20px;
+  border-radius: 6px;
+  display: flex;
+  gap: 50px;
+  flex: 1;
 }
 
 .referralpota {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
 }
 
 .referralpota-txt {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .referralpotb {
-    display: flex;
-    gap: 10px;
-    width: 100%;
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  align-items: center;
 }
 
 .referralpotb-txt {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
 }
 
 .referralpota span:nth-child(1) {
-    color: #C5C5C7;
-    font-size: 12px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
+  color: #C5C5C7;
+  font-size: 12px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
 }
 
 .referralpotb span:nth-child(1) {
-    color: #C5C5C7;
-    font-size: 12px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
+  color: #C5C5C7;
+  font-size: 12px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
 }
 
 .referralpota span:nth-child(2) {
-    color: #ffffff;
-    font-size: 18px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
+  color: #ffffff;
+  font-size: 18px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
 }
 
 .referralpotb span:nth-child(2) {
-    color: #ffffff;
-    font-size: 18px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
+  color: #ffffff;
+  font-size: 18px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
 }
 
 .referralvalue {
-    background-color: #0B1210;
-    padding: 20px;
-    border-radius: 6px;
-    display: flex;
-    gap: 50px;
-    width: 40%;
+  background-color: #0B1210;
+  padding: 20px;
+  border-radius: 6px;
+  display: flex;
+  gap: 50px;
+  flex: 1;
+  justify-content: space-between;
 }
 
 .referralvalue-txt {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .referralvalue-txt span:nth-child(1) {
-    color: #C5C5C7;
-    font-size: 12px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
+  color: #C5C5C7;
+  font-size: 12px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
 }
 
 .referralvalue-txt span:nth-child(2) {
-    color: #FF9D3F;
-    font-size: 18px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
+  color: #FF9D3F;
+  font-size: 18px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
 }
 
 .referral-btn button {
-    background: rgb(11, 40, 31);
-    border: 1px transparent;
-    border-radius: 6px;
-    color: #fff;
-    padding: 8px 24px;
-    width: 159px;
-    cursor: pointer;
-    transition: 0.3s;
+  background: rgb(11, 40, 31);
+  border: 1px transparent;
+  border-radius: 6px;
+  color: #fff;
+  padding: 8px 24px;
+  width: fit-content;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .refer-dashboard {
-    border-radius: 6px;
-    background-color: #070C0A;
-    padding: 8px 20px;
-    color: #FFf;
-    font-size: 14px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
-    width: 130px;
+  border-radius: 6px;
+  background-color: #070C0A;
+  padding: 8px 20px;
+  color: #FFf;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  width: fit-content;
+  margin-bottom: 2rem;
 }
 
 .refer-invite {
-    background-color: #0B1210;
-    border-radius: 6px;
-    margin: 20px;
-    padding: 20px;
+  background-color: #0B1210;
+  border-radius: 6px;
+  padding: 20px;
+  margin-bottom: 1rem;
 }
 
 .refer-invite-txt {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
 
 .refer-invite-txt span:nth-child(1) {
-    color: #FFf;
-    font-size: 16px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 800;
+  color: #FFf;
+  font-size: 16px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 800;
 }
 
 .refer-invite-txt span:nth-child(2) {
-    color: #88DF95;
-    font-size: 12px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
-    text-decoration: underline;
+  color: #88DF95;
+  font-size: 12px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  text-decoration: underline;
 }
 
 .refer-commissionrewards {
-    margin-top: 20px;
-    color: #fff;
-    font-size: 12px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
+  margin-top: 20px;
+  color: #fff;
+  font-size: 12px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
+  margin-bottom: 10px;
 }
 
 .refer-commissionrewards .percentagecommission {
-    color: #FF9D3F !important;
+  color: #FF9D3F !important;
 }
 
 .pinfo {
-    color: #6E6E71;
-    font-size: 12px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 600;
+  color: #6E6E71;
+  font-size: 12px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 600;
 }
 
-.referral-cta{
-    background-color: #0B1210;
-    margin: 20px;
-    padding: 20px;
-    border-radius: 6px;
+.referral-cta {
+  background-color: #0B1210;
+  padding: 20px;
+  border-radius: 6px;
 }
 
 .referral-cta_boxes {
-    display: flex;
-    margin: 20px 0;
-    gap: 30px;
+  display: flex;
+  margin: 20px 0;
+  gap: 30px;
 }
 
 .referral-cta_box-info {
-    display: flex;
-    gap: 10px;
-    background-color: #070C0A;
-    border-radius: 6px;
-    padding: 16px;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  gap: 10px;
+  background-color: #070C0A;
+  border-radius: 6px;
+  padding: 16px;
+  align-items: center;
+}
+.referral-cta_box-info img:nth-child(3) {
+  margin-left: auto;
+  cursor: pointer;
 }
 
-.referral-cta_box p{
-    color: #C5C5C7;
-    font-size: 16px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
+.refer-url-box {
+  flex: 2;
+}
+.refer-code-box {
+  flex: 1;
 }
 
-.referral-cta_box-info span{
-    color: #fff;
-    font-size: 16px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
+.referral-cta_box p {
+  color: #C5C5C7;
+  font-size: 16px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
+  margin-bottom: 10px;
+}
+
+.referral-cta_box-info span {
+  color: #fff;
+  font-size: 16px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
 }
 
 .share-refer-link {
-    display: flex;
-    gap: 10px;
-    align-items: center;
+  display: flex;
+  gap: 10px;
+  align-items: center;
 }
 
 .share-refer-link span {
-    color: #fff;
-    font-size: 14px;
-    font-family: "Manrope", sans-serif;
-    font-weight: 400;
+  color: #fff;
+  font-size: 14px;
+  font-family: "Manrope", sans-serif;
+  font-weight: 400;
 }
 
 .terms-popup {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .terms-popup_container {
-    position: relative;
-    background-color: #0b1210;
-    border-radius: 6px;
-    max-height: 90vh;
-    overflow-y: scroll;
-  }
-  
-  .terms-popup_header {
-    background-color: #0b281f;
-    top: 0;
-    height: 56px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 20px;
-  }
-  .terms-popup_header p {
-      margin: 0;
-      font-family: 'Manrope', sans-serif;
-      font-size: 16px;
-      font-weight: 800;
-      color: #ffffff;
-  }
-  
-  .close {
-    cursor: pointer;
-    background-color: #070C0A;
-    border-radius: 6px;
-    padding: 16px;
-    color: white;
-  }
-  
-  .terms-popup_main-content {
-      padding: 20px;
-  }
-
-  .terms-close {
-    position: absolute;
-    right: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-  
 
+.terms-popup_container {
+  position: relative;
+  background-color: #0b1210;
+  border-radius: 6px;
+  max-height: 90vh;
+  overflow-y: scroll;
+}
+
+.terms-popup_header {
+  background-color: #0b281f;
+  top: 0;
+  height: 56px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+}
+
+.terms-popup_header p {
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.terms-popup_main-content {
+  padding: 20px;
+}
+
+.terms-close {
+  position: absolute;
+  right: 20px;
+}
 
 
 /* --------- MOBILE RESPONSIVENESS --------- */
 @media screen and (max-width: 768px) {
-    .referral-section {
-        margin-left: 8px;
-    }
+  .referral-section {
+    margin-left: 8px;
+  }
 
-    .referral-details{
-        flex-direction: column;
-    }
+  .referral-details {
+    flex-direction: column;
+  }
 
-    .refer-code-box {
-        display: none;
-    }
+  .refer-code-box {
+    display: none;
+  }
 
-    .referralpot {
-        width: 90vw;
-    }
+  .referralpot {
+    width: 90vw;
+  }
 
-    .referralvalue {
-        width: 90vw;
-        gap: 0;
-    }
+  .referralvalue {
+    width: 90vw;
+    gap: 0;
+  }
 
-    
-.referralpota span:nth-child(1) {
+
+  .referralpota span:nth-child(1) {
     font-size: 11px;
-}
+  }
 
-.referralpotb span:nth-child(1) {
+  .referralpotb span:nth-child(1) {
     font-size: 11px;
-}
+  }
 
-.referralpota span:nth-child(2) {
+  .referralpota span:nth-child(2) {
     font-size: 16px;
-}
+  }
 
-.referralpotb span:nth-child(2) {
+  .referralpotb span:nth-child(2) {
     font-size: 16px;
-}
+  }
 
-.refer-invite {
+  .refer-invite {
     width: 80vw;
     margin: 0;
-}
+  }
 
-.referral-cta{
+  .referral-cta {
     width: 80vw;
     margin: 0;
-}
+  }
 }

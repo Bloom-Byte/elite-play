@@ -1,6 +1,7 @@
 import { createContext, useReducer, useEffect, useCallback } from "react";
 import instance from "../utils/api";
 import { ACCESS_TOKEN } from "../utils/constants";
+import { useToken } from "../hooks/useAccessToken";
 
 // Define the initial state
 const initialState = {
@@ -79,8 +80,10 @@ const appReducer = (state, action) => {
 // Context provider
 export const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(appReducer, initialState);
+  const token = useToken();
 
   const fetchUserProfile = useCallback(async () => {
+    if (!token) return;
     try {
       dispatch({ type: SET_USER_LOADING, payload: true });
       const response = await instance.get(
@@ -97,7 +100,7 @@ export const AppProvider = ({ children }) => {
       console.error('Error fetching user profile:', error.message);
       dispatch({ type: SET_USER_LOADING, payload: false });
     }
-  }, [])
+  }, [token])
 
   useEffect(() => {
     const accessToken = localStorage.getItem(ACCESS_TOKEN);

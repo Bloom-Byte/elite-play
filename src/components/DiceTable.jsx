@@ -36,7 +36,7 @@ const DiceTable = ({ bets, userBets }) => {
             probability and involves calculating blockchain hash values and
             algorithms.
           </p>
-            <p>Here&apos;s how the game generally works:</p>
+          <p>Here&apos;s how the game generally works:</p>
           <p>
             1. Blockchain Technology: Blockchain is a decentralized and secure
             technology that ensures transparency and fairness in the game. The
@@ -177,8 +177,8 @@ const DiceTable = ({ bets, userBets }) => {
         <>
           <div className="dicetable-section">
             <div className="dicetable-betstitle">
-              <div onClick={() => {setUserBetsOpen(!userBetsOpen)}} className={userBetsOpen? 'dicetable-betstitle_all-bets' : 'dicetable-betstitle_my-bets'}>All Bets</div>
-              <div onClick={() => {setUserBetsOpen(!userBetsOpen)}} className={userBetsOpen? 'dicetable-betstitle_my-bets' : 'dicetable-betstitle_all-bets'}>My Bets</div>
+              <div onClick={() => { setUserBetsOpen(!userBetsOpen) }} className={userBetsOpen ? 'dicetable-betstitle_all-bets' : 'dicetable-betstitle_my-bets'}>All Bets</div>
+              <div onClick={() => { setUserBetsOpen(!userBetsOpen) }} className={userBetsOpen ? 'dicetable-betstitle_my-bets' : 'dicetable-betstitle_all-bets'}>My Bets</div>
             </div>
             <div>
               <table className="livebets-table_table">
@@ -196,12 +196,16 @@ const DiceTable = ({ bets, userBets }) => {
                       <tr key={index}>
                         <td className="game-icon">{bet._id}</td>
                         <td>
-                          <img
-                            className="coin"
-                            src="./twemoji_coin.svg"
-                            alt="coin"
-                          />
-                          {bet.amount}
+                          <div style={{
+                            display: 'flex'
+                          }}>
+                            <img
+                              className="coin"
+                              src="./twemoji_coin.svg"
+                              alt="coin"
+                            />
+                            {bet.amount}
+                          </div>
                         </td>
                         <td>{bet.payout}x</td>
                         <td
@@ -222,12 +226,17 @@ const DiceTable = ({ bets, userBets }) => {
                         <tr key={index}>
                           <td className="game-icon">{bet._id}</td>
                           <td>
-                            <img
-                              className="coin"
-                              src="./twemoji_coin.svg"
-                              alt="coin"
-                            />
-                            {bet.amount}
+                            <div style={{
+                              display: 'flex',
+                              alignItems: 'center',
+                            }}>
+                              <img
+                                className="coin"
+                                src="./twemoji_coin.svg"
+                                alt="coin"
+                              />
+                              {bet.amount}
+                            </div>
                           </td>
                           <td>{bet.payout}x</td>
                           <td
@@ -253,7 +262,7 @@ const DiceTable = ({ bets, userBets }) => {
                       </tr>
                     )
                   )}
-                 
+
                 </tbody>
               </table>
             </div>

@@ -1,19 +1,17 @@
-import React, { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import CrashGraph from './CrashGraph';
 import './CrashGame.css';
 import instance from '../utils/api';
-import { ACCESS_TOKEN } from '../utils/constants';
 import { useDisclosure } from '../hooks/useDisclosure';
 import { isElementClassOrChildOf } from '../utils/dom';
 import { Link } from 'react-router-dom';
+import { useNotifyAuth } from '../hooks/useNotifyAuthorized';
 
-const CrashGame = ({ isNavOpen, userBets, bets }) => {
+const CrashGame = () => {
   const [auto, setAuto] = useState(false);
-  const [livebet, setLivebet] = useState(false);
   const [tutorial, setTutorial] = useState(false);
   const [betAmount, setBetAmount] = useState(10);
   const [multiplier, setMultiplier] = useState(2.0);
-  const [autoBet, setAutoBet] = useState(false);
   const [gameState, setGameState] = useState({
     isGameRunning: false,
     isGameCrashed: false,
@@ -28,6 +26,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
   const dropdownRef = useRef(null);
 
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const notifyAuthorized = useNotifyAuth();
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -87,17 +86,21 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
 
   const handleCashAmount = (event) => {
     if (event.target.value >= 2) {
-      setMultiplier(event.target.value);
+      setMultiplier(parseFloat(event.target.value));
     }
   };
 
   const handleCashUpdate = (cash) => {
-    if (cash >= 2) {
-      setMultiplier(cash);
+    console.log("update", cash);
+    if (cash < 2) {
+      setMultiplier(2);
+      return
     }
+    setMultiplier(parseFloat(cash.toFixed(2)));
   };
 
   const handlePlaceBet = () => {
+    notifyAuthorized();
     instance.post('/crash-game/bet', {
       amount: betAmount,
       cashOutPoint: multiplier,
@@ -385,7 +388,6 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                         width: '40px',
                         outline: 'none',
                       }}
-                      step={0.1}
                     />
                     <span style={{ marginLeft: '5px' }}>x</span>
                   </div>
@@ -394,7 +396,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                       <img
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                          handleCashUpdate(multiplier + 0.1);
+                          handleCashUpdate(multiplier + 0.01);
                         }}
                         src="./crash-l.svg"
                         alt="arrow"
@@ -402,7 +404,7 @@ const CrashGame = ({ isNavOpen, userBets, bets }) => {
                       <img
                         style={{ cursor: 'pointer' }}
                         onClick={() => {
-                          handleCashUpdate(multiplier - 0.1);
+                          handleCashUpdate(multiplier - 0.01);
                         }}
                         src="./crash-r.svg"
                         alt="arrow"

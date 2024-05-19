@@ -1,4 +1,3 @@
-import React from 'react';
 import './Recentwins.css';
 
 const Recentwins = ({ diceAllBets, crashAllBets }) => {
@@ -29,7 +28,7 @@ const Recentwins = ({ diceAllBets, crashAllBets }) => {
           ))}
         {crashRecentwins.length > 0 &&
           crashRecentwins.slice(0, 5).map((crash, index) => (
-            <div id={index} className="recent-wins__container__item">
+            <div id={index} className="recent-wins__container__item" key={index}>
               <img src="./crash-win.svg" alt="dice-win" />
               <div className="recent-wins__coin-info">
                 <img src="./twemoji_coin.svg" alt="" />

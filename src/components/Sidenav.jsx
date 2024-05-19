@@ -10,8 +10,6 @@ import { useNav } from '../hooks/useUtils';
 import { useDisclosure } from '../hooks/useDisclosure';
 
 const Sidenav = () => {
-  const [liveSupport, setLiveSupport] = useState(false);
-  const [vipSupport, setVipSupport] = useState(false);
   const [languagePopup, setLanguagePopup] = useState(false);
   const [totalClaim, setTotalClaim] = useState(null);
   const [facuetClaimableForCurrentTier, setFaucetClaimableForCurrentTier] = useState(null);
@@ -26,6 +24,7 @@ const Sidenav = () => {
   const { toggleNav } = useNav();
 
   useEffect(() => {
+    if (!state.user) return;
     const fetchData = async () => {
       try {
         const response = await instance.get("/faucet/total-faucet-claimed");
@@ -39,7 +38,7 @@ const Sidenav = () => {
     };
 
     fetchData();
-  }, []);
+  }, [state]);
 
   const { isOpen: isOpenVIP, onOpen: onOpenVIP, onClose: onCloseVIP } = useDisclosure();
   const { isOpen: isOpenLive, onOpen: onOpenLive, onClose: onCloseLive } = useDisclosure();
@@ -88,7 +87,7 @@ const Sidenav = () => {
           <div>
             <div
               onClick={() => { onOpenVIP() }}
-              className={`sidenav__link ${vipSupport ? 'active' : ''}`}
+              className={`sidenav__link ${isOpenVIP ? 'active' : ''}`}
             >
               <img src="./VIP.svg" alt="vip-icon" />
               <span>
@@ -102,7 +101,7 @@ const Sidenav = () => {
                 onClick={() => {
                   onOpenLive();
                 }}
-                className={`sidenav__link ${liveSupport ? 'active' : ''}`}
+                className={`sidenav__link ${isOpenLive ? 'active' : ''}`}
               >
                 <img src="./customer-support.svg" alt="support-icon" />
                 <span>Live Support</span>

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './DepositPopup.css';
 import instance from '../utils/api';
+import { useCopyToClipboard } from '../hooks/useCopy';
 
 const DepositPopup = ({ onCloseDeposit, user }) => {
   const [depositAmountpop, setDepositAmountpop] = useState(0);
@@ -9,20 +10,7 @@ const DepositPopup = ({ onCloseDeposit, user }) => {
   const [validatemessage, setValidateMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
 
-  const copyToClipboard = (text) => {
-    const tempInput = document.createElement('input');
-    tempInput.value = text;
-
-    document.body.appendChild(tempInput);
-
-    tempInput.select();
-
-    document.execCommand('copy');
-
-    document.body.removeChild(tempInput);
-
-    alert('Copied to clipboard: ' + text);
-  };
+  const copyToClipboard = useCopyToClipboard();
 
   const handleDepositChange = (event) => {
     setDepositAmountpop(event.target.value);

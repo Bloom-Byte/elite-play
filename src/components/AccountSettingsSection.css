@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 .account-settings {
-  
+
   box-sizing: border-box !important;
   margin-top: 2rem;
-  
+
   margin-bottom: 10rem;
 }
 
@@ -378,15 +378,15 @@
   transition: 0.4s;
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #24e3a1;
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #24e3a1;
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(16px);
   -ms-transform: translateX(16px);
   transform: translateX(16px);
@@ -407,7 +407,7 @@ input:checked + .slider:before {
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.86);
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -415,311 +415,306 @@ input:checked + .slider:before {
 }
 
 .editusername-popup_container {
-  position: relative;
+  position: absolute;
+  width: 100%;
+  max-width: 500px;
   background-color: #0b1210;
   border-radius: 6px;
+  top: 4rem;
+  overflow: hidden;
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.05), 0px 15px 30px 0px rgba(0, 0, 0, 0.15), 0px 20px 40px 0px rgba(0, 0, 0, 0.25);
+  backdrop-filter: blur(10px);
 }
 
 .editusername-popup_header {
   background-color: #0b281f;
   top: 0;
-  height: 56px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px;
+  padding: 30px;
 }
 
 .editusername-popup_header p {
-    margin: 0;
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    font-weight: 800;
-    color: #ffffff;
-}
-
-.close {
-  cursor: pointer;
-  background-color: #070C0A;
-  border-radius: 6px;
-  padding: 16px;
-  color: white;
+  margin: 0;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  color: #ffffff;
 }
 
 .editusername-popup_main-content {
-    padding: 20px;
+  padding: 20px;
 }
 
 .editusername-popup_edit-avatar {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .editusername-popup_edit-avatar img {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
 }
 
 .editusername-popup_edit-avatar label {
-    background-color: #0B281F;
-    border: 1px solid #0B281F;
-    padding: 8px;
-    border-radius: 6px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    cursor: pointer;
+  background-color: #0B281F;
+  border: 1px solid #0B281F;
+  padding: 8px;
+  border-radius: 6px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
 }
 
 .editusername-popup_edit-username {
-    margin-top: 24px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #C5C5C7;
+  margin-top: 24px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #C5C5C7;
 }
 
 .editusername-popup_edit-username-box {
-    background-color: #070C0A;
-    border: 1px solid #070C0A;
-    width: 90%;
-    padding: 16px;
-    border-radius: 6px;
-    color: white;
+  background-color: #070C0A;
+  border: 1px solid #070C0A;
+  width: 90%;
+  padding: 16px;
+  border-radius: 6px;
+  color: white;
 }
 
 .editusername-popup_edit-username-box:focus {
-    outline: none;
-    border: 2px solid #24E3A1;
+  outline: none;
+  border: 2px solid #24E3A1;
 }
 
 .edit-username_note {
-    font-family: 'Manrope', sans-serif;
-    font-size: 11.01px;
-    font-weight: 400;
-    color: #6E6E71;
+  font-family: 'Manrope', sans-serif;
+  font-size: 11.01px;
+  font-weight: 400;
+  color: #6E6E71;
 }
 
 .edit-username-popup_btn {
-    margin-top: 40px;
-    width: 100%;
-    background: rgb(11, 40, 31);
-    border: 1px transparent;
-    border-radius: 6px;
-    color: #fff; 
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: all 0.3s var(--ease-in-out);
+  margin-top: 40px;
+  width: 100%;
+  background: rgb(11, 40, 31);
+  border: 1px transparent;
+  border-radius: 6px;
+  color: #fff;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-in-out);
 }
 
 .email-popup_header {
-    font-family: 'Manrope', sans-serif;
-    font-size: 18px;
-    font-weight: 800;
-    color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  font-size: 18px;
+  font-weight: 800;
+  color: #ffffff;
 }
 
 .verify-text-sent {
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #ffffff;
-    max-width: 360px;
-    text-align: center;
-    margin-bottom: 2rem;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
+  max-width: 360px;
+  text-align: center;
+  margin-bottom: 2rem;
 }
 
 .email-bold {
-    font-weight: 600 !important;
+  font-weight: 600 !important;
 }
 
 .email-popup_resend {
-    text-align: center;
-    font-family: 'Manrope', sans-serif;
-    font-size: 12px;
-    font-weight: 600;
-    color: #88DF95;
-    margin-top: 3rem;
+  text-align: center;
+  font-family: 'Manrope', sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #88DF95;
+  margin-top: 3rem;
 }
 
 .email-close {
-    position: absolute;
-    right: 20px;
+  position: absolute;
+  right: 20px;
 }
 
 .self-exclusion_container {
-    background-color: #0B281F;
-    padding: 20px;
-    border-radius: 6px;
+  background-color: #0B281F;
+  padding: 20px;
+  border-radius: 6px;
 }
 
 .self-exclusion_container p {
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #ffffff;
-    max-width: 400px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
 }
 
 .self-exclude_options {
-    margin: 2rem 0;
+  margin: 2rem 0;
 }
 
 .self-exclude_options label {
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
-    color: #ffffff;
-    max-width: 400px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #ffffff;
 }
 
 .container-exclude {
-    display: block;
-    position: relative;
-    padding-left: 35px;
-    margin-bottom: 12px;
-    cursor: pointer;
-    font-size: 22px;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
-  }
-  
-  /* Hide the browser's default checkbox */
-  .container-exclude input {
-    position: absolute;
-    opacity: 0;
-    cursor: pointer;
-    height: 0;
-    width: 0;
-  }
-  
-  /* Create a custom checkbox */
-  .checkmark-exclude {
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 16px;
-    width: 16px;
-    background-color: transparent;
-    border: 2px solid #9E9EA2;
-    border-radius: 4px;
-  }
-  
-  /* When the checkbox is checked, add a green background */
-  .container-exclude input:checked ~ .checkmark-exclude {
-    background-color: #24E3A1;
-  }
-  
-  /* Create the checkmark/indicator (hidden when not checked) */
-  .checkmark-exclude:after {
-    content: "";
-    position: absolute;
-    display: none;
-  }
-  
-  /* Show the checkmark when checked */
-  .container-exclude input:checked ~ .checkmark-exclude:after {
-    display: block;
-  }
-  
-  /* Style the checkmark/indicator */
-  .container-exclude .checkmark-exclude:after {
-    left: 5px;
-    top: 3px;
-    width: 4px;
-    height: 7px;
-    border: solid white;
-    border-width: 0 3px 3px 0;
-    -webkit-transform: rotate(45deg);
-    -ms-transform: rotate(45deg);
-    transform: rotate(45deg);
+  display: block;
+  position: relative;
+  padding-left: 35px;
+  margin-bottom: 12px;
+  cursor: pointer;
+  font-size: 22px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default checkbox */
+.container-exclude input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark-exclude {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 16px;
+  width: 16px;
+  background-color: transparent;
+  border: 2px solid #9E9EA2;
+  border-radius: 4px;
+}
+
+/* When the checkbox is checked, add a green background */
+.container-exclude input:checked~.checkmark-exclude {
+  background-color: #24E3A1;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark-exclude:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+.container-exclude input:checked~.checkmark-exclude:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+.container-exclude .checkmark-exclude:after {
+  left: 5px;
+  top: 3px;
+  width: 4px;
+  height: 7px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 
 .chatwithus {
-    color: #88DF95 !important;
+  color: #88DF95 !important;
 }
 
 .self-exclusion-btns {
-    margin-top: 20px;
-    display: flex;
-    gap: 24px;
+  margin-top: 20px;
+  display: flex;
+  gap: 24px;
 }
 
 .self-exclusion_cancel {
-    border: 2px solid #ECECED;
-    background-color: transparent;
-    border-radius: 6px;
-    padding: 8px 16px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ECECED;
-    width: 114px;
+  border: 2px solid #ECECED;
+  background-color: transparent;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ECECED;
+  width: 114px;
 }
 
 .self-exclusion_next {
-    background:  rgb(11, 40, 31);
-    border: 2px solid transparent;
-    border-radius: 6px;
-    padding: 8px 16px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    width: 114px;
-    cursor: pointer;
-    transition: all 0.3s var(--ease-in-out);
+  background: rgb(11, 40, 31);
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 8px 16px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  width: 114px;
+  cursor: pointer;
+  transition: all 0.3s var(--ease-in-out);
 }
 
 .period-options {
-    padding: 16px;
-    background-color: #070C0A;
-    font-family: 'Manrope', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
-    color: #ffffff;
-    border: 1px solid #070C0A;
-    border-radius: 6px;
-    width: 100%;
-    margin: 2rem 0;
+  padding: 16px;
+  background-color: #070C0A;
+  font-family: 'Manrope', sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  color: #ffffff;
+  border: 1px solid #070C0A;
+  border-radius: 6px;
+  width: 100%;
+  margin: 2rem 0;
 }
 
 .language-table td {
-    padding: 20px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #6E6E71;
+  padding: 20px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #6E6E71;
 }
 
 .language-active {
-    background-color: #0B281F;
-    border-radius: 6px;
+  background-color: #0B281F;
+  border-radius: 6px;
 }
 
 .currency-table td {
-    padding: 20px;
-    font-family: 'Manrope', sans-serif;
-    font-size: 14px;
-    font-weight: 600;
-    color: #ffffff;
-    overflow: hidden;
+  padding: 20px;
+  font-family: 'Manrope', sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ffffff;
+  overflow: hidden;
 }
 
 .currency-table td img {
-    margin-bottom: -4px;
-    margin-right: 5px;
+  margin-bottom: -4px;
+  margin-right: 5px;
 }
 
 .country-name {
-    color: #6E6E71 !important;
-    margin-left: 10px;
+  color: #6E6E71 !important;
+  margin-left: 10px;
 }
 
 .email-txt-verified {
@@ -758,7 +753,8 @@ input:checked + .slider:before {
   margin-bottom: -4px;
 }
 
-.auth-security input, button {
+.auth-security input,
+button {
   display: block;
 }
 
@@ -778,10 +774,10 @@ input:checked + .slider:before {
 }
 
 .auth-security button {
-  background:  rgb(11, 40, 31);
+  background: rgb(11, 40, 31);
   border: 1px transparent;
   border-radius: 6px;
-  color: #fff; 
+  color: #fff;
   padding: 10px 20px;
   font-family: "Manrope", sans-serif;
   font-weight: 600;
@@ -829,41 +825,41 @@ input:checked + .slider:before {
   }
 
   .settings-dropdown-content hr {
-      margin-bottom: 20px;
+    margin-bottom: 20px;
   }
 
   .settings-dropdown-cta {
-      margin-bottom: 20px;
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      cursor: pointer;
+    margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    cursor: pointer;
   }
 
   .settings-dropdown-cta a {
-      display: flex;
-      gap: 10px;
-      align-items: center;
+    display: flex;
+    gap: 10px;
+    align-items: center;
   }
 
   .settings-dropdown-cta span {
-      color: #6E6E71;
-      font-size: 14px;
-      font-family: "Manrope", sans-serif;
-      font-weight: 600;
+    color: #6E6E71;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
   }
 
   .settings-dropdown-cta a {
-      color: #6E6E71;
-      font-size: 14px;
-      font-family: "Manrope", sans-serif;
-      font-weight: 600;
-      text-decoration: none;
-      cursor: pointer;
+    color: #6E6E71;
+    font-size: 14px;
+    font-family: "Manrope", sans-serif;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
   }
 
   .settings-dropdown-cta .vip {
-      color: #F29100;
+    color: #F29100;
   }
 
   .account-settings__navs {

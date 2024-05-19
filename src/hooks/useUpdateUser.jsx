@@ -2,12 +2,16 @@ import { useCallback } from "react";
 import { LOGIN, SET_USER_LOADING } from "../contexts/AppContext";
 import { useAppContext } from "./useAppContext";
 import instance from "../utils/api";
+import { useToken } from "./useAccessToken";
 
 
 export const useUpdateUser = () => {
   const { dispatch } = useAppContext();
 
+  const token = useToken();
+
   const update = useCallback(async () => {
+    if (!token) return;
     try {
       const response = await instance.get(
         '/user/me'
@@ -22,7 +26,7 @@ export const useUpdateUser = () => {
     } catch (error) {
       console.error('Error fetching user profile:', error.message);
     }
-  }, [dispatch])
+  }, [dispatch, token])
 
   return update;
 };

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import { register } from 'swiper/element/bundle';
 import 'swiper/swiper-bundle.css';
 import './VIPPopup.css';
@@ -31,7 +31,6 @@ const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, 
       const response = await instance.post('/faucet/claim', {});
 
       if ((response.status === 200 || response.status === 201)) {
-        const responseData = response.data;
         const responseInfo = await instance.get(
           '/faucet/total-faucet-claimed',
         );
@@ -85,7 +84,7 @@ const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, 
               Level up to get exclusive access to generous rewards and
               personalized gifts! Join our community of elite players and enjoy
               the best that online gaming has to offer.{' '}
-              <span className="highlight-level"> View level up details</span>
+              <span className="highlight-level"> View level up details below</span>
             </p>
           </div>
           <div className="vippopup-progess_boxes">
@@ -95,7 +94,7 @@ const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, 
             >
               <h3>Your VIP Progress</h3>
               <p className="xplevel">65 XP</p>
-              <input type="range" max="20000000" value={state.user?.totalBetAmount} />
+              <input readOnly type="range" max="20000000" value={state.user?.totalBetAmount} />
               <p className="xplevel">{state.user?.amountToNextTier} XP until {state.user?.nextTier}</p>
             </div>
             <div className="vippopup-reward-box">
@@ -113,14 +112,14 @@ const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, 
                 <span>
                   Next Reward in:{' '}
                   <span className="nextrewardtime">
-                    {Math.ceil(timeToNextClaim / 1000)}s left
+                    {Math.ceil(timeToNextClaim / 1000)}s
                   </span>
                 </span>
               </p>
               <button
                 onClick={handleClaimToken}
-                disabled={timeToNextClaim > 0}
-                className={`${timeToNextClaim > 0 ? 'disabled ' : ''
+                disabled={!state.user || timeToNextClaim > 0}
+                className={`${!state.user || timeToNextClaim > 0 ? 'disabled ' : ''
                   }vippopup-claimreward-btn`}
               >
                 Claim Reward
@@ -129,7 +128,6 @@ const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, 
           </div>
           <div className="alllevels">
             <h2>VIP LEVELS</h2>
-            {/* <div className="viplevels-boxes"> */}
             <swiper-container
               ref={swiperElRef}
               slides-per-view="3"
@@ -301,7 +299,6 @@ const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, 
                 </div>
               </swiper-slide>
             </swiper-container>
-            {/* </div> */}
           </div>
           <div className="vippopup-bottom-navs">
             <img

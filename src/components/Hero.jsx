@@ -25,6 +25,7 @@ const Hero = () => {
                 min="0"
                 max="20000000"
                 value={state.user?.totalBetAmount}
+                readOnly
                 // onChange={(event) => setLevel(event.target.value)}
               />
               <div className="home-hero__user-info-box__level">

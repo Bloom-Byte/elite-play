@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import './WalletComponent.css';
 import instance from '../utils/api';
 import { useAppContext } from '../hooks/useAppContext';
+import { useCopyToClipboard } from '../hooks/useCopy';
 
 const WalletComponent = () => {
   const [currentSection, setCurrentSection] = useState('Balance');
@@ -32,20 +33,7 @@ const WalletComponent = () => {
     setDepositAccountId(event.target.value);
   };
 
-  const copyToClipboard = (text) => {
-    const tempInput = document.createElement('input');
-    tempInput.value = text;
-
-    document.body.appendChild(tempInput);
-
-    tempInput.select();
-
-    document.execCommand('copy');
-
-    document.body.removeChild(tempInput);
-
-    alert('Copied to clipboard: ' + text);
-  };
+  const copyToClipboard = useCopyToClipboard();
 
   const depositToEliteplay = async () => {
     const url = '/transactions/deposit';

@@ -1,26 +1,15 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './ReferralSection.css';
 import { useAppContext } from '../hooks/useAppContext';
+import { useCopyToClipboard } from '../hooks/useCopy';
+import { Divider } from '@chakra-ui/react';
 
 const ReferralSection = ({ referralInfo, referralCount }) => {
   const [terms, setTerms] = useState(false);
 
   const { state } = useAppContext();
 
-  const copyToClipboard = (text) => {
-    const tempInput = document.createElement('input');
-    tempInput.value = text;
-
-    document.body.appendChild(tempInput);
-
-    tempInput.select();
-
-    document.execCommand('copy');
-
-    document.body.removeChild(tempInput);
-
-    alert('Copied to clipboard: ' + text);
-  };
+  const copyToClipboard = useCopyToClipboard();
 
   return (
     <>
@@ -34,9 +23,10 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
               <img src="./pot-coin.svg" alt="coin-icon" />
               <div className="referralpota-txt">
                 <span>Total Rewards</span>
-                <span>eGold {state.user.totalReferralEarnings}</span>
+                <span>eGold {state.user?.totalReferralEarnings || '0.00'}</span>
               </div>
             </div>
+            <Divider orientation="vertical" />
             <div className="referralpotb">
               <img src="./speaker.svg" alt="speaker" />
               <div className="referralpotb-txt">
@@ -65,7 +55,7 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
               Referral Terms & Conditions
             </span>
           </div>
-          <hr />
+          <Divider mt={2} />
           <p className="refer-commissionrewards">
             <span className="percentagecommission">25%</span> Commission Rewards
           </p>
@@ -77,7 +67,7 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
         </div>
         <div className="referral-cta">
           <div className="referral-cta_boxes">
-            <div className="referral-cta_box">
+            <div className="referral-cta_box refer-url-box">
               <p>Referral Link</p>
               <div className="referral-cta_box-info">
                 <img src="./link-02.svg" alt="link-icon" />
@@ -86,14 +76,12 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   onClick={() => {
                     copyToClipboard(referralInfo?.fullReferralUrl);
                   }}
-                  style={{ cursor: 'pointer', marginLeft: '30px' }}
                   src="./copy-01.svg"
                   alt="copy-icon"
                 />
               </div>
             </div>
             <div
-              style={{ width: '100%' }}
               className="referral-cta_box refer-code-box"
             >
               <p>Referral Code</p>
@@ -101,16 +89,13 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                 style={{ width: '90%', justifyContent: 'space-between' }}
                 className="referral-cta_box-info"
               >
-                <div>
-                  <img
-                    style={{ marginBottom: '-6px', marginRight: '10px' }}
-                    src="./tag-01.svg"
-                    alt="tag-icon"
-                  />
-                  <span>
-                    {referralInfo ? referralInfo.referralCode : 'yuxeer'}
-                  </span>
-                </div>
+                <img
+                  src="./tag-01.svg"
+                  alt="tag-icon"
+                />
+                <span>
+                  {referralInfo ? referralInfo.referralCode : 'yuxeer'}
+                </span>
 
                 <img
                   onClick={() => {
@@ -118,7 +103,6 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                       `${referralInfo ? referralInfo.referralCode : 'yuxeer'}`
                     );
                   }}
-                  style={{ cursor: 'pointer', alignSelf: 'flex-end' }}
                   src="./copy-01.svg"
                   alt="copy-icon"
                 />
@@ -129,7 +113,9 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
             <span>Share via social media</span>
             <img src="./share-tw.svg" alt="twitter-icon" />
             <img src="./share-ig.svg" alt="ig-icon" />
-            <img src="./share-wa.svg" alt="whatsapp-icon" />
+            <a href={`whatsapp://send?text=${referralInfo?.fullReferralUrl}`}>
+              <img src="./share-wa.svg" alt="whatsapp-icon" />
+            </a>
             <img src="./share-te.svg" alt="telegram-icon" />
             <img src="./share-ds.svg" alt="discord-icon" />
           </div>
@@ -154,12 +140,12 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                 <p>
                   The website is supported by the BC.GAME prediction platform.
                   Platform games include Crash, Classic Dice and so on. By
-                  completing the BC.GAME Affiliate Program (the "Affiliate
-                  Program") application and clicking "I agree to the Terms and
+                  completing the BC.GAME Affiliate Program (the &quot;Affiliate
+                  Program&quot;) application and clicking &quot;I agree to the Terms and
                   Conditions (the “Terms”)” within the registration form, you
-                  (hereinafter the "Affiliate") hereby agree to abide by all the
+                  (hereinafter the &quot;Affiliate&quot;) hereby agree to abide by all the
                   terms and conditions set out in this agreement. The commission
-                  structure of the "commission rules" is also an integral part
+                  structure of the &quot;commission rules&quot; is also an integral part
                   of this agreement. BC.GAME reserves the right to amend, alter,
                   delete or extend any provisions of this agreement, at any time
                   and at its sole discretion, without giving any advance notice
@@ -178,11 +164,11 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   Affiliate comes into effect on the date the affiliate
                   application is approved. 1. Purpose 1.1. The Affiliate
                   maintains and operates one or more websites on the Internet
-                  (hereinafter collectively referred to as "the Website"),
+                  (hereinafter collectively referred to as &quot;the Website&quot;),
                   and/or refers potential customers through other channels. 1.2.
                   This Agreement governs the terms and conditions which are
                   related to the promotion of the website BC.GAME by the
-                  Affiliate, hereinafter referred to as "BC.GAME", whereby the
+                  Affiliate, hereinafter referred to as &quot;BC.GAME&quot;, whereby the
                   Affiliate will be paid a commission as defined in this
                   Agreement depending on the traffic sent to BC.GAME and the
                   terms of this Agreement. 1.3. The definition of the term Net
@@ -222,7 +208,7 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   potential players to host at its own cost and expense. The
                   Affiliate will be solely responsible for the distribution,
                   content and manners of its marketing activities. All of the
-                  Affiliate's marketing activities must be professional, proper
+                  Affiliate&apos;s marketing activities must be professional, proper
                   and lawful under applicable laws and must be in accordance
                   with this Agreement. c) To use only the tracking link provided
                   within the scope of the affiliate program, otherwise no
@@ -271,7 +257,7 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   accordance with what is set out in the commission structures
                   for the particular product. The calculation is product
                   specific and it is set out in every product-specific
-                  commission structure. (see "commission rules" for details)
+                  commission structure. (see &quot;commission rules&quot; for details)
                   6.3. Users can withdraw commissions from the agent system at
                   any time. The commissions will be withdrawn into the platform
                   wallet. Users can also withdraw the platform wallet to any
@@ -319,7 +305,7 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   may be terminated by either party by giving a thirty (30) day
                   written notification to the other party. Written notification
                   may be given by email. a) The Affiliate must remove all
-                  references to BC.GAME from the Affiliate's websites and/or
+                  references to BC.GAME from the Affiliate&apos;s websites and/or
                   other marketing channels and communications, irrespective of
                   whether the communications are commercial or non-commercial.
                   b) All rights and licenses granted to the Affiliate under this
@@ -329,11 +315,11 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   other designations vested in the Company. c) The Affiliate
                   will be entitled only to those earned and unpaid commissions
                   as of the effective date of termination;however provided, the
-                  Company may withhold the Affiliate's final payment for a
+                  Company may withhold the Affiliate&apos;s final payment for a
                   reasonable time to ensure that the correct amount is paid. The
                   Affiliate will not be eligible to earn or receive commissions
                   after this termination date. d) If this Agreement is
-                  terminated by the Company on the basis of the Affiliate's
+                  terminated by the Company on the basis of the Affiliate&apos;s
                   breach, the Company shall be entitled to withhold the
                   Affiliate’s earned but unpaid commissions as of the
                   termination date as collateral for any claim arising from such
@@ -344,7 +330,7 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   notification by the Company to the Affiliate. e) The Affiliate
                   must return to the Company any and all confidential
                   information (and all copies and derivations thereof) in the
-                  Affiliate's possession, custody and control. f) The Affiliate
+                  Affiliate&apos;s possession, custody and control. f) The Affiliate
                   will release the Company from all obligations and liabilities
                   occurring or arising after the date of such a termination,
                   except with respect to those obligations that by their nature
@@ -358,7 +344,7 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   survive the termination of this Agreement. 8. Warranties 8.1.
                   The Affiliate expressly acknowledges and agrees that the use
                   of the Internet is at its own risk and that this affiliate
-                  program is provided "as is" and "as available" without any
+                  program is provided &quot;as is&quot; and &quot;as available&quot; without any
                   warranties or conditions whatsoever, even if expressed or
                   implied. No guarantee is made that it will make access to its
                   website possible at any particular time or any particular
@@ -366,28 +352,28 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   Affiliate or anyone else for any inaccuracy, error or omission
                   in, or loss, injury or damage caused in whole or in part by
                   failures, delays or interruptions of the BC.GAME website or
-                  the affiliate program. a) Any breach of the Affiliate's
+                  the affiliate program. a) Any breach of the Affiliate&apos;s
                   representations, warranties or covenants under this Agreement.
-                  b) The Affiliate's use (or misuse) of the marketing materials.
-                  c) All conduct and activities occurring under the Affiliate's
+                  b) The Affiliate&apos;s use (or misuse) of the marketing materials.
+                  c) All conduct and activities occurring under the Affiliate&apos;s
                   user ID and password. d) Any defamatory, libelous or illegal
                   material contained within the Affiliate’s website or as part
-                  of the Affiliate's information and data. e) Any claim or
-                  contention that the Affiliate’s website or the Affiliate's
-                  information and data infringes any third party's patent,
+                  of the Affiliate&apos;s information and data. e) Any claim or
+                  contention that the Affiliate’s website or the Affiliate&apos;s
+                  information and data infringes any third party&apos;s patent,
                   copyright, trademark, or other intellectual property rights or
-                  violates any third party's rights of privacy or publicity. f)
+                  violates any third party&apos;s rights of privacy or publicity. f)
                   Third party access or use of the Affiliate’s website or to the
-                  Affiliate's information and data. g) Any claim related to the
+                  Affiliate&apos;s information and data. g) Any claim related to the
                   Affiliate website. h) Any violation of this Agreement. 9.2.
                   The Company reserves the right to participate, at its own
                   expense in the defense of any matter. 10. Company Rights 10.1.
                   In order to comply with company or BC.GAME policies, and to
-                  protect the company or BC.GAME's interests, the company or
+                  protect the company or BC.GAME&apos;s interests, the company or
                   BC.GAME can reject any player or close the player account.
                   10.2. The Company may refuse any applicant and/or may close
                   any Affiliate’s account if it is necessary to comply with the
-                  Company's policy and/or protect the interest of the Company.
+                  Company&apos;s policy and/or protect the interest of the Company.
                   If the Affiliate is in breach of this Agreement or the
                   Company’s Terms or other rules, policies and guidelines of the
                   Company, the Company may besides closing the Affiliate’s
@@ -395,7 +381,7 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   11. Commission structure 11.1. The commission settled to the
                   agent is a percentage of the game betting amount.The exact
                   commission structure is part of this agreement. For details,
-                  see the "commission rules" clause.In this case, the Commission
+                  see the &quot;commission rules&quot; clause.In this case, the Commission
                   is withdrawn to the player’s platform wallet (digital
                   currency), but not directly to other addresses. 12. Assignment
                   12.1. The Affiliate may not assign this Agreement, by
@@ -406,7 +392,7 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   terms. 12.2. The Company may assign this Agreement, by
                   operation of the law or otherwise, at any time without
                   obtaining the prior consent of the Affiliate. 13. Non-Waiver
-                  13.1. The Company's failure to enforce the Affiliate's
+                  13.1. The Company&apos;s failure to enforce the Affiliate&apos;s
                   adherence to the Terms outlined in this Agreement shall not
                   constitute a waiver of the right of the Company to enforce
                   said terms at any time. 14. Force Majeure 14.1. Neither party
@@ -425,7 +411,7 @@ const ReferralSection = ({ referralInfo, referralCount }) => {
                   without notice. 15. Relationship of the Parties 15.1. Nothing
                   contained in this Agreement, nor any action taken by any party
                   to this Agreement, shall be deemed to constitute either party
-                  (or any of such party's employees, agents, or representatives)
+                  (or any of such party&apos;s employees, agents, or representatives)
                   an employee, or legal representative of the other party, nor
                   to create any partnership, joint venture, association, or
                   syndication among or between the parties, nor to confer on
