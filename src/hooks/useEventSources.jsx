@@ -30,9 +30,10 @@ export function useEventSource({
 
     eventSource.onmessage = (event) => {
       try {
+        console.log(`Event data from ${url}:`, data)
+        if (event.data?.message) return;
         const data = JSON.parse(event.data);
         setData(prev => [data, ...prev]);
-        console.log(`Event data from ${url}:`, data)
       } catch (error) {
         console.error('Error parsing message:', error)
       }
