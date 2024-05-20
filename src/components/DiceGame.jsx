@@ -28,6 +28,9 @@ const DiceGame = ({ userBets }) => {
   const openTutorialRef = useRef(null);
   const [userSeed, setUserSeed] = useState('');
   const [serverSeed, setServerSeed] = useState('')
+  const [winAmount, setWinAmount] = useState(0)
+  const [lossAmount, setLossAmount] = useState(0)
+  const [inProcess, setInProcess] = useState(false)
 
   const { isOpen: isOpenLiveGames, onOpen: onOpenLiveGames, onClose: onCloseLiveGames } = useDisclosure();
   const { isOpen: isOpenFair, onOpen: onOpenFair, onClose: onCloseFair } = useDisclosure();
@@ -139,13 +142,12 @@ const DiceGame = ({ userBets }) => {
   const toast = useToast();
   const notifyAuthorized = useNotifyAuth();
 
-  const placeBet = useCallback(() => {
+  const placeBet = useCallback(async () => {
     const token = generateRandomToken(36);
     const url = `/game/place-bet`;
     const pay = Number((100 / diceRoll).toFixed(4));
 
     if (!state.user | state.user?.balance < betAmount) {
-      setAutoBet(false);
       toast({
         position: 'bottom',
         status: 'error',
@@ -166,18 +168,50 @@ const DiceGame = ({ userBets }) => {
       clientSeed: token,
     };
 
-    instance.post(url, data)
+    return instance.post(url, data)
       .then((response) => {
         if (response.status === 201) {
+          if (response.data?.betStatus === 'win') {
+            toast({
+              position: 'bottom',
+              status: 'success',
+              title: 'Auto Bet',
+              description: `You won ${response.data.winAmount} coins by rolling ${response.data.roll}`,
+              size: 'sm',
+              duration: 2000
+            });
+          } else {
+            toast({
+              position: 'bottom',
+              status: 'error',
+              title: 'Auto Bet',
+              description: `You lost ${betAmount} coins by rolling ${response.data.roll}`,
+              size: 'sm',
+              duration: 2000
+            });
+          }
+
           setDiceGameResponse(response.data)
-          setDiceRoll(response.data.roll)
+          setWinAmount((prev) => prev + response.data.winAmount)
+          setLossAmount((prev) => prev + betAmount)
           updateUser();
+          return response.data;
         } else {
-          throw new Error('Failed to place bet');
+          toast({
+            position: 'bottom',
+            status: 'error',
+            title: 'Failed to place bet',
+            description: response.data.message || 'An error occurred',
+          });
         }
       })
       .catch((error) => {
-        console.error('Error:', error);
+        toast({
+          position: 'bottom',
+          status: 'error',
+          title: 'Failed to place bet',
+          description: error.message || 'An error occurred',
+        });
       });
   }, [betAmount, diceRoll, rollover, serverSeed, state.user, updateUser, toast]);
 
@@ -188,20 +222,89 @@ const DiceGame = ({ userBets }) => {
 
   const stopAutoBet = () => {
     setAutoBet(false);
+    setWinAmount(0);
+    setLossAmount(0);
+    setInProcess(false);
   };
 
   useEffect(() => {
-    let interval;
-    if (autoBet) {
-      interval = setInterval(() => {
-        placeBet();
-      }, 1000);
-    } else {
-      clearInterval(interval);
+    function next() {
+      // Place the next bet
+      setTimeout(() => {
+        setInProcess(false);
+      }, 2000);
     }
+    function end() {
+      // End the auto bet
+      setAutoBet(false);
+      setWinAmount(0);
+      setLossAmount(0);
+      next();
+    }
+    if (autoBet && !inProcess) {
+      console.log('Placing a new bet due to auto bet');
+      setInProcess(true);
+      placeBet().then((diceGameResponse) => {
 
-    return () => clearInterval(interval);
-  }, [autoBet, placeBet]);
+        // Check if the number of bets is not infinite
+        if (numBets !== Infinity) {
+          setNumBets(numBets - 1);
+          if ((numBets - 1) <= 0) {
+            toast({
+              position: 'bottom',
+              status: 'success',
+              title: 'Auto Bet Stopped',
+              description: 'Number of bets reached',
+            });
+            end();
+            return;
+          }
+        }
+
+        // Handle reset
+        if (diceGameResponse?.betStatus === 'win') {
+          if (onWinOption === 0) {
+            setDiceRoll(diceGameResponse.targetValue);
+          } else {
+            setDiceRoll(Math.ceil(diceGameResponse.targetValue + ((winIncreaseBy * diceGameResponse.targetValue) / 100)));
+          }
+        } else {
+          if (onLossOption === 0) {
+            setDiceRoll(diceGameResponse.targetValue);
+          } else {
+            setDiceRoll(Math.ceil(diceGameResponse.targetValue + ((lossIncreaseBy * diceGameResponse.targetValue) / 100)));
+          }
+        }
+
+        // Handle stop on win
+        if (diceGameResponse?.betStatus === 'win' && winAmount >= stopOnWin) {
+          toast({
+            position: 'bottom',
+            status: 'success',
+            title: 'Auto Bet Stopped',
+            description: 'Stop on win reached',
+          });
+          end();
+          return;
+        }
+
+        // Handle stop on loss
+        if (diceGameResponse?.betStatus === 'loss' && lossAmount >= stopOnLoss) {
+          toast({
+            position: 'bottom',
+            status: 'success',
+            title: 'Auto Bet Stopped',
+            description: 'Stop on loss reached',
+          });
+          end();
+          return;
+        }
+        next();
+      }).catch(() => {
+        end();
+      });
+    }
+  }, [autoBet, placeBet, numBets, onWinOption, toast, winAmount, stopOnWin, lossAmount, stopOnLoss, onLossOption, winIncreaseBy, lossIncreaseBy, inProcess]);
 
   return (
     <div className={`dicegame`}>
