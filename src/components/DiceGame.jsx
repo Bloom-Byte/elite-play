@@ -145,7 +145,7 @@ const DiceGame = ({ userBets }) => {
   const placeBet = useCallback(async () => {
     const token = generateRandomToken(36);
     const url = `/game/place-bet`;
-    const pay = Number((100 / diceRoll).toFixed(4));
+    const pay = Number(((100 / diceRoll) || 0).toFixed(4));
 
     if (!state.user | state.user?.balance < betAmount) {
       toast({
@@ -641,7 +641,7 @@ const DiceGame = ({ userBets }) => {
                   <div className="dicegame-placebet__amount">
                     <span>
                       <img src="./twemoji_coin.svg" alt="coin" />
-                      {(betAmount * (100 / diceRoll)).toFixed(2)}
+                      {((betAmount * (100 / diceRoll)) || 0).toFixed(2)}
                     </span>
                   </div>
                 </div>
@@ -686,7 +686,7 @@ const DiceGame = ({ userBets }) => {
             <div className="dicegame-diceroll__outer-box">
               <p>Payout</p>
               <div className="dicegame-diceroll__box-info">
-                <span>{rollover ? (100 / (100 - diceRoll)).toFixed(4) : (100 / diceRoll).toFixed(4)}</span>
+                <span>{rollover ? ((100 / (100 - diceRoll)) || 0).toFixed(4) : ((100 / diceRoll) || 0).toFixed(4)}</span>
                 <span>x</span>
               </div>
             </div>
