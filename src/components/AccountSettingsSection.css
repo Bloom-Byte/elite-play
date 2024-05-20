@@ -357,6 +357,48 @@
   height: 0;
 }
 
+.input-group {
+  display: flex;
+  align-items: stretch;  
+  background-color: #070C0A;
+  border-radius: 6px;
+  overflow: hidden;
+}
+.input-group input {
+  border-top-right-radius: 0px;
+  border-bottom-right-radius: 0px;
+}
+.input-group .addon {
+  padding: 0 16px;
+  border-radius: 6px;
+  color: white;
+  transition: .3s;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+  transition: .3s;
+}
+.input-group .addon:hover {
+  background-color: #0f1613;
+}
+
+.editusername-popup_edit-username-box {
+  background-color: #070C0A;
+  border: 2px solid transparent;
+  width: 100%;
+  padding: 16px;
+  border-radius: 6px;
+  color: white;
+  transition: .3s;
+}
+
+.editusername-popup_edit-username-box:focus {
+  outline: none;
+  border: 2px solid #24E3A1;
+}
+
 /* The slider */
 .slider {
   position: absolute;
@@ -483,21 +525,6 @@ input:checked+.slider:before {
   font-weight: 600;
   color: #C5C5C7;
   margin-bottom: 10px;
-}
-
-.editusername-popup_edit-username-box {
-  background-color: #070C0A;
-  border: 2px solid transparent;
-  width: 100%;
-  padding: 16px;
-  border-radius: 6px;
-  color: white;
-  transition: .3s;
-}
-
-.editusername-popup_edit-username-box:focus {
-  outline: none;
-  border: 2px solid #24E3A1;
 }
 
 .edit-username_note {

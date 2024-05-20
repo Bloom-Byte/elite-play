@@ -180,12 +180,3 @@ input:checked+.slider2:before {
 .slider2.round2:before {
   border-radius: 50%;
 }
-
-
-
-/* --------- MOBILE RESPONSIVENESS --------- */
-@media screen and (max-width: 768px) {
-  .currencydropdown {
-    right: 20vw;
-  }
-}

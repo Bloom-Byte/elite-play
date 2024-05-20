@@ -38,7 +38,7 @@ const Sidenav = () => {
     };
 
     fetchData();
-  }, [state]);
+  }, [state.user]);
 
   const { isOpen: isOpenVIP, onOpen: onOpenVIP, onClose: onCloseVIP } = useDisclosure();
   const { isOpen: isOpenLive, onOpen: onOpenLive, onClose: onCloseLive } = useDisclosure();
@@ -47,18 +47,6 @@ const Sidenav = () => {
   return (
     <>
       <div className={`sidenav-expanded ${state.isNavOpen ? 'open' : ''}`}>
-        <div style={{ display: 'none' }} className="sidenav__icon">
-          <img
-            className="nav-icon"
-            onClick={() => toggleNav()}
-            src="./menu-01.svg"
-            alt="close-icon"
-          />
-          <Link to="/">
-            {' '}
-            <img src="./eliteplay.svg" alt="logo" />
-          </Link>
-        </div>
         <div className="sidenav__links">
           <div>
             <Link to="/referrals" style={{ textDecoration: 'none' }}>

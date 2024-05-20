@@ -29,6 +29,15 @@ const UserInformationPopup = ({
   const formattedDate = formatDate(user?.dateUserJoined);
   const { isOpen, onClose, onOpen } = useDisclosure();
 
+  const favG = user?.favoriteGame && user?.favoriteGame.toLowerCase().indexOf('dice') !== -1 ? 'dice' : 'crash';
+  let favWagered = 0;
+  if (favG === 'dice') {
+    favWagered = user?.totalEliteGoldBetOnDice || 0;
+  }
+  if (favG === 'crash') {
+    favWagered = user?.totalEliteGoldBetOnCrash || 0;
+  }
+
   return (
     <>
       <Modal title={"User Information"} isOpen={isOpenUser} close={onCloseUser}>
@@ -78,13 +87,16 @@ const UserInformationPopup = ({
           <div className="fav-info">
             <div className="fav-game-type">
               {
-                user?.favoriteGame && user?.favoriteGame.toLowerCase().indexOf('dice') !== -1 ? <img src="./dice-win.svg" alt="dice" /> : <img src="./crash-win.svg" alt="crash" />
+                favG === 'crash' && <img src="./crash-win.svg" alt="dice" />
+              }
+              {
+                favG === 'dice' && <img src="./dice-win.svg" alt="crash" />
               }
               <span>{user?.favoriteGame || '-'}</span>
             </div>
             <div className="fav-game-amount">
               <p>Wagered</p>
-              <p>USD 18,149.23</p>
+              <p>eGold {favWagered}</p>
             </div>
           </div>
         </div>

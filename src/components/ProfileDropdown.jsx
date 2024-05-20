@@ -2,32 +2,28 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import UserInformationPopup from './UserInformationPopup';
 import { useNavigate } from 'react-router-dom';
 import './ProfileDropdown.css';
-import { ACCESS_TOKEN } from '../utils/constants';
 import { isElementClassOrChildOf } from '../utils/dom';
-import { useAppContext } from '../hooks/useAppContext';
-import { LOGOUT } from '../contexts/AppContext';
 import { useToast } from '@chakra-ui/react';
 import { useDisclosure } from '../hooks/useDisclosure';
+import { useLogout } from '../hooks/useLogout';
 
 const ProfileDropdown = ({ user, isOpen, setIsOpen }) => {
   const [isStatPopupOpen, setIsStatPopupOpen] = useState(false);
   const navigate = useNavigate();
   const dropdownRef = useRef(null);
-  const { dispatch } = useAppContext();
   const { isOpen: isOpenUser, onClose: onCloseUser, onOpen: onOpenUser } = useDisclosure();
 
   const toast = useToast();
+  const logout = useLogout();
 
   const handleLogout = () => {
-    localStorage.removeItem(ACCESS_TOKEN);
-    dispatch({ type: LOGOUT });
-    navigate('/');
     toast({
       title: 'Logged out successfully',
       status: 'success',
       duration: 3000,
       isClosable: true,
     });
+    logout();
   };
 
   const close = useCallback(() => {

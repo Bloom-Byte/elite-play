@@ -49,6 +49,10 @@
   margin-top: 16px;
   background-color: #070c0a;
   padding: 10px;
+  overflow: hidden;
+}
+
+.dicetable-tab-content {
   overflow-x: scroll;
 }
 
@@ -167,10 +171,4 @@ tr {
 /* --------- MOBILE RESPONSIVENESS ---------- */
 
 @media screen and (max-width: 768px) {
-  .dicetable {
-    margin-left: 8px;
-    overflow-x: scroll;
-    width: 95vw;
-    margin-right: 5px;
-  }
 }

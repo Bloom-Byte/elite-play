@@ -12,7 +12,7 @@ body {
     left: 0;
     background-color: #0B1210;
     padding: 20px;
-    width: 46px;
+    width: 85px;
     transition: .5s;
     margin-top: 5rem;
 }
@@ -29,6 +29,7 @@ body {
 
 .nav__icon {
   display: flex;
+  align-items: center;
 }
 
 .nav-icon {
@@ -112,21 +113,20 @@ body {
 }
 
 
+
+
 /* --------- MOBILE RESPONSIVENESS --------- */
 @media screen and (max-width: 768px) {
-    /* .sidenav-expanded {
-        display: none;
-    } */
-
-    .sidenav-mini {
-        display: none;
-    }
-
-    .sidenav__icon {
-        margin-bottom: 20px;
-    }
-
-    .mobile-chat {
-        display: flex;
-    }
+  .nav__icon {
+    gap: 10px;
+  }
+}
+@media screen and (max-width: 480px) {
+  .sidenav-expanded {
+    transform: translateX(-100%);
+  }
+  .sidenav-expanded.open {
+    width: 250px;
+    transform: translateX(0);
+  }
 }

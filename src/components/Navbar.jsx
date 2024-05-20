@@ -12,6 +12,7 @@ import { useAppContext } from '../hooks/useAppContext';
 import { useNav } from '../hooks/useUtils';
 import { Link } from 'react-router-dom';
 import { useDisclosure } from '../hooks/useDisclosure';
+import { useWindowWidth } from '../hooks/useWIndowWidth';
 
 const Navbar = () => {
   const [isProfileDropdownOpen, setIsProfileDropdownOpen] = useState(false);
@@ -24,6 +25,8 @@ const Navbar = () => {
 
   const { state } = useAppContext();
   const { toggleNav } = useNav();
+
+  const width = useWindowWidth();
 
   const { isOpen: isOpenDeposit, onClose: onCloseDeposit, onOpen: onOpenDeposit } = useDisclosure();
 
@@ -39,7 +42,9 @@ const Navbar = () => {
               alt="close-icon"
             />
             <Link to="/">
-              <img className="nav-logo" src="./eliteplay.svg" alt="logo" />
+              <img className="nav-logo" src={
+                width > 768 ? './eliteplay.svg' : './eliteplay-sm.png'
+              } alt="logo" />
             </Link>
           </div>
         </div>
@@ -91,14 +96,14 @@ const Navbar = () => {
                 <span>Deposit</span>
               </div>
             </div>
-            <div
+            {/* <div
               style={{ cursor: 'pointer' }}
               onClick={() => {
                 setNotificationsPopupOpen(!notificationsPopupOpen);
               }}
             >
               <img src="./not-bell.svg" alt="notification icon" />
-            </div>
+            </div> */}
             <div className='nav-profile-button' style={{ position: 'relative' }}>
               <div
                 onClick={() => {

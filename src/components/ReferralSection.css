@@ -16,6 +16,7 @@
   justify-content: space-between;
   gap: 20px;
   margin-bottom: 1rem;
+  flex-wrap: wrap;
 }
 
 .referralpot {
@@ -32,6 +33,7 @@
   gap: 10px;
   width: 100%;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .referralpota-txt {
@@ -45,6 +47,7 @@
   gap: 10px;
   width: 100%;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .referralpotb-txt {
@@ -86,9 +89,11 @@
   padding: 20px;
   border-radius: 6px;
   display: flex;
-  gap: 50px;
+  gap: 20px;
   flex: 1;
   justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: center;
 }
 
 .referralvalue-txt {
@@ -143,6 +148,8 @@
 .refer-invite-txt {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .refer-invite-txt span:nth-child(1) {
@@ -190,6 +197,8 @@
   display: flex;
   margin: 20px 0;
   gap: 30px;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .referral-cta_box-info {
@@ -199,6 +208,7 @@
   border-radius: 6px;
   padding: 16px;
   align-items: center;
+  flex-wrap: wrap;
 }
 .referral-cta_box-info img:nth-child(3) {
   margin-left: auto;
@@ -302,53 +312,15 @@
 }
 
 
-/* --------- MOBILE RESPONSIVENESS --------- */
+
 @media screen and (max-width: 768px) {
-  .referral-section {
-    margin-left: 8px;
-  }
-
-  .referral-details {
-    flex-direction: column;
-  }
-
-  .refer-code-box {
-    display: none;
-  }
-
   .referralpot {
-    width: 90vw;
-  }
-
-  .referralvalue {
-    width: 90vw;
-    gap: 0;
-  }
-
-
-  .referralpota span:nth-child(1) {
-    font-size: 11px;
-  }
-
-  .referralpotb span:nth-child(1) {
-    font-size: 11px;
-  }
-
-  .referralpota span:nth-child(2) {
-    font-size: 16px;
-  }
-
-  .referralpotb span:nth-child(2) {
-    font-size: 16px;
-  }
-
-  .refer-invite {
-    width: 80vw;
-    margin: 0;
-  }
-
-  .referral-cta {
-    width: 80vw;
-    margin: 0;
+    gap: 20px;
   }
 }
+
+/* @media screen and (max-width: 550px) {
+  .referralpotb {
+    flex-direction: column;
+  }
+} */

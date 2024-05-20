@@ -1,13 +1,15 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 .home-hero {
-  height: 350px;
+  height: 360px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
   background-size: cover;
   max-width: 100%;
   border-radius: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .home-hero-extended {
@@ -36,7 +38,7 @@
   font-family: 'Manrope', sans-serif;
   font-weight: 400;
   color: #ffffff;
-  margin-bottom: 1rem;
+  margin-bottom: 1.5rem;
 }
 
 .home-hero__txt-section button {
@@ -46,15 +48,17 @@
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
   padding: 10px 20px;
-  border: 2px solid transparent;
   border-radius: 8px;
   cursor: pointer;
   transition: 0.3s;
+  border-radius: var(--button-l-border-radius, 6px);
+  background: conic-gradient(from 0deg at 50% 50%, #88DF95 0deg, #01252C 360deg);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.00) inset;
+  background-size: 200% 200%;
 }
 
 .home-hero__txt-section button:hover {
-  background: transparent;
-  border: 2px solid #24e3a1;
+  background-position: 100%;
 }
 
 .home-hero__user-info {
@@ -90,40 +94,40 @@
 }
 
 .home-hero__user-info-box__level {
-    display: flex;
-    justify-content: space-between;
-    /* margin-top: 1rem; */
+  display: flex;
+  justify-content: space-between;
+  /* margin-top: 1rem; */
 }
 
 .hero__rank-info {
-    font-size: 10px;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 400;
-    color: #6E6E71;
+  font-size: 10px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 400;
+  color: #6E6E71;
 }
 
 .bronze {
-    color: 
+  color:
     #CD7F32;
 }
 
 .silver {
-    color: 
+  color:
     #C0C0C0;
 }
 
 .xp {
-    color: #88DF95;
+  color: #88DF95;
 }
 
 .range-level {
-    accent-color: white;
-    width: 100%;
-    background-color:pink;
+  accent-color: white;
+  width: 100%;
+  background-color: pink;
 }
 
 .vip-progress-head {
-    margin-top: 100px !important;
+  margin-top: 100px !important;
 }
 
 

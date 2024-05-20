@@ -3,7 +3,7 @@
 .tutorial-dropdown-crash {
   position: absolute;
   top: 2.8rem;
-  left: 0;
+  right: 0;
   z-index: 10;
   width: 210px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);

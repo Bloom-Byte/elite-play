@@ -5,11 +5,18 @@
   top: 0;
   right: 0;
   background-color: #070c0a;
-  transition: transform 2s ease-in;
+  transition: transform .3s ease-in;
   transform: translateX(100%);
   height: calc(100vh - 5rem);
   margin-top: 5rem;
   width: 300px;
+}
+
+.chatmsg-error {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80px;
 }
 
 .chatroom-popup.open {
@@ -39,8 +46,12 @@
 }
 
 .chatroom-btn {
-  display: flex;
-  gap: 10px;
+  display: none;
+  place-items: center;
+  background-color: #070c0a;
+  border-radius: 6px;
+  width: 30px;
+  height: 30px;
 }
 
 .arrow {
@@ -150,6 +161,7 @@
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
 }
+
 .chatroom-user-profile span:last-child {
   color: #9E9EA2;
   font-size: 12px;
@@ -215,14 +227,38 @@
   font-weight: 600;
 }
 
-.hide-cancel-button {
+.openChat {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
   display: none;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  background-color: #019f3c;
+  border-radius: 50%;
+  font-size: 2rem;
+  box-shadow: 0px 0px 10px 0px rgba(189, 189, 189, 0.315);
+  transition: 0.3s;
 }
 
-/* --------- MOBILE RESPONSIVENESS ---------- */
+.openChat:hover {
+  background-color: #0b281f;
+}
 
-@media screen and (max-width: 768px) {
+
+
+@media screen and (max-width: 1200px) {
+  .chatroom-btn {
+    display: grid;
+  }
+  .openChat {
+    display: grid;
+  }
+}
+
+@media screen and (max-width: 500px) {
   .chatroom-popup {
-    width: 100vw;
+    width: 100%;
   }
 }

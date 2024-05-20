@@ -48,7 +48,7 @@ const Footer = () => {
                 <Link to='/helpcenter'>Terms of Service</Link>
                 <Link to=''>Live Support</Link>
             </div>
-            <div>
+            <div className='footer-cta-items-social'>
                 <p>Community</p>
                 <div className='social-icons'>
                     <img src="./facebook.svg" alt="facebook-icon" />

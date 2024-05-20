@@ -1,18 +1,18 @@
 import { useState } from 'react';
-import axios from 'axios';
 import './AccountSettingsSection.css';
 import instance from '../utils/api';
 import { ACCESS_TOKEN } from '../utils/constants';
 import { useAppContext } from '../hooks/useAppContext';
 import { Divider, useToast } from '@chakra-ui/react';
 import { useCopyToClipboard } from '../hooks/useCopy';
-import { FiUser } from "react-icons/fi";
+import { FiEye, FiEyeOff, FiUser } from "react-icons/fi";
 import { MdOutlineSecurity } from "react-icons/md";
 import { MdRoomPreferences } from "react-icons/md";
 import Modal from './Modal';
 import { useDisclosure } from '../hooks/useDisclosure';
 import { useUpdateUser } from '../hooks/useUpdateUser';
 import { validatePassword } from '../utils/auth';
+import { useLogout } from '../hooks/useLogout';
 
 const AccountSettingsSection = () => {
   const [currentSection, setCurrentSection] = useState('account-info');
@@ -27,6 +27,7 @@ const AccountSettingsSection = () => {
   const [confirmNewPassword, setConfirmNewPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [selectedPeriod, setSelectedPeriod] = useState('7');
+  const [showPassword, setShowPassword] = useState(false);
 
   const [profileImage, setProfileImage] = useState(null);
 
@@ -136,6 +137,7 @@ const AccountSettingsSection = () => {
   };
 
   const copyToClipboard = useCopyToClipboard();
+  const logout = useLogout();
 
   const updatePassword = async () => {
     const url = '/user/update/password';
@@ -174,25 +176,24 @@ const AccountSettingsSection = () => {
       const responseData = response.data;
 
       if (response.status === 201) {
-        // window.location.href = '/login';
         toast({
           position: 'top',
           status: 'success',
           title: 'Password Updated',
-          description: responseData.data.message,
+          description: 'Your password has been updated successfully. Please login again.',
           isClosable: true,
         });
+        logout();
       } else {
         throw new Error(responseData.data || 'Failed to update password');
       }
     } catch (error) {
-      console.error('Error occurred during password update:', error.message);
-      // setError(error.message || error.response.message);
+      console.error(error);
       toast({
         position: 'top',
         status: 'error',
         title: 'Error',
-        description: error.message || error.response.data.message,
+        description: error?.response?.data?.error || 'Failed to update password',
       });
     }
   };
@@ -605,41 +606,68 @@ const AccountSettingsSection = () => {
         }}>
           <div>
             <p className="editusername-popup_edit-username">Old Password</p>
-            <input
-              className="editusername-popup_edit-username-box"
-              type="password"
-              placeholder="********"
-              value={confirmOldPassword}
-              onChange={(event) => {
-                setConfirmOldPassword(event.target.value);
-              }}
-            />
+            <div className='input-group'>
+              <input
+                className="editusername-popup_edit-username-box"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Set Password"
+                value={confirmOldPassword}
+                onChange={(event) => {
+                  setConfirmOldPassword(event.target.value);
+                }}
+              />
+              <span className='addon' onClick={() => {
+                setShowPassword(!showPassword);
+              }}>
+                {
+                  showPassword ? <FiEyeOff /> : <FiEye />
+                }
+              </span>
+            </div>
           </div>
           <div>
             <p className="editusername-popup_edit-username">New Password</p>
-            <input
-              className="editusername-popup_edit-username-box"
-              type="password"
-              placeholder="Set Password"
-              value={newPassword}
-              onChange={(event) => {
-                setNewPassword(event.target.value);
-              }}
-            />
+            <div className='input-group'>
+              <input
+                className="editusername-popup_edit-username-box"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Set Password"
+                value={newPassword}
+                onChange={(event) => {
+                  setNewPassword(event.target.value);
+                }}
+              />
+              <span className='addon' onClick={() => {
+                setShowPassword(!showPassword);
+              }}>
+                {
+                  showPassword ? <FiEyeOff /> : <FiEye />
+                }
+              </span>
+            </div>
           </div>
           <div>
             <p className="editusername-popup_edit-username">
               Confirm Password
             </p>
-            <input
-              className="editusername-popup_edit-username-box"
-              type="password"
-              placeholder="Confirm Password"
-              value={confirmNewPassword}
-              onChange={(event) => {
-                setConfirmNewPassword(event.target.value);
-              }}
-            />
+            <div className='input-group'>
+              <input
+                className="editusername-popup_edit-username-box"
+                type={showPassword ? 'text' : 'password'}
+                placeholder="Set Password"
+                value={confirmNewPassword}
+                onChange={(event) => {
+                  setConfirmNewPassword(event.target.value);
+                }}
+              />
+              <span className='addon' onClick={() => {
+                setShowPassword(!showPassword);
+              }}>
+                {
+                  showPassword ? <FiEyeOff /> : <FiEye />
+                }
+              </span>
+            </div>
           </div>
         </div>
         <p className="verify-text-sent">

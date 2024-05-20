@@ -5,6 +5,7 @@ import './ChatPopup.css';
 import { ACCESS_TOKEN } from '../utils/constants';
 import { useAppContext } from '../hooks/useAppContext';
 import { useChat } from '../hooks/useUtils';
+import { Link } from 'react-router-dom';
 
 const accessToken = localStorage.getItem(ACCESS_TOKEN);
 const socket = SocketIO(`${import.meta.env.VITE_BASE_API_URL}/chat`, {
@@ -39,6 +40,13 @@ const ChatPopup = () => {
     };
   }, []);
 
+  const scrollToBottom = (time = 100) => {
+    if (!mainContent.current) return;
+    setTimeout(() => {
+      mainContent.current.scrollTop = mainContent.current.scrollHeight;
+    }, time);
+  };
+
   useEffect(() => {
     {
       socket.connect(); // connect to socket
@@ -46,6 +54,7 @@ const ChatPopup = () => {
       socket.on('connect', () => {
         // fire when we have connection
         console.log('Socket connected');
+        scrollToBottom(2000)
       });
 
       socket.on('disconnect', () => {
@@ -95,12 +104,6 @@ const ChatPopup = () => {
     };
   }, []);
 
-  const scrollToBottom = () => {
-    setTimeout(() => {
-      mainContent.current.scrollTop = mainContent.current.scrollHeight;
-    }, 100);
-  };
-
   const handleSendMessage = (e) => {
     const trimmedMessage = inputMessage.trim();
     if (e.key !== 'Enter' || inputMessage.trim().length === 0) return;
@@ -137,14 +140,10 @@ const ChatPopup = () => {
         <div className="chatroom-popup_header">
           <p>Chatroom</p>
           <div
-            className={`chatroom-btn ${isMobile ? '' : 'hide-cancel-button'}`}
+            className={`chatroom-btn`}
+            onClick={toggleChat}
           >
-            <img
-              onClick={() => toggleChat()}
-              className="close"
-              src="./cancel-x.svg"
-              alt="cancel-x.svg"
-            />
+            <span>x</span>
           </div>
         </div>
         <div className="chatroom-maincontent" ref={mainContent}>
@@ -196,6 +195,17 @@ const ChatPopup = () => {
             }
           </div>
         </div>
+        {
+          !state.user && (
+            <div className="chatmsg-error">
+              <h3>
+                Please <Link style={{
+                  color: '#88DF95'
+                }} to={'/login'}>login</Link> to chat.
+              </h3>
+            </div>
+          )
+        }
         {state.user && (
           <div>
             <form className="chatroom-input" onSubmit={sendMessage}>

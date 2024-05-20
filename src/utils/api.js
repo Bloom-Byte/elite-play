@@ -24,7 +24,7 @@ instance.interceptors.response.use(
   },
   (error) => {
     if (error.response.status === 401) {
-      localStorage.removeItem(ACCESS_TOKEN);
+      // localStorage.removeItem(ACCESS_TOKEN);
 
       const url = error.config.url;
       const allowedUrls = ["/login", "/register", "/user/me"];
@@ -33,7 +33,7 @@ instance.interceptors.response.use(
       }
 
       if (window.location.pathname !== "/login") {
-        window.location.href = "/login";
+        // window.location.href = "/login";
       }
     }
     return Promise.reject(error);

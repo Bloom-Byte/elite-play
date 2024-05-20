@@ -68,7 +68,7 @@ body {
   background-color: #070C0A;
   border: 2px solid transparent;
   border-radius: 4px;
-  width: calc(100% - 50px);
+  width: 100%;
   height: 48px;
   color: white;
   transition: 0.3s;

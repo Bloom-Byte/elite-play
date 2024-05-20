@@ -24,7 +24,7 @@ const Hero = () => {
                 max="20000000"
                 value={state.user?.totalBetAmount}
                 readOnly
-                // onChange={(event) => setLevel(event.target.value)}
+              // onChange={(event) => setLevel(event.target.value)}
               />
               <div className="home-hero__user-info-box__level">
                 <div className="hero__rank-info">
@@ -43,7 +43,9 @@ const Hero = () => {
           <div className="home-hero__txt-section">
             <h4>Turn Playtime to Paytime</h4>
             <p>Dive into a world of incredible rewards.</p>
-            <Link style={{ textDecoration: 'none', transition: '.3s' }} to="/register"> <button>Sign Up Now</button></Link>
+            <Link style={{ textDecoration: 'none', transition: '.3s' }} to="/register"> <button style={{
+              width: '100%'
+            }}>Sign Up Now</button></Link>
           </div>
         )}
       </div>

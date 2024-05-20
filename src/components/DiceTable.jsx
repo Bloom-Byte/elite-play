@@ -180,7 +180,7 @@ const DiceTable = ({ bets, userBets }) => {
               <div onClick={() => { setUserBetsOpen(!userBetsOpen) }} className={userBetsOpen ? 'dicetable-betstitle_all-bets' : 'dicetable-betstitle_my-bets'}>All Bets</div>
               <div onClick={() => { setUserBetsOpen(!userBetsOpen) }} className={userBetsOpen ? 'dicetable-betstitle_my-bets' : 'dicetable-betstitle_all-bets'}>My Bets</div>
             </div>
-            <div>
+            <div className='dicetable-tab-content'>
               <table className="livebets-table_table">
                 <thead>
                   <tr>

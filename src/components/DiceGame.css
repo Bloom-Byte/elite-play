@@ -105,6 +105,7 @@
   color: #9e9ea2;
   margin-top: 1.5rem;
 }
+
 .dicegame-placebet__bet p:first-child {
   margin-top: 0;
 }
@@ -153,8 +154,14 @@
   background-color: #0b1210;
 }
 
+
+.dicegame-placebet__bet {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+
 .dicegame-rollnow {
-  margin-top: 20px;
   width: 100%;
   border-radius: 6px;
   padding: 12px;
@@ -202,6 +209,7 @@
 .dicegame-diceroll__die {
   position: relative;
   display: inline-block;
+  margin-left: calc(50% - 43px);
 }
 
 .dicegame-diceroll__die img {
@@ -238,9 +246,11 @@
 
 .dicegame-diceroll__range_values {
   display: flex;
-  gap: 19%;
-  margin-left: 10px;
+  gap: 20%;
+  margin: 0 auto;
   margin-top: 8px;
+  width: calc(100% - 40px);
+  justify-content: space-between;
 }
 
 .dicegame-diceroll__range_values span {
@@ -257,6 +267,9 @@
   display: flex;
   gap: 10px;
   padding: 8px 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
 }
 
 .dicegame-diceroll__box p {
@@ -271,6 +284,7 @@
 
 .dicegame-diceroll__outer-box {
   width: 100%;
+  max-width: 200px;
 }
 
 .dicegame-diceroll__box-info {
@@ -382,6 +396,7 @@
   color: white;
   transition: 0.3s;
   align-self: center;
+  min-width: 44px;
 }
 
 .tutorial-dropdown {
@@ -396,7 +411,7 @@
 
 .tutorial-dropdown-content {
   position: relative;
-  background-color: #0B281F;
+  background-color: #0f362a;
   border-radius: 16px;
   padding: 20px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
@@ -487,29 +502,118 @@
   color: #E14453 !important;
 }
 
-
-
-/* --------- MOBILE RESPONSIVENESS ---------- */
-
-@media screen and (max-width: 768px) {
-  .dicegame {
-    margin-left: 8px;
+@media screen and (max-width: 1350px) {
+  .dicegame-placebet__amount {
+    flex-direction: column;
+    gap: 5px;
+    align-items: start;
   }
+}
 
-  .dicegame-gamesection {
-    flex-direction: column-reverse;
+@media screen and (max-width: 1200px) {
+  .dicegame-placebet__amount {
+    flex-direction: row;
+    gap: 5px;
+    align-items: center;
   }
+}
 
-  .dicegame-diceroll__odds {
-    overflow-x: scroll;
+@media screen and (max-width: 1000px) {
+  .dicegame-diceroll {
+    flex: 4;
   }
 
   .dicegame-placebet {
-    width: 95vw;
+    flex: 3;
   }
 
-  .dicegame-diceroll {
-    width: 85vw;
+  .dicegame-diceroll__range_values {
+    margin: unset;
   }
-
 }
+
+@media screen and (max-width: 850px) {
+  .dicegame-placebet__amount {
+    flex-direction: column;
+    gap: 5px;
+    align-items: start;
+  }
+
+  .dicegame-onwin {
+    flex-direction: column;
+  }
+
+  .gamedice-reset_btn {
+    padding: 8px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .dicegame-buttons {
+    align-items: stretch;
+  }
+
+  .dicegame-buttons button {
+    width: fit-content;
+  }
+
+  .dicegame-placebet__select-amount {
+    flex-wrap: wrap;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .dicegame-gamesection {
+    flex-direction: column-reverse;
+    height: auto;
+  }
+
+  .dicegame-placebet {
+    max-width: none;
+    overflow-y: unset;
+  }
+
+  .dicegame-diceroll__range_values {
+    margin: 0 auto;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .dicegame-buttons {
+    overflow-x: scroll;
+  }
+
+  .dicegame-buttons button {
+    white-space: nowrap;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .dicegame-placebet {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .dicegame-placebet__bet {
+    flex-direction: column-reverse;
+  }
+
+  .dicegame-diceroll__range_values {
+    margin: unset;
+  }
+}
+
+/* @media screen and (max-width: 1200px) {
+  .dicegame-diceroll {
+    flex: 4;
+  }
+
+  .dicegame-placebet {
+    flex: 3;
+  }
+
+  .dicegame-diceroll__range_values {
+    gap: 17%;
+    margin-left: 20px;
+  }
+} */

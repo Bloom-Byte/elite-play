@@ -37,10 +37,3 @@
 }
 
 
-/* --------- MOBILE RESPONSIVENESS ---------- */
-
-@media screen and (max-width: 768px) {
-  .dicetutorial {
-    margin-left: 8px;
-  }
-}
