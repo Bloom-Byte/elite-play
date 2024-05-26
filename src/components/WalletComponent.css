@@ -418,7 +418,7 @@
 }
 
 .withdraw-address_input {
-  width: 99%;
+  width: 100%;
   padding: 16px 0px;
   padding-left: 10px;
   background-color: #070C0A;
@@ -514,7 +514,7 @@
   background-color: #0B1210;
   border-radius: 6px;
   padding: 20px;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
 }
 
 .earnings-img_container img {
@@ -551,6 +551,10 @@
   color: white;
 }
 
+.tableHistory td, .tableHistory th {
+  border: none;
+}
+
 /* --------- MOBILE RESPONSIVENESS ---------- */
 
 @media screen and (max-width: 768px) {
@@ -560,6 +564,10 @@
 
   .wallet-comp_wallet-options {
     display: none;
+  }
+  
+  .wallet-comp_wallet-info {
+    width: 100%;
   }
 
   .wallet-comp_wallet-balance {

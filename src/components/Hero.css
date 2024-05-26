@@ -5,11 +5,10 @@
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  background-size: cover;
-  max-width: 100%;
   border-radius: 12px;
   display: flex;
   align-items: center;
+  padding: 2rem 4rem;
 }
 
 .home-hero-extended {
@@ -64,9 +63,7 @@
 .home-hero__user-info {
   display: flex;
   flex-direction: column;
-  align-items: left;
   text-align: left;
-  margin-left: 50px;
 }
 
 .home-hero__user-info h4 {
@@ -78,11 +75,15 @@
 
 .home-hero__user-info-box {
   box-shadow: 0px 20px 40px 0px #00000040;
-  border: 1px solid #24e3a1;
   background-color: rgba(5, 46, 17, 0.8);
-  padding: 10px;
+  padding: 20px;
   border-radius: 8px;
-  width: 320px;
+  width: 500px;
+  max-width: 420px;
+  border-radius: var(--Button-corner-radius, 8px);
+  border: 1px solid rgba(255, 255, 255, 0.10);
+  background: rgba(0, 0, 0, 0.50);
+  box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.05), 0px 15px 30px 0px rgba(0, 0, 0, 0.15), 0px 20px 40px 0px rgba(0, 0, 0, 0.25);
 }
 
 .home-hero__user-info-box h4 {
@@ -90,7 +91,7 @@
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
   color: #ffffff;
-  margin: 0;
+  margin-bottom: .7rem;
 }
 
 .home-hero__user-info-box__level {
@@ -104,6 +105,9 @@
   font-family: 'Manrope', sans-serif;
   font-weight: 400;
   color: #6E6E71;
+  display: flex;
+  align-items: center;
+  gap: 5px;
 }
 
 .bronze {
@@ -127,7 +131,7 @@
 }
 
 .vip-progress-head {
-  margin-top: 100px !important;
+  margin-bottom: 1rem;
 }
 
 
@@ -135,48 +139,12 @@
 
 @media screen and (max-width: 768px) {
   .home-hero {
-    align-self: center;
-    margin-left: 8px;
-    margin-top: 0;
-    height: 250px;
-    width: 95vw;
-    margin-right: 5px;
+    padding: 1rem;
   }
-
-  .vip-progress-head {
-    margin-top: 50px !important;
-  }
-
-  .home-hero__txt-section {
-    max-width: 200px;
-  }
-
-  .home-hero__txt-section h4 {
-    font-size: 24px;
-  }
-
-  .home-hero__txt-section p {
-    font-size: 14px;
-  }
-
   .home-hero__user-info {
-    padding-bottom: 1rem;
+    width: 100%;
   }
-
   .home-hero__user-info-box {
-    width: 200px;
-  }
-
-  .home-hero__user-info-box h4 {
-    font-size: 14px;
-  }
-
-  .home-hero__user-info-box__level {
-    margin-top: 1rem;
-  }
-
-  .mobile__page-navigation {
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    width: 100%;
   }
 }

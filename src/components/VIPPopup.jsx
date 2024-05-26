@@ -20,6 +20,11 @@ const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, 
       setTimeToNextClaim(timeToNextClaim - 1000);
     }, 1000);
 
+    if (timeToNextClaim <= 0) {
+      setTimeToNextClaim(0);
+      clearTimeout(timeout);
+    }
+
     return () => clearTimeout(timeout);
   }, [timeToNextClaim, setTimeToNextClaim]);
 
@@ -129,12 +134,23 @@ const VIPPopup = ({ onCloseVIP, timeToNextClaim, facuetClaimableForCurrentTier, 
               </h2>
               <p className="reward-details">
                 Total Reward Claimed <span className="coinamount">{totalClaim}</span>{' '}
-                <span>
-                  Next Reward in:{' '}
-                  <span className="nextrewardtime">
-                    {Math.ceil(timeToNextClaim / 1000)}s
-                  </span>
-                </span>
+                {
+                  timeToNextClaim > 0 ? (
+                    <span>
+                      Next Reward in:{' '}
+                      <span className="nextrewardtime">
+                        {Math.ceil(timeToNextClaim / 1000)}s
+                      </span>
+                    </span>
+                  ) : (
+                    <span>
+                      Next Reward:{' '}
+                      <span className="nextrewardtime">
+                        Now
+                      </span>
+                    </span>
+                  )
+                }
               </p>
               <button
                 onClick={handleClaimToken}

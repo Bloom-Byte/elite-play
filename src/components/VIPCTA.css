@@ -1,16 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 .vip-cta {
-    height: 350px;
+  height: 350px;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
-  
-  
   margin-top: 3rem;
   background-size: cover;
   max-width: 100%;
   border-radius: 12px;
+  display: flex;
+  align-items: center;
 }
 
 .vip-cta-extended {
@@ -20,7 +20,7 @@
 .vip-cta_text {
   display: flex;
   flex-direction: column;
-  max-width: 225px;
+  max-width: 300px;
   text-align: left;
   padding: 10px;
   padding-left: 50px;
@@ -49,12 +49,14 @@
   font-size: 16px;
   font-family: 'Manrope', sans-serif;
   font-weight: 600;
-  padding: 10px 20px;
-  border: 2px solid transparent;
+  padding: 14px 20px;
   border-radius: 8px;
   cursor: pointer;
   margin-top: 2rem;
   transition: 0.3s;
+  border-radius: var(--button-l-border-radius, 6px);
+  background: conic-gradient(from 0deg at 50% 50%, #F4900C 0deg, #FFAC33 360deg);
+  box-shadow: 0px 0px 0px 0px rgba(0, 0, 0, 0.00) inset;
 }
 
 .vip-cta_text button:hover {

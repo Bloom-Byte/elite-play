@@ -1,68 +1,66 @@
-import React, { useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import './WalletComponent.css';
 import instance from '../utils/api';
 import { useAppContext } from '../hooks/useAppContext';
 import { useCopyToClipboard } from '../hooks/useCopy';
+import { Box, Divider, useToast } from '@chakra-ui/react';
+import { isElementClassOrChildOf } from '../utils/dom';
+import { useDeposit } from '../hooks/useDeposit';
+import { ADDRESS } from '../utils/constants';
+import {
+  Table,
+  Thead,
+  Tbody,
+  Tr,
+  Th,
+  Td,
+  TableContainer,
+} from '@chakra-ui/react'
+import moment from 'moment';
 
 const WalletComponent = () => {
   const [currentSection, setCurrentSection] = useState('Balance');
   const [mobileNav, setMobileNav] = useState(false);
   const [withdrawalAmount, setWithdrawalAmount] = useState(0);
   const [withdrawalAccount, setWithdrawalAccount] = useState('');
-  const [validatemessage, setValidateMessage] = useState('');
-  const [depositAmount, setDepositAmount] = useState(0);
-  const [depositAccountId, setDepositAccountId] = useState('');
-  const [successMessage, setSuccessMessage] = useState('');
-  const [isLoading, setIsLoading] = useState(false);
+  const [transactions, setTransactions] = useState([]);
 
   const { state } = useAppContext();
+  const toast = useToast();
 
   const handleWithdrawalChange = (event) => {
-    setWithdrawalAmount(event.target.value);
+    const value = parseFloat(event.target.value);
+    if (isNaN(value)) {
+      return;
+    }
+    if (value < 50) {
+      setWithdrawalAmount(50);
+    } else {
+      setWithdrawalAmount(value);
+    }
   };
 
   const handleWithdrawalAccount = (event) => {
-    setWithdrawalAmount(event.target.value);
-  };
-
-  const handleDepositChange = (event) => {
-    setDepositAmount(event.target.value);
-  };
-
-  const handleDepositAccountId = (event) => {
-    setDepositAccountId(event.target.value);
+    setWithdrawalAccount(event.target.value);
   };
 
   const copyToClipboard = useCopyToClipboard();
 
-  const depositToEliteplay = async () => {
-    const url = '/transactions/deposit';
-    setIsLoading(true);
-
-    try {
-      const response = await instance.post(url);
-      if (response.status === 201) {
-        setSuccessMessage(response.data.data.message);
-      } else {
-        setValidateMessage(response.data.message);
-        throw new Error('Failed to deposit');
-      }
-    } catch (error) {
-      console.error('Error occurred during deposit:', error);
-      setValidateMessage(error.response.data.message);
-    } finally {
-      setIsLoading(false);
-    }
-  };
+  const { isLoading, depositToEliteplay } = useDeposit();
 
   async function initiateWithdrawal() {
     const url = '/transactions/withdraw';
 
-    if (withdrawalAmount < 50) {
-      setValidateMessage('Minimum Withdrawal is 50 eGold');
+    if (state.user.balance < withdrawalAmount) {
+      toast({
+        title: 'Insufficient balance',
+        description: 'You do not have enough balance to make this withdrawal',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      });
       return;
-    } else {
-      setValidateMessage('');
     }
     const requestBody = {
       amount: withdrawalAmount,
@@ -73,15 +71,98 @@ const WalletComponent = () => {
       const response = await instance.post(url, requestBody);
 
       if (response.status === 201) {
-        setSuccessMessage(response.data.data.message);
+        toast({
+          title: 'Withdrawal initiated',
+          description: 'Your withdrawal has been initiated successfully',
+          status: 'success',
+          duration: 5000,
+          isClosable: true,
+          position: 'top',
+        });
       } else {
         console.error('Failed to initiate transaction:', response.statusText);
       }
     } catch (error) {
       console.error('Error occurred while initiating transaction:', error);
-      setValidateMessage(error.response.data.message);
+      toast({
+        title: 'Failed to initiate withdrawal',
+        description: 'An error occurred while initiating withdrawal',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      });
     }
   }
+
+  const fetchTransactions = useCallback(async () => {
+    const url = '/transactions/history';
+
+    try {
+      const response = await instance.get(url);
+
+      if (response.status !== 200) {
+        toast({
+          title: 'Failed to fetch transactions',
+          description: 'An error occurred while fetching transactions',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top',
+        });
+        return;
+      }
+
+      setTransactions(response.data.transactions);
+    } catch (error) {
+      if (error.response.status === 404) {
+        toast({
+          title: 'No transactions found',
+          status: 'error',
+          duration: 5000,
+          isClosable: true,
+          position: 'top',
+        });
+        return;
+      }
+      console.error('Error occurred while fetching transactions:', error);
+      toast({
+        title: 'Failed to fetch transactions',
+        description: 'An error occurred while fetching transactions',
+        status: 'error',
+        duration: 5000,
+        isClosable: true,
+        position: 'top',
+      });
+      return;
+    }
+  }, [toast]);
+
+  useEffect(() => {
+    if (currentSection === 'Transaction') {
+      fetchTransactions();
+    }
+  }, [currentSection, fetchTransactions]);
+
+  const close = useCallback(() => {
+    setMobileNav(false);
+  }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        !isElementClassOrChildOf(event.target, 'accountDropDown')
+      ) {
+        close();
+      }
+    };
+
+    window.addEventListener('mousedown', handleClickOutside);
+
+    return () => {
+      window.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [close]);
 
   return (
     <div className={`wallet-comp`}>
@@ -89,13 +170,74 @@ const WalletComponent = () => {
         <div className="wallet-setting-header">
           <span>Wallet</span>
         </div>
-        <div
-          onClick={() => {
-            setMobileNav(!mobileNav);
-          }}
-          className="accountsettings-mobile_nav"
-        >
-          <img src="./slant-menu.svg" alt="" />
+        <div className='accountDropDown' style={{
+          position: 'relative',
+        }}>
+          <div
+            onClick={() => {
+              setMobileNav(!mobileNav);
+            }}
+            className="accountsettings-mobile_nav"
+          >
+            <img src="./slant-menu.svg" alt="" />
+          </div>
+          {mobileNav && (
+            <div className="settings-dropdown">
+              <div className="settings-dropdown-content">
+                <div
+                  onClick={() => {
+                    setCurrentSection('Balance');
+                    close();
+                  }}
+                  className={`profile-dropdown-cta ${currentSection === 'Balance' ? 'active' : ''}`}
+                >
+                  <img src="./wallet-02.svg" alt="wallet" />
+                  <span>Balance</span>
+                </div>
+                <div
+                  onClick={() => {
+                    setCurrentSection('Deposit');
+                    close();
+                  }}
+                  className={`profile-dropdown-cta ${currentSection === 'Deposit' ? 'active' : ''}`}
+                >
+                  <img src="./money-receive-01.svg" alt="wallet" />
+                  <span>Deposit</span>
+                </div>
+                <div
+                  onClick={() => {
+                    setCurrentSection('Withdraw');
+                    close();
+                  }}
+                  className={`profile-dropdown-cta ${currentSection === 'Withdraw' ? 'active' : ''}`}
+                >
+                  <img src="./bitcoin-withdraw.svg" alt="wallet" />
+                  <span>Withdraw</span>
+                </div>
+                {/* <div
+                  onClick={() => {
+                    setCurrentSection('Earnings')
+                    close();
+                  }}
+                  className={`profile-dropdown-cta ${currentSection === 'Earnings' ? 'active' : ''}`}
+                >
+                  <img src="./coins-01.svg" alt="wallet" />
+                  <span>Earnings</span>
+                </div> */}
+                <Divider mb={'0px !important'} />
+                <div
+                  onClick={() => {
+                    setCurrentSection('Transaction');
+                    close();
+                  }}
+                  className={`profile-dropdown-cta ${currentSection === 'Transaction' ? 'active' : ''}`}
+                >
+                  <img src="./bitcoin-transaction.svg" alt="wallet" />
+                  <span>Transaction</span>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       </div>
 
@@ -125,10 +267,10 @@ const WalletComponent = () => {
             <img src="./bitcoin-withdraw.svg" alt="wallet" />
             <span>Withdraw</span>
           </div>
-          <div className="wallet-option" onClick={() => setCurrentSection('Earnings')}>
+          {/* <div className="wallet-option" onClick={() => setCurrentSection('Earnings')}>
             <img src="./coins-01.svg" alt="wallet" />
             <span>Earnings</span>
-          </div>
+          </div> */}
           <div
             onClick={() => setCurrentSection('Transaction')}
             className={`wallet-option ${currentSection === 'Transaction' ? 'wallet-option_active' : ''
@@ -189,97 +331,98 @@ const WalletComponent = () => {
           {currentSection === 'Deposit' && (
             <div className="wallet-deposit">
               <div className="deposit-wallet_main">
-                <div>
-                  <div className="crypto-deposit-method_type">
-                    <div>
-                      <p>Deposit Currency</p>
-                      <select className="options-list" disabled={true}>
-                        <option value="usdt">eGold</option>
-                      </select>
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '20px',
+                  marginBottom: '30px',
+                }}>
+                  <div className='deposit-cp'>
+                    <p>Deposit Currency</p>
+                    <div className="deposit-address">
+                      <span className="eg-address">
+                        <span className="eAddress">eGold</span>
+                      </span>
                     </div>
                   </div>
-                  <p>Account Id</p>
-                  <div className="deposit-address">
-                    <span className="eg-address">
-                      <span className="eAddress">8722767</span>
-                    </span>
-                    <span
-                      onClick={() => {
-                        copyToClipboard('8722767');
-                      }}
-                      className="copy-bx"
-                    >
-                      <img src="./copy-01.svg" alt="" /> copy
-                    </span>
+                  <div className='deposit-cp'>
+                    <p>Account Id</p>
+                    <div className="deposit-address">
+                      <span className="eg-address">
+                        <span className="eAddress">8722767</span>
+                      </span>
+                      <span
+                        onClick={() => {
+                          copyToClipboard('8722767');
+                        }}
+                        className="copy-bx"
+                      >
+                        <img src="./copy-01.svg" alt="" /> copy
+                      </span>
+                    </div>
                   </div>
-                  <p>User Id</p>
-                  <div className="deposit-address">
-                    <span className="eg-address">
-                      <span className="eAddress">{state.user?._id}</span>
-                    </span>
-                    <span
-                      onClick={() => {
-                        copyToClipboard(state.user?._id);
-                      }}
-                      className="copy-bx"
-                    >
-                      <img src="./copy-01.svg" alt="" /> copy
-                    </span>
+                  <div className='deposit-cp'>
+                    <p>User Id</p>
+                    <div className="deposit-address">
+                      <span className="eg-address">
+                        <span className="eAddress">{state.user?._id}</span>
+                      </span>
+                      <span
+                        onClick={() => {
+                          copyToClipboard(state.user?._id);
+                        }}
+                        className="copy-bx"
+                      >
+                        <img src="./copy-01.svg" alt="" /> copy
+                      </span>
+                    </div>
                   </div>
-                  {/* <p>Deposit Amount</p>
-                  <div className="withdraw-address-box">
-                    <input
-                      className="withdraw-address_input"
-                      type="text"
-                      value={depositAmount}
-                      onChange={handleDepositChange}
-                    />
-                  </div> */}
-                  {/* <p>Account Id</p>
-                  <div className="withdraw-address-box">
-                    <input
-                      className="withdraw-address_input"
-                      type="text"
-                      value={depositAccountId}
-                      onChange={handleDepositAccountId}
-                    />
-                  </div> */}
-                  {validatemessage && (
-                    <p style={{ color: '#E14453' }}>{validatemessage}</p>
-                  )}
-                  {successMessage && (
-                    <p style={{ color: '#34B263' }}>{successMessage}</p>
-                  )}
-                  <div className="deposit-crypto">
-                    <img src="./alert-01.svg" alt="alert-icon" />
-                    <span>Minimum Deposit: 1 eGold</span>
-                  </div>
-                  <div className="deposit-crypto">
-                    <img src="./alert-01.svg" alt="alert-icon" />
-                    <span>Please add your user id as description in the transaction</span>
-                  </div>
-                  <div className="deposit_fiat-btn">
-                    <button onClick={depositToEliteplay}>
-                      {isLoading ? (
-                        <div className="lds-ring">
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                          <div></div>
-                        </div>
-                      ) : (
-                        'Confirm Deposit'
-                      )}
-                    </button>
-                  </div>
-                  <div className="crypto-notice">
-                    <span className="crypto-notice_notice-head">
-                      NOTICE:{' '}
-                    </span>
-                    <span className="crypto-notice_notice-info">
-                      Please wait for your deposit to reflect 30 mins after transanction.
-                    </span>
-                  </div>
+                </div>
+                <div className="depositpopup-min">
+                  <img src="./alert-01.svg" alt="alert-icon" />
+                  <span>Minimum Deposit: 1 eGold</span>
+                </div>
+                <div className="depositpopup-min">
+                  <img src="./alert-01.svg" alt="alert-icon" />
+                  <span>Please add your user id as description in the transaction</span>
+                </div>
+                <button className='makeDeposit' onClick={() => {
+                  const redirectUrl = `https://www.elitepvpers.com/theblackmarket/profile/${ADDRESS}`;
+                  toast({
+                    title: 'Redirecting to Elitepvypers',
+                    description: `You will be redirected to elitepvpers.com in 5 seconds to make a deposit to ${ADDRESS}. If you are not automatically redirected, use the following link: ${redirectUrl}`,
+                    status: 'success',
+                    duration: 5000,
+                    isClosable: true,
+                    position: 'top',
+                  });
+                  setTimeout(() => {
+                    window.open(redirectUrl, '_blank');
+                  }, 5000);
+                }}>
+                  Make a deposit
+                </button>
+                <div className="deposit_fiat-btn">
+                  <button onClick={depositToEliteplay}>
+                    {isLoading ? (
+                      <div className="lds-ring">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                      </div>
+                    ) : (
+                      'Confirm Deposit'
+                    )}
+                  </button>
+                </div>
+                <div className="crypto-notice">
+                  <span className="crypto-notice_notice-head">
+                    NOTICE:{' '}
+                  </span>
+                  <span className="crypto-notice_notice-info">
+                    Please wait for your deposit to reflect 30 mins after transanction.
+                  </span>
                 </div>
               </div>
             </div>
@@ -288,59 +431,56 @@ const WalletComponent = () => {
           {currentSection === 'Withdraw' && (
             <div className="wallet-deposit">
               <div className="deposit-wallet_main">
-                <div>
-                  <div className="crypto-deposit-method_type">
-                    <div>
-                      <p>Withdraw Currency</p>
-                      <select className="options-list" disabled={true}>
-                        <option value="usdt">eGold</option>
-                      </select>
+                <div style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '20px',
+                  marginBottom: '30px',
+                }}>
+                  <div className='deposit-cp'>
+                    <p>Withdraw Currency</p>
+                    <div className="deposit-address">
+                      <span className="eg-address">
+                        <span className="eAddress">eGold</span>
+                      </span>
                     </div>
                   </div>
-                  <p>Account Id</p>
-                  <div className="withdraw-address-box">
-                    <input
-                      className="withdraw-address_input"
-                      type="text"
-                      value={withdrawalAccount}
-                      onChange={handleWithdrawalAccount}
-                    />
-                  </div>
-                  {/* <p>Withdrawal Address</p>
+                  <div className='deposit-cp'>
+                    <p>Account Id</p>
                     <div className="withdraw-address-box">
                       <input
                         className="withdraw-address_input"
                         type="text"
-                        placeholder="Fill in carefully according to the specefied currency"
+                        value={withdrawalAccount}
+                        onChange={handleWithdrawalAccount}
                       />
-                    </div> */}
-                  <div className="withdraw-amount_title">
-                    <p>Withdraw Amount</p>
-                    <p>MIN: 50 eGold</p>
+                    </div>
                   </div>
+                  <div className='deposit-cp'>
+                    <div className="withdraw-amount_title">
+                      <p>Withdraw Amount</p>
+                      <p>MIN: 50 eGold</p>
+                    </div>
+                    <div className="withdraw-address-box">
+                      <input
+                        className="withdraw-address_input"
+                        type="number"
+                        value={withdrawalAmount}
+                        onChange={handleWithdrawalChange}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div>
 
-                  <div className="withdraw-address-box">
-                    <input
-                      className="withdraw-address_input"
-                      type="text"
-                      value={withdrawalAmount}
-                      onChange={handleWithdrawalChange}
-                    />
-                  </div>
-                  {validatemessage && (
-                    <p style={{ color: '#E14453' }}>{validatemessage}</p>
-                  )}
-                  {successMessage && (
-                    <p style={{ color: '#34B263' }}>{successMessage}</p>
-                  )}
                   <div className="withdraw_amounts">
                     <div className="withdraw_amount-details">
                       <span>Withdraw Amount:</span>
-                      <span>0.00 eGold</span>
+                      <span>{withdrawalAmount} eGold</span>
                     </div>
                     <div className="withdraw_amount-details">
-                      <span>
-                        Fee:{' '}
+                      <span className='flexed'>
+                        Fee:
                         <img
                           className="more-info_icon"
                           src="./help-circle.svg"
@@ -351,7 +491,7 @@ const WalletComponent = () => {
                     </div>
                     <div className="withdraw_amount-details">
                       <span>Total Withdraw Amount:</span>
-                      <span>0.00 eGold</span>
+                      <span>{withdrawalAmount} eGold</span>
                     </div>
                   </div>
 
@@ -372,7 +512,7 @@ const WalletComponent = () => {
           )}
           {currentSection === 'Transaction' && (
             <div className="transaction-section">
-              <div className="transaction-filters">
+              {/* <div className="transaction-filters">
                 <select name="" id="">
                   <option value="deposit">Deposit</option>
                   <option value="withdraw">Withdraw</option>
@@ -393,12 +533,51 @@ const WalletComponent = () => {
                   <option value="">Failed</option>
                   <option value="">Canceled</option>
                 </select>
-              </div>
+              </div> */}
               <div className="transaction-main_section">
-                <div className="no-transanction-img_container">
-                  <img src="./_x31_.png" alt="no-transanction_image" />
-                </div>
-                <p className="no-data_txt">Oops! There is no data yet!</p>
+                {
+                  transactions.length === 0 && (
+                    <>
+                      <div className="no-transanction-img_container">
+                        <img src="./_x31_.png" alt="no-transanction_image" />
+                      </div>
+                      <p className="no-data_txt">Oops! There is no data yet!</p>
+                    </>
+                  )
+                }
+                {
+                  transactions.length > 0 && (
+                    <Box className='tableHistory'>
+                      <TableContainer>
+                        <Table variant='simple'>
+                          <Thead>
+                            <Tr>
+                              <Th>ID</Th>
+                              <Th>Type</Th>
+                              <Th>Currency</Th>
+                              <Th>Amount</Th>
+                              <Th>Time</Th>
+                              <Th>Status</Th>
+                            </Tr>
+                          </Thead>
+                          <Tbody>
+                            {
+                              transactions.map((transaction, index) => (
+                                <Tr key={index}>
+                                  <Td>{transaction.transactionId}</Td>
+                                  <Td>{transaction.transactionType.toUpperCase()}</Td>
+                                  <Td>eGold</Td>
+                                  <Td>{transaction.amount}</Td>
+                                  <Td>{moment(transaction.timestamp).fromNow()}</Td>
+                                  <Td>Complete</Td>
+                                </Tr>
+                              ))
+                            }
+                          </Tbody>
+                        </Table>
+                      </TableContainer>
+                    </Box>)
+                }
               </div>
             </div>
           )}
@@ -411,55 +590,6 @@ const WalletComponent = () => {
           )}
         </div>
       </div>
-      {mobileNav && (
-        <div className="settings-dropdown">
-          <div className="settings-dropdown-content">
-            <div
-              onClick={() => {
-                setCurrentSection('Balance');
-              }}
-              className="settings-dropdown-cta"
-            >
-              <img src="./wallet-02.svg" alt="wallet" />
-              <span>Balance</span>
-            </div>
-            <div
-              onClick={() => {
-                setCurrentSection('Deposit');
-              }}
-              className="profile-dropdown-cta"
-            >
-              <img src="./money-receive-01.svg" alt="wallet" />
-              <span>Deposit</span>
-            </div>
-            <div
-              onClick={() => {
-                setCurrentSection('Withdraw');
-              }}
-              className="profile-dropdown-cta"
-            >
-              <img src="./bitcoin-withdraw.svg" alt="wallet" />
-              <span>Withdraw</span>
-            </div>
-            <div
-              onClick={() => setCurrentSection('Earnings')}
-              className="profile-dropdown-cta"
-            >
-              <img src="./coins-01.svg" alt="wallet" />
-              <span>Earnings</span>
-            </div>
-            <div
-              onClick={() => {
-                setCurrentSection('Transaction');
-              }}
-              className="profile-dropdown-cta"
-            >
-              <img src="./bitcoin-transaction.svg" alt="wallet" />
-              <span>Transaction</span>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

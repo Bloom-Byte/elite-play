@@ -6,21 +6,19 @@ import { useEventSource } from '../hooks/useEventSources';
 
 
 const Crash = () => {
+  // const bets = useEventSource({
+  //   url: '/game/crash-game/leaderboard'
+  // });
   const bets = useEventSource({
-    url: '/game/crash-game/leaderboard'
-  });
-  const userBets = useEventSource({
     url: '/crash-game/bets-resolved'
   });
-
+  
   return (
     <div style={{
       padding: '0 20px',
     }}>
-      <CrashGame bets={bets}
-        userBets={userBets} />
-      <CrashTable bets={bets}
-        userBets={userBets} />
+      <CrashGame bets={bets} />
+      <CrashTable bets={bets}/>
     </div>
   );
 };

@@ -6,7 +6,6 @@ import LanguagePopup from './LanguagePopup';
 import './Sidenav.css';
 import instance from '../utils/api';
 import { useAppContext } from '../hooks/useAppContext';
-import { useNav } from '../hooks/useUtils';
 import { useDisclosure } from '../hooks/useDisclosure';
 
 const Sidenav = () => {
@@ -21,7 +20,6 @@ const Sidenav = () => {
   const isCrashPage = location.pathname == '/crash'
 
   const { state } = useAppContext();
-  const { toggleNav } = useNav();
 
   useEffect(() => {
     if (!state.user) return;

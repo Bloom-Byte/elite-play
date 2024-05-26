@@ -1,74 +1,67 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Open+Sans:wght@400;600&display=swap');
 
 .deposit-cta {
-    height: 250px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-    
-    margin-top: 3rem;
-    background-size: cover;
-    max-width: 100%;
-    border-radius: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  height: 250px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  margin-top: 3rem;
+  background-size: cover;
+  max-width: 100%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 0 2rem;
 }
 
 .deposit-cta-extended {
-    margin-left: 18rem;
+  margin-left: 18rem;
 }
 
 .deposit-cta__txt {
-    padding: 0 50px;
-    display: flex;
-    /* max-width: 500px; */
+  display: flex;
+  /* max-width: 500px; */
 }
 
 .deposit-cta__txt h4 {
-    font-size: 32px;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 600;
-    color: #ffffff;
-    margin-bottom: 1rem;
+  font-size: 32px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 1rem;
 }
 
 .begin-now {
-    color: #FEAB32;
+  color: #FEAB32;
 }
 
 .deposit-cta button {
-    background:  #FFAC33;
-    border: 2px solid transparent;
-    border-radius: 6px;
-    padding: 10px 40px;
-    margin-right: 50px;
-    font-size: 16px;
-    font-family: 'Manrope', sans-serif;
-    font-weight: 600;
-    color: #ffffff;
-    cursor: pointer;
-    transition: 0.3s;
+  background: #FFAC33;
+  border: 2px solid transparent;
+  border-radius: 6px;
+  padding: 10px 40px;
+  font-size: 16px;
+  font-family: 'Manrope', sans-serif;
+  font-weight: 600;
+  color: #ffffff;
+  cursor: pointer;
+  transition: 0.3s;
 }
 
 .deposit-cta button:hover {
-    background: transparent;
-    border: 2px solid #FFAC33;
+  background: transparent;
+  border: 2px solid #FFAC33;
 }
 
 
 /* --------- MOBILE RESPONSIVENESS --------- */
 @media screen and (max-width: 768px) {
-    .deposit-cta  {
-        align-self: center;
-        margin-left: 8px;
-        width: 95vw;
-        margin-right: 5px;
-    }
-    
-    .deposit-cta__txt h4 {
-        font-size: 20px;
-        margin-bottom: 1rem;
-    }
+  .deposit-cta__txt h4 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
 }

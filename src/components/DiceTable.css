@@ -132,6 +132,7 @@ tr {
   gap: 10px;
   justify-content: space-between;
   align-items: start;
+  flex-wrap: wrap;
 }
 
 .randomize-seedbox {
@@ -170,5 +171,11 @@ tr {
 
 /* --------- MOBILE RESPONSIVENESS ---------- */
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 540px) {
+  .randomize-seed {
+    margin-bottom: 2rem;
+  }
+  .randomize-seedbox {
+    width: 100%;
+  }
 }

@@ -137,9 +137,9 @@
 .depositpopup-notice {
   margin-bottom: 20px;
   padding: 16px;
-  max-width: 448px;
   background-color: #0B281F;
   border-radius: 6px;
+  text-align: center;
 }
 
 .depositpopup-notice span {

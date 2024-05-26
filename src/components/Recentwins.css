@@ -3,12 +3,20 @@
 .recent-wins {
     background: #070C0A;
     margin-top: 2rem;
-    padding: 8px, 16px, 8px, 16px;
+    padding: 16px 0;
     border-radius: 9px;
 }
 
 .recent-wins__extended {
     margin-left: 18rem;
+}
+
+.recent-wins__container__item {
+  text-align: center;
+}
+
+.recent-wins__container__item > img {
+    min-width: 80px;
 }
 
 .recent-wins__title {
@@ -26,25 +34,29 @@
     transition: 0.3s;
 }
 
+.recent-wins__title {
+  margin-bottom: 1rem;
+}
+
 .recent-wins__title h4 {
     font-size: 14px;
     font-family: 'Manrope', sans-serif;
     font-weight: 800;
     color: #ffffff;
-    margin-bottom: 1rem;
 }
 
 .recent-wins__container {
     display: flex;
     margin-left: 1rem;
     gap: 1rem;
-    flex-wrap: wrap;
+    overflow-x: scroll;
 }
 
 .recent-wins__coin-info {
     display: flex;
     gap: 5px;
     margin-top: 5px;
+    justify-content: center;
 }
 
 .recent-wins__coin-info span {

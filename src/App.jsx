@@ -19,6 +19,9 @@ import ResetPassword from './pages/ResetPassword'
 import './App.css'
 import Layout from './components/layout'
 import { AppProvider } from './contexts/AppContext'
+import AdminLayout from './components/adminLayout'
+import Tickets from './pages/AdminTickets'
+import TicketDetail from './pages/AdminTicketsDetail'
 
 function App() {
 
@@ -42,6 +45,10 @@ function App() {
             <Route path="/crashbeginner" element={<CrashBeginner />} />
             <Route path="/crashstrategy" element={<CrashStrategy />} />
             <Route path="/crashautomation" element={<CrashAutomation />} />
+          </Route>
+          <Route path="/admin" element={<AdminLayout />}>
+            <Route index element={<Tickets />} />
+            <Route path="tickets/:ticketId" element={<TicketDetail />} />
           </Route>
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/reset-password/:token" element={<ResetPassword />} />

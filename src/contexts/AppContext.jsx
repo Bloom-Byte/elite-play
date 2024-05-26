@@ -92,7 +92,12 @@ export const AppProvider = ({ children }) => {
       dispatch({ type: SET_USER_LOADING, payload: false });
       if (response.status === 200) {
         const data = response.data;
-        dispatch({ type: LOGIN, payload: data });
+        dispatch({
+          type: LOGIN, payload: {
+            ...data,
+            balance: parseFloat(data.balance)
+          }
+        });
       } else {
         console.error('Failed to fetch user profile:', response.statusText);
       }

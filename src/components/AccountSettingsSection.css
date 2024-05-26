@@ -448,7 +448,7 @@ input:checked+.slider:before {
 }
 
 .editusername-popup {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
@@ -491,6 +491,9 @@ input:checked+.slider:before {
 
 .editusername-popup_main-content {
   padding: 20px;
+  overflow-x: scroll;
+  overflow-y: scroll;
+  max-height: 80vh;
 }
 
 .editusername-popup_edit-avatar {
@@ -829,7 +832,7 @@ button {
   }
 
   .accountsettings-mobile_nav {
-    display: block;
+    display: flex;
     background: rgb(11, 40, 31);
     border: 1px transparent;
     border-radius: 6px;
@@ -837,24 +840,33 @@ button {
     height: 30px;
     cursor: pointer;
     transition: all 0.3s var(--ease-in-out);
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    min-width: 40px;
   }
 
   .accountsettings-mobile_nav img {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
   }
 
   .settings-dropdown {
     position: absolute;
-    top: 200px;
-    left: 60vw;
+    top: 50px;
+    right: 0;
+    width: 230px;
+    z-index: 1;
   }
 
   .settings-dropdown-content {
     position: relative;
-    background-color: #0B1210;
+    background-color: #14201c;
     border-radius: 16px;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
 
   .settings-dropdown-content hr {
@@ -908,5 +920,15 @@ button {
   }
 
   .email-txt img {
+  }
+}
+
+@media screen and (max-width: 510px) {
+  .editusername-popup {
+    /* padding: 0 20px; */
+  }
+  
+  .editusername-popup_container {
+    max-width: 96% !important;
   }
 }

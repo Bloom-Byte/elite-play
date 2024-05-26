@@ -2,6 +2,82 @@ import React, { useState } from 'react';
 import './DiceTable.css';
 import { useAppContext } from '../hooks/useAppContext';
 
+const DataTable = ({ bets }) => {
+  return (<table className="livebets-table_table">
+    <thead>
+      <tr>
+        <th>Player</th>
+        <th>Bet ID</th>
+        <th>Wager</th>
+        <th>Multiplier</th>
+        <th>Payout</th>
+        <th>Profit</th>
+      </tr>
+    </thead>
+    <tbody>
+      {(
+        bets.length > 0 ? (
+          bets.map((bet, index) => {
+            const profit = Math.max(bet.winAmount - bet.amount, 0);
+            return (
+              <tr key={index}>
+                <td>{bet.username}</td>
+                <td className="game-icon">{bet._id}</td>
+                <td>
+                  <div style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                  }}>
+                    <img
+                      className="coin"
+                      src="./twemoji_coin.svg"
+                      alt="coin"
+                    />
+                    {bet.amount}
+                  </div>
+                </td>
+                <td>{bet.payout}x</td>
+                <td
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}
+                  className={bet.betStatus === 'loss' ? 'red' : 'green'}
+                >
+                  <img
+                    className="coin"
+                    src="./twemoji_coin.svg"
+                    alt="coin"
+                  />
+                  {bet.winAmount.toFixed(2)}
+                </td>
+                <td
+                  className={bet.betStatus === 'loss' ? 'red' : 'green'}
+                >
+                  <div className='flexed'>
+                    <img
+                      className="coin"
+                      src="./twemoji_coin.svg"
+                      alt="coin"
+                    />
+                    {profit.toFixed(2)}
+                  </div>
+                </td>
+              </tr>
+            )
+          })
+        ) : (
+          <tr>
+            <td colSpan="4">No bets available</td>
+          </tr>
+        )
+      )}
+
+    </tbody>
+  </table>)
+}
+
 const DiceTable = ({ bets, userBets }) => {
   const [toggle, setToggle] = useState(false);
   const [userBetsOpen, setUserBetsOpen] = useState(false)
@@ -181,90 +257,13 @@ const DiceTable = ({ bets, userBets }) => {
               <div onClick={() => { setUserBetsOpen(!userBetsOpen) }} className={userBetsOpen ? 'dicetable-betstitle_my-bets' : 'dicetable-betstitle_all-bets'}>My Bets</div>
             </div>
             <div className='dicetable-tab-content'>
-              <table className="livebets-table_table">
-                <thead>
-                  <tr>
-                    <th>Bet ID</th>
-                    <th>Wager</th>
-                    <th>Multiplier</th>
-                    <th>Payout</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {userBetsOpen ? (
-                    userBets?.map((bet, index) => (
-                      <tr key={index}>
-                        <td className="game-icon">{bet._id}</td>
-                        <td>
-                          <div style={{
-                            display: 'flex'
-                          }}>
-                            <img
-                              className="coin"
-                              src="./twemoji_coin.svg"
-                              alt="coin"
-                            />
-                            {bet.amount}
-                          </div>
-                        </td>
-                        <td>{bet.payout}x</td>
-                        <td
-                          className={bet.betStatus === 'loss' ? 'red' : 'green'}
-                        >
-                          <img
-                            className="coin"
-                            src="./twemoji_coin.svg"
-                            alt="coin"
-                          />
-                          {bet.winAmount.toFixed(2)}x
-                        </td>
-                      </tr>
-                    ))
-                  ) : (
-                    bets.length > 0 ? (
-                      bets.map((bet, index) => (
-                        <tr key={index}>
-                          <td className="game-icon">{bet._id}</td>
-                          <td>
-                            <div style={{
-                              display: 'flex',
-                              alignItems: 'center',
-                            }}>
-                              <img
-                                className="coin"
-                                src="./twemoji_coin.svg"
-                                alt="coin"
-                              />
-                              {bet.amount}
-                            </div>
-                          </td>
-                          <td>{bet.payout}x</td>
-                          <td
-                            style={{
-                              display: 'flex',
-                              justifyContent: 'center',
-                              alignItems: 'center',
-                            }}
-                            className={bet.betStatus === 'loss' ? 'red' : 'green'}
-                          >
-                            <img
-                              className="coin"
-                              src="./twemoji_coin.svg"
-                              alt="coin"
-                            />
-                            {bet.winAmount.toFixed(2)}
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td colSpan="4">No bets available</td>
-                      </tr>
-                    )
-                  )}
-
-                </tbody>
-              </table>
+              {
+                userBetsOpen ? (
+                  <DataTable bets={userBets} />
+                ) : (
+                  <DataTable bets={bets} />
+                )
+              }
             </div>
           </div>
         </>

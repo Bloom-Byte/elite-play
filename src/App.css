@@ -44,3 +44,15 @@ input, button, select, textarea, span {
   color: white;
   font-family: 'Manrope', sans-serif;
 }
+
+.prevent-select {
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
+}
+
+.flexed {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}

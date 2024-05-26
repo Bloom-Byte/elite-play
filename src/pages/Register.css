@@ -24,6 +24,7 @@ body {
 .register-form {
   width: 55%;
   padding: 0 4rem;
+  background-color: #0B1210;
 }
 
 .register-form__form {

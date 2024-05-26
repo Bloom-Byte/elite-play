@@ -113,10 +113,9 @@
 .dicegame-placebet__amount-toggle {
   display: flex;
   gap: 8px;
-}
-
-.dicegame-placebet__amount span img {
-  margin-right: 5px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .dicegame-placebet__amount-toggle span {
@@ -134,6 +133,9 @@
   display: flex;
   gap: 5px;
   margin-bottom: 20px;
+  -webkit-user-select: none; /* Safari */
+  -ms-user-select: none; /* IE 10 and IE 11 */
+  user-select: none; /* Standard syntax */
 }
 
 .dicegame-placebet__select-amount span {
@@ -368,7 +370,7 @@
 
 .gamedice-reset_btn span.active,
 .gamedice-reset_btn span:hover {
-  background-color: #0B1210;
+  background-color: #2d3835;
   transition: .3s;
 }
 
@@ -384,6 +386,10 @@
   font-size: 12px;
   font-weight: 600;
   color: #ffffff;
+}
+
+.dice--livebet-table tr.resolved.win td {
+  color: #34b263;
 }
 
 .count-arrows {
@@ -446,6 +452,7 @@
 .dicegame-placebet__amount span {
   display: flex;
   gap: 2px;
+  cursor: pointer;
 }
 
 .dicegame-placebet__amount-display {
@@ -479,10 +486,6 @@
   padding: 8px;
   color: white;
   transition: 0.3s;
-}
-
-.dicegame-placebet__amount span img {
-  margin-right: 5px;
 }
 
 .count-arrows img {
@@ -580,7 +583,7 @@
 
 @media screen and (max-width: 500px) {
   .dicegame-buttons {
-    overflow-x: scroll;
+    /* overflow-x: scroll; */
   }
 
   .dicegame-buttons button {
@@ -602,18 +605,3 @@
     margin: unset;
   }
 }
-
-/* @media screen and (max-width: 1200px) {
-  .dicegame-diceroll {
-    flex: 4;
-  }
-
-  .dicegame-placebet {
-    flex: 3;
-  }
-
-  .dicegame-diceroll__range_values {
-    gap: 17%;
-    margin-left: 20px;
-  }
-} */

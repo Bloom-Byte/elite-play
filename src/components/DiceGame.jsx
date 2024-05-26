@@ -101,14 +101,20 @@ const DiceGame = ({ userBets }) => {
   }
 
   const handleBetAmount = (event) => {
-    if (event.target.value >= 1 && event.target.value <= 1000000000) {
-      setBetAmount(event.target.value);
+    const value = parseFloat(event.target.value);
+    if (isNaN(value)) {
+      setBetAmount(0);
+    } else if (value >= 1 && value <= 1000000000) {
+      setBetAmount(value);
     }
   };
 
   const handleNumBets = (event) => {
-    if (event.target.value >= 1 && event.target.value <= 1000000000) {
-      setNumBets(parseInt(event.target.value));
+    const value = parseInt(event.target.value);
+    if (isNaN(value)) {
+      setNumBets(0);
+    } else if (value >= 1 && value <= 1000000000) {
+      setNumBets(parseInt(value));
     }
   }
 
@@ -175,7 +181,7 @@ const DiceGame = ({ userBets }) => {
             toast({
               position: 'bottom',
               status: 'success',
-              title: 'Auto Bet',
+              title: 'Won',
               description: `You won ${response.data.winAmount} coins by rolling ${response.data.roll}`,
               size: 'sm',
               duration: 2000
@@ -184,7 +190,7 @@ const DiceGame = ({ userBets }) => {
             toast({
               position: 'bottom',
               status: 'error',
-              title: 'Auto Bet',
+              title: 'Lost',
               description: `You lost ${betAmount} coins by rolling ${response.data.roll}`,
               size: 'sm',
               duration: 2000
@@ -310,13 +316,13 @@ const DiceGame = ({ userBets }) => {
     <div className={`dicegame`}>
       <div className="dicegame-buttons">
         <button className="dicegame-dice-title">Dice</button>
-        <button
+        {/* <button
           onClick={() => {
             onOpenLiveGames();
           }}
         >
           <img src="./Exclude.svg" alt="icon" /> Live Games
-        </button>
+        </button> */}
         <button
           onClick={() => {
             onOpenFair();
@@ -675,13 +681,13 @@ const DiceGame = ({ userBets }) => {
               onChange={handleChange}
             />
           </div>
-          <div className="dicegame-diceroll__range_values">
+          {/* <div className="dicegame-diceroll__range_values">
             <span>0</span>
             <span>25</span>
             <span>50</span>
             <span>75</span>
             <span>100</span>
-          </div>
+          </div> */}
           <div className="dicegame-diceroll__box">
             <div className="dicegame-diceroll__outer-box">
               <p>Payout</p>

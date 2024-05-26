@@ -219,3 +219,11 @@
   font-weight: 800;
   color: #6E6E71;
 }
+
+/* --------- MOBILE RESPONSIVENESS ---------- */
+
+@media screen and (max-width: 768px) {
+  .userinfopopup-content {
+    width: 99% !important;
+  }
+}

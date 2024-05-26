@@ -19,7 +19,7 @@ const Home = () => {
   });
 
   const crashAllBets = useEventSource({
-    url: '/game/crash-game/leaderboard'
+    url: '/crash-game/bets-resolved'
   });
   const crashUserBets = useEventSource({
     url: '/crash-game/bets-resolved'

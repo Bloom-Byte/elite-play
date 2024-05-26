@@ -3,6 +3,7 @@ import StatPopup from './StatPopup';
 import './UserInformationPopup.css';
 import Modal from './Modal';
 import { useDisclosure } from '../hooks/useDisclosure';
+import moment from 'moment';
 
 const UserInformationPopup = ({
   isOpenUser,
@@ -11,11 +12,7 @@ const UserInformationPopup = ({
 }) => {
 
   const formatDate = (isoDateString) => {
-    const date = new Date(isoDateString);
-    const month = date.getMonth() + 1;
-    const day = date.getDate();
-    const year = date.getFullYear();
-    return `Joined on ${month}/${day}/${year}`;
+    return `Joined on ${moment(isoDateString).format('MMMM DD, YYYY')}`;
   };
 
   const totalWins = useMemo(() => {
@@ -57,14 +54,14 @@ const UserInformationPopup = ({
             <span className="stat-stat-icon">
               <img src="./Statistics.svg" alt="statistics" /> Statistics
             </span>
-            <span
+            {/* <span
               onClick={() => {
                 onOpen();
               }}
               className="stat-next-icon"
             >
               Details <img src="./Union-green.svg" alt="union-icon" />
-            </span>
+            </span> */}
           </div>
           <div className="statcards">
             <div className="statcard">
