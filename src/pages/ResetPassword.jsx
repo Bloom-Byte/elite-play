@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
-import axios from 'axios';
 import './Login.css';
 import instance from '../utils/api';
 import { ACCESS_TOKEN } from '../utils/constants';
+import { FiEye, FiEyeOff } from 'react-icons/fi';
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
@@ -16,6 +16,8 @@ const ResetPassword = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const { token } = useParams();
+
+  const [showPassword, setShowPassword] = useState(false);
 
 
   const handlePasswordChange = (event) => {
@@ -69,7 +71,7 @@ const ResetPassword = () => {
     <div className="mobile-auth">
       <div className="register">
         <div className="register-logo">
-          <img src="./auth-img.png" alt="logo" />
+          <img src="/auth-img.png" alt="logo" />
         </div>
         <div className="register-form">
           <div className="register-form__heading">
@@ -82,41 +84,55 @@ const ResetPassword = () => {
                   className="input-icon"
                   src={
                     !passwordFocused && password
-                      ? './lock-key-white.svg'
-                      : './lock-key.svg'
+                      ? '/lock-key-white.svg'
+                      : '/lock-key.svg'
                   }
                   alt="password-icon"
                 />
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   placeholder="New Password"
                   value={password}
                   onChange={handlePasswordChange}
                   onFocus={() => setPasswordFocused(true)}
                   onBlur={() => setPasswordFocused(false)}
                 />
+                <span className='addon' onClick={() => {
+                  setShowPassword(!showPassword);
+                }}>
+                  {
+                    showPassword ? <FiEyeOff /> : <FiEye />
+                  }
+                </span>
               </div>
               <div className="register-form__input-box">
                 <img
                   className="input-icon"
                   src={
                     !confirmPasswordFocused && confirmPassword
-                      ? './lock-key-white.svg'
-                      : './lock-key.svg'
+                      ? '/lock-key-white.svg'
+                      : '/lock-key.svg'
                   }
                   alt="password-icon"
                 />
                 <input
-                  type="password"
+                  type={showPassword ? 'text' : 'password'}
                   placeholder="Confirm New Password"
                   value={confirmPassword}
-                  onChange={ handleConfirmPasswordChange}
+                  onChange={handleConfirmPasswordChange}
                   onFocus={() => setConfirmPasswordFocused(true)}
                   onBlur={() => setConfirmPasswordFocused(false)}
                 />
+                <span className='addon' onClick={() => {
+                  setShowPassword(!showPassword);
+                }}>
+                  {
+                    showPassword ? <FiEyeOff /> : <FiEye />
+                  }
+                </span>
               </div>
               <button className="register-form__submit-btn" type="submit">
-              {isLoading ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Reset Password'}
+                {isLoading ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Reset Password'}
               </button>
               {error && <p className='error-msg'>{error}</p>}
               {successMessage && <p className="success-msg">{successMessage}</p>}

@@ -66,6 +66,7 @@ body {
 
 .register-form__input-box input {
   padding-left: 50px;
+  padding-right: 50px;
   background-color: #070C0A;
   border: 2px solid transparent;
   border-radius: 4px;
@@ -78,6 +79,18 @@ body {
 .register-form__input-box input:focus {
   outline: none;
   border: 2px solid #24E3A1;
+}
+
+.register-form__input-box .addon {
+  position: absolute;
+  color: white;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  font-size: 1.3rem;
 }
 
 .register-form__check-box {

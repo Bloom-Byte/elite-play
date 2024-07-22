@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import "firebase/auth";
 import { initializeApp } from "firebase/app";
@@ -6,6 +6,7 @@ import { GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
 import './Login.css';
 import instance from '../utils/api';
 import { ACCESS_TOKEN } from '../utils/constants';
+import { validateEmail } from '../utils/validators';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -58,16 +59,6 @@ const Login = () => {
 
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
-  };
-
-  const validateEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  };
-
-  const validatePassword = (password) => {
-    const re = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/;
-    return re.test(password);
   };
 
   const handleSubmit = async (event) => {

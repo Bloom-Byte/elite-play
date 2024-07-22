@@ -1,44 +1,55 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react';
 import './Login.css';
 import instance from '../utils/api';
+import { useToast } from '@chakra-ui/react';
+import { validateEmail } from '../utils/validators';
 
 const ForgotPassword = () => {
   const [email, setEmail] = useState('');
   const [emailFocused, setEmailFocused] = useState(true);
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+
+  const toast = useToast();
 
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
-
-
-  const validateEmail = (email) => {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-  };
-
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
 
     if (!validateEmail(email)) {
-      setError('Please enter a valid email address.');
+      toast({
+        title: 'Error',
+        description: 'Please enter a valid email address.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
       setIsLoading(false);
       return;
     }
 
     try {
-      await instance.post('/user/auth/forgot-password', {
+      const response = await instance.post('/user/auth/forgot-password', {
         email,
       });
-
-      setMessage('Reset Email Sent successfully and token will expire in 10 MINS');
+      console.log(response.data);
+      toast({
+        title: response.data.message,
+        status: 'success',
+        duration: 3000,
+        isClosable: true,
+      });
     } catch (error) {
-      setError(error.response.message);
+      toast({
+        title: 'Error',
+        description: "Something went wrong, please try again later.",
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
     } finally {
       setIsLoading(false);
     }
@@ -75,9 +86,6 @@ const ForgotPassword = () => {
                   onBlur={() => setEmailFocused(false)}
                 />
               </div>
-              {error && <p className='error-msg'>{error}</p>}
-              {message && <p className='success-msg'>{message}</p>}
-
               <button className="register-form__submit-btn" type="submit">
                 {isLoading ? <div className="lds-ring"><div></div><div></div><div></div><div></div></div> : 'Reset Password'}
               </button>
