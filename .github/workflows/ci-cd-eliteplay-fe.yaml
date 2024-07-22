@@ -44,6 +44,7 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no  eliteplay@${{ secrets.EC2_IP }} << 'EOF'
             # Stop and remove any existing container
+            pwd
            if docker ps -a --format '{{.Names}}' | grep -q '^elite-play$'; then
             docker stop elite-play || true
             docker rm elite-play || true
