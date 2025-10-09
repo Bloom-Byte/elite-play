@@ -37,12 +37,6 @@ const ResetPassword = () => {
     event.preventDefault();
     setIsLoading(true);
 
-    if (!validatePassword(password)) {
-      setError('Password must be at least 8 characters long and include at least one number and one special character.');
-      setIsLoading(false);
-      return;
-    }
-
     if (password !== confirmPassword) {
       setError('Passwords do not match.');
       setIsLoading(false);

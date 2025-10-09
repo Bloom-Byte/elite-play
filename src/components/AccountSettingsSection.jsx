@@ -142,18 +142,6 @@ const AccountSettingsSection = () => {
   const updatePassword = async () => {
     const url = '/user/update/password';
 
-    if (!validatePassword(newPassword)) {
-      const error = 'Password must be at least 8 characters long and include at least one number and one special character.'
-      setIsLoading(false);
-      toast({
-        position: 'top',
-        status: 'error',
-        title: 'Error',
-        description: error,
-      });
-      return;
-    }
-
     // Validate new password and confirm password
     if (newPassword !== confirmNewPassword) {
       toast({

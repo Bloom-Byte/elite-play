@@ -4,6 +4,11 @@ import { useAppContext } from '../hooks/useAppContext';
 import { toFixed } from '../utils/helpers';
 
 const DataTable = ({ diceAllBets, crashAllBets }) => {
+  
+  function isThere(array) {
+    return Array.isArray(array) && array.length > 0 && !array[0].message;
+  }
+
   return (<table className="livebets-table_table">
     <thead>
       <tr>
@@ -18,7 +23,7 @@ const DataTable = ({ diceAllBets, crashAllBets }) => {
     <tbody>
       {(
         <>
-          {Array.isArray(diceAllBets) && diceAllBets.slice(0, 5).map((dice, index) => {
+          {isThere(diceAllBets) && diceAllBets.slice(0, 5).map((dice, index) => {
             const profit = Math.max(dice.winAmount - dice.amount, 0);
             return (
               <tr id={index} key={index}>
@@ -59,7 +64,7 @@ const DataTable = ({ diceAllBets, crashAllBets }) => {
               </tr>
             )
           })}
-          {Array.isArray(crashAllBets) && crashAllBets.slice(0, 5).map((dice, index) => {
+          {isThere(crashAllBets) && crashAllBets.slice(0, 5).map((dice, index) => {
             const profit = Math.max(dice.payout - dice.amount, 0);
             return (
               <tr id={index} key={index}>

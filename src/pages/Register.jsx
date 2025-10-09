@@ -94,16 +94,6 @@ const Register = () => {
       setError('');
     }
 
-    if (!validatePassword(password)) {
-      setError(
-        'Password must be at least 8 characters long and include at least one number and one special character.'
-      );
-      setIsLoading(false);
-      return;
-    } else {
-      setError('');
-    }
-
     if (!termsChecked) {
       setError('You must agree to the terms and conditions.');
       setIsLoading(false);

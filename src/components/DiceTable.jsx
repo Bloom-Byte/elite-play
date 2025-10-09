@@ -3,6 +3,10 @@ import './DiceTable.css';
 import { useAppContext } from '../hooks/useAppContext';
 
 const DataTable = ({ bets }) => {
+
+  function isThere(array) {
+    return Array.isArray(array) && array.length > 0 && !array[0].message;
+  }
   return (<table className="livebets-table_table">
     <thead>
       <tr>
@@ -16,7 +20,7 @@ const DataTable = ({ bets }) => {
     </thead>
     <tbody>
       {(
-        bets.length > 0 ? (
+        isThere(bets) ? (
           bets.map((bet, index) => {
             const profit = Math.max(bet.winAmount - bet.amount, 0);
             return (
